@@ -1,2 +1,2 @@
 # ai-laravel
-Integration into the Laravael PHP framework
+Integration into the Laravel 5 PHP framework
