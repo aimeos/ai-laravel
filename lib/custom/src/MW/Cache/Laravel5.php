@@ -98,7 +98,7 @@ class MW_Cache_Laravel5
 	 */
 	public function get( $name, $default = null )
 	{
-		if( ( $entry = $this->_object->get( $name ) ) !== false ) {
+		if( ( $entry = $this->_object->get( $name ) ) !== null ) {
 			return $entry;
 		}
 

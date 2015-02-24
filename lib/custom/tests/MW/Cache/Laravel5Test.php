@@ -78,6 +78,15 @@ class MW_Cache_Laravel5Test extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetDefault()
+	{
+		$this->_mock->expects( $this->once() )->method( 'get' )
+			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( null ) );
+
+		$this->assertEquals( 'default', $this->_object->get( 'key', 'default' ) );
+	}
+
+
 	public function testGetList()
 	{
 		$this->_mock->expects( $this->exactly( 2 ) )->method( 'get' )
