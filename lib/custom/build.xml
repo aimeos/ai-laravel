@@ -12,7 +12,7 @@
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
-		<delete file="tests/coverage.json" quiet="true" failonerror="false" />
+		<delete file="tests/coverage.xml" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml ."
 			  dir="tests" checkreturn="true" logoutput="true"/>
 	</target>
@@ -25,7 +25,7 @@
 
 	<target name="clean" description="Cleans up temporary files">
 		<delete file="tests/ai-laravel5_lib-custom_test.junit.xml" quiet="true" failonerror="false" />
-		<delete file="tests/coverage.json" quiet="true" failonerror="false" />
+		<delete file="tests/coverage.xml" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">
 				<include name="*.log" />
