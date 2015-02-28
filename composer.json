@@ -21,10 +21,10 @@
 	},
 	"autoload": {
 		"psr-0": {
-			"MW": "lib/custom/src",
+			"MW": "lib/custom/src"
 		},
 		"classmap": [
-			"lib/custom/src",
+			"lib/custom/src"
 		]
 	}
 }
