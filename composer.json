@@ -1,20 +1,20 @@
 {
-	"name": "aimeos/ai-laravel5",
-	"description": "Aimeos extension for utilizing Laravel 5 components",
+	"name": "aimeos/ai-laravel",
+	"description": "Aimeos extension for utilizing Laravel 4 and 5 components",
 	"keywords": ["aimeos", "adapter", "laravel"],
 	"homepage": "http://aimeos.org",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
-		"source": "https://github.com/aimeos/ai-laravel5",
-		"issues": "https://github.com/aimeos/ai-laravel5/issues",
+		"source": "https://github.com/aimeos/ai-laravel",
+		"issues": "https://github.com/aimeos/ai-laravel/issues",
 		"forum": "https://aimeos.org/help",
 		"wiki": "https://aimeos.org/docs"
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"require": {
-		"php": ">=5.4.0"
+		"php": ">=5.3.0"
 	},
 	"require-dev": {
 		"laravel/framework": "~5.0"

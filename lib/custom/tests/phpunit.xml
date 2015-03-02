@@ -7,6 +7,6 @@
 		</testsuite>
 	</testsuites>
 	<logging>
-		<log type="junit" target="ai-laravel5_lib-custom_test.junit.xml" />
+		<log type="junit" target="ai-laravel_lib-custom_test.junit.xml" />
 	</logging>
 </phpunit>

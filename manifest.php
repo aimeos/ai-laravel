@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'name' => 'ai-laravel5',
+	'name' => 'ai-laravel',
 	'depends' => array(
 		'arcavias-core',
 	),
