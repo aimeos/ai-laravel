@@ -75,7 +75,7 @@ class TestHelper
 
 		$ctx->setLocale( $localeItem );
 
-		$ctx->setEditor( 'ai-laravel:lib/custom' );
+		$ctx->setEditor( 'ai-laravel:unittest' );
 
 		return $ctx;
 	}
