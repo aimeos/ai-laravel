@@ -19,6 +19,7 @@ class MW_View_Helper_Url_Laravel5
 	implements MW_View_Helper_Interface
 {
 	private $_builder;
+	private $_fixed;
 
 
 	/**
@@ -26,12 +27,14 @@ class MW_View_Helper_Url_Laravel5
 	 *
 	 * @param \MW_View_Interface $view View instance with registered view helpers
 	 * @param \Illuminate\Contracts\Routing\UrlGenerator $builder Laravel URL builder object
+	 * @param array Associative list of fixed parameters that should be available for all routes
 	 */
-	public function __construct( \MW_View_Interface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder )
+	public function __construct( \MW_View_Interface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
 	{
 		parent::__construct( $view );
 
 		$this->_builder = $builder;
+		$this->_fixed = $fixed;
 	}
 
 
@@ -50,7 +53,7 @@ class MW_View_Helper_Url_Laravel5
 	{
 		$values = $this->_getValues( $config );
 
-		return $this->_builder->route( $target, $params, $values['absoluteUri'] );
+		return $this->_builder->route( $target, $params + $this->_fixed, $values['absoluteUri'] );
 	}
 
 

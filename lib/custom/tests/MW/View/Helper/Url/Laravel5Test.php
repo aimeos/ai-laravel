@@ -26,7 +26,7 @@ class MW_View_Helper_Url_Laravel5Test extends MW_Unittest_Testcase
 
 		$view = new \MW_View_Default();
 		$this->_mock = $this->getMock( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' );
-		$this->_object = new MW_View_Helper_Url_Laravel5( $view, $this->_mock );
+		$this->_object = new MW_View_Helper_Url_Laravel5( $view, $this->_mock, array() );
 	}
 
 

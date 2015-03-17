@@ -26,7 +26,7 @@ class MW_View_Helper_Url_Laravel4Test extends MW_Unittest_Testcase
 
 		$view = new \MW_View_Default();
 		$this->_mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )->disableOriginalConstructor()->getMock();
-		$this->_object = new MW_View_Helper_Url_Laravel4( $view, $this->_mock );
+		$this->_object = new MW_View_Helper_Url_Laravel4( $view, $this->_mock, array() );
 	}
 
 
