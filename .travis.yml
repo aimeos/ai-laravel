@@ -22,7 +22,7 @@ before_script:
   - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
 
 script:
-  - vendor/bin/phing -Ddir=ext/ai-laravel coverageext checkext
+  - vendor/bin/phing -Ddir=ext/ai-laravel setup coverageext checkext
 
 after_success:
   - php vendor/bin/coveralls -c ext/ai-laravel/.coveralls.yml
