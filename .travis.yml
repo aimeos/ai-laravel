@@ -18,6 +18,8 @@ before_script:
   - cd ../arcavias-core
   - mv ../ai-laravel ext/
   - composer require "laravel/framework:${LARAVEL_VERSION}"
+  - mysql -e 'create database aimeos;'
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
 
 script:
   - vendor/bin/phing -Ddir=ext/ai-laravel coverageext checkext
