@@ -51,7 +51,7 @@ CREATE TABLE "users" (
 	KEY "users_address1_index" ("address1"),
 	KEY "users_city_index" ("city"),
 	KEY "users_postal_index" ("postal")
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Table structure for table "users_address"
@@ -110,12 +110,7 @@ CREATE TABLE "users_address" (
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_lvuad_id"
-	PRIMARY KEY ("id"),
-CONSTRAINT "fk_lvuli_rid"
-	FOREIGN KEY ("refid")
-	REFERENCES "users" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_lvuad_refid" ON "users_address" ("refid");
@@ -202,11 +197,6 @@ CONSTRAINT "pk_lvuli_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_lvuli_sid_dm_rid_tid_pid"
 	UNIQUE ("siteid", "domain", "refid", "typeid", "parentid"),
-CONSTRAINT "fk_lvuli_pid"
-	FOREIGN KEY ("parentid")
-	REFERENCES "users" ("id")
-	ON UPDATE CASCADE
-	ON DELETE CASCADE,
 CONSTRAINT "fk_lvuli_typeid"
 	FOREIGN KEY ( "typeid" )
 	REFERENCES "users_list_type" ("id")
