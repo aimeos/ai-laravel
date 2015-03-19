@@ -306,7 +306,7 @@ class MShop_Customer_Manager_List_LaravelTest extends MW_Unittest_Testcase
 		$manager = MShop_Customer_Manager_Factory::createManager( $this->_context, 'Laravel' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3@aimeos.org' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer3' ) );
 		$search->setSlice( 0, 1 );
 
 		$results = $manager->searchItems( $search );

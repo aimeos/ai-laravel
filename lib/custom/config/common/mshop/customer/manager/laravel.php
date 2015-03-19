@@ -13,10 +13,10 @@ return array(
 		',
 		'insert' => '
 			INSERT INTO "users" (
-				"name", "email", "company", "vatid", "salutation", "title",
+				"name", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"telefax", "website", "birthday", "status",
+				"telefax", "website", "email", "birthday", "status",
 				"vdate", "password", "updated_at", "editor", "created_at"
 			) VALUES (
 				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
@@ -24,17 +24,17 @@ return array(
 		',
 		'update' => '
 			UPDATE "users"
-			SET "name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
+			SET "name" = ?, "company" = ?, "vatid" = ?,
 				"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
-				"telephone" = ?, "telefax" = ?, "website" = ?,
+				"telephone" = ?, "telefax" = ?, "website" = ?, "email" = ?,
 				"birthday" = ?, "status" = ?, "vdate" = ?, "password" = ?,
 				"updated_at" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT lvu."id", lvu."name" as "label", lvu."email" as "code",
+			SELECT DISTINCT lvu."id", lvu."name" as "label", lvu."name" as "code",
 				lvu."company", lvu."vatid", lvu."salutation", lvu."title",
 				lvu."firstname", lvu."lastname", lvu."address1",
 				lvu."address2", lvu."address3", lvu."postal", lvu."city",

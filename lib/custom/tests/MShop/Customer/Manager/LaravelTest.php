@@ -66,14 +66,14 @@ class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
 	{
 		$search = $this->_object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'unitCustomer3@aimeos.org' ),
+			$search->compare( '==', 'customer.code', 'unitCustomer3' ),
 			$search->compare( '==', 'customer.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->_object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new Exception( 'No customer item with code "unitCustomer3@aimeos.org" found' );
+			throw new Exception( 'No customer item with code "unitCustomer3" found' );
 		}
 
 		$actual = $this->_object->getItem( $expected->getId(), array( 'text' ) );
@@ -88,13 +88,13 @@ class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
 	{
 		$item = $this->_object->createItem();
 
-		$item->setCode( 'unitTest@aimeos.org' );
+		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
 		$this->_object->saveItem( $item );
 		$itemSaved = $this->_object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unitTest2@aimeos.org' );
+		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
 		$this->_object->saveItem( $itemExp );
 		$itemUpd = $this->_object->getItem( $itemExp->getId() );
@@ -125,7 +125,7 @@ class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 
 		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
-		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeCreated() );
+		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException( 'MShop_Exception' );
@@ -147,7 +147,7 @@ class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer2' );
-		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer2@aimeos.org' );
+		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer2' );
 
 		$expr[] = $search->compare( '>=', 'customer.salutation', '' );
 		$expr[] = $search->compare( '>=', 'customer.company', '' );

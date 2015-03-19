@@ -36,7 +36,7 @@ class MShop_Customer_Manager_Laravel
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
-			'internalcode' => 'lvu."email"',
+			'internalcode' => 'lvu."name"',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
 		),
@@ -359,25 +359,25 @@ class MShop_Customer_Manager_Laravel
 
 			$stmt = $this->_getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getLabel() );
-			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $billingAddress->getCompany() );
-			$stmt->bind( 4, $billingAddress->getVatID() );
-			$stmt->bind( 5, $billingAddress->getSalutation() );
-			$stmt->bind( 6, $billingAddress->getTitle() );
-			$stmt->bind( 7, $billingAddress->getFirstname() );
-			$stmt->bind( 8, $billingAddress->getLastname() );
-			$stmt->bind( 9, $billingAddress->getAddress1() );
-			$stmt->bind( 10, $billingAddress->getAddress2() );
-			$stmt->bind( 11, $billingAddress->getAddress3() );
-			$stmt->bind( 12, $billingAddress->getPostal() );
-			$stmt->bind( 13, $billingAddress->getCity() );
-			$stmt->bind( 14, $billingAddress->getState() );
-			$stmt->bind( 15, $billingAddress->getCountryId() );
-			$stmt->bind( 16, $billingAddress->getLanguageId() );
-			$stmt->bind( 17, $billingAddress->getTelephone() );
-			$stmt->bind( 18, $billingAddress->getTelefax() );
-			$stmt->bind( 19, $billingAddress->getWebsite() );
+			$stmt->bind( 1, $item->getCode() );
+			$stmt->bind( 2, $billingAddress->getCompany() );
+			$stmt->bind( 3, $billingAddress->getVatID() );
+			$stmt->bind( 4, $billingAddress->getSalutation() );
+			$stmt->bind( 5, $billingAddress->getTitle() );
+			$stmt->bind( 6, $billingAddress->getFirstname() );
+			$stmt->bind( 7, $billingAddress->getLastname() );
+			$stmt->bind( 8, $billingAddress->getAddress1() );
+			$stmt->bind( 9, $billingAddress->getAddress2() );
+			$stmt->bind( 10, $billingAddress->getAddress3() );
+			$stmt->bind( 11, $billingAddress->getPostal() );
+			$stmt->bind( 12, $billingAddress->getCity() );
+			$stmt->bind( 13, $billingAddress->getState() );
+			$stmt->bind( 14, $billingAddress->getCountryId() );
+			$stmt->bind( 15, $billingAddress->getLanguageId() );
+			$stmt->bind( 16, $billingAddress->getTelephone() );
+			$stmt->bind( 17, $billingAddress->getTelefax() );
+			$stmt->bind( 18, $billingAddress->getWebsite() );
+			$stmt->bind( 19, $billingAddress->getEmail() );
 			$stmt->bind( 20, $item->getBirthday() );
 			$stmt->bind( 21, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
 			$stmt->bind( 22, $item->getDateVerified() );
