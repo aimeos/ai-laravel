@@ -208,6 +208,10 @@ class MShop_Customer_Manager_Address_Laravel
 	 */
 	public function cleanup( array $siteids )
 	{
+		$path = 'classes/customer/manager/address/submanagers';
+		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			$this->getSubManager( $domain )->cleanup( $siteids );
+		}
 	}
 
 
