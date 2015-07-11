@@ -27,6 +27,6 @@ after_success:
 
 matrix:
   fast_finish: true
-   exclude:
+  exclude:
     - php: 5.4
       env: "LARAVEL_VERSION=5.1.*"
