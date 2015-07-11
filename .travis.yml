@@ -8,10 +8,8 @@ php:
   - 5.4
 
 env:
-  - LARAVEL_VERSION=4.0.*
-  - LARAVEL_VERSION=4.1.*
-  - LARAVEL_VERSION=4.2.*
   - LARAVEL_VERSION=5.0.*
+  - LARAVEL_VERSION=5.1.*
 
 before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
@@ -26,3 +24,9 @@ script:
 
 after_success:
   - php vendor/bin/coveralls -c ext/ai-laravel/.coveralls.yml
+
+matrix:
+  fast_finish: true
+   exclude:
+    - php: 5.4
+      env: "LARAVEL_VERSION=5.1.*"
