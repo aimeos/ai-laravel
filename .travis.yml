@@ -14,8 +14,8 @@ env:
   - LARAVEL_VERSION=5.0.*
 
 before_script:
-  - git clone --depth=50 --branch=master git://github.com/aimeos/arcavias-core.git ../arcavias-core
-  - cd ../arcavias-core
+  - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+  - cd ../aimeos-core
   - mv ../ai-laravel ext/
   - composer require "laravel/framework:${LARAVEL_VERSION}"
   - mysql -e 'create database aimeos;'
