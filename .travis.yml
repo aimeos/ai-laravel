@@ -24,3 +24,9 @@ script:
 
 after_success:
   - php vendor/bin/coveralls -c ext/ai-laravel/.coveralls.yml
+
+matrix:
+  fast_finish: true
+   exclude:
+    - php: 5.4
+      env: "LARAVEL_VERSION=5.1.*"
