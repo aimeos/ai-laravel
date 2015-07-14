@@ -67,6 +67,13 @@ class MShop_Customer_Manager_List_Type_LaravelTest extends MW_Unittest_Testcase
 	}
 
 
+	public function testGetSubManager()
+	{
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->_object->createSearch();

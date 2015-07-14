@@ -102,6 +102,12 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
 	}
 
+	public function testGetSubManager()
+	{
+		$this->setExpectedException( 'MShop_Exception' );
+		$this->_object->getSubManager( 'unknown' );
+	}
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = new MShop_Common_Item_Address_Default( 'customer.address.', $this->_fixture );
