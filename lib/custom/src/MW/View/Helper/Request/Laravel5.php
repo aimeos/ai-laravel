@@ -9,7 +9,7 @@
 
 
 /**
- * View helper class for generating URLs using the Laravel 5 URL builder.
+ * View helper class for retrieving request data.
  *
  * @package MW
  * @subpackage View
