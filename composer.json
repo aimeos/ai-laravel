@@ -1,8 +1,8 @@
 {
 	"name": "aimeos/ai-laravel",
-	"description": "Aimeos extension for utilizing Laravel components",
-	"keywords": ["aimeos", "adapter", "laravel"],
-	"homepage": "https://aimeos.org",
+	"description": "Laravel adapter for Aimeos web shops and e-commerce solutions",
+	"keywords": ["aimeos", "adapter", "laravel", "shop", "e-commerce"],
+	"homepage": "https://aimeos.org/Laravel",
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
