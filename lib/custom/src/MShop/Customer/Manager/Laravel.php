@@ -187,9 +187,9 @@ class MShop_Customer_Manager_Laravel
 			'type' => 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
 		),
-		'customer.vdate'=> array(
+		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
-			'code' => 'customer.vdate',
+			'code' => 'customer.dateverified',
 			'internalcode' => 'lvu."vdate"',
 			'type' => 'date',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
