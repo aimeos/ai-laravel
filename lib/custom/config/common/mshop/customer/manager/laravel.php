@@ -16,10 +16,10 @@ return array(
 				"name", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"telefax", "website", "email", "birthday", "status",
+				"telefax", "website", "email", "label", "birthday", "status",
 				"vdate", "password", "updated_at", "editor", "created_at"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
 		'update' => '
@@ -29,12 +29,12 @@ return array(
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 				"telephone" = ?, "telefax" = ?, "website" = ?, "email" = ?,
-				"birthday" = ?, "status" = ?, "vdate" = ?, "password" = ?,
-				"updated_at" = ?, "editor" = ?
+				"label" = ?, "birthday" = ?, "status" = ?, "vdate" = ?,
+				"password" = ?, "updated_at" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 		'search' => '
-			SELECT DISTINCT lvu."id", lvu."name" as "label", lvu."name" as "code",
+			SELECT DISTINCT lvu."id", lvu."label", lvu."name" as "code",
 				lvu."company", lvu."vatid", lvu."salutation", lvu."title",
 				lvu."firstname", lvu."lastname", lvu."address1",
 				lvu."address2", lvu."address3", lvu."postal", lvu."city",

@@ -24,14 +24,14 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 
 		$search = $customer->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.label', 'unitCustomer1' ),
+			$search->compare( '==', 'customer.code', 'unitCustomer1' ),
 			$search->compare( '==', 'customer.editor', $this->_editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No customer item found for label "%1$s"', 'unitCustomer1' ) );
+			throw new Exception( sprintf( 'No customer item found for code "%1$s"', 'unitCustomer1' ) );
 		}
 
 		$this->_fixture = array(

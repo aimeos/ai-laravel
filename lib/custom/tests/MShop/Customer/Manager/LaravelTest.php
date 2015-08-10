@@ -146,7 +146,7 @@ class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
-		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer2' );
+		$expr[] = $search->compare( '==', 'customer.label', 'Erika Mustermann' );
 		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer2' );
 
 		$expr[] = $search->compare( '>=', 'customer.salutation', '' );

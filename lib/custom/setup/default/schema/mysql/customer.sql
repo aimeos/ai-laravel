@@ -15,6 +15,7 @@ SET SESSION sql_mode='ANSI';
 --
 CREATE TABLE "users" (
 	"id" int(10) unsigned NOT NULL AUTO_INCREMENT,
+	"label" varchar(255) NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"password" varchar(60) NOT NULL,

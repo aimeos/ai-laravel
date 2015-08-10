@@ -29,7 +29,7 @@ class MShop_Customer_Manager_Laravel
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
-			'internalcode' => 'lvu."name"',
+			'internalcode' => 'lvu."label"',
 			'type' => 'string',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
 		),
@@ -382,18 +382,19 @@ class MShop_Customer_Manager_Laravel
 			$stmt->bind( 17, $billingAddress->getTelefax() );
 			$stmt->bind( 18, $billingAddress->getWebsite() );
 			$stmt->bind( 19, $billingAddress->getEmail() );
-			$stmt->bind( 20, $item->getBirthday() );
-			$stmt->bind( 21, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 22, $item->getDateVerified() );
-			$stmt->bind( 23, $item->getPassword() );
-			$stmt->bind( 24, $date ); // Modification time
-			$stmt->bind( 25, $context->getEditor() );
+			$stmt->bind( 20, $item->getLabel() );
+			$stmt->bind( 21, $item->getBirthday() );
+			$stmt->bind( 22, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 23, $item->getDateVerified() );
+			$stmt->bind( 24, $item->getPassword() );
+			$stmt->bind( 25, $date ); // Modification time
+			$stmt->bind( 26, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 27, $id, MW_DB_Statement_Abstract::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 26, $date ); // Creation time
+				$stmt->bind( 27, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();
