@@ -263,7 +263,7 @@ class MShop_Customer_Manager_Address_Laravel
 	 */
 	protected function _getConfigPath()
 	{
-		return 'mshop/customer/manager/address/laravel/item/';
+		return 'mshop/customer/manager/address/laravel/item';
 	}
 
 
