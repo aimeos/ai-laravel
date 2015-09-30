@@ -7,6 +7,7 @@
 	</target>
 
 	<target name="testperf" description="Executes all performance tests">
+		<echo msg="No performance tests available" />
 	</target>
 
 	<target name="coverage" description="Generates the code coverage report">
@@ -22,9 +23,11 @@
 	</target>
 
 	<target name="i18n" description="Creates all translation files">
+		<echo msg="No translation files available" />
 	</target>
 
 	<target name="build" description="Builds package for deployment">
+		<echo msg="Nothing to build" />
 	</target>
 
 	<target name="release" description="Creates new release" depends="build">
