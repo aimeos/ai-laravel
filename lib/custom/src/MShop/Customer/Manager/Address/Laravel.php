@@ -18,7 +18,7 @@ class MShop_Customer_Manager_Address_Laravel
 	extends MShop_Customer_Manager_Address_Default
 	implements MShop_Customer_Manager_Address_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.address.id' => array(
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
@@ -209,7 +209,7 @@ class MShop_Customer_Manager_Address_Laravel
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/address/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -223,9 +223,9 @@ class MShop_Customer_Manager_Address_Laravel
 	public function deleteItems( array $ids )
 	{
 		$path = 'mshop/customer/manager/address/laravel/item/delete';
-		$sql = $this->_getContext()->getConfig()->get( $path, $path );
+		$sql = $this->getContext()->getConfig()->get( $path, $path );
 
-		$this->_deleteItems( $ids, $sql, false );
+		$this->deleteItemsBase( $ids, $sql, false );
 	}
 
 
@@ -239,7 +239,7 @@ class MShop_Customer_Manager_Address_Laravel
 	{
 		$path = 'classes/customer/manager/address/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -252,7 +252,7 @@ class MShop_Customer_Manager_Address_Laravel
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', 'address/' . $manager, ( $name === null ? 'Laravel' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'address/' . $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
 
 
@@ -261,7 +261,7 @@ class MShop_Customer_Manager_Address_Laravel
 	 *
 	 * @return string Configuration path (mshop/customer/manager/address/laravel/item/)
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		return 'mshop/customer/manager/address/laravel/item';
 	}
@@ -272,8 +272,8 @@ class MShop_Customer_Manager_Address_Laravel
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

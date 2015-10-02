@@ -8,8 +8,8 @@
 
 class MW_Cache_Laravel4Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -24,8 +24,8 @@ class MW_Cache_Laravel4Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Class \\Illuminate\\Cache\\StoreInterface not found' );
 		}
 
-		$this->_mock = $this->getMock( '\\Illuminate\\Cache\\StoreInterface' );
-		$this->_object = new MW_Cache_Laravel4( $this->_mock );
+		$this->mock = $this->getMock( '\\Illuminate\\Cache\\StoreInterface' );
+		$this->object = new MW_Cache_Laravel4( $this->mock );
 	}
 
 
@@ -37,96 +37,96 @@ class MW_Cache_Laravel4Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_mock, $this->_object );
+		unset( $this->mock, $this->object );
 	}
 
 
 	public function testDelete()
 	{
-		$this->_mock->expects( $this->once() )->method( 'forget' )->with( $this->equalTo( 'key' ) );
-		$this->_object->delete( 'key' );
+		$this->mock->expects( $this->once() )->method( 'forget' )->with( $this->equalTo( 'key' ) );
+		$this->object->delete( 'key' );
 	}
 
 
 	public function testDeleteList()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) );
-		$this->_object->deleteList( array( 'key', 'key' ) );
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) );
+		$this->object->deleteList( array( 'key', 'key' ) );
 	}
 
 
 	public function testDeleteByTags()
 	{
-		$this->_mock->expects( $this->once() )->method( 'flush' );
-		$this->_object->deleteByTags( array( 'tag', 'tag' ) );
+		$this->mock->expects( $this->once() )->method( 'flush' );
+		$this->object->deleteByTags( array( 'tag', 'tag' ) );
 	}
 
 
 	public function testFlush()
 	{
-		$this->_mock->expects( $this->once() )->method( 'flush' );
-		$this->_object->flush();
+		$this->mock->expects( $this->once() )->method( 'flush' );
+		$this->object->flush();
 	}
 
 
 	public function testGet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->once() )->method( 'get' )
 			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( 'value' ) );
 
-		$this->assertEquals( 'value', $this->_object->get( 'key', 'default' ) );
+		$this->assertEquals( 'value', $this->object->get( 'key', 'default' ) );
 	}
 
 
 	public function testGetDefault()
 	{
-		$this->_mock->expects( $this->once() )->method( 'get' )
+		$this->mock->expects( $this->once() )->method( 'get' )
 		->with( $this->equalTo( 'key' ) );
 
-		$this->assertEquals( 'default', $this->_object->get( 'key', 'default' ) );
+		$this->assertEquals( 'default', $this->object->get( 'key', 'default' ) );
 	}
 
 
 	public function testGetList()
 	{
-		$this->_mock->expects( $this->exactly( 2 ) )->method( 'get' )
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
 			->will( $this->returnValue( 'value' ) );
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
-		$this->assertEquals( $expected, $this->_object->getList( array( 'key1', 'key2' ) ) );
+		$this->assertEquals( $expected, $this->object->getList( array( 'key1', 'key2' ) ) );
 	}
 
 
 	public function testGetListByTags()
 	{
-		$this->assertEquals( array(), $this->_object->getListByTags( array( 'key', 'key' ) ) );
+		$this->assertEquals( array(), $this->object->getListByTags( array( 'key', 'key' ) ) );
 	}
 
 
 	public function testSet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'put' )
+		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
-		$this->_object->set( 'key', 'value', array( 'tag' ), '2100-01-01 00:00:00' );
+		$this->object->set( 'key', 'value', array( 'tag' ), '2100-01-01 00:00:00' );
 	}
 
 
 	public function testSetForever()
 	{
-		$this->_mock->expects( $this->once() )->method( 'forever' )
+		$this->mock->expects( $this->once() )->method( 'forever' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
 	
-		$this->_object->set( 'key', 'value', array( 'tag' ), null );
+		$this->object->set( 'key', 'value', array( 'tag' ), null );
 	}
 
 
 	public function testSetList()
 	{
-		$this->_mock->expects( $this->once() )->method( 'put' )
+		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
 		$expires = array( 'key' => '2100-01-01 00:00:00' );
-		$this->_object->setList( array( 'key' => 'value' ), array( 'key' => array( 'tag' ) ), $expires );
+		$this->object->setList( array( 'key' => 'value' ), array( 'key' => array( 'tag' ) ), $expires );
 	}
 }

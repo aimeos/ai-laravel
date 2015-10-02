@@ -26,15 +26,15 @@ class MW_Setup_Task_CustomerListAddLaravelTestData
 	/**
 	 * Adds customer test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding customer-list Laravel test data', 0 );
-		$this->_additional->setEditor( 'ai-laravel:unittest' );
+		$this->msg( 'Adding customer-list Laravel test data', 0 );
+		$this->additional->setEditor( 'ai-laravel:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'customer-list.php';
@@ -49,9 +49,9 @@ class MW_Setup_Task_CustomerListAddLaravelTestData
 		}
 
 		$refIds = array();
-		$refIds['text'] = $this->_getTextData( $refKeys['text'] );
-		$this->_addCustomerListData( $testdata, $refIds, 'Laravel' );
+		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$this->addCustomerListData( $testdata, $refIds, 'Laravel' );
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 }

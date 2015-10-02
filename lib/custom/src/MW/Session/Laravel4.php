@@ -17,7 +17,7 @@
 class MW_Session_Laravel4
 	implements MW_Session_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_Session_Laravel4
 	 */
 	public function __construct( \Illuminate\Session\Store $object )
 	{
-		$this->_object = $object;
+		$this->object = $object;
 	}
 
 
@@ -42,7 +42,7 @@ class MW_Session_Laravel4
 	 */
 	public function get( $name, $default = null )
 	{
-		return $this->_object->get( $name, $default );
+		return $this->object->get( $name, $default );
 	}
 
 
@@ -57,6 +57,6 @@ class MW_Session_Laravel4
 	 */
 	public function set( $name, $value )
 	{
-		$this->_object->put( $name, $value );
+		$this->object->put( $name, $value );
 	}
 }

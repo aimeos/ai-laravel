@@ -17,7 +17,7 @@
 class MShop_Customer_Manager_Laravel
 	extends MShop_Customer_Manager_Default
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
@@ -226,7 +226,7 @@ class MShop_Customer_Manager_Laravel
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -239,7 +239,7 @@ class MShop_Customer_Manager_Laravel
 	 */
 	public function createItem()
 	{
-		return $this->_createItem();
+		return $this->createItemBase();
 	}
 
 
@@ -251,9 +251,9 @@ class MShop_Customer_Manager_Laravel
 	public function deleteItems( array $ids )
 	{
 		$path = 'mshop/customer/manager/laravel/item/delete';
-		$sql = $this->_getContext()->getConfig()->get( $path, $path );
+		$sql = $this->getContext()->getConfig()->get( $path, $path );
 
-		$this->_deleteItems( $ids, $sql, false );
+		$this->deleteItemsBase( $ids, $sql, false );
 	}
 
 
@@ -267,7 +267,7 @@ class MShop_Customer_Manager_Laravel
 	{
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
 	}
 
 
@@ -286,9 +286,9 @@ class MShop_Customer_Manager_Laravel
 
 		if( !$item->isModified() ) { return; }
 
-		$context = $this->_getContext();
+		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
 		try
@@ -361,7 +361,7 @@ class MShop_Customer_Manager_Laravel
 				$path = 'mshop/customer/manager/laravel/item/update';
 			}
 
-			$stmt = $this->_getCachedStatement( $conn, $path );
+			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getCode() );
 			$stmt->bind( 2, $billingAddress->getCompany() );
@@ -432,7 +432,7 @@ class MShop_Customer_Manager_Laravel
 				 * @see mshop/customer/manager/laravel/item/count
 				 */
 				$path = 'mshop/customer/manager/laravel/item/newid';
-				$item->setId( $this->_newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -455,8 +455,8 @@ class MShop_Customer_Manager_Laravel
 	 */
 	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->_getContext()->getDatabaseManager();
-		$dbname = $this->_getResourceName();
+		$dbm = $this->getContext()->getDatabaseManager();
+		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$map = array();
 
@@ -467,7 +467,7 @@ class MShop_Customer_Manager_Laravel
 			$cfgPathCount = 'mshop/customer/manager/laravel/item/count';
 			$required = array( 'customer' );
 
-			$results = $this->_searchItems( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
 				$map[ $row['id'] ] = $row;
 			}
@@ -480,7 +480,7 @@ class MShop_Customer_Manager_Laravel
 			throw $e;
 		}
 
-		return $this->_buildItems( $map, $ref, 'customer' );
+		return $this->buildItems( $map, $ref, 'customer' );
 	}
 
 
@@ -493,6 +493,6 @@ class MShop_Customer_Manager_Laravel
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', $manager, ( $name === null ? 'Laravel' : $name ) );
+		return $this->getSubManagerBase( 'customer', $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
 }

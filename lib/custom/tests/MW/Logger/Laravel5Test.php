@@ -8,7 +8,7 @@
 
 class MW_Logger_Laravel5Test extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -23,8 +23,8 @@ class MW_Logger_Laravel5Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Logging\\Log not found' );
 		}
 
-		$this->_mock = $this->getMock( '\\Illuminate\\Contracts\\Logging\\Log' );
-		$this->_object = new MW_Logger_Laravel5( $this->_mock );
+		$this->mock = $this->getMock( '\\Illuminate\\Contracts\\Logging\\Log' );
+		$this->object = new MW_Logger_Laravel5( $this->mock );
 	}
 
 
@@ -36,42 +36,42 @@ class MW_Logger_Laravel5Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_mock, $this->_object );
+		unset( $this->mock, $this->object );
 	}
 
 
 	public function testLog()
 	{
-		$this->_mock->expects( $this->once() )->method( 'log' )
+		$this->mock->expects( $this->once() )->method( 'log' )
 			->with( $this->equalTo( 'msg' ), $this->equalTo( 'error' ) );
-		$this->_object->log( 'msg' );
+		$this->object->log( 'msg' );
 	}
 
 
 	public function testNonScalarLog()
 	{
-		$this->_mock->expects( $this->once() )->method( 'log' )
+		$this->mock->expects( $this->once() )->method( 'log' )
 			->with( $this->equalTo( '["error","error2",2]' ), $this->equalTo( 'error' ) );
-		$this->_object->log( array( 'error', 'error2', 2 ) );
+		$this->object->log( array( 'error', 'error2', 2 ) );
 	}
 
 
 	public function testLogDebug()
 	{
-		$this->_object->log( 'emergency', MW_Logger_Abstract::EMERG );
-		$this->_object->log( 'alert', MW_Logger_Abstract::ALERT );
-		$this->_object->log( 'critical', MW_Logger_Abstract::CRIT );
-		$this->_object->log( 'error', MW_Logger_Abstract::ERR );
-		$this->_object->log( 'warning', MW_Logger_Abstract::WARN );
-		$this->_object->log( 'notice', MW_Logger_Abstract::NOTICE );
-		$this->_object->log( 'info', MW_Logger_Abstract::INFO );
-		$this->_object->log( 'debug', MW_Logger_Abstract::DEBUG );
+		$this->object->log( 'emergency', MW_Logger_Abstract::EMERG );
+		$this->object->log( 'alert', MW_Logger_Abstract::ALERT );
+		$this->object->log( 'critical', MW_Logger_Abstract::CRIT );
+		$this->object->log( 'error', MW_Logger_Abstract::ERR );
+		$this->object->log( 'warning', MW_Logger_Abstract::WARN );
+		$this->object->log( 'notice', MW_Logger_Abstract::NOTICE );
+		$this->object->log( 'info', MW_Logger_Abstract::INFO );
+		$this->object->log( 'debug', MW_Logger_Abstract::DEBUG );
 	}
 
 
 	public function testBadPriority()
 	{
 		$this->setExpectedException( 'MW_Logger_Exception' );
-		$this->_object->log( 'error', -1 );
+		$this->object->log( 'error', -1 );
 	}
 }

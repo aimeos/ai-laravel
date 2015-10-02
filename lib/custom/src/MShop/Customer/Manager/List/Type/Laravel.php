@@ -18,7 +18,7 @@ class MShop_Customer_Manager_List_Type_Laravel
 	extends MShop_Customer_Manager_List_Type_Default
 	implements MShop_Customer_Manager_List_Type_Interface
 {
-	private $_searchConfig = array(
+	private $searchConfig = array(
 		'customer.list.type.id' => array(
 			'code'=>'customer.list.type.id',
 			'internalcode'=>'lvulity."id"',
@@ -96,11 +96,11 @@ class MShop_Customer_Manager_List_Type_Laravel
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/list/type/submanagers';
-		foreach( $this->_getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->_cleanup( $siteids, 'mshop/customer/manager/list/type/laravel/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/list/type/laravel/item/delete' );
 	}
 
 
@@ -114,7 +114,7 @@ class MShop_Customer_Manager_List_Type_Laravel
 	{
 		$path = 'classes/customer/manager/list/type/submanagers';
 
-		return $this->_getSearchAttributes( $this->_searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
 
 
@@ -127,7 +127,7 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->_getSubManager( 'customer', 'list/type/' . $manager, ( $name === null ? 'Laravel' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'list/type/' . $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
 
 
@@ -136,7 +136,7 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 *
 	 * @return string Configuration path (mshop/customer/manager/list/type/laravel/item/)
 	 */
-	protected function _getConfigPath()
+	protected function getConfigPath()
 	{
 		return 'mshop/customer/manager/list/type/laravel/item/';
 	}
@@ -147,8 +147,8 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function _getSearchConfig()
+	protected function getSearchConfig()
 	{
-		return $this->_searchConfig;
+		return $this->searchConfig;
 	}
 }

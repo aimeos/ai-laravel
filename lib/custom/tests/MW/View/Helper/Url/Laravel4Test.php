@@ -8,8 +8,8 @@
 
 class MW_View_Helper_Url_Laravel4Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -25,8 +25,8 @@ class MW_View_Helper_Url_Laravel4Test extends MW_Unittest_Testcase
 		}
 
 		$view = new \MW_View_Default();
-		$this->_mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )->disableOriginalConstructor()->getMock();
-		$this->_object = new MW_View_Helper_Url_Laravel4( $view, $this->_mock, array() );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )->disableOriginalConstructor()->getMock();
+		$this->object = new MW_View_Helper_Url_Laravel4( $view, $this->mock, array() );
 	}
 
 
@@ -38,25 +38,25 @@ class MW_View_Helper_Url_Laravel4Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->mock );
+		unset( $this->object, $this->mock );
 	}
 
 
 	public function testTransform()
 	{
-		$this->_mock->expects( $this->once() )->method( 'route' )
+		$this->mock->expects( $this->once() )->method( 'route' )
 			->with( $this->equalTo( 'route'), $this->equalTo( array( 'key' => 'value' ) ), $this->equalTo( false ) );
 
-		$this->_object->transform( 'route', 'catalog', 'list', array( 'key' => 'value' ) );
+		$this->object->transform( 'route', 'catalog', 'list', array( 'key' => 'value' ) );
 	}
 
 
 	public function testTransformAbsolute()
 	{
-		$this->_mock->expects( $this->once() )->method( 'route' )
+		$this->mock->expects( $this->once() )->method( 'route' )
 			->with( $this->equalTo( 'route'), $this->equalTo( array() ), $this->equalTo( true ) );
 
 		$options = array( 'absoluteUri' => true );
-		$this->_object->transform( 'route', 'catalog', 'list', array(), array(), $options );
+		$this->object->transform( 'route', 'catalog', 'list', array(), array(), $options );
 	}
 }

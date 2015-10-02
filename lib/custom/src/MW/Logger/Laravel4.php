@@ -18,7 +18,7 @@ class MW_Logger_Laravel4
 	extends MW_Logger_Abstract
 	implements MW_Logger_Interface
 {
-	private $_logger = null;
+	private $logger = null;
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_Logger_Laravel4
 	 */
 	public function __construct( \Illuminate\Log\Writer $logger )
 	{
-		$this->_logger = $logger;
+		$this->logger = $logger;
 	}
 
 
@@ -52,21 +52,21 @@ class MW_Logger_Laravel4
 			switch( $priority )
 			{
 				case MW_Logger_Abstract::EMERG:
-					$this->_logger->emergency( $message ); break;
+					$this->logger->emergency( $message ); break;
 				case MW_Logger_Abstract::ALERT:
-					$this->_logger->alert( $message ); break;
+					$this->logger->alert( $message ); break;
 				case MW_Logger_Abstract::CRIT:
-					$this->_logger->critical( $message ); break;
+					$this->logger->critical( $message ); break;
 				case MW_Logger_Abstract::ERR:
-					$this->_logger->error( $message ); break;
+					$this->logger->error( $message ); break;
 				case MW_Logger_Abstract::WARN:
-					$this->_logger->warning( $message ); break;
+					$this->logger->warning( $message ); break;
 				case MW_Logger_Abstract::NOTICE:
-					$this->_logger->notice( $message ); break;
+					$this->logger->notice( $message ); break;
 				case MW_Logger_Abstract::INFO:
-					$this->_logger->info( $message ); break;
+					$this->logger->info( $message ); break;
 				case MW_Logger_Abstract::DEBUG:
-					$this->_logger->debug( $message ); break;
+					$this->logger->debug( $message ); break;
 				default:
 					throw new MW_Logger_Exception( 'Invalid log level' );
 			}

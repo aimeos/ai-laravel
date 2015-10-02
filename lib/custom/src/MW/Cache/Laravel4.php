@@ -18,7 +18,7 @@ class MW_Cache_Laravel4
 	extends MW_Cache_Abstract
 	implements MW_Cache_Interface
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_Cache_Laravel4
 	 */
 	public function __construct( \Illuminate\Cache\StoreInterface $cache )
 	{
-		$this->_object = $cache;
+		$this->object = $cache;
 	}
 
 
@@ -41,7 +41,7 @@ class MW_Cache_Laravel4
 	 */
 	public function delete( $key )
 	{
-		$this->_object->forget( $key );
+		$this->object->forget( $key );
 	}
 
 
@@ -56,7 +56,7 @@ class MW_Cache_Laravel4
 	public function deleteList( array $keys )
 	{
 		foreach( $keys as $key ) {
-			$this->_object->forget( $key );
+			$this->object->forget( $key );
 		}
 	}
 
@@ -71,8 +71,8 @@ class MW_Cache_Laravel4
 	 */
 	public function deleteByTags( array $tags )
 	{
-		// $this->_object->tags( $tag )->flush();
-		$this->_object->flush();
+		// $this->object->tags( $tag )->flush();
+		$this->object->flush();
 	}
 
 
@@ -83,7 +83,7 @@ class MW_Cache_Laravel4
 	 */
 	public function flush()
 	{
-		$this->_object->flush();
+		$this->object->flush();
 	}
 
 
@@ -98,7 +98,7 @@ class MW_Cache_Laravel4
 	 */
 	public function get( $name, $default = null )
 	{
-		if( ( $entry = $this->_object->get( $name ) ) !== null ) {
+		if( ( $entry = $this->object->get( $name ) ) !== null ) {
 			return $entry;
 		}
 
@@ -122,7 +122,7 @@ class MW_Cache_Laravel4
 
 		foreach( $keys as $key )
 		{
-			if( ( $entry = $this->_object->get( $key ) ) !== false ) {
+			if( ( $entry = $this->object->get( $key ) ) !== false ) {
 				$result[$key] = $entry;
 			}
 		}
@@ -162,9 +162,9 @@ class MW_Cache_Laravel4
 	public function set( $name, $value, array $tags = array(), $expires = null )
 	{
 		if( $expires !== null && ( $timestamp = strtotime( $expires ) ) !== false ) {
-			$this->_object->put( $name, $value, ($timestamp - time())/60 );
+			$this->object->put( $name, $value, ($timestamp - time())/60 );
 		} else {
-			$this->_object->forever( $name, $value );
+			$this->object->forever( $name, $value );
 		}
 	}
 

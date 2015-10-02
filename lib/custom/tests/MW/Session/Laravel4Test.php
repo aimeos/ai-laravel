@@ -8,8 +8,8 @@
 
 class MW_Session_Laravel4Test extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_mock;
+	private $object;
+	private $mock;
 
 
 	/**
@@ -24,8 +24,8 @@ class MW_Session_Laravel4Test extends MW_Unittest_Testcase
 			$this->markTestSkipped( 'Class \\Illuminate\\Session\\Store not found' );
 		}
 
-		$this->_mock = $this->getMockBuilder( '\\Illuminate\\Session\\Store' )->disableOriginalConstructor()->getMock();
-		$this->_object = new MW_Session_Laravel4( $this->_mock );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Session\\Store' )->disableOriginalConstructor()->getMock();
+		$this->object = new MW_Session_Laravel4( $this->mock );
 	}
 
 
@@ -37,21 +37,21 @@ class MW_Session_Laravel4Test extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testGetDefault()
 	{
-		$this->_mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( 'notexist' ) );
-		$this->_object->get( 'notexist' );
+		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( 'notexist' ) );
+		$this->object->get( 'notexist' );
 	}
 
 
 	public function testSet()
 	{
-		$this->_mock->expects( $this->once() )->method( 'put' )
+		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
-		$this->_object->set( 'key', 'value' );
+		$this->object->set( 'key', 'value' );
 	}
 }

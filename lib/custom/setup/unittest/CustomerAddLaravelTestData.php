@@ -25,15 +25,15 @@ class MW_Setup_Task_CustomerAddLaravelTestData extends MW_Setup_Task_CustomerAdd
 	/**
 	 * Adds customer TYPO3 test data.
 	 */
-	protected function _process()
+	protected function process()
 	{
 		$iface = 'MShop_Context_Item_Interface';
-		if( !( $this->_additional instanceof $iface ) ) {
+		if( !( $this->additional instanceof $iface ) ) {
 			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
-		$this->_msg( 'Adding Laravel customer test data', 0 );
-		$this->_additional->setEditor( 'ai-laravel:unittest' );
+		$this->msg( 'Adding Laravel customer test data', 0 );
+		$this->additional->setEditor( 'ai-laravel:unittest' );
 
 		$parentIds = array();
 		$ds = DIRECTORY_SEPARATOR;
@@ -44,20 +44,20 @@ class MW_Setup_Task_CustomerAddLaravelTestData extends MW_Setup_Task_CustomerAdd
 		}
 
 
-		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->_additional, 'Laravel' );
+		$customerManager = MShop_Customer_Manager_Factory::createManager( $this->additional, 'Laravel' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Laravel' );
 
-		$this->_cleanupCustomerData( $customerManager, $customerAddressManager );
+		$this->cleanupCustomerData( $customerManager, $customerAddressManager );
 
-		$this->_conn->begin();
+		$this->conn->begin();
 
-		$parentIds = $this->_addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
-		$this->_addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
+		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
+		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
 
-		$this->_conn->commit();
+		$this->conn->commit();
 
 
-		$this->_status( 'done' );
+		$this->status( 'done' );
 	}
 
 
@@ -67,7 +67,7 @@ class MW_Setup_Task_CustomerAddLaravelTestData extends MW_Setup_Task_CustomerAdd
 	 * @param MShop_Common_Manager_Interface $customerManager Customer manager
 	 * @param MShop_Common_Manager_Interface $customerAddressManager Customer address manager
 	 */
-	protected function _cleanupCustomerData( MShop_Common_Manager_Interface $customerManager, MShop_Common_Manager_Interface $customerAddressManager )
+	protected function cleanupCustomerData( MShop_Common_Manager_Interface $customerManager, MShop_Common_Manager_Interface $customerAddressManager )
 	{
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.website', 'unittest.aimeos.org' ) );

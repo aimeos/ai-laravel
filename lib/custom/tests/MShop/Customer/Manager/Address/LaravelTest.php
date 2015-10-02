@@ -8,9 +8,9 @@
 
 class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 {
-	private $_fixture = null;
-	private $_object = null;
-	private $_editor = 'ai-laravel:unittest';
+	private $fixture = null;
+	private $object = null;
+	private $editor = 'ai-laravel:unittest';
 
 
 	/**
@@ -19,13 +19,13 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 	protected function setUp()
 	{
 		$context = TestHelper::getContext();
-		$this->_editor = $context->getEditor();
+		$this->editor = $context->getEditor();
 		$customer = new MShop_Customer_Manager_Laravel( $context );
 
 		$search = $customer->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'unitCustomer1' ),
-			$search->compare( '==', 'customer.editor', $this->_editor )
+			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $customer->searchItems( $search );
@@ -34,7 +34,7 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 			throw new Exception( sprintf( 'No customer item found for code "%1$s"', 'unitCustomer1' ) );
 		}
 
-		$this->_fixture = array(
+		$this->fixture = array(
 			'refid' => $customerItem->getId(),
 			'company' => 'ABC GmbH',
 			'vatid' => 'DE999999999',
@@ -58,7 +58,7 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 			'siteid' => $context->getLocale()->getSiteId(),
 		);
 
-		$this->_object = $customer->getSubManager( 'address', 'Laravel' );
+		$this->object = $customer->getSubManager( 'address', 'Laravel' );
 	}
 
 
@@ -67,62 +67,62 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object, $this->_fixture );
+		unset( $this->object, $this->fixture );
 	}
 
 
 	public function testCleanup()
 	{
-		$this->_object->cleanup( array( -1 ) );
+		$this->object->cleanup( array( -1 ) );
 	}
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->_object->getSearchAttributes() as $attribute ) {
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
 		}
 	}
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $this->_object->createItem() );
+		$this->assertInstanceOf( 'MShop_Common_Item_Address_Interface', $this->object->createItem() );
 	}
 
 	public function testGetItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'ABC GmbH' ) );
 
-		$items = $this->_object->searchItems( $search );
+		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new Exception( 'No address item with company "ABC" found' );
 		}
 
-		$this->assertEquals( $item, $this->_object->getItem( $item->getId() ) );
+		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
 	}
 
 	public function testGetSubManager()
 	{
 		$this->setExpectedException( 'MShop_Exception' );
-		$this->_object->getSubManager( 'unknown' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = new MShop_Common_Item_Address_Default( 'customer.address.', $this->_fixture );
+		$item = new MShop_Common_Item_Address_Default( 'customer.address.', $this->fixture );
 		$item->setId( null );
-		$this->_object->saveItem( $item );
-		$itemSaved = $this->_object->getItem( $item->getId() );
+		$this->object->saveItem( $item );
+		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setPosition( 1 );
 		$itemExp->setCity( 'Berlin' );
 		$itemExp->setState( 'Berlin' );
-		$this->_object->saveItem( $itemExp );
-		$itemUpd = $this->_object->getItem( $itemExp->getId() );
+		$this->object->saveItem( $itemExp );
+		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
-		$this->_object->deleteItem( $itemSaved->getId() );
+		$this->object->deleteItem( $itemSaved->getId() );
 
 
 		$this->assertTrue( $item->getId() !== null );
@@ -149,7 +149,7 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite());
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag());
 
-		$this->assertEquals( $this->_editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified());
 
@@ -176,47 +176,47 @@ class MShop_Customer_Manager_Address_LaravelTest extends MW_Unittest_Testcase
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite());
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag());
 
-		$this->assertEquals( $this->_editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
 		$this->setExpectedException('MShop_Exception');
-		$this->_object->getItem( $itemSaved->getId() );
+		$this->object->getItem( $itemSaved->getId() );
 	}
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->_object->createSearch() );
+		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
 	}
 
 
 	public function testSearchItem()
 	{
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$conditions = array(
 			$search->compare( '==', 'customer.address.company', 'ABC' ),
-			$search->compare( '==', 'customer.address.editor', $this->_editor )
+			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 1, count( $this->_object->searchItems( $search ) ) );
+		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
 
 
 	public function testSearchItemTotal()
 	{
 		$total = 0;
-		$search = $this->_object->createSearch();
+		$search = $this->object->createSearch();
 
 		$conditions = array(
 			$search->compare( '~=', 'customer.address.company', 'ABC GmbH' ),
-			$search->compare( '==', 'customer.address.editor', $this->_editor )
+			$search->compare( '==', 'customer.address.editor', $this->editor )
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->_object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );

@@ -18,7 +18,7 @@ class MW_Logger_Laravel5
 	extends MW_Logger_Abstract
 	implements MW_Logger_Interface
 {
-	private $_logger = null;
+	private $logger = null;
 
 
 	/**
@@ -28,7 +28,7 @@ class MW_Logger_Laravel5
 	 */
 	public function __construct( \Illuminate\Contracts\Logging\Log $logger )
 	{
-		$this->_logger = $logger;
+		$this->logger = $logger;
 	}
 
 
@@ -49,7 +49,7 @@ class MW_Logger_Laravel5
 				$message = json_encode( $message );
 			}
 
-			$this->_logger->log( $message, $this->_translatePriority( $priority ) );
+			$this->logger->log( $message, $this->translatePriority( $priority ) );
 		}
 		catch( \Exception $e )	{
 			throw new \MW_Logger_Exception( $e->getMessage(), $e->getCode(), $e );
@@ -64,7 +64,7 @@ class MW_Logger_Laravel5
 	 * @return integer Log level from Monolog\Logger
 	 * @throws MW_Logger_Exception If log level is unknown
 	 */
-	protected function _translatePriority( $priority )
+	protected function translatePriority( $priority )
 	{
 		switch( $priority )
 		{

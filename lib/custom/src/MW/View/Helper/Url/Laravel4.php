@@ -18,8 +18,8 @@ class MW_View_Helper_Url_Laravel4
 	extends MW_View_Helper_Abstract
 	implements MW_View_Helper_Interface
 {
-	private $_builder;
-	private $_fixed;
+	private $builder;
+	private $fixed;
 
 
 	/**
@@ -33,8 +33,8 @@ class MW_View_Helper_Url_Laravel4
 	{
 		parent::__construct( $view );
 
-		$this->_builder = $builder;
-		$this->_fixed = $fixed;
+		$this->builder = $builder;
+		$this->fixed = $fixed;
 	}
 
 
@@ -51,9 +51,9 @@ class MW_View_Helper_Url_Laravel4
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
-		$values = $this->_getValues( $config );
+		$values = $this->getValues( $config );
 
-		return $this->_builder->route( $target, $params + $this->_fixed, $values['absoluteUri'] );
+		return $this->builder->route( $target, $params + $this->fixed, $values['absoluteUri'] );
 	}
 
 
@@ -63,7 +63,7 @@ class MW_View_Helper_Url_Laravel4
 	 * @param array $config Associative list of key/value pairs
 	 * @return array Associative list of sanitized key/value pairs
 	 */
-	protected function _getValues( array $config )
+	protected function getValues( array $config )
 	{
 		$values = array(
 			'absoluteUri' => false,
