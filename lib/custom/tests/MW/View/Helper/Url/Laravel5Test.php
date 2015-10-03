@@ -6,7 +6,7 @@
  */
 
 
-class MW_View_Helper_Url_Laravel5Test extends MW_Unittest_Testcase
+class MW_View_Helper_Url_Laravel5Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;

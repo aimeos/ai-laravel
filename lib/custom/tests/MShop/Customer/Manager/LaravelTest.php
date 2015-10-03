@@ -6,7 +6,7 @@
  */
 
 
-class MShop_Customer_Manager_LaravelTest extends MW_Unittest_Testcase
+class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $fixture;

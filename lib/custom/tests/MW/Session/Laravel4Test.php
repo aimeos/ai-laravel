@@ -6,7 +6,7 @@
  */
 
 
-class MW_Session_Laravel4Test extends MW_Unittest_Testcase
+class MW_Session_Laravel4Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
