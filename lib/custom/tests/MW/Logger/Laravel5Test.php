@@ -6,7 +6,7 @@
  */
 
 
-class MW_Logger_Laravel5Test extends MW_Unittest_Testcase
+class MW_Logger_Laravel5Test extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
