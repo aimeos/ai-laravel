@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Logger_Laravel4Test extends PHPUnit_Framework_TestCase
+class Laravel4Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -24,7 +25,7 @@ class MW_Logger_Laravel4Test extends PHPUnit_Framework_TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Log\\Writer' )->disableOriginalConstructor()->getMock();
-		$this->object = new MW_Logger_Laravel4( $this->mock );
+		$this->object = new \Aimeos\MW\Logger\Laravel4( $this->mock );
 	}
 
 
@@ -54,20 +55,20 @@ class MW_Logger_Laravel4Test extends PHPUnit_Framework_TestCase
 
 	public function testLogDebug()
 	{
-		$this->object->log( 'emergency', MW_Logger_Abstract::EMERG );
-		$this->object->log( 'alert', MW_Logger_Abstract::ALERT );
-		$this->object->log( 'critical', MW_Logger_Abstract::CRIT );
-		$this->object->log( 'error', MW_Logger_Abstract::ERR );
-		$this->object->log( 'warning', MW_Logger_Abstract::WARN );
-		$this->object->log( 'notice', MW_Logger_Abstract::NOTICE );
-		$this->object->log( 'info', MW_Logger_Abstract::INFO );
-		$this->object->log( 'debug', MW_Logger_Abstract::DEBUG );
+		$this->object->log( 'emergency', \Aimeos\MW\Logger\Base::EMERG );
+		$this->object->log( 'alert', \Aimeos\MW\Logger\Base::ALERT );
+		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
+		$this->object->log( 'error', \Aimeos\MW\Logger\Base::ERR );
+		$this->object->log( 'warning', \Aimeos\MW\Logger\Base::WARN );
+		$this->object->log( 'notice', \Aimeos\MW\Logger\Base::NOTICE );
+		$this->object->log( 'info', \Aimeos\MW\Logger\Base::INFO );
+		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::DEBUG );
 	}
 
 
 	public function testBadPriority()
 	{
-		$this->setExpectedException( 'MW_Logger_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Logger\\Exception' );
 		$this->object->log( 'error', -1 );
 	}
 }

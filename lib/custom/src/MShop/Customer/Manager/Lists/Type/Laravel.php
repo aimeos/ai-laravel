@@ -8,82 +8,85 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists\Type;
+
+
 /**
  * Laravel implementation of the customer list type class.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_List_Type_Laravel
-	extends MShop_Customer_Manager_List_Type_Default
-	implements MShop_Customer_Manager_List_Type_Interface
+class Laravel
+	extends \Aimeos\MShop\Customer\Manager\Lists\Type\Standard
+	implements \Aimeos\MShop\Customer\Manager\Lists\Type\Iface
 {
 	private $searchConfig = array(
-		'customer.list.type.id' => array(
-			'code'=>'customer.list.type.id',
+		'customer.lists.type.id' => array(
+			'code'=>'customer.lists.type.id',
 			'internalcode'=>'lvulity."id"',
 			'internaldeps'=>array( 'LEFT JOIN "users_list_type" AS lvulity ON ( lvuli."typeid" = lvulity."id" )' ),
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.type.siteid' => array(
-			'code'=>'customer.list.type.siteid',
+		'customer.lists.type.siteid' => array(
+			'code'=>'customer.lists.type.siteid',
 			'internalcode'=>'lvulity."siteid"',
 			'label'=>'Customer list type site ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.type.code' => array(
-			'code'=>'customer.list.type.code',
+		'customer.lists.type.code' => array(
+			'code'=>'customer.lists.type.code',
 			'internalcode'=>'lvulity."code"',
 			'label'=>'Customer list type code',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.type.domain' => array(
-			'code'=>'customer.list.type.domain',
+		'customer.lists.type.domain' => array(
+			'code'=>'customer.lists.type.domain',
 			'internalcode'=>'lvulity."domain"',
 			'label'=>'Customer list type domain',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.type.label' => array(
-			'code'=>'customer.list.type.label',
+		'customer.lists.type.label' => array(
+			'code'=>'customer.lists.type.label',
 			'internalcode'=>'lvulity."label"',
 			'label'=>'Customer list type label',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.type.status' => array(
-			'code'=>'customer.list.type.status',
+		'customer.lists.type.status' => array(
+			'code'=>'customer.lists.type.status',
 			'internalcode'=>'lvulity."status"',
 			'label'=>'Customer list type status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.list.type.ctime'=> array(
-			'code'=>'customer.list.type.ctime',
+		'customer.lists.type.ctime'=> array(
+			'code'=>'customer.lists.type.ctime',
 			'internalcode'=>'lvulity."ctime"',
 			'label'=>'Customer list type create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.type.mtime'=> array(
-			'code'=>'customer.list.type.mtime',
+		'customer.lists.type.mtime'=> array(
+			'code'=>'customer.lists.type.mtime',
 			'internalcode'=>'lvulity."mtime"',
 			'label'=>'Customer list type modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.type.editor'=> array(
-			'code'=>'customer.list.type.editor',
+		'customer.lists.type.editor'=> array(
+			'code'=>'customer.lists.type.editor',
 			'internalcode'=>'lvulity."editor"',
 			'label'=>'Customer list type editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -95,12 +98,12 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/customer/manager/list/type/submanagers';
+		$path = 'classes/customer/manager/lists/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/customer/manager/list/type/laravel/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/type/laravel/item/delete' );
 	}
 
 
@@ -108,11 +111,11 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/customer/manager/list/type/submanagers';
+		$path = 'classes/customer/manager/lists/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -127,18 +130,18 @@ class MShop_Customer_Manager_List_Type_Laravel
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->getSubManagerBase( 'customer', 'list/type/' . $manager, ( $name === null ? 'Laravel' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'lists/type/' . $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
 
 
 	/**
 	 * Returns the config path for retrieving the configuration values.
 	 *
-	 * @return string Configuration path (mshop/customer/manager/list/type/laravel/item/)
+	 * @return string Configuration path (mshop/customer/manager/lists/type/laravel/item/)
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/list/type/laravel/item/';
+		return 'mshop/customer/manager/lists/type/laravel/item/';
 	}
 
 

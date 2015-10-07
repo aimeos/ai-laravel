@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 /**
  * Implementation using Laravel 4 sessions.
  *
  * @package MW
  * @subpackage Session
  */
-class MW_Session_Laravel4
-	implements MW_Session_Interface
+class Laravel4
+	implements \Aimeos\MW\Session\Iface
 {
 	private $object;
 

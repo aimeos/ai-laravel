@@ -8,119 +8,122 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Lists;
+
+
 /**
  * Laravel implementation of the customer list class.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_List_Laravel
-	extends MShop_Customer_Manager_List_Default
-	implements MShop_Customer_Manager_List_Interface, MShop_Common_Manager_List_Interface
+class Laravel
+	extends \Aimeos\MShop\Customer\Manager\Lists\Standard
+	implements \Aimeos\MShop\Customer\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Lists\Iface
 {
 	private $searchConfig = array(
-		'customer.list.id'=> array(
-			'code'=>'customer.list.id',
+		'customer.lists.id'=> array(
+			'code'=>'customer.lists.id',
 			'internalcode'=>'lvuli."id"',
 			'internaldeps' => array( 'LEFT JOIN "users_list" AS lvuli ON ( lvu."id" = lvuli."parentid" )' ),
 			'label'=>'Customer list ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.siteid'=> array(
-			'code'=>'customer.list.siteid',
+		'customer.lists.siteid'=> array(
+			'code'=>'customer.lists.siteid',
 			'internalcode'=>'lvuli."siteid"',
 			'label'=>'Customer list site ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.parentid'=> array(
-			'code'=>'customer.list.parentid',
+		'customer.lists.parentid'=> array(
+			'code'=>'customer.lists.parentid',
 			'internalcode'=>'lvuli."parentid"',
 			'label'=>'Customer list parent ID',
 			'type'=> 'integer',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.domain'=> array(
-			'code'=>'customer.list.domain',
+		'customer.lists.domain'=> array(
+			'code'=>'customer.lists.domain',
 			'internalcode'=>'lvuli."domain"',
 			'label'=>'Customer list domain',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.typeid' => array(
-			'code'=>'customer.list.typeid',
+		'customer.lists.typeid' => array(
+			'code'=>'customer.lists.typeid',
 			'internalcode'=>'lvuli."typeid"',
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.list.refid'=> array(
-			'code'=>'customer.list.refid',
+		'customer.lists.refid'=> array(
+			'code'=>'customer.lists.refid',
 			'internalcode'=>'lvuli."refid"',
 			'label'=>'Customer list reference ID',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.datestart' => array(
-			'code'=>'customer.list.datestart',
+		'customer.lists.datestart' => array(
+			'code'=>'customer.lists.datestart',
 			'internalcode'=>'lvuli."start"',
 			'label'=>'Customer list start date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.dateend' => array(
-			'code'=>'customer.list.dateend',
+		'customer.lists.dateend' => array(
+			'code'=>'customer.lists.dateend',
 			'internalcode'=>'lvuli."end"',
 			'label'=>'Customer list end date/time',
 			'type'=> 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.config' => array(
-			'code'=>'customer.list.config',
+		'customer.lists.config' => array(
+			'code'=>'customer.lists.config',
 			'internalcode'=>'lvuli."config"',
 			'label'=>'Customer list position',
 			'type'=> 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.position' => array(
-			'code'=>'customer.list.position',
+		'customer.lists.position' => array(
+			'code'=>'customer.lists.position',
 			'internalcode'=>'lvuli."pos"',
 			'label'=>'Customer list position',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.list.status' => array(
-			'code'=>'customer.list.status',
+		'customer.lists.status' => array(
+			'code'=>'customer.lists.status',
 			'internalcode'=>'lvuli."status"',
 			'label'=>'Customer list status',
 			'type'=> 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.list.ctime'=> array(
-			'code'=>'customer.list.ctime',
+		'customer.lists.ctime'=> array(
+			'code'=>'customer.lists.ctime',
 			'internalcode'=>'lvuli."ctime"',
 			'label'=>'Customer list create date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.mtime'=> array(
-			'code'=>'customer.list.mtime',
+		'customer.lists.mtime'=> array(
+			'code'=>'customer.lists.mtime',
 			'internalcode'=>'lvuli."mtime"',
 			'label'=>'Customer list modification date/time',
 			'type'=> 'datetime',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.list.editor'=> array(
-			'code'=>'customer.list.editor',
+		'customer.lists.editor'=> array(
+			'code'=>'customer.lists.editor',
 			'internalcode'=>'lvuli."editor"',
 			'label'=>'Customer list editor',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -132,12 +135,12 @@ class MShop_Customer_Manager_List_Laravel
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/customer/manager/list/submanagers';
+		$path = 'classes/customer/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/customer/manager/list/laravel/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/laravel/item/delete' );
 	}
 
 
@@ -145,11 +148,11 @@ class MShop_Customer_Manager_List_Laravel
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/customer/manager/list/submanagers';
+		$path = 'classes/customer/manager/lists/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
@@ -164,18 +167,18 @@ class MShop_Customer_Manager_List_Laravel
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->getSubManagerBase( 'customer', 'list/' . $manager, ( $name === null ? 'Laravel' : $name ) );
+		return $this->getSubManagerBase( 'customer', 'lists/' . $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
 
 
 	/**
 	 * Returns the config path for retrieving the configuration values.
 	 *
-	 * @return string Configuration path (mshop/customer/manager/list/type/laravel/item/)
+	 * @return string Configuration path (mshop/customer/manager/lists/type/laravel/item/)
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/list/laravel/item/';
+		return 'mshop/customer/manager/lists/laravel/item/';
 	}
 
 

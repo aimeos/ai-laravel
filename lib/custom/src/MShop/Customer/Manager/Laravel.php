@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
  * Customer class implementation for Friends of Symfony user bundle.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Laravel
-	extends MShop_Customer_Manager_Default
+class Laravel
+	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
 		'customer.id' => array(
@@ -23,7 +26,7 @@ class MShop_Customer_Manager_Laravel
 			'code' => 'customer.id',
 			'internalcode' => 'lvu."id"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
 		// customer.siteid is not available
 		'customer.label' => array(
@@ -31,189 +34,189 @@ class MShop_Customer_Manager_Laravel
 			'code' => 'customer.label',
 			'internalcode' => 'lvu."label"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
 			'internalcode' => 'lvu."name"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.salutation' => array(
 			'label' => 'Customer salutation',
 			'code' => 'customer.salutation',
 			'internalcode' => 'lvu."salutation"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.company'=> array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
 			'internalcode' => 'lvu."company"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.vatid'=> array(
 			'label' => 'Customer VAT ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 'lvu."vatid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
 			'internalcode' => 'lvu."title"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Customer firstname',
 			'code' => 'customer.firstname',
 			'internalcode' => 'lvu."firstname"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Customer lastname',
 			'code' => 'customer.lastname',
 			'internalcode' => 'lvu."lastname"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Customer address part one',
 			'code' => 'customer.address1',
 			'internalcode' => 'lvu."address1"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Customer address part two',
 			'code' => 'customer.address2',
 			'internalcode' => 'lvu."address2"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Customer address part three',
 			'code' => 'customer.address3',
 			'internalcode' => 'lvu."address3"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Customer postal',
 			'code' => 'customer.postal',
 			'internalcode' => 'lvu."postal"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'Customer city',
 			'code' => 'customer.city',
 			'internalcode' => 'lvu."city"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'Customer state',
 			'code' => 'customer.state',
 			'internalcode' => 'lvu."state"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Customer language',
 			'code' => 'customer.languageid',
 			'internalcode' => 'lvu."langid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
 			'internalcode' => 'lvu."countryid"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Customer telephone',
 			'code' => 'customer.telephone',
 			'internalcode' => 'lvu."telephone"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'Customer email',
 			'code' => 'customer.email',
 			'internalcode' => 'lvu."email"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 'lvu."telefax"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Customer website',
 			'code' => 'customer.website',
 			'internalcode' => 'lvu."website"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
 			'internalcode' => 'lvu."birthday"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.password'=> array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
 			'internalcode' => 'lvu."password"',
 			'type' => 'string',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.status'=> array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
 			'internalcode' => 'lvu."status"',
 			'type' => 'integer',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
 		'customer.dateverified'=> array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'lvu."vdate"',
 			'type' => 'date',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.ctime'=> array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
 			'internalcode' => 'lvu."created_at"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.mtime'=> array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
 			'internalcode' => 'lvu."updated_at"',
 			'type' => 'datetime',
-			'internaltype' => MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.editor'=> array(
 			'label'=>'Customer editor',
 			'code'=>'customer.editor',
 			'internalcode' => 'lvu."editor"',
 			'type'=> 'string',
-			'internaltype'=> MW_DB_Statement_Abstract::PARAM_STR,
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
@@ -226,7 +229,7 @@ class MShop_Customer_Manager_Laravel
 	public function cleanup( array $siteids )
 	{
 		$path = 'classes/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'list' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 	}
@@ -235,7 +238,7 @@ class MShop_Customer_Manager_Laravel
 	/**
 	 * Instantiates a new customer item object.
 	 *
-	 * @return MShop_Customer_Item_Interface
+	 * @return \Aimeos\MShop\Customer\Item\Iface
 	 */
 	public function createItem()
 	{
@@ -261,27 +264,27 @@ class MShop_Customer_Manager_Laravel
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
 		$path = 'classes/customer/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'list' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
 	}
 
 
 	/**
 	 * Saves a customer item object.
 	 *
-	 * @param MShop_Customer_Item_Interface $item Customer item object
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = 'MShop_Customer_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Customer\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new MShop_Customer_Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( !$item->isModified() ) { return; }
@@ -384,14 +387,14 @@ class MShop_Customer_Manager_Laravel
 			$stmt->bind( 19, $billingAddress->getEmail() );
 			$stmt->bind( 20, $item->getLabel() );
 			$stmt->bind( 21, $item->getBirthday() );
-			$stmt->bind( 22, $item->getStatus(), MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 22, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 23, $item->getDateVerified() );
 			$stmt->bind( 24, $item->getPassword() );
 			$stmt->bind( 25, $date ); // Modification time
 			$stmt->bind( 26, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 27, $id, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
 				$stmt->bind( 27, $date ); // Creation time
@@ -437,7 +440,7 @@ class MShop_Customer_Manager_Laravel
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -448,12 +451,12 @@ class MShop_Customer_Manager_Laravel
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria object
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing MShop_Customer_Item_Interface
-	 * @throws MShop_Customer_Exception If creating items failed
+	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
+	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( MW_Common_Criteria_Interface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -462,7 +465,7 @@ class MShop_Customer_Manager_Laravel
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/laravel/item/search';
 			$cfgPathCount = 'mshop/customer/manager/laravel/item/count';
 			$required = array( 'customer' );
@@ -474,7 +477,7 @@ class MShop_Customer_Manager_Laravel
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname  );
 			throw $e;

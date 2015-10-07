@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Laravel 4 caching implementation.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_Laravel4
-	extends MW_Cache_Abstract
-	implements MW_Cache_Interface
+class Laravel4
+	extends \Aimeos\MW\Cache\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $object;
 

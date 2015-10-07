@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_View_Helper_Url_Laravel4Test extends PHPUnit_Framework_TestCase
+class Laravel4Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
@@ -24,9 +25,9 @@ class MW_View_Helper_Url_Laravel4Test extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( '\\Illuminate\\Routing\\UrlGenerator is not available' );
 		}
 
-		$view = new \MW_View_Default();
+		$view = new \Aimeos\MW\View\Standard();
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )->disableOriginalConstructor()->getMock();
-		$this->object = new MW_View_Helper_Url_Laravel4( $view, $this->mock, array() );
+		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel4( $view, $this->mock, array() );
 	}
 
 
@@ -47,7 +48,7 @@ class MW_View_Helper_Url_Laravel4Test extends PHPUnit_Framework_TestCase
 		$this->mock->expects( $this->once() )->method( 'route' )
 			->with( $this->equalTo( 'route'), $this->equalTo( array( 'key' => 'value' ) ), $this->equalTo( false ) );
 
-		$this->object->transform( 'route', 'catalog', 'list', array( 'key' => 'value' ) );
+		$this->object->transform( 'route', 'catalog', 'lists', array( 'key' => 'value' ) );
 	}
 
 
@@ -57,6 +58,6 @@ class MW_View_Helper_Url_Laravel4Test extends PHPUnit_Framework_TestCase
 			->with( $this->equalTo( 'route'), $this->equalTo( array() ), $this->equalTo( true ) );
 
 		$options = array( 'absoluteUri' => true );
-		$this->object->transform( 'route', 'catalog', 'list', array(), array(), $options );
+		$this->object->transform( 'route', 'catalog', 'lists', array(), array(), $options );
 	}
 }

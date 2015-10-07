@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Laravel 5 caching implementation.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_Laravel5
-	extends MW_Cache_Abstract
-	implements MW_Cache_Interface
+class Laravel5
+	extends \Aimeos\MW\Cache\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $object;
 

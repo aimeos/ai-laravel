@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Request;
+
+
 /**
  * View helper class for retrieving request data.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Request_Laravel5
-	extends MW_View_Helper_Abstract
-	implements MW_View_Helper_Interface
+class Laravel5
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $request;
 
@@ -24,10 +27,10 @@ class MW_View_Helper_Request_Laravel5
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param \MW_View_Interface $view View instance with registered view helpers
+	 * @param \\Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Http\Request $request Laravel request object
 	 */
-	public function __construct( \MW_View_Interface $view, \Illuminate\Http\Request $request )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Http\Request $request )
 	{
 		parent::__construct( $view );
 
@@ -38,7 +41,7 @@ class MW_View_Helper_Request_Laravel5
 	/**
 	 * Returns the request view helper.
 	 *
-	 * @return MW_View_Helper_Interface Request view helper
+	 * @return \Aimeos\MW\View\Helper\Iface Request view helper
 	 */
 	public function transform()
 	{

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required tables.
  */
-class MW_Setup_Task_TablesCreateLaravel extends MW_Setup_Task_TablesCreateMShop
+class TablesCreateLaravel extends \Aimeos\MW\Setup\Task\TablesCreateMShop
 {
 	/**
 	 * Returns the list of task names which depends on this task.

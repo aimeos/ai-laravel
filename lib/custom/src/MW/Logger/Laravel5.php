@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * Log messages using the Laravel 5 logger.
  *
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Laravel5
-	extends MW_Logger_Abstract
-	implements MW_Logger_Interface
+class Laravel5
+	extends \Aimeos\MW\Logger\Base
+	implements \Aimeos\MW\Logger\Iface
 {
 	private $logger = null;
 
@@ -38,10 +41,10 @@ class MW_Logger_Laravel5
 	 * @param string $message Message text that should be written to the log facility
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @throws MW_Logger_Exception If an error occurs in Zend_Log
-	 * @see MW_Logger_Abstract for available log level constants
+	 * @throws \Aimeos\MW\Logger\Exception If an error occurs in Zend_Log
+	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $priority = \MW_Logger_Abstract::ERR, $facility = 'message' )
+	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
 		try
 		{
@@ -52,7 +55,7 @@ class MW_Logger_Laravel5
 			$this->logger->log( $message, $this->translatePriority( $priority ) );
 		}
 		catch( \Exception $e )	{
-			throw new \MW_Logger_Exception( $e->getMessage(), $e->getCode(), $e );
+			throw new \Aimeos\MW\Logger\Exception( $e->getMessage(), $e->getCode(), $e );
 		}
 	}
 
@@ -60,32 +63,32 @@ class MW_Logger_Laravel5
 	/**
 	 * Translates the log priority to the log levels of Monolog.
 	 *
-	 * @param integer $priority Log level from MW_Logger_Abstract
+	 * @param integer $priority Log level from \Aimeos\MW\Logger\Base
 	 * @return integer Log level from Monolog\Logger
-	 * @throws MW_Logger_Exception If log level is unknown
+	 * @throws \Aimeos\MW\Logger\Exception If log level is unknown
 	 */
 	protected function translatePriority( $priority )
 	{
 		switch( $priority )
 		{
-			case MW_Logger_Abstract::EMERG:
+			case \Aimeos\MW\Logger\Base::EMERG:
 				return 'emergency';
-			case MW_Logger_Abstract::ALERT:
+			case \Aimeos\MW\Logger\Base::ALERT:
 				return 'alert';
-			case MW_Logger_Abstract::CRIT:
+			case \Aimeos\MW\Logger\Base::CRIT:
 				return 'critical';
-			case MW_Logger_Abstract::ERR:
+			case \Aimeos\MW\Logger\Base::ERR:
 				return 'error';
-			case MW_Logger_Abstract::WARN:
+			case \Aimeos\MW\Logger\Base::WARN:
 				return 'warning';
-			case MW_Logger_Abstract::NOTICE:
+			case \Aimeos\MW\Logger\Base::NOTICE:
 				return 'notice';
-			case MW_Logger_Abstract::INFO:
+			case \Aimeos\MW\Logger\Base::INFO:
 				return 'info';
-			case MW_Logger_Abstract::DEBUG:
+			case \Aimeos\MW\Logger\Base::DEBUG:
 				return 'debug';
 			default:
-				throw new MW_Logger_Exception( 'Invalid log level' );
+				throw new \Aimeos\MW\Logger\Exception( 'Invalid log level' );
 		}
 	}
 }

@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager\Group;
+
+
 /**
  * Laravel implementation of the customer group class.
  *
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Manager_Group_Laravel
-	extends MShop_Customer_Manager_Group_Default
-	implements MShop_Customer_Manager_Group_Interface
+class Laravel
+	extends \Aimeos\MShop\Customer\Manager\Group\Standard
+	implements \Aimeos\MShop\Customer\Manager\Group\Iface
 {
 }

@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Session;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Session_Laravel5Test extends PHPUnit_Framework_TestCase
+class Laravel5Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +26,7 @@ class MW_Session_Laravel5Test extends PHPUnit_Framework_TestCase
 		}
 
 		$this->mock = $this->getMock( '\\Illuminate\\Session\\SessionInterface' );
-		$this->object = new MW_Session_Laravel5( $this->mock );
+		$this->object = new \Aimeos\MW\Session\Laravel5( $this->mock );
 	}
 
 

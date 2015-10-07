@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
+class LaravelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $fixture;
@@ -19,16 +20,16 @@ class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
-		$this->object = new MShop_Customer_Manager_Laravel( $context );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
 
 		$this->fixture = array(
 			'label' => 'unitTest',
 			'status' => 2,
 		);
 
-		$this->address = new MShop_Common_Item_Address_Default( 'common.address.' );
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
 	}
 
 
@@ -51,14 +52,14 @@ class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute )
 		{
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MShop_Customer_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $this->object->createItem() );
 	}
 
 
@@ -73,7 +74,7 @@ class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new Exception( 'No customer item with code "unitCustomer3" found' );
+			throw new \Exception( 'No customer item with code "unitCustomer3" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
@@ -128,14 +129,14 @@ class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Interface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $this->object->createSearch() );
 	}
 
 
@@ -239,17 +240,17 @@ class MShop_Customer_Manager_LaravelTest extends PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address' ) );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $this->object->getSubManager( 'address', 'Default' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address', 'Standard' ) );
 
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'address', 'unknown' );
 	}
 }

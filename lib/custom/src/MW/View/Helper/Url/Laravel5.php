@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
  * View helper class for generating URLs using the Laravel 5 URL builder.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Url_Laravel5
-	extends MW_View_Helper_Abstract
-	implements MW_View_Helper_Interface
+class Laravel5
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	private $builder;
 	private $fixed;
@@ -25,11 +28,11 @@ class MW_View_Helper_Url_Laravel5
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param \MW_View_Interface $view View instance with registered view helpers
+	 * @param \\Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Contracts\Routing\UrlGenerator $builder Laravel URL builder object
 	 * @param array Associative list of fixed parameters that should be available for all routes
 	 */
-	public function __construct( \MW_View_Interface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
+	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
 	{
 		parent::__construct( $view );
 
