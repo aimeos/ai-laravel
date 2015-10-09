@@ -135,7 +135,7 @@ class Laravel
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/customer/manager/lists/submanagers';
+		$path = 'mshop/customer/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -152,7 +152,7 @@ class Laravel
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/customer/manager/lists/submanagers';
+		$path = 'mshop/customer/manager/lists/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
