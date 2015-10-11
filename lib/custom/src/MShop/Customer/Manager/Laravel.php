@@ -262,7 +262,7 @@ class Laravel
 	 * Returns the list attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -449,12 +449,12 @@ class Laravel
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
