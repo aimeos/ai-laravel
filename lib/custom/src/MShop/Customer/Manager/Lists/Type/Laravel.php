@@ -103,7 +103,7 @@ class Laravel
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/type/laravel/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/lists/type/laravel/delete' );
 	}
 
 
@@ -137,11 +137,11 @@ class Laravel
 	/**
 	 * Returns the config path for retrieving the configuration values.
 	 *
-	 * @return string Configuration path (mshop/customer/manager/lists/type/laravel/item/)
+	 * @return string Configuration path (mshop/customer/manager/lists/type/laravel/)
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/lists/type/laravel/item/';
+		return 'mshop/customer/manager/lists/type/laravel/';
 	}
 
 

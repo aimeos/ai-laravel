@@ -6,8 +6,8 @@
  */
 
 return array(
-	'item' => array(
-		'aggregate' => '
+	'aggregate' => array(
+		'ansi' => '
 			SELECT "key", COUNT(DISTINCT "id") AS "count"
 			FROM (
 				SELECT :key AS "key", lvuli."id" AS "id"
@@ -19,7 +19,9 @@ return array(
 			) AS list
 			GROUP BY "key"
 		',
-		'getposmax' => '
+	),
+	'getposmax' => array(
+		'ansi' => '
 			SELECT MAX( "pos" ) AS pos
 			FROM "users_list"
 			WHERE "siteid" = ?
@@ -27,27 +29,37 @@ return array(
 				AND "typeid" = ?
 				AND "domain" = ?
 		',
-		'insert' => '
+	),
+	'insert' => array(
+		'ansi' => '
 			INSERT INTO "users_list"( "parentid", "siteid", "typeid", "domain", "refid", "start", "end",
 			"config", "pos", "status", "mtime", "editor", "ctime" )
 			VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )
 		',
-		'update' => '
+	),
+	'update' => array(
+		'ansi' => '
 			UPDATE "users_list"
 			SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 				"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'updatepos' => '
+	),
+	'updatepos' => array(
+		'ansi' => '
 			UPDATE "users_list"
 				SET "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
+	),
+	'delete' => array(
+		'ansi' => '
 			DELETE FROM "users_list"
 			WHERE :cond AND siteid = ?
 		',
-		'move' => '
+	),
+	'move' => array(
+		'ansi' => '
 			UPDATE "users_list"
 				SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 			WHERE "siteid" = ?
@@ -56,7 +68,9 @@ return array(
 				AND "domain" = ?
 				AND "pos" >= ?
 		',
-		'search' => '
+	),
+	'search' => array(
+		'ansi' => '
 			SELECT lvuli."id", lvuli."siteid", lvuli."parentid", lvuli."typeid", lvuli."domain",
 				lvuli."refid", lvuli."start", lvuli."end", lvuli."config", lvuli."pos",
 				lvuli."status", lvuli."mtime", lvuli."editor", lvuli."ctime"
@@ -66,7 +80,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT lvuli."id"
@@ -76,5 +92,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
+	),
+	'newid' => array(
+		'mysql' => 'SELECT LAST_INSERT_ID()'
 	),
 );

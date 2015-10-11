@@ -225,10 +225,8 @@ class Laravel
 	 */
 	public function deleteItems( array $ids )
 	{
-		$path = 'mshop/customer/manager/address/laravel/item/delete';
-		$sql = $this->getContext()->getConfig()->get( $path, $path );
-
-		$this->deleteItemsBase( $ids, $sql, false );
+		$path = 'mshop/customer/manager/address/laravel/delete';
+		$this->deleteItemsBase( $ids, $path, false );
 	}
 
 
@@ -262,11 +260,11 @@ class Laravel
 	/**
 	 * Returns the config path for retrieving the configuration values.
 	 *
-	 * @return string Configuration path (mshop/customer/manager/address/laravel/item/)
+	 * @return string Configuration path (mshop/customer/manager/address/laravel/)
 	 */
 	protected function getConfigPath()
 	{
-		return 'mshop/customer/manager/address/laravel/item';
+		return 'mshop/customer/manager/address/laravel/';
 	}
 
 

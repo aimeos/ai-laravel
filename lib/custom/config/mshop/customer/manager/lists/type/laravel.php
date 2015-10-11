@@ -6,22 +6,28 @@
  */
 
 return array(
-	'item' => array(
-		'insert' => '
+	'insert' => array(
+		'ansi' => '
 			INSERT INTO "users_list_type"( "siteid", "code", "domain", "label", "status",
 				"mtime", "editor", "ctime" )
 			VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
 		',
-		'update' => '
+	),
+	'update' => array(
+		'ansi' => '
 			UPDATE "users_list_type"
 			SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'delete' => '
+	),
+	'delete' => array(
+		'ansi' => '
 			DELETE FROM "users_list_type"
 			WHERE :cond AND siteid = ?
 		',
-		'search' => '
+	),
+	'search' => array(
+		'ansi' => '
 			SELECT lvulity."id", lvulity."siteid", lvulity."code",
 				lvulity."domain", lvulity."label", lvulity."status",
 				lvulity."mtime", lvulity."editor", lvulity."ctime"
@@ -32,7 +38,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT lvulity."id"
@@ -42,5 +50,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS LIST
 		',
+	),
+	'newid' => array(
+		'mysql' => 'SELECT LAST_INSERT_ID()'
 	),
 );

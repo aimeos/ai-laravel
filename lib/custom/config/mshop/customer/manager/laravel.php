@@ -6,12 +6,14 @@
  */
 
 return array(
-	'item' => array(
-		'delete' => '
+	'delete' => array(
+		'ansi' => '
 			DELETE FROM "users"
 			WHERE :cond
 		',
-		'insert' => '
+	),
+	'insert' => array(
+		'ansi' => '
 			INSERT INTO "users" (
 				"name", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
@@ -22,7 +24,9 @@ return array(
 				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
-		'update' => '
+	),
+	'update' => array(
+		'ansi' => '
 			UPDATE "users"
 			SET "name" = ?, "company" = ?, "vatid" = ?,
 				"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
@@ -33,7 +37,9 @@ return array(
 				"password" = ?, "updated_at" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
-		'search' => '
+	),
+	'search' => array(
+		'ansi' => '
 			SELECT DISTINCT lvu."id", lvu."label", lvu."name" as "code",
 				lvu."company", lvu."vatid", lvu."salutation", lvu."title",
 				lvu."firstname", lvu."lastname", lvu."address1",
@@ -48,7 +54,9 @@ return array(
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
-		'count' => '
+	),
+	'count' => array(
+		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
 				SELECT DISTINCT lvu."id"
@@ -58,5 +66,8 @@ return array(
 				LIMIT 10000 OFFSET 0
 			) AS list
 		',
+	),
+	'newid' => array(
+		'mysql' => 'SELECT LAST_INSERT_ID()'
 	),
 );
