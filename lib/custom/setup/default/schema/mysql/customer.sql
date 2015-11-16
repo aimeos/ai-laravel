@@ -62,8 +62,8 @@ CREATE TABLE "users_address" (
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
 	-- site id, not used
 	"siteid" INTEGER NULL,
-	-- reference id for customer
-	"refid" INTEGER UNSIGNED NOT NULL,
+	-- parent id for customer
+	"parentid" INTEGER UNSIGNED NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
 	-- vatid
@@ -114,7 +114,7 @@ CONSTRAINT "pk_lvuad_id"
 	PRIMARY KEY ("id")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
-CREATE INDEX "idx_lvuad_refid" ON "users_address" ("refid");
+CREATE INDEX "idx_lvuad_pid" ON "users_address" ("parentid");
 
 CREATE INDEX "idx_lvuad_ln_fn" ON "users_address" ("lastname", "firstname");
 

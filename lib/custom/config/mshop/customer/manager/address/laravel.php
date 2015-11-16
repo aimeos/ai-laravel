@@ -15,7 +15,7 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "users_address" (
-				"siteid", "refid", "company", "vatid", "salutation", "title",
+				"siteid", "parentid", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
 				"email", "telefax", "website", "flag", "pos", "mtime",
@@ -28,7 +28,7 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "users_address"
-			SET "siteid" = ?, "refid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+			SET "siteid" = ?, "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 				"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 				"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 				"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -39,7 +39,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT lvuad."id", lvuad."refid",
+			SELECT DISTINCT lvuad."id", lvuad."parentid",
 				lvuad."company", lvuad."vatid", lvuad."salutation", lvuad."title",
 				lvuad."firstname", lvuad."lastname", lvuad."address1",
 				lvuad."address2", lvuad."address3", lvuad."postal",
