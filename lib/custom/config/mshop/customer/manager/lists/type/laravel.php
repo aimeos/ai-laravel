@@ -28,9 +28,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT lvulity."id", lvulity."siteid", lvulity."code",
-				lvulity."domain", lvulity."label", lvulity."status",
-				lvulity."mtime", lvulity."editor", lvulity."ctime"
+			SELECT lvulity."id" AS "customer.lists.type.id", lvulity."siteid" AS "customer.lists.type.siteid",
+				lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
+				lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
+				lvulity."mtime" AS "customer.lists.type.mtime", lvulity."editor" AS "customer.lists.type.editor",
+				lvulity."ctime" AS "customer.lists.type.ctime"
 			FROM "users_list_type" AS lvulity
 			:joins
 			WHERE

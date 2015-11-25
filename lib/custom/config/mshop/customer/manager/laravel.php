@@ -40,14 +40,21 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT lvu."id", lvu."label", lvu."name" as "code",
-				lvu."company", lvu."vatid", lvu."salutation", lvu."title",
-				lvu."firstname", lvu."lastname", lvu."address1",
-				lvu."address2", lvu."address3", lvu."postal", lvu."city",
-				lvu."state", lvu."countryid", lvu."langid",
-				lvu."telephone", lvu."email", lvu."telefax", lvu."website",
-				lvu."birthday", lvu."status", lvu."vdate", lvu."password",
-				lvu."created_at" AS "ctime", lvu."updated_at" AS "mtime", lvu."editor"
+			SELECT DISTINCT lvu."id" AS "customer.id",
+				lvu."label" AS "customer.label", lvu."name" as "customer.code",
+				lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
+				lvu."salutation" AS "customer.salutation", lvu."title" AS "customer.title",
+				lvu."firstname" AS "customer.firstname", lvu."lastname" AS "customer.lastname",
+				lvu."address1" AS "customer.address1", lvu."address2" AS "customer.address2",
+				lvu."address3" AS "customer.address3", lvu."postal" AS "customer.postal",
+				lvu."city" AS "customer.city", lvu."state" AS "customer.state",
+				lvu."countryid" AS "customer.countryid", lvu."langid" AS "customer.langid",
+				lvu."telephone" AS "customer.telephone", lvu."email" AS "customer.email",
+				lvu."telefax" AS "customer.telefax", lvu."website" AS "customer.website",
+				lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
+				lvu."vdate" AS "customer.dateverified", lvu."password" AS "customer.password",
+				lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
+				lvu."editor" AS "customer.editor"
 			FROM "users" AS lvu
 			:joins
 			WHERE :cond

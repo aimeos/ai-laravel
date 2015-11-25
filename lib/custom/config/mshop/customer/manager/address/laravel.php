@@ -39,14 +39,19 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT lvuad."id", lvuad."parentid",
-				lvuad."company", lvuad."vatid", lvuad."salutation", lvuad."title",
-				lvuad."firstname", lvuad."lastname", lvuad."address1",
-				lvuad."address2", lvuad."address3", lvuad."postal",
-				lvuad."city", lvuad."state", lvuad."countryid",
-				lvuad."langid", lvuad."telephone", lvuad."email",
-				lvuad."telefax", lvuad."website", lvuad."flag",
-				lvuad."pos", lvuad."mtime", lvuad."editor", lvuad."ctime"
+			SELECT DISTINCT lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
+				lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
+				lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
+				lvuad."firstname" AS "customer.address.firstname", lvuad."lastname" AS "customer.address.lastname",
+				lvuad."address1" AS "customer.address.address1", lvuad."address2" AS "customer.address.address2",
+				lvuad."address3" AS "customer.address.address3", lvuad."postal" AS "customer.address.postal",
+				lvuad."city" AS "customer.address.city", lvuad."state" AS "customer.address.state",
+				lvuad."countryid" AS "customer.address.countryid", lvuad."langid" AS "customer.address.languageid",
+				lvuad."telephone" AS "customer.address.telephone", lvuad."email" AS "customer.address.email",
+				lvuad."telefax" AS "customer.address.telefax", lvuad."website" AS "customer.address.website",
+				lvuad."flag" AS "customer.address.flag", lvuad."pos" AS "customer.address.position",
+				lvuad."mtime" AS "customer.address.mtime", lvuad."editor" AS "customer.address.editor",
+				lvuad."ctime" AS "customer.address.ctime"
 			FROM "users_address" AS lvuad
 			:joins
 			WHERE :cond

@@ -71,9 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT lvuli."id", lvuli."siteid", lvuli."parentid", lvuli."typeid", lvuli."domain",
-				lvuli."refid", lvuli."start", lvuli."end", lvuli."config", lvuli."pos",
-				lvuli."status", lvuli."mtime", lvuli."editor", lvuli."ctime"
+			SELECT lvuli."id" AS "customer.lists.id", lvuli."siteid" AS "customer.lists.siteid",
+				lvuli."parentid" AS "customer.lists.parentid", lvuli."typeid" AS "customer.lists.typeid",
+				lvuli."domain" AS "customer.lists.domain", lvuli."refid" AS "customer.lists.refid",
+				lvuli."start" AS "customer.lists.datestart", lvuli."end" AS "customer.lists.dateend",
+				lvuli."config" AS "customer.lists.config", lvuli."pos" AS "customer.lists.position",
+				lvuli."status" AS "customer.lists.status", lvuli."mtime" AS "customer.lists.mtime",
+				lvuli."editor" AS "customer.lists.editor", lvuli."ctime" AS "customer.lists.ctime"
 			FROM "users_list" AS lvuli
 			:joins
 			WHERE :cond
