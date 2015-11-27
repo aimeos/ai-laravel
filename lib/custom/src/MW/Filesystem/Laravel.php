@@ -249,7 +249,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 */
 	public function writes( $path, $stream )
 	{
-		if( ( $content = @fread( $stream, 0x7fffffff ) ) === false ) {
+		if( ( $content = @fread( $stream, 0x7ffffffd ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
