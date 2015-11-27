@@ -12,12 +12,12 @@ namespace Aimeos\MW\Filesystem;
 
 
 /**
- * Implementation of basic file system methods
+ * Implementation of Laravel file system adapter
  *
  * @package MW
  * @subpackage Filesystem
  */
-class Laravel implements BasicIface, DirIface, MetaIface
+class Laravel implements Iface, DirIface, MetaIface
 {
 	private $fs;
 
