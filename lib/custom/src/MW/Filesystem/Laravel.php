@@ -25,7 +25,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	/**
 	 * Initializes the object
 	 *
-	 * @param string $basepath Root path to the file system
+	 * @param \Illuminate\Contracts\Filesystem\Filesystem $fs Laravel file system object
 	 */
 	public function __construct( \Illuminate\Contracts\Filesystem\Filesystem $fs )
 	{
