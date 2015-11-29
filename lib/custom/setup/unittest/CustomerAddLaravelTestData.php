@@ -73,11 +73,11 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	protected function cleanupCustomerData( \Aimeos\MShop\Common\Manager\Iface $customerManager, \Aimeos\MShop\Common\Manager\Iface $customerAddressManager )
 	{
 		$search = $customerManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.website', 'unittest.aimeos.org' ) );
+		$search->setConditions( $search->compare( '=~', 'customer.code', 'unitCustomer' ) );
 		$customerItems = $customerManager->searchItems( $search );
 
 		$search = $customerAddressManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' ) );
+		$search->setConditions( $search->compare( '=~', 'customer.address.email', 'unitCustomer' ) );
 		$addressItems = $customerAddressManager->searchItems( $search );
 
 		$customerAddressManager->deleteItems( array_keys( $addressItems ) );
