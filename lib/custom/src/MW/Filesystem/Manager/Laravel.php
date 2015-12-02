@@ -19,8 +19,9 @@ namespace Aimeos\MW\Filesystem\Manager;
  */
 class Laravel extends Standard implements Iface
 {
-	private $objects = array();
 	private $fsm;
+	private $objects = array();
+	private $tempdir;
 
 
 	/**
@@ -28,12 +29,14 @@ class Laravel extends Standard implements Iface
 	 *
 	 * @param \Illuminate\Filesystem\FilesystemManager $fsm Laravel file system manager object
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @param string $tempdir Directory for storing temporary files
 	 */
-	public function __construct( \Illuminate\Filesystem\FilesystemManager $fsm, \Aimeos\MW\Config\Iface $config )
+	public function __construct( \Illuminate\Filesystem\FilesystemManager $fsm, \Aimeos\MW\Config\Iface $config, $tempdir )
 	{
 		parent::__construct( $config );
 
 		$this->fsm = $fsm;
+		$this->tempdir = $tempdir;
 	}
 
 
@@ -51,7 +54,7 @@ class Laravel extends Standard implements Iface
 		if( is_string( $key ) )
 		{
 			if( !isset( $this->objects[$key] ) ) {
-				$this->objects[$key] = new \Aimeos\MW\Filesystem\Laravel( $this->fsm->disk( $key ) );
+				$this->objects[$key] = new \Aimeos\MW\Filesystem\Laravel( $this->fsm->disk( $key ), $this->tempdir );
 			}
 
 			return $this->objects[$key];

@@ -20,16 +20,19 @@ namespace Aimeos\MW\Filesystem;
 class Laravel implements Iface, DirIface, MetaIface
 {
 	private $fs;
+	private $tempdir;
 
 
 	/**
 	 * Initializes the object
 	 *
 	 * @param \Illuminate\Contracts\Filesystem\Filesystem $fs Laravel file system object
+	 * @param string $tempdir Directory for storing temporary files
 	 */
-	public function __construct( \Illuminate\Contracts\Filesystem\Filesystem $fs )
+	public function __construct( \Illuminate\Contracts\Filesystem\Filesystem $fs, $tempdir )
 	{
 		$this->fs = $fs;
+		$this->tempdir = $tempdir;
 	}
 
 
@@ -182,6 +185,27 @@ class Laravel implements Iface, DirIface, MetaIface
 
 
 	/**
+	 * Reads the content of the remote file and writes it to a local one
+	 *
+	 * @param string $path Path to the remote file
+	 * @return string Path of the local file
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function readf( $path )
+	{
+		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
+		}
+
+		if( @file_put_contents( $filename, $this->fs->get( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $filename ) );
+		}
+
+		return $filename;
+	}
+
+
+	/**
 	 * Returns the stream descriptor for the file
 	 *
 	 * {@inheritDoc}
@@ -199,18 +223,15 @@ class Laravel implements Iface, DirIface, MetaIface
 		}
 
 		if( ( $stream = tmpfile() ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( 'Couldn\'t create temporary file' );
 		}
 
 		if( fwrite( $stream, $content ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( 'Couldn\'t write to temporary file' );
 		}
 
 		if( rewind( $stream ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( 'Couldn\'t rewind temporary file' );
 		}
 
 		return $stream;
@@ -234,6 +255,26 @@ class Laravel implements Iface, DirIface, MetaIface
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
+	}
+
+
+	/**
+	 * Writes the content of the local file to the remote path
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param string $path Path to the remote file
+	 * @param string $file Path to the local file
+	 * @return void
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function writef( $path, $local )
+	{
+		if( ( $content = @file_get_contents( $local ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $local ) );
+		}
+
+		$this->write( $path, $content );
 	}
 
 

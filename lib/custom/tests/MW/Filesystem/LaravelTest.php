@@ -19,7 +19,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Filesystem\Laravel( $this->mock );
+		$this->object = new \Aimeos\MW\Filesystem\Laravel( $this->mock, sys_get_temp_dir() );
 	}
 
 
@@ -156,6 +156,18 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testReadf()
+	{
+		$this->mock->expects( $this->once() )->method( 'get' )
+			->will( $this->returnValue( 'test' ) );
+
+		$result = $this->object->readf( 'file' );
+
+		$this->assertEquals( 'test', file_get_contents( $result ) );
+		unlink( $result );
+	}
+
+
 	public function testReads()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
@@ -195,6 +207,26 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( '', 'test' );
+	}
+
+
+	public function testWritef()
+	{
+		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'file99';
+		file_put_contents( $file, 'test' );
+
+		$this->mock->expects( $this->once() )->method( 'put' );
+
+		$this->object->writef( 'file', $file );
+
+		unlink( $file );
+	}
+
+
+	public function testWritefException()
+	{
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->writef( '', 'invalid' );
 	}
 
 

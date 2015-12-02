@@ -22,7 +22,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$this->config = new \Aimeos\MW\Config\PHPArray( array(), array() );
-		$this->object = new \Aimeos\MW\Filesystem\Manager\Laravel( $this->storage, $this->config );
+		$this->object = new \Aimeos\MW\Filesystem\Manager\Laravel( $this->storage, $this->config, sys_get_temp_dir() );
 	}
 
 
