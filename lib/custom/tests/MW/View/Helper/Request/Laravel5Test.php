@@ -65,4 +65,13 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( '127.0.0.1', $this->object->transform()->getClientAddress() );
 	}
+
+
+	public function testGetTarget()
+	{
+		$this->mock->expects( $this->once() )->method( 'route' )
+			->will( $this->returnValue( null ) );
+
+		$this->assertEquals( null, $this->object->transform()->getTarget() );
+	}
 }

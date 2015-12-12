@@ -19,7 +19,7 @@ namespace Aimeos\MW\View\Helper\Request;
  */
 class Laravel5
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Request\Iface
 {
 	private $request;
 
@@ -68,5 +68,18 @@ class Laravel5
 	public function getClientAddress()
 	{
 		return $this->request->ip();
+	}
+
+
+	/**
+	 * Returns the current page or route name
+	 *
+	 * @return string|null Current page or route name
+	 */
+	public function getTarget()
+	{
+		if( ( $route = $this->request->route() ) !== null ) {
+			return $route->getName();
+		}
 	}
 }
