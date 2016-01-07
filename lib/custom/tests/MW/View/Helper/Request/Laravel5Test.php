@@ -74,4 +74,10 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( null, $this->object->transform()->getTarget() );
 	}
+
+
+	public function testGetUploadedFiles()
+	{
+		$this->assertEquals( array(), $this->object->transform()->getUploadedFiles() );
+	}
 }

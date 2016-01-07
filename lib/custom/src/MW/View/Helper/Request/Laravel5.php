@@ -18,7 +18,7 @@ namespace Aimeos\MW\View\Helper\Request;
  * @subpackage View
  */
 class Laravel5
-	extends \Aimeos\MW\View\Helper\Base
+	extends \Aimeos\MW\View\Helper\Request\Standard
 	implements \Aimeos\MW\View\Helper\Request\Iface
 {
 	private $request;
@@ -32,20 +32,9 @@ class Laravel5
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Http\Request $request )
 	{
-		parent::__construct( $view );
+		\Aimeos\MW\View\Helper\Request\Standard::__construct( $view, null, null, null, $request->file() );
 
 		$this->request = $request;
-	}
-
-
-	/**
-	 * Returns the request view helper.
-	 *
-	 * @return \Aimeos\MW\View\Helper\Iface Request view helper
-	 */
-	public function transform()
-	{
-		return $this;
 	}
 
 
@@ -81,5 +70,37 @@ class Laravel5
 		if( ( $route = $this->request->route() ) !== null ) {
 			return $route->getName();
 		}
+	}
+
+
+	/**
+	 * Creates a normalized file upload data from the given array.
+	 *
+	 * @param \Traversable|array $files File upload data
+	 * @return array Multi-dimensional list of file objects
+	 */
+	protected function createUploadedFiles( $files )
+	{
+		$files = array();
+
+		foreach( $files as $key => $value )
+		{
+			if( $value instanceof UploadedFile )
+			{
+				$files[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
+					$value->getRealPath(),
+					$value->getClientOriginalName(),
+					$value->getSize(),
+					$value->getClientMimeType(),
+					$value->getError()
+				);
+			}
+			else
+			{
+				$files[$key] = $this->createUploadedFiles($value);
+			}
+		}
+
+		return $files;
 	}
 }
