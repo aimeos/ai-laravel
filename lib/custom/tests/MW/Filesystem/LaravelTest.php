@@ -55,10 +55,30 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testMkdirException()
+	{
+		$this->mock->expects( $this->once() )->method( 'makeDirectory' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->mkdir( 'test' );
+	}
+
+
 	public function testRmdir()
 	{
 		$this->mock->expects( $this->once() )->method( 'deleteDirectory' );
 
+		$this->object->rmdir( 'test' );
+	}
+
+
+	public function testRmdirException()
+	{
+		$this->mock->expects( $this->once() )->method( 'deleteDirectory' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rmdir( 'test' );
 	}
 
@@ -83,6 +103,16 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testScanException()
+	{
+		$this->mock->expects( $this->once() )->method( 'directories' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->scan( 'test' );
+	}
+
+
 	public function testSize()
 	{
 		$this->mock->expects( $this->once() )->method( 'size' )
@@ -91,6 +121,16 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->size( 'test' );
 
 		$this->assertEquals( 4, $result );
+	}
+
+
+	public function testSizeException()
+	{
+		$this->mock->expects( $this->once() )->method( 'size' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->size( 'test' );
 	}
 
 
@@ -105,10 +145,30 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testTimeException()
+	{
+		$this->mock->expects( $this->once() )->method( 'lastModified' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->time( 'test' );
+	}
+
+
 	public function testRm()
 	{
 		$this->mock->expects( $this->once() )->method( 'delete' );
 
+		$this->object->rm( 'test' );
+	}
+
+
+	public function testRmException()
+	{
+		$this->mock->expects( $this->once() )->method( 'delete' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rm( 'test' );
 	}
 
@@ -269,10 +329,30 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testMoveException()
+	{
+		$this->mock->expects( $this->once() )->method( 'move' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->move( 'file1', 'file2' );
+	}
+
+
 	public function testCopy()
 	{
 		$this->mock->expects( $this->once() )->method( 'copy' );
 
+		$this->object->copy( 'file1', 'file2' );
+	}
+
+
+	public function testCopyException()
+	{
+		$this->mock->expects( $this->once() )->method( 'copy' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->copy( 'file1', 'file2' );
 	}
 }
