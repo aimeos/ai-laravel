@@ -35,7 +35,8 @@ class Laravel5
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Http\Request $request )
 	{
-		\Aimeos\MW\View\Helper\Request\Standard::__construct( $view, null, null, null, $request->file() );
+		$files = ( $request->file() ?: array() );
+		\Aimeos\MW\View\Helper\Request\Standard::__construct( $view, null, null, null, $files );
 
 		$this->request = $request;
 	}
@@ -98,9 +99,9 @@ class Laravel5
 					$value->getError()
 				);
 			}
-			else
+			elseif( is_array( $value ) )
 			{
-				$list[$key] = $this->createUploadedFiles($value);
+				$list[$key] = $this->createUploadedFiles( $value );
 			}
 		}
 
