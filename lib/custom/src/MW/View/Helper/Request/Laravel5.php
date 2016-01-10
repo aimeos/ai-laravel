@@ -11,6 +11,9 @@
 namespace Aimeos\MW\View\Helper\Request;
 
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+
 /**
  * View helper class for retrieving request data.
  *
@@ -81,13 +84,13 @@ class Laravel5
 	 */
 	protected function createUploadedFiles( $files )
 	{
-		$files = array();
+		$list = array();
 
 		foreach( $files as $key => $value )
 		{
 			if( $value instanceof UploadedFile )
 			{
-				$files[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
+				$list[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
 					$value->getRealPath(),
 					$value->getClientOriginalName(),
 					$value->getSize(),
@@ -97,10 +100,10 @@ class Laravel5
 			}
 			else
 			{
-				$files[$key] = $this->createUploadedFiles($value);
+				$list[$key] = $this->createUploadedFiles($value);
 			}
 		}
 
-		return $files;
+		return $list;
 	}
 }
