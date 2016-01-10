@@ -11,6 +11,7 @@ php:
 env:
   - LARAVEL_VERSION=5.0.*
   - LARAVEL_VERSION=5.1.*
+  - LARAVEL_VERSION=5.2.*
 
 before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
@@ -31,3 +32,5 @@ matrix:
   exclude:
     - php: 5.4
       env: "LARAVEL_VERSION=5.1.*"
+    - php: 5.4
+      env: "LARAVEL_VERSION=5.2.*"
