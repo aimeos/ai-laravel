@@ -28,7 +28,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 		$view = new \Aimeos\MW\View\Standard();
 
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Http\\Request' )
-			->setMethods( array( 'file' ) )->getMock();
+			->setMethods( array( 'file', 'getContent', 'ip', 'route' ) )->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'file' )->will( $this->returnValue( array() ) );
 
