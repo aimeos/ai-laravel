@@ -21,17 +21,14 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->config = new \Aimeos\MW\Config\PHPArray( array(), array() );
+		$this->config = new \Aimeos\MW\Config\Decorator\Memory( new \Aimeos\MW\Config\PHPArray( array(), array() ) );
 		$this->object = new \Aimeos\MW\Filesystem\Manager\Laravel( $this->storage, $this->config, sys_get_temp_dir() );
 	}
 
 
 	protected function tearDown()
 	{
-		$this->config->set( 'resource/fs-media', null );
-		$this->config->set( 'resource/fs', null );
-
-		unset( $this->object, $this->storage );
+		unset( $this->config, $this->object, $this->storage );
 	}
 
 
