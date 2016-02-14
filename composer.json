@@ -15,10 +15,13 @@
 	"prefer-stable": true,
 	"require": {
 		"php": ">=5.3.3",
-		"composer/installers": "~1.0"
+		"composer/installers": "~1.0",
+		"laravel/framework": "~5.0",
+		"symfony/psr-http-message-bridge": "~0.2",
+		"zendframework/zend-diactoros": "~1.0"
 	},
 	"require-dev": {
-		"laravel/framework": ">=5.0"
+		"satooshi/php-coveralls": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

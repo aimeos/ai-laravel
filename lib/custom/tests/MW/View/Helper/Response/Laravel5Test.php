@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
+namespace Aimeos\MW\View\Helper\Response;
+
+
+class Laravel5Test extends \PHPUnit_Framework_TestCase
+{
+	private $object;
+	private $mock;
+
+
+	protected function setUp()
+	{
+		if( !class_exists( '\Illuminate\Http\Response' ) ) {
+			$this->markTestSkipped( '\Illuminate\Http\Response is not available' );
+		}
+
+		if( !class_exists( '\Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory' ) ) {
+			$this->markTestSkipped( '\Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory is not available' );
+		}
+
+		$view = new \Aimeos\MW\View\Standard();
+		$response = new \Illuminate\Http\Response( 'Content' );
+
+		$this->object = new \Aimeos\MW\View\Helper\Response\Laravel5( $view, $response );
+	}
+
+
+	protected function tearDown()
+	{
+		unset( $this->object, $this->mock );
+	}
+
+
+	public function testTransform()
+	{
+		$this->assertInstanceOf( '\Aimeos\MW\View\Helper\Response\Laravel5', $this->object->transform() );
+	}
+}
