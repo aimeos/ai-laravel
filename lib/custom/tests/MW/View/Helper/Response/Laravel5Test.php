@@ -26,9 +26,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 		}
 
 		$view = new \Aimeos\MW\View\Standard();
-		$response = new \Illuminate\Http\Response( 'Content' );
-
-		$this->object = new \Aimeos\MW\View\Helper\Response\Laravel5( $view, $response );
+		$this->object = new \Aimeos\MW\View\Helper\Response\Laravel5( $view );
 	}
 
 

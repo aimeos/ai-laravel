@@ -24,14 +24,10 @@ class Laravel5
 	/**
 	 * Initializes the response view helper.
 	 *
-	 * @param \\Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param \Illuminate\Http\Response $response Laravel response object
+	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Http\Response $response )
+	public function __construct( \Aimeos\MW\View\Iface $view )
 	{
-		$factory = new \Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory();
-		$psr7response = $factory->createResponse( $response );
-
-		parent::__construct( $view, $psr7response );
+		parent::__construct( $view, new \Zend\Diactoros\Response() );
 	}
 }
