@@ -10,6 +10,10 @@
 
 namespace Aimeos\MW\View\Helper\Request;
 
+use Zend\Diactoros\ServerRequestFactory;
+use Zend\Diactoros\ServerRequest;
+use Zend\Diactoros\Stream;
+
 
 /**
  * View helper class for retrieving request data.
