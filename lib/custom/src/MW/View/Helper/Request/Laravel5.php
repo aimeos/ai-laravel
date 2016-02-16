@@ -34,10 +34,7 @@ class Laravel5
 	{
 		$this->request = $request;
 
-		$factory = new \Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory();
-		$psr7request = $factory->createRequest( $request );
-
-		parent::__construct( $view, $psr7request );
+		parent::__construct( $view, $this->createRequest( $request ) );
 	}
 
 
@@ -62,5 +59,67 @@ class Laravel5
 		if( ( $route = $this->request->route() ) !== null ) {
 			return $route->getName();
 		}
+	}
+
+
+	/**
+	 * Transforms a Symfony request into a PSR-7 request object
+	 *
+	 * @param \Illuminate\Http\Request $nativeRequest Laravel request object
+	 * @return \Psr\Http\Message\ServerRequestInterface PSR-7 request object
+	 */
+	protected function createRequest( \Illuminate\Http\Request $nativeRequest )
+	{
+		$files = ServerRequestFactory::normalizeFiles( $this->getFiles( $nativeRequest->files->all() ) );
+		$server = ServerRequestFactory::normalizeServer( $nativeRequest->server->all() );
+		$headers = $nativeRequest->headers->all();
+		$cookies = $nativeRequest->cookies->all();
+		$post = $nativeRequest->request->all();
+		$query = $nativeRequest->query->all();
+		$method = $nativeRequest->getMethod();
+		$uri = $nativeRequest->getUri();
+
+		$body = new Stream( 'php://temp', 'wb+' );
+		$body->write( $nativeRequest->getContent() );
+
+		$request = new ServerRequest( $server, $files, $uri, $method, $body, $headers, $cookies, $query, $post );
+
+		foreach( $nativeRequest->attributes->all() as $key => $value ) {
+			$request = $request->withAttribute( $key, $value );
+		}
+
+		return $request;
+	}
+
+
+	/**
+	 * Converts Symfony uploaded files array to the PSR-7 one.
+	 *
+	 * @param array $files Multi-dimensional list of uploaded files from Symfony request
+	 * @return array Multi-dimensional list of uploaded files as PSR-7 objects
+	 */
+	protected function getFiles( array $files )
+	{
+		$list = array();
+
+		foreach( $files as $key => $value )
+		{
+			if( $value instanceof \Illuminate\Http\UploadedFile )
+			{
+				$list[$key] = new \Zend\Diactoros\UploadedFile(
+					$file->getRealPath(),
+					$file->getSize(),
+					$file->getError(),
+					$file->getClientOriginalName(),
+					$file->getClientMimeType()
+				);
+			}
+			else
+			{
+				$list[$key] = $this->getFiles( $value );
+			}
+		}
+
+		return $list;
 	}
 }
