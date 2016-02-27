@@ -21,8 +21,8 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( '\Illuminate\Http\Request is not available' );
 		}
 
-		if( !class_exists( '\Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory' ) ) {
-			$this->markTestSkipped( '\Symfony\Bridge\PsrHttpMessage\Factory\DiactorosFactory is not available' );
+		if( !class_exists( '\Zend\Diactoros\Response' ) ) {
+			$this->markTestSkipped( '\Zend\Diactoros\Response is not available' );
 		}
 
 		$view = new \Aimeos\MW\View\Standard();
