@@ -18,7 +18,7 @@ namespace Aimeos\MW\View\Helper\Url;
  * @subpackage View
  */
 class Laravel5
-	extends \Aimeos\MW\View\Helper\Base
+	extends \Aimeos\MW\View\Helper\Url\Base
 	implements \Aimeos\MW\View\Helper\Url\Iface
 {
 	private $builder;
@@ -54,6 +54,7 @@ class Laravel5
 	 */
 	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
 	{
+		$params = $this->sanitize( $params );
 		$values = $this->getValues( $config );
 
 		return $this->builder->route( $target, $params + $this->fixed, $values['absoluteUri'] );
