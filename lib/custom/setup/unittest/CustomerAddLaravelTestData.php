@@ -26,9 +26,9 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 
 	/**
-	 * Adds customer TYPO3 test data.
+	 * Adds attribute test data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {

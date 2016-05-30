@@ -26,9 +26,9 @@ class TablesCreateLaravel extends \Aimeos\MW\Setup\Task\TablesCreateMShop
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Migrate database schema
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( 'Creating Aimeos Laravel user tables', 0 );
 		$this->status( '' );
@@ -36,9 +36,9 @@ class TablesCreateLaravel extends \Aimeos\MW\Setup\Task\TablesCreateMShop
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'customer.sql',
+			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'customer.php',
 		);
 
-		$this->setup( $files );
+		$this->setupSchema( $files );
 	}
 }
