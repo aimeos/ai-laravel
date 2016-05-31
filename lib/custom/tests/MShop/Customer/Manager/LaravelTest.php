@@ -191,7 +191,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.city', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.address.state', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'customer.address.countryid', 'de' );
+		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332221' );
 		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@aimeos.org' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544333212' );
