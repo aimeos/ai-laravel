@@ -24,7 +24,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Logging\\Log not found' );
 		}
 
-		$this->mock = $this->getMock( '\\Illuminate\\Contracts\\Logging\\Log' );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Logging\\Log' )->getMock();
 		$this->object = new \Aimeos\MW\Logger\Laravel5( $this->mock );
 	}
 

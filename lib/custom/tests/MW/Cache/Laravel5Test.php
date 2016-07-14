@@ -25,7 +25,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Cache\\Store not found' );
 		}
 
-		$this->mock = $this->getMock( '\\Illuminate\\Contracts\\Cache\\Store' );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Cache\\Store' )->getMock();
 		$this->object = new \Aimeos\MW\Cache\Laravel5( $this->mock );
 	}
 

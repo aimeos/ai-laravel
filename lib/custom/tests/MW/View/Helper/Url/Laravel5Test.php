@@ -26,7 +26,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 		}
 
 		$view = new \Aimeos\MW\View\Standard();
-		$this->mock = $this->getMock( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' )->getMock();
 		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel5( $view, $this->mock, array() );
 	}
 

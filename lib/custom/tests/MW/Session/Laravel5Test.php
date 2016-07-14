@@ -25,7 +25,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'Class \\Illuminate\\Session\\SessionInterface not found' );
 		}
 
-		$this->mock = $this->getMock( '\\Illuminate\\Session\\SessionInterface' );
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Session\\SessionInterface' )->getMock();
 		$this->object = new \Aimeos\MW\Session\Laravel5( $this->mock );
 	}
 
