@@ -32,7 +32,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No customer item found for code "%1$s"', 'unitCustomer1' ) );
+			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'unitCustomer1' ) );
 		}
 
 		$this->fixture = array(
@@ -97,7 +97,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No address item with company "ABC" found' );
+			throw new \RuntimeException( 'No address item with company "ABC" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );

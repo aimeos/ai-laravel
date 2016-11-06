@@ -74,7 +74,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \Exception( 'No customer item with code "unitCustomer3" found' );
+			throw new \RuntimeException( 'No customer item with code "unitCustomer3" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
