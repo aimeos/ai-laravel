@@ -22,12 +22,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
@@ -42,16 +42,15 @@ return array(
 			$table->addColumn( 'created_at', 'datetime', array() );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mscus_id' );
-			$table->addUniqueIndex( array( 'email' ), 'users_email_unique' );
-			$table->addIndex( array( 'langid' ), 'users_langid_index' );
-			$table->addIndex( array( 'status', 'lastname', 'firstname' ), 'users_status_lastname_firstname_index' );
-			$table->addIndex( array( 'status', 'address1', 'address2' ), 'users_status_address1_address2_index' );
-			$table->addIndex( array( 'status', 'postal', 'city' ), 'users_status_postal_city_index' );
-			$table->addIndex( array( 'lastname' ), 'users_lastname_index' );
-			$table->addIndex( array( 'address1' ), 'users_address1_index' );
-			$table->addIndex( array( 'city' ), 'users_city_index' );
-			$table->addIndex( array( 'postal' ), 'users_postal_index' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvusr_id' );
+			$table->addUniqueIndex( array( 'email' ), 'unq_lvusr_email' );
+			$table->addIndex( array( 'langid' ), 'idx_lvusr_langid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvusr_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvusr_postal_address1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvusr_postal_city' );
+			$table->addIndex( array( 'lastname' ), 'idx_lvusr_lastname' );
+			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
+			$table->addIndex( array( 'city' ), 'idx_lvusr_city' );
 
 			return $schema;
 		},
@@ -69,12 +68,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
@@ -88,10 +87,11 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvuad_id' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_ln_fn' );
-			$table->addIndex( array( 'address1', 'address2' ), 'idx_lvuad_ad1_ad2' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_post_ci' );
 			$table->addIndex( array( 'parentid' ), 'idx_lvuad_pid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_postal_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_postal_city' );
+			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
 			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
 
