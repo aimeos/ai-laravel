@@ -46,8 +46,8 @@ return array(
 			$table->addUniqueIndex( array( 'email' ), 'unq_lvusr_email' );
 			$table->addIndex( array( 'langid' ), 'idx_lvusr_langid' );
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvusr_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvusr_postal_address1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_lvusr_postal_city' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvusr_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvusr_post_city' );
 			$table->addIndex( array( 'lastname' ), 'idx_lvusr_lastname' );
 			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
 			$table->addIndex( array( 'city' ), 'idx_lvusr_city' );
@@ -89,8 +89,8 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvuad_id' );
 			$table->addIndex( array( 'parentid' ), 'idx_lvuad_pid' );
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_postal_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_postal_city' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_post_city' );
 			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
 			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
