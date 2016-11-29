@@ -35,6 +35,8 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
+			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
 			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'status', 'smallint', array() );
@@ -80,6 +82,8 @@ return array(
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
+			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
 			$table->addColumn( 'flag', 'integer', array() );
 			$table->addColumn( 'pos', 'smallint', array() );
 			$table->addColumn( 'mtime', 'datetime', array() );

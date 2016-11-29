@@ -168,6 +168,8 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'customer.email', '' );
 		$expr[] = $search->compare( '>=', 'customer.telefax', '' );
 		$expr[] = $search->compare( '>=', 'customer.website', '' );
+		$expr[] = $search->compare( '>=', 'customer.longitude', '10.0' );
+		$expr[] = $search->compare( '>=', 'customer.latitude', '50.0' );
 
 		$expr[] = $search->compare( '==', 'customer.birthday', '1970-01-01' );
 		$expr[] = $search->compare( '>=', 'customer.password', '' );
@@ -196,6 +198,8 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@aimeos.org' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544333212' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' );
+		$expr[] = $search->compare( '>=', 'customer.address.longitude', '10.0' );
+		$expr[] = $search->compare( '>=', 'customer.address.latitude', '50.0' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
 		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );

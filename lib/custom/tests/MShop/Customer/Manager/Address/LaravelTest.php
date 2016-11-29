@@ -55,6 +55,8 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 			'customer.address.email' => 'unittest@aimeos.org',
 			'customer.address.telefax' => '05554433222',
 			'customer.address.website' => 'unittest.aimeos.org',
+			'customer.address.longitude' => '10.0',
+			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.siteid' => $context->getLocale()->getSiteId(),
 		);
@@ -148,6 +150,8 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail());
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax());
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite());
+		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude());
+		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude());
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag());
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -175,6 +179,8 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail());
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax());
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite());
+		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude());
+		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude());
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag());
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -195,11 +201,36 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$conditions = array(
-			$search->compare( '==', 'customer.address.company', 'ABC' ),
-			$search->compare( '==', 'customer.address.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$expr = array();
+		$expr[] = $search->compare( '!=', 'customer.address.id', null );
+		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
+		$expr[] = $search->compare( '==', 'customer.address.company', 'ABC GmbH' );
+		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );
+		$expr[] = $search->compare( '==', 'customer.address.salutation', 'mr' );
+		$expr[] = $search->compare( '==', 'customer.address.title', 'Dr.' );
+		$expr[] = $search->compare( '==', 'customer.address.firstname', 'Good' );
+		$expr[] = $search->compare( '==', 'customer.address.lastname', 'Unittest' );
+		$expr[] = $search->compare( '==', 'customer.address.address1', 'Pickhuben' );
+		$expr[] = $search->compare( '==', 'customer.address.address2', '2-4' );
+		$expr[] = $search->compare( '==', 'customer.address.address3', '' );
+		$expr[] = $search->compare( '==', 'customer.address.postal', '11099' );
+		$expr[] = $search->compare( '==', 'customer.address.city', 'Berlin' );
+		$expr[] = $search->compare( '==', 'customer.address.state', 'Berlin' );
+		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
+		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332221' );
+		$expr[] = $search->compare( '==', 'customer.address.email', 'unitCustomer2@aimeos.org' );
+		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544333212' );
+		$expr[] = $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' );
+		$expr[] = $search->compare( '>=', 'customer.address.longitude', '10.0' );
+		$expr[] = $search->compare( '>=', 'customer.address.latitude', '50.0' );
+		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
+		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
+		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'customer.address.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
+
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
 

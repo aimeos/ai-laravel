@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 return array(
@@ -18,10 +18,10 @@ return array(
 				"siteid", "parentid", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"email", "telefax", "website", "flag", "pos", "mtime",
-				"editor", "ctime"
+				"email", "telefax", "website", "longitude", "latitude", "flag",
+				"pos", "mtime", "editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		',
 	),
@@ -32,14 +32,14 @@ return array(
 				"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 				"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 				"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
-				"email" = ?, "telefax" = ?, "website" = ?, "flag" = ?,
-				"pos" = ?, "mtime" = ?, "editor" = ?
+				"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
+				"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		',
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
+			SELECT lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
 				lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
 				lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
 				lvuad."firstname" AS "customer.address.firstname", lvuad."lastname" AS "customer.address.lastname",
@@ -49,12 +49,20 @@ return array(
 				lvuad."countryid" AS "customer.address.countryid", lvuad."langid" AS "customer.address.languageid",
 				lvuad."telephone" AS "customer.address.telephone", lvuad."email" AS "customer.address.email",
 				lvuad."telefax" AS "customer.address.telefax", lvuad."website" AS "customer.address.website",
+				lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
 				lvuad."flag" AS "customer.address.flag", lvuad."pos" AS "customer.address.position",
 				lvuad."mtime" AS "customer.address.mtime", lvuad."editor" AS "customer.address.editor",
 				lvuad."ctime" AS "customer.address.ctime"
 			FROM "users_address" AS lvuad
 			:joins
 			WHERE :cond
+			GROUP BY lvuad."id", lvuad."parentid", lvuad."company", lvuad."vatid",
+				lvuad."salutation", lvuad."title", lvuad."firstname", lvuad."lastname",
+				lvuad."address1", lvuad."address2", lvuad."address3", lvuad."postal",
+				lvuad."city", lvuad."state", lvuad."countryid", lvuad."langid",
+				lvuad."telephone", lvuad."email", lvuad."telefax", lvuad."website",
+				lvuad."longitude", lvuad."latitude", lvuad."flag", lvuad."pos",
+				lvuad."mtime", lvuad."editor", lvuad."ctime"
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',
