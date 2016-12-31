@@ -167,8 +167,10 @@ class Laravel5
 	 */
 	public function set( $key, $value, $expires = null, array $tags = array() )
 	{
-		if( $expires !== null && ( $timestamp = strtotime( $expires ) ) !== false ) {
-			$this->object->put( $key, $value, ($timestamp - time())/60 );
+		if( is_string( $expires ) ) {
+			$this->object->put( $key, $value, (int) ( date_create( $expires )->getTimestamp() - time() ) / 60 );
+		} elseif( is_int( $expires ) ) {
+			$this->object->put( $key, $value, (int) $expires / 60 );
 		} else {
 			$this->object->forever( $key, $value );
 		}
@@ -183,7 +185,7 @@ class Laravel5
 	 *
 	 * @param iterable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param int|string|array $expires Associative list of keys and datetime
+	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.
 	 * @param array $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
