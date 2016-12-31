@@ -36,6 +36,17 @@ class Laravel5
 
 
 	/**
+	 * Removes all entries for the current site from the cache.
+	 *
+	 * @inheritDoc
+	 */
+	public function clear()
+	{
+		$this->object->flush();
+	}
+
+
+	/**
 	 * Removes the cache entry identified by the given key.
 	 *
 	 * @inheritDoc
@@ -56,7 +67,7 @@ class Laravel5
 	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 */
-	public function deleteList( array $keys )
+	public function deleteMultiple( $keys )
 	{
 		foreach( $keys as $key ) {
 			$this->object->forget( $key );
@@ -75,17 +86,6 @@ class Laravel5
 	public function deleteByTags( array $tags )
 	{
 		// $this->object->tags( $tag )->flush();
-		$this->object->flush();
-	}
-
-
-	/**
-	 * Removes all entries for the current site from the cache.
-	 *
-	 * @inheritDoc
-	 */
-	public function flush()
-	{
 		$this->object->flush();
 	}
 
@@ -114,12 +114,13 @@ class Laravel5
 	 *
 	 * @inheritDoc
 	 *
-	 * @param string[] $keys List of key strings for the requested cache entries
+	 * @param iterable $keys List of key strings for the requested cache entries
+	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 */
-	public function getList( array $keys )
+	public function getMultiple( $keys, $default = null )
 	{
 		$result = array();
 
@@ -127,6 +128,8 @@ class Laravel5
 		{
 			if( ( $entry = $this->object->get( $key ) ) !== false ) {
 				$result[$key] = $entry;
+			} else {
+				$result[$key] = $default;
 			}
 		}
 
@@ -144,7 +147,7 @@ class Laravel5
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
 	 */
-	public function getListByTags( array $tags )
+	public function getMultipleByTags( array $tags )
 	{
 		return array();
 	}
@@ -155,19 +158,19 @@ class Laravel5
 	 *
 	 * @inheritDoc
 	 *
-	 * @param string $name Key string for the given value like product/id/123
+	 * @param string $key Key string for the given value like product/id/123
 	 * @param mixed $value Value string that should be stored for the given key
+	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format or as TTL value when the cache entry expires
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
-	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
-	 * 	format when the cache entry expires
 	 */
-	public function set( $name, $value, array $tags = array(), $expires = null )
+	public function set( $key, $value, $expires = null, array $tags = array() )
 	{
 		if( $expires !== null && ( $timestamp = strtotime( $expires ) ) !== false ) {
-			$this->object->put( $name, $value, ($timestamp - time())/60 );
+			$this->object->put( $key, $value, ($timestamp - time())/60 );
 		} else {
-			$this->object->forever( $name, $value );
+			$this->object->forever( $key, $value );
 		}
 	}
 
@@ -178,21 +181,22 @@ class Laravel5
 	 *
 	 * @inheritDoc
 	 *
-	 * @param array $pairs Associative list of key/value pairs. Both must be
+	 * @param iterable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param array $tags Associative list of key/tag or key/tags pairs that should be
-	 * 	associated to the values identified by their key. The value associated
-	 * 	to the key can either be a tag string or an array of tag strings
-	 * @param array $expires Associative list of key/datetime pairs.
+	 * @param int|string|array $expires Associative list of keys and datetime
+	 *  string or integer TTL pairs.
+	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 *  should be associated to the values identified by their key. The value
+	 *  associated to the key can either be a tag string or an array of tag strings
 	 */
-	public function setList( array $pairs, array $tags = array(), array $expires = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = array() )
 	{
 		foreach( $pairs as $key => $value )
 		{
 			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : array() );
 			$keyExpire = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
-			$this->set( $key, $value, $tagList, $keyExpire );
+			$this->set( $key, $value, $keyExpire, $tagList );
 		}
 	}
 }

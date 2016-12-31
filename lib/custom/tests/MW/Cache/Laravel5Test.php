@@ -1,24 +1,20 @@
 <?php
 
-namespace Aimeos\MW\Cache;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
+namespace Aimeos\MW\Cache;
+
+
 class Laravel5Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $mock;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( interface_exists( '\\Illuminate\\Contracts\\Cache\\Store' ) === false ) {
@@ -30,12 +26,6 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->mock, $this->object );
@@ -49,10 +39,10 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDeleteList()
+	public function testDeleteMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) );
-		$this->object->deleteList( array( 'key', 'key' ) );
+		$this->object->deleteMultiple( array( 'key', 'key' ) );
 	}
 
 
@@ -63,10 +53,10 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testFlush()
+	public function testClear()
 	{
 		$this->mock->expects( $this->once() )->method( 'flush' );
-		$this->object->flush();
+		$this->object->clear();
 	}
 
 
@@ -88,19 +78,19 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetList()
+	public function testGetMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
 			->will( $this->returnValue( 'value' ) );
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
-		$this->assertEquals( $expected, $this->object->getList( array( 'key1', 'key2' ) ) );
+		$this->assertEquals( $expected, $this->object->getMultiple( array( 'key1', 'key2' ) ) );
 	}
 
 
-	public function testGetListByTags()
+	public function testGetMultipleByTags()
 	{
-		$this->assertEquals( array(), $this->object->getListByTags( array( 'key', 'key' ) ) );
+		$this->assertEquals( array(), $this->object->getMultipleByTags( array( 'key', 'key' ) ) );
 	}
 
 
@@ -109,7 +99,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
-		$this->object->set( 'key', 'value', array( 'tag' ), '2100-01-01 00:00:00' );
+		$this->object->set( 'key', 'value', '2100-01-01 00:00:00', array( 'tag' ) );
 	}
 
 
@@ -117,17 +107,17 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'forever' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
-	
-		$this->object->set( 'key', 'value', array( 'tag' ), null );
+
+		$this->object->set( 'key', 'value', null, array( 'tag' ) );
 	}
 
 
-	public function testSetList()
+	public function testSetMultiple()
 	{
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
 		$expires = array( 'key' => '2100-01-01 00:00:00' );
-		$this->object->setList( array( 'key' => 'value' ), array( 'key' => array( 'tag' ) ), $expires );
+		$this->object->setMultiple( array( 'key' => 'value' ), $expires, array( 'key' => array( 'tag' ) ) );
 	}
 }
