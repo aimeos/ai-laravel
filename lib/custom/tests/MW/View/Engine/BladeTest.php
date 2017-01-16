@@ -37,6 +37,8 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
 	public function testRender()
 	{
+		$v = new \Aimeos\MW\View\Standard( array() );
+
 		$view = $this->getMockBuilder( '\Illuminate\View\View' )
 			->setMethods( array( 'render' ) )
 			->disableOriginalConstructor()
@@ -48,7 +50,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 		$this->mock->expects( $this->once() )->method( 'file' )
 			->will( $this->returnValue( $view) );
 
-		$result = $this->object->render( 'filepath', array( 'key' => 'value' ) );
+		$result = $this->object->render( $v, 'filepath', array( 'key' => 'value' ) );
 		$this->assertEquals( 'test', $result );
 	}
 }
