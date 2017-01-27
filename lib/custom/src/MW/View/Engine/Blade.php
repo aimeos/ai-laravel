@@ -44,11 +44,12 @@ class Blade implements Iface
 	 */
 	public function render( \Aimeos\MW\View\Iface $view, $filename, array $values )
 	{
-		$lv = $this->factory->file( $filename, $values );
+		$factory = $this->factory;
+		$lv = $factory->file( $filename, $values );
 
-		$fcn = function( $lv, $contents ) use ( $view )
+		$fcn = function() use ( $factory, $view )
 		{
-			foreach( $this->factory->getSections() as $name => $section ) {
+			foreach( $factory->getSections() as $name => $section ) {
 				$view->block()->set( $name, $section );
 			}
 		};
