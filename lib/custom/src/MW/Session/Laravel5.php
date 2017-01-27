@@ -26,9 +26,9 @@ class Laravel5
 	/**
 	 * Initializes the object.
 	 *
-	 * @param \Illuminate\Session\SessionInterface $object Laravel session object
+	 * @param \Illuminate\Session\Store $object Laravel session object
 	 */
-	public function __construct( \Illuminate\Session\SessionInterface $object )
+	public function __construct( \Illuminate\Session\Store $object )
 	{
 		$this->object = $object;
 	}
@@ -60,6 +60,6 @@ class Laravel5
 	 */
 	public function set( $name, $value )
 	{
-		$this->object->set( $name, $value );
+		$this->object->put( $name, $value );
 	}
 }
