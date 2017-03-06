@@ -20,9 +20,6 @@
 		"zendframework/zend-diactoros": "~1.0",
 		"aimeos/aimeos-core": "dev-master"
 	},
-	"require-dev": {
-		"satooshi/php-coveralls": "dev-master"
-	},
 	"autoload": {
 		"psr-4": {
 			"Aimeos\\MW\\": "lib/custom/src/MW"
