@@ -497,7 +497,12 @@ class Laravel
 			throw $e;
 		}
 
-		return $this->buildItems( $map, $ref, 'customer' );
+		$addrItems = [];
+		if( in_array( 'address', $ref, true ) ) {
+			$addrItems = $this->getAddressItems( array_keys( $map ) );
+		}
+
+		return $this->buildItems( $map, $ref, 'customer', $addrItems );
 	}
 
 
