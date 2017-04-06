@@ -52,7 +52,7 @@ class Laravel5
 	 * @param array $config Additional configuration parameter per URL
 	 * @return string Complete URL that can be used in the template
 	 */
-	public function transform( $target = null, $controller = null, $action = null, array $params = array(), array $trailing = array(), array $config = array() )
+	public function transform( $target = null, $controller = null, $action = null, array $params = [], array $trailing = [], array $config = [] )
 	{
 		$params = $this->sanitize( $params );
 		$values = $this->getValues( $config );

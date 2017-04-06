@@ -104,7 +104,7 @@ class Laravel5
 	 */
 	protected function getFiles( array $files )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $files as $key => $value )
 		{

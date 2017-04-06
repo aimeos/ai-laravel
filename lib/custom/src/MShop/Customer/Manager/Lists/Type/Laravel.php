@@ -99,7 +99,7 @@ class Laravel
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/lists/type/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -117,7 +117,7 @@ class Laravel
 	{
 		$path = 'mshop/customer/manager/lists/type/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

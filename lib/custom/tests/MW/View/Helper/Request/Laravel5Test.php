@@ -27,7 +27,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 
 		$view = new \Aimeos\MW\View\Standard();
 		$param = array( 'HTTP_HOST' => 'localhost', 'REMOTE_ADDR' => '127.0.0.1' );
-		$request = new \Illuminate\Http\Request( array(), array(), array(), array(), array(), $param, 'Content' );
+		$request = new \Illuminate\Http\Request( [], [], [], [], [], $param, 'Content' );
 
 		$this->object = new \Aimeos\MW\View\Helper\Request\Laravel5( $view, $request );
 	}

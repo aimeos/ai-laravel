@@ -20,7 +20,7 @@ namespace Aimeos\MW\Filesystem\Manager;
 class Laravel extends Standard implements Iface
 {
 	private $fsm;
-	private $objects = array();
+	private $objects = [];
 	private $tempdir;
 
 

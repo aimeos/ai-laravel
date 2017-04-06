@@ -201,7 +201,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'ABC GmbH' );
@@ -248,7 +248,7 @@ class LaravelTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );

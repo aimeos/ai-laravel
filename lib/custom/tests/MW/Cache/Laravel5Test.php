@@ -90,7 +90,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 
 	public function testGetMultipleByTags()
 	{
-		$this->assertEquals( array(), $this->object->getMultipleByTags( array( 'key', 'key' ) ) );
+		$this->assertEquals( [], $this->object->getMultipleByTags( array( 'key', 'key' ) ) );
 	}
 
 

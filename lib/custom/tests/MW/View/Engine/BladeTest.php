@@ -37,7 +37,7 @@ class BladeTest extends \PHPUnit_Framework_TestCase
 
 	public function testRender()
 	{
-		$v = new \Aimeos\MW\View\Standard( array() );
+		$v = new \Aimeos\MW\View\Standard( [] );
 
 		$view = $this->getMockBuilder( '\Illuminate\View\View' )
 			->setMethods( array( 'render' ) )

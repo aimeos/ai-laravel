@@ -38,7 +38,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 		$this->msg( 'Adding Laravel customer test data', 0 );
 		$this->additional->setEditor( 'ai-laravel:unittest' );
 
-		$parentIds = array();
+		$parentIds = [];
 		$ds = DIRECTORY_SEPARATOR;
 		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
 

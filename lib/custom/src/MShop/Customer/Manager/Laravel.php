@@ -470,12 +470,12 @@ class Laravel
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$map = array();
+		$map = [];
 
 		try
 		{

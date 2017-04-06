@@ -122,7 +122,7 @@ class Laravel5
 	 */
 	public function getMultiple( $keys, $default = null )
 	{
-		$result = array();
+		$result = [];
 
 		foreach( $keys as $key )
 		{
@@ -149,7 +149,7 @@ class Laravel5
 	 */
 	public function getMultipleByTags( array $tags )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -165,7 +165,7 @@ class Laravel5
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() )
+	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 		if( is_string( $expires ) ) {
 			$this->object->put( $key, $value, (int) ( date_create( $expires )->getTimestamp() - time() ) / 60 );
@@ -191,11 +191,11 @@ class Laravel5
 	 *  should be associated to the values identified by their key. The value
 	 *  associated to the key can either be a tag string or an array of tag strings
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 		foreach( $pairs as $key => $value )
 		{
-			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : array() );
+			$tagList = ( isset( $tags[$key] ) ? (array) $tags[$key] : [] );
 			$keyExpire = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 			$this->set( $key, $value, $keyExpire, $tagList );

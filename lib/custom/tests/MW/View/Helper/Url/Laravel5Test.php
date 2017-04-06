@@ -27,7 +27,7 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 
 		$view = new \Aimeos\MW\View\Standard();
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' )->getMock();
-		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel5( $view, $this->mock, array() );
+		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel5( $view, $this->mock, [] );
 	}
 
 
@@ -55,9 +55,9 @@ class Laravel5Test extends \PHPUnit_Framework_TestCase
 	public function testTransformAbsolute()
 	{
 		$this->mock->expects( $this->once() )->method( 'route' )
-			->with( $this->equalTo( 'route'), $this->equalTo( array() ), $this->equalTo( true ) );
+			->with( $this->equalTo( 'route'), $this->equalTo( [] ), $this->equalTo( true ) );
 
 		$options = array( 'absoluteUri' => true );
-		$this->object->transform( 'route', 'catalog', 'lists', array(), array(), $options );
+		$this->object->transform( 'route', 'catalog', 'lists', [], [], $options );
 	}
 }
