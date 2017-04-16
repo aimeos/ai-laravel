@@ -95,7 +95,7 @@ return array(
 			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_last_first' );
 			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_post_addr1' );
 			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_post_city' );
-			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
+			$table->addIndex( array( 'address1' ), 'idx_lvuad_address1' );
 			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
 
