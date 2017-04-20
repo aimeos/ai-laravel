@@ -8,7 +8,7 @@
 namespace Aimeos\MW\View\Engine;
 
 
-class BladeTest extends \PHPUnit_Framework_TestCase
+class BladeTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;

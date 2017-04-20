@@ -9,7 +9,7 @@
 namespace Aimeos\MW\View\Helper\Response;
 
 
-class Laravel5Test extends \PHPUnit_Framework_TestCase
+class Laravel5Test extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;

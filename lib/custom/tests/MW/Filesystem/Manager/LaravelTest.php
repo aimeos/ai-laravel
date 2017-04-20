@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Filesystem\Manager;
 
 
-class LaravelTest extends \PHPUnit_Framework_TestCase
+class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $config;
 	private $object;
