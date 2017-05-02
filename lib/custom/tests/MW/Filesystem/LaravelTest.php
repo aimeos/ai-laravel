@@ -60,7 +60,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'makeDirectory' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->mkdir( 'test' );
 	}
 
@@ -78,7 +78,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'deleteDirectory' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rmdir( 'test' );
 	}
 
@@ -108,7 +108,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'directories' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->scan( 'test' );
 	}
 
@@ -129,7 +129,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'size' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->size( 'test' );
 	}
 
@@ -150,7 +150,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'lastModified' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->time( 'test' );
 	}
 
@@ -168,7 +168,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'delete' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rm( 'test' );
 	}
 
@@ -211,7 +211,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'get' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->read( 'readinvalid' );
 	}
 
@@ -247,7 +247,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'get' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->reads( 'readinvalid' );
 	}
 
@@ -265,7 +265,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( '', 'test' );
 	}
 
@@ -285,7 +285,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testWritefException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writef( '', 'invalid' );
 	}
 
@@ -309,14 +309,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$handle = fopen( __FILE__, 'r' );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writes( 'file', $handle );
 	}
 
 
 	public function testWritesException2()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writes( 'file', null );
 	}
 
@@ -334,7 +334,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'move' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->move( 'file1', 'file2' );
 	}
 
@@ -352,7 +352,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'copy' )
 			->will( $this->throwException( new \RuntimeException() ) );
 
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->copy( 'file1', 'file2' );
 	}
 }
