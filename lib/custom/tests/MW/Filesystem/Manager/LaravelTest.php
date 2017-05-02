@@ -55,7 +55,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetException()
 	{
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
 		$this->object->get( 'fs-media' );
 	}
 }
