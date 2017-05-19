@@ -13,6 +13,7 @@ return array(
 			$table = $schema->createTable( 'users' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255, 'default' => '' ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'remember_token', 'string', array( 'length' => 100, 'notnull' => false ) );
