@@ -31,7 +31,7 @@ class Laravel
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// site ID is not available
+		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.address.refid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',

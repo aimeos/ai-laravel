@@ -268,21 +268,21 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "users" (
-						"name", "company", "vatid", "salutation", "title",
+						"siteid", "name", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"telefax", "website", "email", "longitude", "latitude", "label",
 						"birthday", "status", "vdate", "password",
 						"updated_at", "editor", "created_at"
 					) VALUES (
-						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
 				',
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "users"
-					SET "name" = ?, "company" = ?, "vatid" = ?,
+					SET "siteid" = ?, "name" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
@@ -294,7 +294,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT lvu."id" AS "customer.id",
+					SELECT lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
 						lvu."label" AS "customer.label", lvu."name" AS "customer.code",
 						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
 						lvu."salutation" AS "customer.salutation", lvu."title" AS "customer.title",
@@ -313,7 +313,7 @@ return array(
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
-					GROUP BY lvu."id", lvu."label", lvu."name", lvu."company", lvu."vatid",
+					GROUP BY lvu."id", lvu."siteid", lvu."label", lvu."name", lvu."company", lvu."vatid",
 						lvu."salutation", lvu."title", lvu."firstname", lvu."lastname",
 						lvu."address1", lvu."address2", lvu."address3", lvu."postal",
 						lvu."city", lvu."state", lvu."countryid", lvu."langid",
