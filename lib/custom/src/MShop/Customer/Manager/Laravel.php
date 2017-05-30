@@ -21,25 +21,26 @@ class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
+		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 'lvu."id"',
 			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
-		),
-		// customer.siteid is only for informational purpuse, not for filtering
-		'customer.label' => array(
-			'label' => 'Customer label',
-			'code' => 'customer.label',
-			'internalcode' => 'lvu."label"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
 			'internalcode' => 'lvu."name"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		),
+		'customer.label' => array(
+			'label' => 'Customer label',
+			'code' => 'customer.label',
+			'internalcode' => 'lvu."label"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
