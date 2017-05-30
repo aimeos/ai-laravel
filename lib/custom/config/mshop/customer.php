@@ -309,7 +309,7 @@ return array(
 						lvu."address1" AS "customer.address1", lvu."address2" AS "customer.address2",
 						lvu."address3" AS "customer.address3", lvu."postal" AS "customer.postal",
 						lvu."city" AS "customer.city", lvu."state" AS "customer.state",
-						lvu."countryid" AS "customer.countryid", lvu."langid" AS "customer.langid",
+						lvu."countryid" AS "customer.countryid", lvu."langid" AS "customer.languageid",
 						lvu."telephone" AS "customer.telephone",lvu."telefax" AS "customer.telefax",
 						lvu."email" AS "customer.email", lvu."website" AS "customer.website",
 						lvu."longitude" AS "customer.longitude", lvu."latitude" AS "customer.latitude",
