@@ -461,10 +461,6 @@ class Laravel
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
-
-
-		$newItem = $this->getItem( $item->getId(), ['customer/group'] );
-		$this->updateListItems( $newItem, array_flip( $item->getGroups() ), 'customer/group', 'default' );
 	}
 
 
