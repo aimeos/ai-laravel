@@ -35,3 +35,5 @@ matrix:
       env: "LARAVEL_VERSION=5.3.*"
     - php: 5.5
       env: "LARAVEL_VERSION=5.4.*"
+  allow_failures:
+    - php: hhvm
