@@ -56,7 +56,7 @@ return array(
 							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
 							lvuad."flag" AS "customer.address.flag", lvuad."pos" AS "customer.address.position",
 							lvuad."mtime" AS "customer.address.mtime", lvuad."editor" AS "customer.address.editor",
-							lvuad."ctime" AS "customer.address.ctime"
+							lvuad."ctime" AS "customer.address.ctime", lvuad."siteid" AS "customer.address.siteid"
 						FROM "users_address" AS lvuad
 						:joins
 						WHERE :cond
