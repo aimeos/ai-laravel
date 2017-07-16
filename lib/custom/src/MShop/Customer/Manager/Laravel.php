@@ -457,8 +457,6 @@ class Laravel
 				$item->setId( $this->newId( $conn, $path ) );
 			}
 
-			$this->addGroups( $item );
-
 			$dbm->release( $conn, $dbname );
 		}
 		catch( \Exception $e )
@@ -466,6 +464,8 @@ class Laravel
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		$this->addGroups( $item );
 
 		return $item;
 	}
