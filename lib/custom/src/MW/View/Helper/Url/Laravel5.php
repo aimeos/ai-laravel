@@ -56,8 +56,9 @@ class Laravel5
 	{
 		$params = $this->sanitize( $params );
 		$values = $this->getValues( $config );
+		$fragment = ( !empty( $trailing ) ? '#' . implode( '/', $trailing ) : '' );
 
-		return $this->builder->route( $target, $params + $this->fixed, $values['absoluteUri'] );
+		return $this->builder->route( $target, $params + $this->fixed, $values['absoluteUri'] ) . $fragment;
 	}
 
 
