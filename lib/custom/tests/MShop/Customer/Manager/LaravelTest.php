@@ -239,6 +239,22 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1' ) );
+
+		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new \Exception( 'No customer item for "unitCustomer1" available' );
+		}
+
+		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'address' ) );
