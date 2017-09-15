@@ -316,7 +316,7 @@ return array(
 						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
 						lvu."vdate" AS "customer.dateverified", lvu."password" AS "customer.password",
 						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
-						lvu."editor" AS "customer.editor"
+						lvu."editor" AS "customer.editor", lvu.*
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
