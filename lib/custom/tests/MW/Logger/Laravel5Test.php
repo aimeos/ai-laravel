@@ -1,23 +1,20 @@
 <?php
 
-namespace Aimeos\MW\Logger;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MW\Logger;
+
+
 class Laravel5Test extends \PHPUnit\Framework\TestCase
 {
+	private $mock;
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( interface_exists( '\\Illuminate\\Contracts\\Logging\\Log' ) === false ) {
@@ -29,12 +26,6 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->mock, $this->object );
