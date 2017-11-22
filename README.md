@@ -7,7 +7,7 @@
 [![Build Status](https://travis-ci.org/aimeos/ai-laravel.png?branch=master)](https://travis-ci.org/aimeos/ai-laravel)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-laravel/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-laravel?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-laravel/?branch=master)
-[![HHVM Status](http://hhvm.h4cc.de/badge/aimeos/ai-laravel.svg)](http://hhvm.h4cc.de/package/aimeos/ai-laravel)
+[![License](https://poser.pugx.org/aimeos/ai-laravel/license.svg)](https://packagist.org/packages/aimeos/ai-laravel)
 
 The Aimeos web shop components can integrate into almost any PHP application and uses the infrastructure of the application for building URLs, caching content, configuration settings, logging messages, session handling, sending e-mails or handling translations.
 
