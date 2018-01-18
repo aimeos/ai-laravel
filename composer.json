@@ -4,7 +4,7 @@
 	"keywords": ["aimeos", "adapter", "laravel", "shop", "e-commerce"],
 	"homepage": "https://aimeos.org/Laravel",
 	"type": "aimeos-extension",
-	"license": "LGPL-3.0",
+	"license": "LGPL-3.0-or-later",
 	"support": {
 		"source": "https://github.com/aimeos/ai-laravel",
 		"issues": "https://github.com/aimeos/ai-laravel/issues",
