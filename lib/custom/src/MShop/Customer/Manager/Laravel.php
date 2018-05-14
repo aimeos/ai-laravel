@@ -302,7 +302,7 @@ class Laravel
 		}
 
 		if( !$item->isModified() ) {
-			return $item;
+			return $this->saveRefItems( $item, 'customer' );
 		}
 
 		$context = $this->getContext();
@@ -467,7 +467,7 @@ class Laravel
 
 		$this->addGroups( $item );
 
-		return $item;
+		return $this->saveRefItems( $item, 'customer' );
 	}
 
 
