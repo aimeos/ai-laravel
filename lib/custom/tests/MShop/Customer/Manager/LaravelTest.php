@@ -1,18 +1,20 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Customer\Manager;
+
+
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $fixture;
 	private $address;
-	private $editor = 'ai-laravel:unittest';
+	private $editor = '';
 
 
 	protected function setUp()
@@ -61,14 +63,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'unitCustomer3' ),
+			$search->compare( '==', 'customer.code', 'UTC003' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No customer item with code "unitCustomer3" found' );
+			throw new \RuntimeException( 'No customer item with code "UTC003" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
@@ -144,8 +146,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
-		$expr[] = $search->compare( '==', 'customer.label', 'Erika Mustermann' );
-		$expr[] = $search->compare( '==', 'customer.code', 'unitCustomer2' );
+		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer2' );
+		$expr[] = $search->compare( '==', 'customer.code', 'UTC002' );
 
 		$expr[] = $search->compare( '>=', 'customer.salutation', '' );
 		$expr[] = $search->compare( '>=', 'customer.company', '' );
@@ -209,7 +211,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsNoCriteria()
+	public function testSearchItemsTotal()
 	{
 		$total = 0;
 
@@ -227,7 +229,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsBaseCriteria()
+	public function testSearchItemsCriteria()
 	{
 		$search = $this->object->createSearch( true );
 		$conditions = array(
@@ -242,12 +244,12 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'unitCustomer1' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
 
 		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No customer item for "unitCustomer1" available' );
+			throw new \Exception( 'No customer item for "UTC001" available' );
 		}
 
 		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );

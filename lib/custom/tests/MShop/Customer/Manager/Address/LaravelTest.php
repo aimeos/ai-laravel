@@ -1,17 +1,19 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager\Address;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Customer\Manager\Address;
+
+
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $fixture = null;
 	private $object = null;
-	private $editor = 'ai-laravel:unittest';
+	private $editor = '';
 
 
 	protected function setUp()
@@ -22,14 +24,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$search = $customer->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'unitCustomer1' ),
+			$search->compare( '==', 'customer.code', 'UTC001' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'unitCustomer1' ) );
+			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'UTC001' ) );
 		}
 
 		$this->fixture = array(
@@ -80,6 +82,12 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
+	public function testGetSubManager()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getSubManager( 'unknown' );
+	}
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $this->object->createItem() );
@@ -97,12 +105,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
-	}
-
-	public function testGetSubManager()
-	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->getSubManager( 'unknown' );
 	}
 
 	public function testSaveUpdateDeleteItem()
