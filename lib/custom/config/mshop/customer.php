@@ -265,6 +265,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'laravel' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "users_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "users_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "users_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT lvuprty."id" AS "customer.property.type.id", lvuprty."siteid" AS "customer.property.type.siteid",
+								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
+								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
+								lvuprty."mtime" AS "customer.property.type.mtime", lvuprty."editor" AS "customer.property.type.editor",
+								lvuprty."ctime" AS "customer.property.type.ctime"
+							FROM "users_property_type" lvuprty
+							:joins
+							WHERE :cond
+							GROUP BY lvuprty."id", lvuprty."siteid", lvuprty."code", lvuprty."domain",
+								lvuprty."label", lvuprty."status", lvuprty."mtime", lvuprty."editor",
+								lvuprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT lvuprty."id"
+								FROM "users_property_type" lvuprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT users_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'laravel' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "users_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "users_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "users_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
+							lvupr."siteid" AS "customer.property.siteid", lvupr."typeid" AS "customer.property.typeid",
+							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
+							lvupr."mtime" AS "customer.property.mtime", lvupr."editor" AS "customer.property.editor",
+							lvupr."ctime" AS "customer.property.ctime"
+						FROM "users_property" AS lvupr
+						:joins
+						WHERE :cond
+						GROUP BY lvupr."id", lvupr."parentid", lvupr."siteid", lvupr."typeid",
+							lvupr."langid", lvupr."value", lvupr."mtime", lvupr."editor",
+							lvupr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT lvupr."id"
+							FROM "users_property" AS lvupr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT users_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'laravel' => array(
 			'delete' => array(
 				'ansi' => '
