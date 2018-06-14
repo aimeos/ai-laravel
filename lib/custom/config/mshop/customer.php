@@ -100,17 +100,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "users_list_type"(
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						',
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "users_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						',
@@ -127,11 +127,13 @@ return array(
 								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
 								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
 								lvulity."mtime" AS "customer.lists.type.mtime", lvulity."editor" AS "customer.lists.type.editor",
-								lvulity."ctime" AS "customer.lists.type.ctime"
+								lvulity."ctime" AS "customer.lists.type.ctime", lvulity."pos" AS "customer.lists.type.position"
 							FROM "users_list_type" AS lvulity
 							:joins
-							WHERE
-								:cond
+							WHERE :cond
+							GROUP BY lvulity."id", lvulity."siteid", lvulity."code", lvulity."domain",
+								lvulity."label", lvulity."status", lvulity."mtime", lvulity."editor",
+								lvulity."ctime", lvulity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						',
@@ -238,6 +240,10 @@ return array(
 						FROM "users_list" AS lvuli
 						:joins
 						WHERE :cond
+						GROUP BY lvuli."id", lvuli."parentid", lvuli."siteid", lvuli."typeid",
+							lvuli."domain", lvuli."refid", lvuli."start", lvuli."end",
+							lvuli."config", lvuli."pos", lvuli."status", lvuli."mtime",
+							lvuli."editor", lvuli."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					',
@@ -277,17 +283,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "users_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "users_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -298,13 +304,13 @@ return array(
 								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
 								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
 								lvuprty."mtime" AS "customer.property.type.mtime", lvuprty."editor" AS "customer.property.type.editor",
-								lvuprty."ctime" AS "customer.property.type.ctime"
+								lvuprty."ctime" AS "customer.property.type.ctime", lvuprty."pos" AS "customer.property.type.position"
 							FROM "users_property_type" lvuprty
 							:joins
 							WHERE :cond
 							GROUP BY lvuprty."id", lvuprty."siteid", lvuprty."code", lvuprty."domain",
 								lvuprty."label", lvuprty."status", lvuprty."mtime", lvuprty."editor",
-								lvuprty."ctime" /*-columns*/ , :columns /*columns-*/
+								lvuprty."ctime", lvuprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

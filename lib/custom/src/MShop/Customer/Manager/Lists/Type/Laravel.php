@@ -67,6 +67,13 @@ class Laravel
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
+		'customer.lists.type.position' => array(
+			'code'=>'customer.lists.type.position',
+			'internalcode'=>'lvulity."pos"',
+			'label'=>'Customer list type position',
+			'type'=> 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'customer.lists.type.ctime'=> array(
 			'code'=>'customer.lists.type.ctime',
 			'internalcode'=>'lvulity."ctime"',
