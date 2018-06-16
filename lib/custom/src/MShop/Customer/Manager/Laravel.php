@@ -301,7 +301,9 @@ class Laravel
 			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -467,6 +469,7 @@ class Laravel
 
 		$this->addGroups( $item );
 
+		$item = $this->savePropertyItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -511,7 +514,12 @@ class Laravel
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
 
-		return $this->buildItems( $map, $ref, 'customer', $addrItems );
+		$propItems = [];
+		if( in_array( 'customer/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer' );
+		}
+
+		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
 	}
 
 
