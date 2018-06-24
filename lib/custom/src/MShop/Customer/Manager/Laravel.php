@@ -304,6 +304,7 @@ class Laravel
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
+			$item = $this->saveAddressItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -470,6 +471,7 @@ class Laravel
 		$this->addGroups( $item );
 
 		$item = $this->savePropertyItems( $item, 'customer' );
+		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -511,7 +513,7 @@ class Laravel
 
 		$addrItems = [];
 		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ) );
+			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
 		}
 
 		$propItems = [];
