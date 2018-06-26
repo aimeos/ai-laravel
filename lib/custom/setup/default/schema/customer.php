@@ -101,6 +101,9 @@ return array(
 			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
 			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
 
+			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuad_pid' );
+
 			return $schema;
 		},
 
@@ -155,6 +158,9 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_lvuli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_lvuli_pid_sid_pos' );
 
+			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuli_pid' );
+
 			$table->addForeignKeyConstraint( 'users_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuli_typeid' );
 
@@ -208,6 +214,9 @@ return array(
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvupr_pid' );
+
+			$table->addForeignKeyConstraint( 'users_property_type', array( 'typeid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvupr_typeid' );
 
 			return $schema;
 		},
