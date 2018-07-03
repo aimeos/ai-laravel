@@ -19,6 +19,5 @@ namespace Aimeos\MShop\Customer\Manager\Group;
  */
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Group\Standard
-	implements \Aimeos\MShop\Customer\Manager\Group\Iface
 {
 }

@@ -18,8 +18,7 @@ namespace Aimeos\MShop\Customer\Manager\Property\Type;
  * @subpackage Customer
  */
 class Laravel
-	extends \Aimeos\MShop\Common\Manager\Type\Base
-	implements \Aimeos\MShop\Customer\Manager\Property\Type\Iface
+	extends \Aimeos\MShop\Customer\Manager\Property\Type\Standard
 {
 	private $searchConfig = array(
 		'customer.property.type.id' => array(

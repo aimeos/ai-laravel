@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Customer\Manager\Lists;
  */
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Lists\Standard
-	implements \Aimeos\MShop\Customer\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Lists\Iface
 {
 	private $searchConfig = array(
 		'customer.lists.id'=> array(

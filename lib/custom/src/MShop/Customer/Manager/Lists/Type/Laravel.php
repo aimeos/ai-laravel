@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
  */
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Lists\Type\Standard
-	implements \Aimeos\MShop\Customer\Manager\Lists\Type\Iface
 {
 	private $searchConfig = array(
 		'customer.lists.type.id' => array(
