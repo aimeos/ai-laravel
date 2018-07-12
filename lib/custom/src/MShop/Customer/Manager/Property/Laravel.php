@@ -96,18 +96,6 @@ class Laravel
 
 
 	/**
-	 * Initializes the object.
-	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
-	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
-	{
-		parent::__construct( $context );
-		$this->setResourceName( 'db-customer' );
-	}
-
-
-	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
@@ -124,20 +112,6 @@ class Laravel
 
 
 	/**
-	 * Returns the available manager types
-	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( $withsub = true )
-	{
-		$path = 'mshop/customer/manager/property/submanagers';
-
-		return $this->getResourceTypeBase( 'customer/property', $path, array( 'type' ), $withsub );
-	}
-
-
-	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
@@ -147,7 +121,7 @@ class Laravel
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['type'], $withsub );
 	}
 
 

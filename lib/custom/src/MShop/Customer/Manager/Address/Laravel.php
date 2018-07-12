@@ -228,18 +228,8 @@ class Laravel
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
-	}
 
-
-	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		$path = 'mshop/customer/manager/address/laravel/delete';
-		$this->deleteItemsBase( $ids, $path, false );
+		$this->cleanupBase( $siteids, 'mshop/customer/manager/address/laravel/delete' );
 	}
 
 

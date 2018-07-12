@@ -13,7 +13,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_address"
-						WHERE :cond
+						WHERE :cond AND siteid = ?
 					',
 				),
 				'insert' => array(
