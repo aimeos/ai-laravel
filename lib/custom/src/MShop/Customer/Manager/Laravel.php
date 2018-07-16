@@ -253,17 +253,6 @@ class Laravel
 
 
 	/**
-	 * Instantiates a new customer item object.
-	 *
-	 * @return \Aimeos\MShop\Customer\Item\Iface
-	 */
-	public function createItem()
-	{
-		return $this->createItemBase( ['customer.siteid' => $this->getContext()->getLocale()->getSiteId()] );
-	}
-
-
-	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
