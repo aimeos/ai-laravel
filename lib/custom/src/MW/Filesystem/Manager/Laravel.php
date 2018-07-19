@@ -41,6 +41,30 @@ class Laravel extends Standard implements Iface
 
 
 	/**
+	 * Cleans up the object
+	 */
+	public function __destruct()
+	{
+		foreach( $this->objects as $key => $object ) {
+			unset( $this->objects[$key] );
+		}
+	}
+
+
+	/**
+	 * Clean up the objects inside
+	 */
+	public function __sleep()
+	{
+		$this->__destruct();
+
+		$this->objects = [];
+
+		return get_object_vars( $this );
+	}
+
+
+	/**
 	 * Returns the file system for the given name
 	 *
 	 * @param string $name Key for the file system
