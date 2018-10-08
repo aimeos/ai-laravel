@@ -153,7 +153,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvuli_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'refid', 'typeid', 'parentid' ), 'unq_lvuli_sid_dm_rid_tid_pid' );
 			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_lvuli_sid_stat_start_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'refid', 'domain', 'typeid' ), 'idx_lvuli_pid_sid_rid_dom_tid' );
+			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'refid', 'typeid' ), 'idx_lvuli_pid_sid_dom_rid_tid' );
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_lvuli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_lvuli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_lvuli_pid_sid_pos' );
