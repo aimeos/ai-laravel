@@ -22,10 +22,10 @@ return array(
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
-							"email", "telefax", "website", "longitude", "latitude", "flag",
+							"email", "telefax", "website", "longitude", "latitude",
 							"pos", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -37,7 +37,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -54,9 +54,9 @@ return array(
 							lvuad."telephone" AS "customer.address.telephone", lvuad."email" AS "customer.address.email",
 							lvuad."telefax" AS "customer.address.telefax", lvuad."website" AS "customer.address.website",
 							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
-							lvuad."flag" AS "customer.address.flag", lvuad."pos" AS "customer.address.position",
-							lvuad."mtime" AS "customer.address.mtime", lvuad."editor" AS "customer.address.editor",
-							lvuad."ctime" AS "customer.address.ctime", lvuad."siteid" AS "customer.address.siteid"
+							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
+							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
+							lvuad."siteid" AS "customer.address.siteid"
 						FROM "users_address" AS lvuad
 						:joins
 						WHERE :cond
@@ -65,7 +65,7 @@ return array(
 							lvuad."address1", lvuad."address2", lvuad."address3", lvuad."postal",
 							lvuad."city", lvuad."state", lvuad."countryid", lvuad."langid",
 							lvuad."telephone", lvuad."email", lvuad."telefax", lvuad."website",
-							lvuad."longitude", lvuad."latitude", lvuad."flag", lvuad."pos",
+							lvuad."longitude", lvuad."latitude", lvuad."pos",
 							lvuad."mtime", lvuad."editor", lvuad."ctime"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start

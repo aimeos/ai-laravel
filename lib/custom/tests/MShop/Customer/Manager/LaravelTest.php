@@ -234,7 +234,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.website', 'unittest.aimeos.org' );
 		$expr[] = $search->compare( '>=', 'customer.address.longitude', '10.0' );
 		$expr[] = $search->compare( '>=', 'customer.address.latitude', '50.0' );
-		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
 		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'customer.address.ctime', '1970-01-01 00:00:00' );
