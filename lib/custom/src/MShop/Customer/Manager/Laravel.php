@@ -174,15 +174,15 @@ class Laravel
 			'label' => 'Customer longitude',
 			'code' => 'customer.longitude',
 			'internalcode' => 'lvu."longitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.latitude' => array(
 			'label' => 'Customer latitude',
 			'code' => 'customer.latitude',
 			'internalcode' => 'lvu."latitude"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
@@ -394,8 +394,8 @@ class Laravel
 			$stmt->bind( 18, $billingAddress->getTelefax() );
 			$stmt->bind( 19, $billingAddress->getWebsite() );
 			$stmt->bind( 20, $billingAddress->getEmail() );
-			$stmt->bind( 21, $billingAddress->getLongitude() );
-			$stmt->bind( 22, $billingAddress->getLatitude() );
+			$stmt->bind( 21, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( 22, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( 23, $item->getLabel() );
 			$stmt->bind( 24, $item->getBirthday() );
 			$stmt->bind( 25, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
