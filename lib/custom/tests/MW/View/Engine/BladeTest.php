@@ -20,7 +20,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( '\Illuminate\View\Factory is not available' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\Illuminate\View\Factory' )
+		$this->mock = $this->getMockBuilder( \Illuminate\View\Factory::class )
 			->setMethods( array( 'file' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -39,7 +39,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 	{
 		$v = new \Aimeos\MW\View\Standard( [] );
 
-		$view = $this->getMockBuilder( '\Illuminate\View\View' )
+		$view = $this->getMockBuilder( \Illuminate\View\View::class )
 			->setMethods( array( 'render' ) )
 			->disableOriginalConstructor()
 			->getMock();

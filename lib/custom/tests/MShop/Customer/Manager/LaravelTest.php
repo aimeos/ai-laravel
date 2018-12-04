@@ -99,8 +99,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItem( $item->getId() );
 
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $item );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $itemExp );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $itemExp );
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

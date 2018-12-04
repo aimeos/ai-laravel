@@ -22,7 +22,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Install the Laravel framework first' );
 		}
 
-		$this->storage = $this->getMockBuilder( '\Illuminate\Filesystem\FilesystemManager' )
+		$this->storage = $this->getMockBuilder( \Illuminate\Filesystem\FilesystemManager::class )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
