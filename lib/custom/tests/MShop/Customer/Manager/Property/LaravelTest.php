@@ -154,6 +154,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.languageid', null );
 		$expr[] = $search->compare( '==', 'customer.property.value', '1' );
 		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
+
+		$search->setConditions( $search->combine('&&', $expr) );
+		$results = $this->object->searchItems( $search, [], $total );
+		$this->assertEquals( 1, count( $results ) );
 	}
 
 
