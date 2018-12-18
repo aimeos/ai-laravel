@@ -24,7 +24,6 @@ class Laravel
 		'customer.property.type.id' => array(
 			'code' => 'customer.property.type.id',
 			'internalcode' => 'lvuprty."id"',
-			'internaldeps' => array( 'LEFT JOIN "users_property_type" AS lvuprty ON ( lvupr."typeid" = lvuprty."id" )' ),
 			'label' => 'Property type ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

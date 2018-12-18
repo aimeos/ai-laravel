@@ -76,11 +76,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
 
@@ -88,11 +87,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
-		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 
@@ -123,7 +121,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
-		$this->assertNotEquals( '', $actual->getTypeName() );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -133,7 +130,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'customer/property', $result );
-		$this->assertContains( 'customer/property/type', $result );
 	}
 
 
@@ -154,41 +150,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.property.id', null );
 		$expr[] = $search->compare( '!=', 'customer.property.parentid', null );
 		$expr[] = $search->compare( '!=', 'customer.property.siteid', null );
-		$expr[] = $search->compare( '!=', 'customer.property.typeid', null );
+		$expr[] = $search->compare( '==', 'customer.property.type', 'newsletter' );
 		$expr[] = $search->compare( '==', 'customer.property.languageid', null );
 		$expr[] = $search->compare( '==', 'customer.property.value', '1' );
 		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'customer.property.type.id', null );
-		$expr[] = $search->compare( '!=', 'customer.property.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.property.type.domain', 'customer' );
-		$expr[] = $search->compare( '==', 'customer.property.type.code', 'newsletter' );
-		$expr[] = $search->compare( '>', 'customer.property.type.label', '' );
-		$expr[] = $search->compare( '==', 'customer.property.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.property.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
-
-		$search->setConditions( $search->combine('&&', $expr) );
-		$results = $this->object->searchItems( $search, [], $total );
-		$this->assertEquals( 1, count( $results ) );
-
-
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice(0, 1);
-		$items = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 1, $total );
-
-		foreach($items as $itemId => $item) {
-			$this->assertEquals( $itemId, $item->getId() );
-		}
 	}
 
 

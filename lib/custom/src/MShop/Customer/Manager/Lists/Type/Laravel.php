@@ -24,7 +24,6 @@ class Laravel
 		'customer.lists.type.id' => array(
 			'code'=>'customer.lists.type.id',
 			'internalcode'=>'lvulity."id"',
-			'internaldeps'=>array( 'LEFT JOIN "users_list_type" AS lvulity ON ( lvuli."typeid" = lvulity."id" )' ),
 			'label'=>'Customer list type ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

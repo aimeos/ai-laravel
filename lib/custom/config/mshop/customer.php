@@ -182,14 +182,14 @@ return array(
 						FROM "users_list"
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 					',
 				),
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "users_list"(
-							"parentid", "typeid", "domain", "refid", "start", "end",
+							"parentid", "type", "domain", "refid", "start", "end",
 						"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -199,7 +199,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "users_list"
-						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+						SET "parentid"=?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
 							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
@@ -223,7 +223,7 @@ return array(
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ?
 							AND "parentid" = ?
-							AND "typeid" = ?
+							AND "type" = ?
 							AND "domain" = ?
 							AND "pos" >= ?
 					',
@@ -231,7 +231,7 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT lvuli."id" AS "customer.lists.id", lvuli."siteid" AS "customer.lists.siteid",
-							lvuli."parentid" AS "customer.lists.parentid", lvuli."typeid" AS "customer.lists.typeid",
+							lvuli."parentid" AS "customer.lists.parentid", lvuli."type" AS "customer.lists.type",
 							lvuli."domain" AS "customer.lists.domain", lvuli."refid" AS "customer.lists.refid",
 							lvuli."start" AS "customer.lists.datestart", lvuli."end" AS "customer.lists.dateend",
 							lvuli."config" AS "customer.lists.config", lvuli."pos" AS "customer.lists.position",
@@ -240,7 +240,7 @@ return array(
 						FROM "users_list" AS lvuli
 						:joins
 						WHERE :cond
-						GROUP BY lvuli."id", lvuli."parentid", lvuli."siteid", lvuli."typeid",
+						GROUP BY lvuli."id", lvuli."parentid", lvuli."siteid", lvuli."type",
 							lvuli."domain", lvuli."refid", lvuli."start", lvuli."end",
 							lvuli."config", lvuli."pos", lvuli."status", lvuli."mtime",
 							lvuli."editor", lvuli."ctime" /*-columns*/ , :columns /*columns-*/
@@ -348,7 +348,7 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "users_property" (
-							"parentid", "typeid", "langid", "value",
+							"parentid", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
@@ -358,7 +358,7 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "users_property"
-						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+						SET "parentid" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -366,14 +366,14 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
-							lvupr."siteid" AS "customer.property.siteid", lvupr."typeid" AS "customer.property.typeid",
+							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
 							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
 							lvupr."mtime" AS "customer.property.mtime", lvupr."editor" AS "customer.property.editor",
 							lvupr."ctime" AS "customer.property.ctime"
 						FROM "users_property" AS lvupr
 						:joins
 						WHERE :cond
-						GROUP BY lvupr."id", lvupr."parentid", lvupr."siteid", lvupr."typeid",
+						GROUP BY lvupr."id", lvupr."parentid", lvupr."siteid", lvupr."type",
 							lvupr."langid", lvupr."value", lvupr."mtime", lvupr."editor",
 							lvupr."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/

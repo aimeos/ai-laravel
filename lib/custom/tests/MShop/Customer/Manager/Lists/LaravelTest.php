@@ -96,11 +96,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertTrue( $itemSaved->getType() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
-		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getRefId(), $itemSaved->getRefId() );
 		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
@@ -114,11 +113,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
-		$this->assertTrue( $itemUpd->getType() !== null );
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
-		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getRefId(), $itemUpd->getRefId() );
 		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
@@ -230,8 +228,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'customer.lists.parentid', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.domain', 'text' );
-		$expr[] = $search->compare( '>', 'customer.lists.typeid', 0 );
-		$expr[] = $search->compare( '>', 'customer.lists.refid', 0 );
+		$expr[] = $search->compare( '==', 'customer.lists.type', 'default' );
+		$expr[] = $search->compare( '>', 'customer.lists.refid', '' );
 		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2100-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
@@ -240,16 +238,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
-		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
-		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
-		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice(0, 1);
@@ -312,7 +300,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
 			$search->compare( '==', 'customer.lists.domain', 'text' ),
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
-			$search->compare( '==', 'customer.lists.type.code', 'default' ),
+			$search->compare( '==', 'customer.lists.type', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'customer.lists.position' ) ) );
