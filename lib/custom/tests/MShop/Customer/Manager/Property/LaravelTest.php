@@ -20,7 +20,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelper::getContext();
 		$this->editor = $context->getEditor();
 
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context, 'Laravel' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
 		$this->object = $manager->getSubManager( 'property', 'Laravel' );
 	}
 

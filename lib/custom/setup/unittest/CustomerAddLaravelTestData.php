@@ -44,7 +44,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 		}
 
 
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Laravel' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Laravel' );
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Laravel' );
 
 		$this->cleanupCustomerData( $customerManager, $customerAddressManager );

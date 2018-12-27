@@ -18,7 +18,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context = \TestHelper::getContext();
 		$this->editor = $this->context->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Laravel' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Laravel' );
 		$this->object = $manager->getSubManager( 'lists', 'Laravel' );
 	}
 
@@ -283,7 +283,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	protected function getListItems()
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->context, 'Laravel' );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Laravel' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC003' ) );
