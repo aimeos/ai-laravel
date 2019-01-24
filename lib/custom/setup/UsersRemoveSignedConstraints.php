@@ -43,7 +43,13 @@ class UsersRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 	{
 		$sql = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = \'users\' AND COLUMN_NAME = \'id\'';
 
-		if( $this->getValue( $sql, 'COLUMN_TYPE', 'db-customer' ) === 'int(10)' )
+		try {
+			$type = $this->getValue( $sql, 'COLUMN_TYPE', 'db-customer' );
+		} catch( \Aimeos\MW\Setup\Exception $e ) {
+			$type = null;
+		}
+
+		if( $type === 'int(10)' )
 		{
 			$this->msg( sprintf( 'Remove signed constraints in users related tables' ), 0 );
 			$this->status( '' );
