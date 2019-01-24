@@ -12,7 +12,7 @@ return array(
 
 			$table = $schema->createTable( 'users' );
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true, 'unsigned' => true ) );
 			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255, 'default' => '' ) );
@@ -64,8 +64,8 @@ return array(
 			$table = $schema->createTable( 'users_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -135,7 +135,7 @@ return array(
 			$table = $schema->createTable( 'users_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
@@ -188,8 +188,8 @@ return array(
 			$table = $schema->createTable( 'users_property' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
