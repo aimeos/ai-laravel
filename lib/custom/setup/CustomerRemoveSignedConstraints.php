@@ -12,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Removes signed constraints from users_* tables before migrating to unsigned
  */
-class UsersRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
+class CustomerRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -21,7 +21,7 @@ class UsersRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return [];
+		return ['CustomerChangeAddressRefidParentidLaravel'];
 	}
 
 
@@ -41,6 +41,7 @@ class UsersRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
+		$schema = $this->getSchema( 'db-customer' );
 		$sql = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = \'users\' AND COLUMN_NAME = \'id\'';
 
 		try {
@@ -49,7 +50,7 @@ class UsersRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 			$type = null;
 		}
 
-		if( $type === 'int(10)' )
+		if( in_array( $type, ['int(10)', 'int(11)'] ) )
 		{
 			$this->msg( sprintf( 'Remove signed constraints in users related tables' ), 0 );
 			$this->status( '' );
