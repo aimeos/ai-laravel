@@ -233,7 +233,60 @@ class Laravel
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'customer:has' => array(
+			'code' => 'customer:has()',
+			'internalcode' => '(
+				SELECT lvuli_has."id" FROM users_list AS lvuli_has
+				WHERE lvu."id" = lvuli_has."parentid" AND :site
+					AND lvuli_has."domain" = $1 AND lvuli_has."type" = $2 AND lvuli_has."refid" = $3
+			)',
+			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
+		'customer:prop' => array(
+			'code' => 'customer:prop()',
+			'internalcode' => '(
+				SELECT lvupr_prop."id" FROM users_property AS lvupr_prop
+				WHERE lvu."id" = lvupr_prop."parentid" AND :site
+					AND lvupr_prop."type" = $1 AND lvupr_prop."value" = $3
+					AND ( lvupr_prop."langid" = $2 OR lvupr_prop."langid" IS NULL )
+			)',
+			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 	);
+
+
+	/**
+	 * Initializes the object.
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 */
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
+	{
+		parent::__construct( $context );
+
+		$locale = $context->getLocale();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'lvuli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'lvupr_prop."siteid"', $siteIds, ':site' );
+	}
 
 
 	/**

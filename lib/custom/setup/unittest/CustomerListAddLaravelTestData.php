@@ -50,6 +50,8 @@ class CustomerListAddLaravelTestData
 
 		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$refIds['product'] = $this->getProductData( $refKeys['product'] );
+		$refIds['customer/group'] = $this->getCustomerGroupData( $refKeys['customer/group'] );
 		$this->addCustomerListData( $testdata, $refIds, 'Laravel' );
 
 		$this->status( 'done' );
