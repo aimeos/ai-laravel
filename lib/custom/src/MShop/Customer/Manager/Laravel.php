@@ -343,6 +343,8 @@ class Laravel
 	{
 		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
 
+		$item = $this->addGroups( $item );
+
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
@@ -510,8 +512,6 @@ class Laravel
 			throw $e;
 		}
 
-		$this->addGroups( $item );
-
 		$item = $this->savePropertyItems( $item, 'customer' );
 		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveListItems( $item, 'customer' );
@@ -538,7 +538,8 @@ class Laravel
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$cfgPathSearch = 'mshop/customer/manager/laravel/search';
 			$cfgPathCount = 'mshop/customer/manager/laravel/count';
-			$required = array( 'customer' );
+			$ref[] = 'customer/group';
+			$required = ['customer'];
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
