@@ -33,10 +33,15 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	/**
 	 * Returns the manager for the current setup task
 	 *
+	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager()
+	protected function getManager( $domain )
 	{
-		return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Laravel' );
+		if( $domain === 'customer' ) {
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Laravel' );
+		}
+
+		return parent::getManager( $domain );
 	}
 }
