@@ -237,10 +237,10 @@ class Laravel
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT lvuli_has."id" FROM users_list AS lvuli_has
-				WHERE lvu."id" = lvuli_has."parentid" AND :site
-					AND lvuli_has."domain" = $1 AND lvuli_has."type" = $2 AND lvuli_has."refid" = $3
+				WHERE lvu."id" = lvuli_has."parentid" AND :site AND lvuli_has."domain" = $1 :type :refid
+				LIMIT 1
 			)',
-			'label' => 'Customer has list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -249,11 +249,10 @@ class Laravel
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT lvupr_prop."id" FROM users_property AS lvupr_prop
-				WHERE lvu."id" = lvupr_prop."parentid" AND :site
-					AND lvupr_prop."type" = $1 AND lvupr_prop."value" = $3
-					AND ( lvupr_prop."langid" = $2 OR lvupr_prop."langid" IS NULL )
+				WHERE lvu."id" = lvupr_prop."parentid" AND :site AND lvupr_prop."type" = $1 :langid :value
+				LIMIT 1
 			)',
-			'label' => 'Customer has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -286,6 +285,27 @@ class Laravel
 
 		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'lvuli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'lvupr_prop."siteid"', $siteIds, ':site' );
+
+
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+
+			$source = str_replace( ':type', isset( $params[1] ) ? 'AND lvuli_has."type" = $2' : '', $source );
+			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND lvuli_has."refid" = $3' : '', $source );
+
+			return $params;
+		};
+
+
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+
+			$lang = 'AND lvupr_prop."langid"';
+			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
+
+			$source = str_replace( ':langid', $lang, $source );
+			$source = str_replace( ':value', isset( $params[2] ) ? 'AND lvupr_prop."value" = $3' : '', $source );
+
+			return $params;
+		};
 	}
 
 
