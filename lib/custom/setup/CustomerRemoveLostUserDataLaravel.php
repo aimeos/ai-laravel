@@ -15,8 +15,9 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'address' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
-		'list' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
+		'users_address' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
+		'users_list' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
+		'users_property' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
 	];
 
 
@@ -47,29 +48,21 @@ class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Remove left over Laravel user address records', 0 );
+		$this->msg( 'Remove left over Laravel user references', 0, '' );
 
-		if( $this->schema->tableExists( 'users' ) && $this->schema->tableExists( 'users_address' ) )
+		foreach( $this->sql as $table => $stmt )
 		{
-			$this->execute( $this->sql['address'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
 
-
-		$this->msg( 'Remove left over Laravel user list records', 0 );
-
-		if( $this->schema->tableExists( 'users' ) && $this->schema->tableExists( 'users_list' ) )
-		{
-			$this->execute( $this->sql['list'] );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
+			if( $this->schema->tableExists( 'users' ) && $this->schema->tableExists( $table ) )
+			{
+				$this->execute( $stmt );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
 		}
 	}
 }
