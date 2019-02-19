@@ -23,24 +23,13 @@ class CustomerChangeAddressRefidParentidLaravel extends \Aimeos\MW\Setup\Task\Ba
 
 
 	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return array List of task names
-	 */
-	public function getPreDependencies()
-	{
-		return [];
-	}
-
-
-	/**
 	 * Returns the list of task names which depends on this task.
 	 *
 	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateLaravel' );
+		return ['TablesCreateMShop'];
 	}
 
 

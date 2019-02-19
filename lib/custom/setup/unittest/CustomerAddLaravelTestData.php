@@ -15,11 +15,22 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
-	 * Returns the list of task names which this task depends on.
+	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
 	public function getPreDependencies()
+	{
+		return ['MShopSetLocale'];
+	}
+
+
+	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPostDependencies()
 	{
 		return ['CustomerAddTestData'];
 	}
