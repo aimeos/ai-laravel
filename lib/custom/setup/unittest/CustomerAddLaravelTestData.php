@@ -15,6 +15,17 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
 {
 	/**
+	 * Returns the list of task names which this task depends on.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPreDependencies()
+	{
+		return ['CustomerAddTestData'];
+	}
+
+
+	/**
 	 * Adds customer test data
 	 */
 	public function migrate()
@@ -43,5 +54,17 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 		}
 
 		return parent::getManager( $domain );
+	}
+
+
+	/**
+	 * Adds the customer group test data.
+	 *
+	 * @param array $testdata Associative list of key/list pairs
+	 * @param \Aimeos\MShop\Common\Manager\Iface $customerGroupManager Customer group manager
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
+	 */
+	protected function addCustomerGroupData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerGroupManager )
+	{
 	}
 }
