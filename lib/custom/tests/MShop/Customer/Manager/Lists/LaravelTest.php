@@ -48,7 +48,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->aggregate( $search, 'customer.lists.domain' );
 
-		$this->assertEquals( 3, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
 		$this->assertEquals( 4, $result['text'] );
 	}
@@ -259,7 +259,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$result = $this->object->searchItems( $search );
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 5, count( $result ) );
 	}
 
 
@@ -272,7 +272,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 6, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 5, count( $this->object->searchItems( $search ) ) );
 	}
 
 
