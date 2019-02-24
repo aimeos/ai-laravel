@@ -13,7 +13,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
-	private $editor = 'ai-laravel:unittest';
+	private $editor = 'ai-laravel:lib/custom';
 
 
 	protected function setUp()
@@ -42,7 +42,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'customer.lists.editor', 'ai-laravel:unittest' ),
+			$search->compare( '==', 'customer.lists.editor', 'ai-laravel:lib/custom' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

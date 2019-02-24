@@ -10,7 +10,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = 'ai-laravel:unittest';
+	private $editor = 'ai-laravel:lib/custom';
 
 
 	protected function setUp()
