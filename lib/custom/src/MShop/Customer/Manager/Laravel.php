@@ -237,8 +237,7 @@ class Laravel
 			'code' => 'customer:has()',
 			'internalcode' => '(
 				SELECT lvuli_has."id" FROM users_list AS lvuli_has
-				WHERE lvu."id" = lvuli_has."parentid" AND :site AND lvuli_has."domain" = $1 :type :refid
-				LIMIT 1
+				WHERE lvu."id" = lvuli_has."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -269,7 +268,9 @@ class Laravel
 	{
 		parent::__construct( $context );
 
+		$self = $this;
 		$locale = $context->getLocale();
+
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
@@ -283,18 +284,22 @@ class Laravel
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:has'], 'lvuli_has."siteid"', $siteIds, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'lvupr_prop."siteid"', $siteIds, ':site' );
 
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$source = str_replace( ':type', isset( $params[1] ) ? 'AND lvuli_has."type" = $2' : '', $source );
-			$source = str_replace( ':refid', isset( $params[2] ) ? 'AND lvuli_has."refid" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'lvuli_has."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'lvuli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};
 
+
+		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'lvupr_prop."siteid"', $siteIds, ':site' );
 
 		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
 
