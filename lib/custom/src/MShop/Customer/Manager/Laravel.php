@@ -248,8 +248,7 @@ class Laravel
 			'code' => 'customer:prop()',
 			'internalcode' => '(
 				SELECT lvupr_prop."id" FROM users_property AS lvupr_prop
-				WHERE lvu."id" = lvupr_prop."parentid" AND :site AND lvupr_prop."type" = $1 :langid :value
-				LIMIT 1
+				WHERE lvu."id" = lvupr_prop."parentid" AND :site AND :key LIMIT 1
 			)',
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -299,15 +298,15 @@ class Laravel
 		};
 
 
-		$this->replaceSiteMarker( $this->searchConfig['customer:prop'], 'lvupr_prop."siteid"', $siteIds, ':site' );
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) {
+			foreach( $params as $key => $param ) {
+				$params[$key] = trim( $param, '\'' );
+			}
 
-			$lang = 'AND lvupr_prop."langid"';
-			$lang = isset( $params[1] ) ? ( $params[1] !== 'null' ? $lang . ' = $2' : $lang . ' IS NULL' ) : '';
-
-			$source = str_replace( ':langid', $lang, $source );
-			$source = str_replace( ':value', isset( $params[2] ) ? 'AND lvupr_prop."value" = $3' : '', $source );
+			$source = str_replace( ':site', $self->toExpression( 'lvupr_prop."siteid"', $siteIds ), $source );
+			$str = $self->toExpression( 'lvupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
+			$source = str_replace( ':key', $str, $source );
 
 			return $params;
 		};

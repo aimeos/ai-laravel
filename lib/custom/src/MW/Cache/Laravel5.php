@@ -168,9 +168,9 @@ class Laravel5
 	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 		if( is_string( $expires ) ) {
-			$this->object->put( $key, $value, (int) ( date_create( $expires )->getTimestamp() - time() ) / 60 );
+			$this->object->put( $key, $value, (int) ( date_create( $expires )->getTimestamp() - time() ) );
 		} elseif( is_int( $expires ) ) {
-			$this->object->put( $key, $value, (int) $expires / 60 );
+			$this->object->put( $key, $value, (int) $expires );
 		} else {
 			$this->object->forever( $key, $value );
 		}
