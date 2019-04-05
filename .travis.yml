@@ -30,7 +30,7 @@ matrix:
       env: "LARAVEL_VERSION=5.5.*"
 
 before_script:
-  - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+  - git clone --depth=50 --branch=2019.04 git://github.com/aimeos/aimeos-core.git ../aimeos-core
   - cd ../aimeos-core
   - mv ../ai-laravel ext/
   - travis_retry composer require "laravel/framework:${LARAVEL_VERSION}" "symfony/psr-http-message-bridge:~1.0" "zendframework/zend-diactoros:~1.0"
