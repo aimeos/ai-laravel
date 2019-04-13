@@ -46,6 +46,14 @@ class Laravel
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'customer.lists.key' => array(
+			'code' => 'customer.lists.key',
+			'internalcode' => 'lvuli."key"',
+			'label' => 'Unique key',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'customer.lists.domain'=> array(
 			'code'=>'customer.lists.domain',
 			'internalcode'=>'lvuli."domain"',
