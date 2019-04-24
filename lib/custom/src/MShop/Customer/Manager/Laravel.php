@@ -33,14 +33,14 @@ class Laravel
 		'customer.code' => array(
 			'label' => 'Customer username',
 			'code' => 'customer.code',
-			'internalcode' => 'lvu."name"',
+			'internalcode' => 'lvu."email"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
-			'internalcode' => 'lvu."label"',
+			'internalcode' => 'lvu."name"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR
 		),
@@ -452,40 +452,39 @@ class Laravel
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $billingAddress->getCompany() );
-			$stmt->bind( 4, $billingAddress->getVatID() );
-			$stmt->bind( 5, $billingAddress->getSalutation() );
-			$stmt->bind( 6, $billingAddress->getTitle() );
-			$stmt->bind( 7, $billingAddress->getFirstname() );
-			$stmt->bind( 8, $billingAddress->getLastname() );
-			$stmt->bind( 9, $billingAddress->getAddress1() );
-			$stmt->bind( 10, $billingAddress->getAddress2() );
-			$stmt->bind( 11, $billingAddress->getAddress3() );
-			$stmt->bind( 12, $billingAddress->getPostal() );
-			$stmt->bind( 13, $billingAddress->getCity() );
-			$stmt->bind( 14, $billingAddress->getState() );
-			$stmt->bind( 15, $billingAddress->getCountryId() );
-			$stmt->bind( 16, $billingAddress->getLanguageId() );
-			$stmt->bind( 17, $billingAddress->getTelephone() );
-			$stmt->bind( 18, $billingAddress->getTelefax() );
-			$stmt->bind( 19, $billingAddress->getWebsite() );
-			$stmt->bind( 20, $billingAddress->getEmail() );
+			$stmt->bind( 2, $item->getLabel() );
+			$stmt->bind( 3, $item->getCode() );
+			$stmt->bind( 4, $billingAddress->getCompany() );
+			$stmt->bind( 5, $billingAddress->getVatID() );
+			$stmt->bind( 6, $billingAddress->getSalutation() );
+			$stmt->bind( 7, $billingAddress->getTitle() );
+			$stmt->bind( 8, $billingAddress->getFirstname() );
+			$stmt->bind( 9, $billingAddress->getLastname() );
+			$stmt->bind( 10, $billingAddress->getAddress1() );
+			$stmt->bind( 11, $billingAddress->getAddress2() );
+			$stmt->bind( 12, $billingAddress->getAddress3() );
+			$stmt->bind( 13, $billingAddress->getPostal() );
+			$stmt->bind( 14, $billingAddress->getCity() );
+			$stmt->bind( 15, $billingAddress->getState() );
+			$stmt->bind( 16, $billingAddress->getCountryId() );
+			$stmt->bind( 17, $billingAddress->getLanguageId() );
+			$stmt->bind( 18, $billingAddress->getTelephone() );
+			$stmt->bind( 19, $billingAddress->getTelefax() );
+			$stmt->bind( 20, $billingAddress->getWebsite() );
 			$stmt->bind( 21, $billingAddress->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
 			$stmt->bind( 22, $billingAddress->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-			$stmt->bind( 23, $item->getLabel() );
-			$stmt->bind( 24, $item->getBirthday() );
-			$stmt->bind( 25, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 26, $item->getDateVerified() );
-			$stmt->bind( 27, $item->getPassword() );
-			$stmt->bind( 28, $date ); // Modification time
-			$stmt->bind( 29, $context->getEditor() );
+			$stmt->bind( 23, $item->getBirthday() );
+			$stmt->bind( 24, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 25, $item->getDateVerified() );
+			$stmt->bind( 26, $item->getPassword() );
+			$stmt->bind( 27, $date ); // Modification time
+			$stmt->bind( 28, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 30, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 29, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 30, $date ); // Creation time
+				$stmt->bind( 29, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();

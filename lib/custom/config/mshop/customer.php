@@ -385,26 +385,26 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "users" (
-						"siteid", "name", "company", "vatid", "salutation", "title",
+						"siteid", "name", "email", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
-						"telefax", "website", "email", "longitude", "latitude", "label",
+						"telefax", "website", "longitude", "latitude",
 						"birthday", "status", "vdate", "password",
 						"updated_at", "editor", "created_at"
 					) VALUES (
-						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
 				',
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "users"
-					SET "siteid" = ?, "name" = ?, "company" = ?, "vatid" = ?,
+					SET "siteid" = ?, "name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
-						"telephone" = ?, "telefax" = ?, "website" = ?, "email" = ?,
-						"longitude" = ?, "latitude" = ?, "label" = ?, "birthday" = ?,
+						"telephone" = ?, "telefax" = ?, "website" = ?,
+						"longitude" = ?, "latitude" = ?, "birthday" = ?,
 						"status" = ?, "vdate" = ?, "password" = ?, "updated_at" = ?, "editor" = ?
 					WHERE "id" = ?
 				',
@@ -412,7 +412,7 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
-						lvu."label" AS "customer.label", lvu."name" AS "customer.code",
+						lvu."name" AS "customer.label", lvu."email" AS "customer.code",
 						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
 						lvu."salutation" AS "customer.salutation", lvu."title" AS "customer.title",
 						lvu."firstname" AS "customer.firstname", lvu."lastname" AS "customer.lastname",
@@ -430,7 +430,7 @@ return array(
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
-					GROUP BY lvu."id", lvu."siteid", lvu."label", lvu."name", lvu."company", lvu."vatid",
+					GROUP BY lvu."id", lvu."siteid", lvu."name", lvu."company", lvu."vatid",
 						lvu."salutation", lvu."title", lvu."firstname", lvu."lastname",
 						lvu."address1", lvu."address2", lvu."address3", lvu."postal",
 						lvu."city", lvu."state", lvu."countryid", lvu."langid",

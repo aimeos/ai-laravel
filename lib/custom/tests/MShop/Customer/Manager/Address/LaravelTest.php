@@ -24,14 +24,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$search = $customer->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'UTC001' ),
+			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'UTC001' ) );
+			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) );
 		}
 
 		$this->fixture = array(

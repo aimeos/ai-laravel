@@ -63,14 +63,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'UTC003' ),
+			$search->compare( '==', 'customer.code', 'test3@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No customer item with code "UTC003" found' );
+			throw new \RuntimeException( 'No customer item with code "test3@example.com" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
@@ -85,13 +85,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = $this->object->createItem();
 
-		$item->setCode( 'unitTest' );
+		$item->setCode( 'unitTest@example.com' );
 		$item->setLabel( 'unitTest' );
 		$item = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unitTest2' );
+		$itemExp->setCode( 'unitTest2@example.com' );
 		$itemExp->setLabel( 'unitTest2' );
 		$itemExp = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
@@ -135,14 +135,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaveAddressItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['customer/address'] );
+		$item = $this->object->findItem( 'test@example.com', ['customer/address'] );
 
-		$item->setId( null )->setCode( 'xyz' );
+		$item->setId( null )->setCode( 'unittest@xyz.com' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', ['customer/address'] );
+		$item2 = $this->object->findItem( 'unittest@xyz.com', ['customer/address'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -153,13 +153,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['customer/property'] );
+		$item = $this->object->findItem( 'test@example.com', ['customer/property'] );
 
-		$item->setId( null )->setCode( 'xyz' );
+		$item->setId( null )->setCode( 'unittest@xyz.com' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'xyz', ['customer/property'] );
+		$item2 = $this->object->findItem( 'unittest@xyz.com', ['customer/property'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -176,7 +176,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'UTC001', ['text'] );
+		$item = $this->object->findItem( 'test@example.com', ['text'] );
 
 		if( ( $listItem = current( $item->getListItems( 'text', 'default' ) ) ) === false ) {
 			throw new \RuntimeException( 'No list item found' );
@@ -187,7 +187,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer001' );
-		$expr[] = $search->compare( '==', 'customer.code', 'UTC001' );
+		$expr[] = $search->compare( '==', 'customer.code', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.birthday', null );
 		$expr[] = $search->compare( '>=', 'customer.password', '' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
@@ -306,12 +306,12 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsRef()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
 		$results = $this->object->searchItems( $search, ['customer/address', 'text'] );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No customer item for "UTC001" available' );
+			throw new \Exception( 'No customer item for "test@example.com" available' );
 		}
 
 		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );

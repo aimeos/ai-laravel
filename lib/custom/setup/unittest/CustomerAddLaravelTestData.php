@@ -53,6 +53,48 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 
 	/**
+	 * Adds the customer data
+	 *
+	 * @param string $path Path to data file
+	 * @throws \Aimeos\MShop\Exception
+	 */
+	protected function process( $path )
+	{
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
+		}
+
+		$manager = $this->getManager( 'customer' );
+		$listManager = $manager->getSubManager( 'lists' );
+		$groupManager = $manager->getSubManager( 'group' );
+		$addrManager = $manager->getSubManager( 'address' );
+		$propManager = $manager->getSubManager( 'property' );
+
+		$manager->begin();
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '=~', 'customer.code', 'test' ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+
+		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
+		$this->addGroupItems( $groupManager, $testdata );
+
+		$items = [];
+		foreach( $testdata['customer'] as $entry )
+		{
+			$item = $manager->createItem()->fromArray( $entry, true );
+			$item = $this->addGroupData( $groupManager, $item, $entry );
+			$item = $this->addPropertyData( $propManager, $item, $entry );
+			$item = $this->addAddressData( $addrManager, $item, $entry );
+			$items[] = $this->addListData( $listManager, $item, $entry );
+		}
+
+		$manager->saveItems( $items );
+		$manager->commit();
+	}
+
+
+	/**
 	 * Returns the manager for the current setup task
 	 *
 	 * @param string $domain Domain name of the manager
