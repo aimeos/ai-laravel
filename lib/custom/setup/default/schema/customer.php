@@ -15,7 +15,6 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true, 'unsigned' => true ) );
 			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255,  ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'remember_token', 'string', array( 'length' => 100, 'notnull' => false ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8,  ) );
