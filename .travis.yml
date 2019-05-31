@@ -1,5 +1,9 @@
 sudo: false
+dist: xenial
 language: php
+
+services:
+  - mysql
 
 php:
   - 7.3
@@ -31,11 +35,10 @@ matrix:
 
 before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
-  - cd ../aimeos-core
-  - mv ../ai-laravel ext/
+  - cd ../aimeos-core && mv ../ai-laravel ext/
   - travis_retry composer require "laravel/framework:${LARAVEL_VERSION}" "symfony/psr-http-message-bridge:~1.0" "zendframework/zend-diactoros:~1.0"
-  - mysql -e 'create database aimeos;'
-  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
+  - mysql -e "CREATE DATABASE aimeos; GRANT ALL ON aimeos.* TO 'aimeos'@'127.0.0.1' IDENTIFIED BY 'aimeos'"
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
 
 script:
   - vendor/bin/phing -Ddir=ext/ai-laravel setup coverageext checkext
