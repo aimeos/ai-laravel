@@ -46,7 +46,7 @@ class CustomerRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 
 		try {
 			$type = $this->getValue( $sql, 'COLUMN_TYPE', 'db-customer' );
-		} catch( \Aimeos\MW\Setup\Exception $e ) {
+		} catch( \Aimeos\MW\Exception $e ) {
 			$type = null;
 		}
 
