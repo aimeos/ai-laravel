@@ -56,7 +56,7 @@ return array(
 							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
 							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
 							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
-							lvuad."siteid" AS "customer.address.siteid"
+							lvuad."siteid" AS "customer.address.siteid", lvuad.*
 						FROM "users_address" AS lvuad
 						:joins
 						WHERE :cond
@@ -127,7 +127,8 @@ return array(
 								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
 								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
 								lvulity."mtime" AS "customer.lists.type.mtime", lvulity."editor" AS "customer.lists.type.editor",
-								lvulity."ctime" AS "customer.lists.type.ctime", lvulity."pos" AS "customer.lists.type.position"
+								lvulity."ctime" AS "customer.lists.type.ctime", lvulity."pos" AS "customer.lists.type.position",
+								lvulity.*
 							FROM "users_list_type" AS lvulity
 							:joins
 							WHERE :cond
@@ -208,7 +209,8 @@ return array(
 							lvuli."start" AS "customer.lists.datestart", lvuli."end" AS "customer.lists.dateend",
 							lvuli."config" AS "customer.lists.config", lvuli."pos" AS "customer.lists.position",
 							lvuli."status" AS "customer.lists.status", lvuli."mtime" AS "customer.lists.mtime",
-							lvuli."editor" AS "customer.lists.editor", lvuli."ctime" AS "customer.lists.ctime"
+							lvuli."editor" AS "customer.lists.editor", lvuli."ctime" AS "customer.lists.ctime",
+							lvuli.*
 						FROM "users_list" AS lvuli
 						:joins
 						WHERE :cond
@@ -276,7 +278,8 @@ return array(
 								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
 								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
 								lvuprty."mtime" AS "customer.property.type.mtime", lvuprty."editor" AS "customer.property.type.editor",
-								lvuprty."ctime" AS "customer.property.type.ctime", lvuprty."pos" AS "customer.property.type.position"
+								lvuprty."ctime" AS "customer.property.type.ctime", lvuprty."pos" AS "customer.property.type.position",
+								lvuprty.*
 							FROM "users_property_type" lvuprty
 							:joins
 							WHERE :cond
@@ -341,7 +344,7 @@ return array(
 							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
 							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
 							lvupr."mtime" AS "customer.property.mtime", lvupr."editor" AS "customer.property.editor",
-							lvupr."ctime" AS "customer.property.ctime"
+							lvupr."ctime" AS "customer.property.ctime", lvupr.*
 						FROM "users_property" AS lvupr
 						:joins
 						WHERE :cond
@@ -426,7 +429,7 @@ return array(
 						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
 						lvu."vdate" AS "customer.dateverified", lvu."password" AS "customer.password",
 						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
-						lvu."editor" AS "customer.editor"
+						lvu."editor" AS "customer.editor", lvu.*
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
