@@ -18,13 +18,13 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "users_address" (
+						INSERT INTO "users_address" ( :names
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
 							"pos", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
@@ -32,7 +32,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "users_address"
-						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+						SET :names
+							"parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -92,10 +93,10 @@ return array(
 				'laravel' => array(
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "users_list_type"(
+							INSERT INTO "users_list_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						',
@@ -103,7 +104,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "users_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						',
@@ -175,10 +177,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "users_list"(
+						INSERT INTO "users_list" ( :names
 							"parentid", "key", "type", "domain", "refid", "start", "end",
 						"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
@@ -186,8 +188,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "users_list"
-						SET "parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
-							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						SET :names
+							"parentid"=?, "key" = ?, "type" = ?, "domain" = ?, "refid" = ?, "start" = ?,
+							"end" = ?, "config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					',
 				),
@@ -246,10 +249,10 @@ return array(
 					),
 					'insert' => array(
 						'ansi' => '
-							INSERT INTO "users_property_type" (
+							INSERT INTO "users_property_type" ( :names
 								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
-							) VALUES (
+							) VALUES ( :values
 								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
@@ -257,7 +260,8 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "users_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
+							SET :names
+								"code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -309,10 +313,10 @@ return array(
 				),
 				'insert' => array(
 					'ansi' => '
-						INSERT INTO "users_property" (
+						INSERT INTO "users_property" ( :names
 							"parentid", "key", "type", "langid", "value",
 							"mtime", "editor", "siteid", "ctime"
-						) VALUES (
+						) VALUES ( :values
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
@@ -320,7 +324,8 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "users_property"
-						SET "parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
+						SET :names
+							"parentid" = ?, "key" = ?, "type" = ?, "langid" = ?,
 							"value" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -371,14 +376,14 @@ return array(
 			),
 			'insert' => array(
 				'ansi' => '
-					INSERT INTO "users" (
+					INSERT INTO "users" ( :names
 						"siteid", "name", "email", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"telefax", "website", "longitude", "latitude",
 						"birthday", "status", "vdate", "password",
 						"updated_at", "editor", "created_at"
-					) VALUES (
+					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
 				',
@@ -386,7 +391,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "users"
-					SET "siteid" = ?, "name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
+					SET :names
+						"siteid" = ?, "name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
