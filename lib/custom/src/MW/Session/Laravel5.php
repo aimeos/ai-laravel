@@ -17,8 +17,7 @@ namespace Aimeos\MW\Session;
  * @package MW
  * @subpackage Session
  */
-class Laravel5
-	implements \Aimeos\MW\Session\Iface
+class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 {
 	private $object;
 
