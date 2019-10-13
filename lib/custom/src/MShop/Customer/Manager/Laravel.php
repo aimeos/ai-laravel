@@ -360,9 +360,9 @@ class Laravel
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item object
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
+	 * @return \Aimeos\MShop\Customer\Item\Iface $item Updated item including the generated ID
 	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, $fetch = true )
 	{
 		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
 
