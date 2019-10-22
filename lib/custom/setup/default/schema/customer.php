@@ -8,7 +8,7 @@
 
 return array(
 	'table' => array(
-		'users' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users' );
 
@@ -43,7 +43,7 @@ return array(
 			$table->addColumn( 'status', 'smallint', array( 'default' => 1 ) );
 			$table->addColumn( 'updated_at', 'datetime', [] );
 			$table->addColumn( 'created_at', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255, 'default' => '' ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255, 'default' => '' ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvusr_id' );
 			$table->addUniqueIndex( array( 'email' ), 'unq_lvusr_email' );
@@ -58,7 +58,7 @@ return array(
 			return $schema;
 		},
 
-		'users_address' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users_address' );
 
@@ -88,7 +88,7 @@ return array(
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvuad_id' );
 			$table->addIndex( array( 'parentid' ), 'idx_lvuad_pid' );
@@ -105,7 +105,7 @@ return array(
 			return $schema;
 		},
 
-		'users_list_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users_list_type' );
 
@@ -129,7 +129,7 @@ return array(
 			return $schema;
 		},
 
-		'users_list' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users_list' );
 
@@ -160,7 +160,7 @@ return array(
 			return $schema;
 		},
 
-		'users_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users_property_type' );
 
@@ -184,7 +184,7 @@ return array(
 			return $schema;
 		},
 
-		'users_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users_property' );
 
