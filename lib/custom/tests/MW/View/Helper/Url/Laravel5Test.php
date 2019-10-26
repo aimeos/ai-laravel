@@ -36,7 +36,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	public function testTransform()
 	{
 		$this->mock->expects( $this->once() )->method( 'route' )
-			->with( $this->equalTo( 'route'), $this->equalTo( array( 'key' => 'value' ) ), $this->equalTo( false ) );
+			->with( $this->equalTo( 'route' ), $this->equalTo( array( 'key' => 'value' ) ), $this->equalTo( false ) );
 
 		$this->object->transform( 'route', 'catalog', 'lists', array( 'key' => 'value' ) );
 	}
@@ -45,7 +45,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	public function testTransformAbsolute()
 	{
 		$this->mock->expects( $this->once() )->method( 'route' )
-			->with( $this->equalTo( 'route'), $this->equalTo( [] ), $this->equalTo( true ) );
+			->with( $this->equalTo( 'route' ), $this->equalTo( [] ), $this->equalTo( true ) );
 
 		$options = array( 'absoluteUri' => true );
 		$this->object->transform( 'route', 'catalog', 'lists', [], [], $options );

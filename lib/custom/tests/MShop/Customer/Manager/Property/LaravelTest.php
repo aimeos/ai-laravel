@@ -50,11 +50,11 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'customer.property.editor', $this->editor ) );
 		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No property item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setLanguageId( 'en' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -103,13 +103,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'customer.property.value', '1'),
+			$search->compare( '~=', 'customer.property.value', '1' ),
 			$search->compare( '==', 'customer.property.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
 
-		if( ($expected = reset($results)) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( sprintf( 'No customer property item found for value "%1$s".', '1' ) );
 		}
 
@@ -148,7 +148,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.value', '1' );
 		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
@@ -156,17 +156,17 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type') );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type', 'Standard') );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );
 
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
-		$this->object->getSubManager('unknown');
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getSubManager( 'unknown' );
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
-		$this->object->getSubManager('type', 'unknown');
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getSubManager( 'type', 'unknown' );
 	}
 }
