@@ -54,7 +54,7 @@ class Laravel5
 
 			$this->logger->log( $message, $this->translatePriority( $priority ) );
 		}
-		catch( \Exception $e )	{
+		catch( \Exception $e ) {
 			throw new \Aimeos\MW\Logger\Exception( $e->getMessage(), $e->getCode(), $e );
 		}
 	}

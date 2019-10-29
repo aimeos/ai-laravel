@@ -48,7 +48,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( 'test' ) );
 
 		$this->mock->expects( $this->once() )->method( 'file' )
-			->will( $this->returnValue( $view) );
+			->will( $this->returnValue( $view ) );
 
 		$result = $this->object->render( $v, 'filepath', array( 'key' => 'value' ) );
 		$this->assertEquals( 'test', $result );
