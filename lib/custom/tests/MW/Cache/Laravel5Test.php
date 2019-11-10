@@ -34,29 +34,33 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	public function testDelete()
 	{
-		$this->mock->expects( $this->once() )->method( 'forget' )->with( $this->equalTo( 'key' ) );
-		$this->object->delete( 'key' );
+		$this->mock->expects( $this->once() )->method( 'forget' )->with( $this->equalTo( 'key' ) )
+			->will( $this->returnValue( true ) );
+
+		$this->assertTrue( $this->object->delete( 'key' ) );
 	}
 
 
 	public function testDeleteMultiple()
 	{
-		$this->mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) );
-		$this->object->deleteMultiple( array( 'key', 'key' ) );
+		$this->mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) )
+			->will( $this->returnValue( true ) );
+
+		$this->assertTrue( $this->object->deleteMultiple( array( 'key', 'key' ) ) );
 	}
 
 
 	public function testDeleteByTags()
 	{
-		$this->mock->expects( $this->once() )->method( 'flush' );
-		$this->object->deleteByTags( array( 'tag', 'tag' ) );
+		$this->mock->expects( $this->once() )->method( 'flush' )->will( $this->returnValue( true ) );
+		$this->assertTrue( $this->object->deleteByTags( array( 'tag', 'tag' ) ) );
 	}
 
 
 	public function testClear()
 	{
-		$this->mock->expects( $this->once() )->method( 'flush' );
-		$this->object->clear();
+		$this->mock->expects( $this->once() )->method( 'flush' )->will( $this->returnValue( true ) );
+		$this->assertTrue( $this->object->clear() );
 	}
 
 
@@ -88,36 +92,29 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMultipleByTags()
-	{
-		$this->assertEquals( [], $this->object->getMultipleByTags( array( 'key', 'key' ) ) );
-	}
-
-
 	public function testSet()
 	{
-		$this->mock->expects( $this->once() )->method( 'put' )
+		$this->mock->expects( $this->once() )->method( 'put' )->will( $this->returnValue( true ) )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
-		$this->object->set( 'key', 'value', '2100-01-01 00:00:00', array( 'tag' ) );
+		$this->assertTrue( $this->object->set( 'key', 'value', '2100-01-01 00:00:00', ['tag'] ) );
 	}
 
 
 	public function testSetForever()
 	{
-		$this->mock->expects( $this->once() )->method( 'forever' )
+		$this->mock->expects( $this->once() )->method( 'forever' )->will( $this->returnValue( true ) )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
 
-		$this->object->set( 'key', 'value', null, array( 'tag' ) );
+		$this->assertTrue( $this->object->set( 'key', 'value', null, ['tag'] ) );
 	}
 
 
 	public function testSetMultiple()
 	{
-		$this->mock->expects( $this->once() )->method( 'put' )
+		$this->mock->expects( $this->once() )->method( 'put' )->will( $this->returnValue( true ) )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
-		$expires = array( 'key' => '2100-01-01 00:00:00' );
-		$this->object->setMultiple( array( 'key' => 'value' ), $expires, array( 'key' => array( 'tag' ) ) );
+		$this->assertTrue( $this->object->setMultiple( array( 'key' => 'value' ), '2100-01-01 00:00:00', ['tag'] ) );
 	}
 }
