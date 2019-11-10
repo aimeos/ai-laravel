@@ -161,7 +161,7 @@ class Laravel5
 	 */
 	public function has( string $key ) : bool
 	{
-		if( $this->object->has( $key ) !== null ) {
+		if( $this->object->get( $key ) !== null ) {
 			return true;
 		}
 
