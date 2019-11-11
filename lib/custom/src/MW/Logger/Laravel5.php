@@ -56,5 +56,7 @@ class Laravel5
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), $e->getCode(), $e );
 		}
+
+		return $this;
 	}
 }
