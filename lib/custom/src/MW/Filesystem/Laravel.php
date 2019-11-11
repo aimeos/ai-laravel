@@ -55,7 +55,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function mkdir( $path )
 	{
 		try {
@@ -72,7 +72,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function rmdir( $path )
 	{
 		try {

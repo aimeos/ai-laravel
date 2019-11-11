@@ -45,10 +45,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setSlice(0, 1);
-		$results = $this->object->searchItems($search);
+		$search->setSlice( 0, 1 );
+		$results = $this->object->searchItems( $search );
 
-		if( ( $expected = reset($results) ) === false ) {
+		if( ( $expected = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No list type item found' );
 		}
 
@@ -66,14 +66,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setSlice(0, 1);
-		$results = $this->object->searchItems($search);
+		$search->setSlice( 0, 1 );
+		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset($results) ) === false ) {
+		if( ( $item = reset( $results ) ) === false ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
-		$item->setId(null);
+		$item->setId( null );
 		$item->setCode( 'unitTestInit' );
 		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
@@ -112,7 +112,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -135,7 +135,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice(0, 1);
+		$search->setSlice( 0, 1 );
 
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
