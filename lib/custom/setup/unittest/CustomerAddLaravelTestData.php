@@ -19,7 +19,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies()
+	public function getPreDependencies() : array
 	{
 		return ['MShopSetLocale'];
 	}
@@ -30,7 +30,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['CustomerAddTestData'];
 	}

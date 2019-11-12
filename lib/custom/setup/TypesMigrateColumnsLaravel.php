@@ -35,7 +35,7 @@ class TypesMigrateColumnsLaravel extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies()
+	public function getPostDependencies() : array
 	{
 		return ['TablesCreateMShop'];
 	}
