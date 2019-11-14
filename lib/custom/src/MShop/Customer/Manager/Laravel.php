@@ -571,7 +571,7 @@ class Laravel
 		}
 		catch( \Exception $e )
 		{
-			$dbm->release( $conn, $dbname  );
+			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
