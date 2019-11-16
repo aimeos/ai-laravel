@@ -71,7 +71,7 @@ class Laravel extends Standard implements Iface
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 * @throws \Aimeos\MW\Filesystem\Exception If an no configuration for that name is found
 	 */
-	public function get( $name )
+	public function get( string $name ) : \Aimeos\MW\Filesystem\Iface
 	{
 		$key = $this->getConfig( $name );
 
