@@ -42,7 +42,7 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $default Value returned if requested key isn't found
 	 * @return mixed Value associated to the requested key
 	 */
-	public function get( $name, $default = null )
+	public function get( string $name, $default = null )
 	{
 		return $this->object->get( $name, $default );
 	}
@@ -57,7 +57,7 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 	 * @param mixed $value Value that should be associated with the given key
 	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
 	 */
-	public function set( $name, $value )
+	public function set( string $name, $value ) : Iface
 	{
 		$this->object->put( $name, $value );
 		return $this;

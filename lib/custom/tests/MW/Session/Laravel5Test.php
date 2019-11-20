@@ -43,6 +43,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
-		$this->object->set( 'key', 'value' );
+
+		$this->assertIntanceof( '\Aimeos\MW\Session\Iface', $this->object->set( 'key', 'value' ) );
 	}
 }
