@@ -462,7 +462,7 @@ class Laravel
 
 			$stmt->bind( $idx++, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( $idx++, $item->getLabel() );
-			$stmt->bind( $idx++, $item->getCode() );
+			$stmt->bind( $idx++, $billingAddress->getEmail() );
 			$stmt->bind( $idx++, $billingAddress->getCompany() );
 			$stmt->bind( $idx++, $billingAddress->getVatID() );
 			$stmt->bind( $idx++, $billingAddress->getSalutation() );
