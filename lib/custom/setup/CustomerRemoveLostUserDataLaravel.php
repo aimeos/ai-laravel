@@ -15,9 +15,15 @@ namespace Aimeos\MW\Setup\Task;
 class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
-		'users_address' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
-		'users_list' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
-		'users_property' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )',
+		'users_address' => [
+			'fk_lvuad_pid' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+		],
+		'users_list' => [
+			'fk_lvuli_pid' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+		],
+		'users_property' => [
+			'fk_lvupr_pid' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+		],
 	];
 
 
@@ -39,18 +45,24 @@ class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Remove left over Laravel user references', 0, '' );
 
-		foreach( $this->sql as $table => $stmt )
-		{
-			$this->msg( sprintf( 'Remove unused %1$s records', $table ), 1 );
+		$schema = $this->getSchema( 'db-customer' );
 
-			if( $this->schema->tableExists( 'users' ) && $this->schema->tableExists( $table ) )
+		foreach( $this->sql as $table => $map )
+		{
+			foreach( $map as $constraint => $sql )
 			{
-				$this->execute( $stmt );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+				$this->msg( sprintf( 'Remove records from %1$s', $table ), 1 );
+
+				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
+					&& $schema->constraintExists( $table, $constraint ) === false
+				) {
+					$this->execute( $sql, 'db-customer' );
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
 			}
 		}
 	}
