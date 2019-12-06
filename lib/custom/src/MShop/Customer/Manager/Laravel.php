@@ -280,7 +280,7 @@ class Laravel
 				$params[$key] = trim( $param, '\'' );
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'lvuli_has."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'lvuli_has."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'lvuli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
@@ -295,7 +295,7 @@ class Laravel
 			}
 
 			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $self->toExpression( 'lvupr_prop."siteid"', $siteIds ), $source );
+			$source = str_replace( ':site', $siteIds ? $self->toExpression( 'lvupr_prop."siteid"', $siteIds ) : '1=1', $source );
 			$str = $self->toExpression( 'lvupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
 			$source = str_replace( ':key', $str, $source );
 
