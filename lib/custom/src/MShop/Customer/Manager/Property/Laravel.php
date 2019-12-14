@@ -42,8 +42,8 @@ class Laravel
 			'code' => 'customer.property.siteid',
 			'internalcode' => 'lvupr."siteid"',
 			'label' => 'Property site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type' => array(
