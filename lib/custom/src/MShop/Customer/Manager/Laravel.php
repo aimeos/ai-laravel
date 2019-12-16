@@ -235,7 +235,7 @@ class Laravel
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => ':site :key AND lvuli."id"',
+			'internalcode' => ':site AND :key AND lvuli."id"',
 			'internaldeps' => ['LEFT JOIN "users_list" AS lvuli ON ( lvuli."parentid" = lvu."id" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
@@ -244,7 +244,7 @@ class Laravel
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => ':site :key AND lvupr."id"',
+			'internalcode' => ':site AND :key AND lvupr."id"',
 			'internaldeps' => ['LEFT JOIN "users_property" AS lvupr ON ( lvupr."parentid" = lvu."id" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
@@ -266,11 +266,8 @@ class Laravel
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
 
-		$siteIds = $this->getSiteIds( $level );
-		$self = $this;
 
-
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -286,15 +283,15 @@ class Laravel
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'lvuli."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'lvuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'lvuli."siteid"', $level );
+			$keystr = $this->toExpression( 'lvuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
 
 
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
+		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $level ) {
 
 			array_walk_recursive( $params, function( &$v ) {
 				$v = trim( $v, '\'' );
@@ -310,8 +307,8 @@ class Laravel
 				}
 			}
 
-			$sitestr = $siteIds ? $self->toExpression( 'lvupr."siteid"', $siteIds ) . ' AND' : '';
-			$keystr = $self->toExpression( 'lvupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$sitestr = $this->getSiteString( 'lvupr."siteid"', $level );
+			$keystr = $this->toExpression( 'lvupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
