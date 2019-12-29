@@ -97,26 +97,27 @@ class Laravel
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
-	public function clear( array $siteids )
+	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		$this->clearBase( $siteids, 'mshop/customer/manager/property/laravel/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/property/laravel/delete' );
 	}
 
 
 	/**
 	 * Returns the attributes that can be used for searching.
 	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @param bool $withsub Return also attributes of sub-managers if true
 	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
-	public function getSearchAttributes( $withsub = true )
+	public function getSearchAttributes( bool $withsub = true ) : array
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 
@@ -132,7 +133,7 @@ class Laravel
 	 * configuration (or Default) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g property types, property lists etc.
 	 */
-	public function getSubManager( $manager, $name = null )
+	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', 'property/' . $manager, ( $name === null ? 'Laravel' : $name ) );
 	}
@@ -143,7 +144,7 @@ class Laravel
 	 *
 	 * @return string Configuration path
 	 */
-	protected function getConfigPath()
+	protected function getConfigPath() : string
 	{
 		return 'mshop/customer/manager/property/laravel/';
 	}
@@ -154,7 +155,7 @@ class Laravel
 	 *
 	 * @return array Associative list of search keys and search definitions
 	 */
-	protected function getSearchConfig()
+	protected function getSearchConfig() : array
 	{
 		return $this->searchConfig;
 	}
