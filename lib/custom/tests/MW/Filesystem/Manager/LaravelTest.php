@@ -16,7 +16,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	private $storage;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !class_exists( '\Illuminate\Filesystem\FilesystemManager' ) ) {
 			$this->markTestSkipped( 'Install the Laravel framework first' );
@@ -32,7 +32,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->config, $this->object, $this->storage );
 	}
@@ -61,7 +61,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetException()
 	{
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
 		$this->object->get( 'fs-media' );
 	}
 }

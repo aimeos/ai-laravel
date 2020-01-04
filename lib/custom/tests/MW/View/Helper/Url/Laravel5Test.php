@@ -15,7 +15,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	private $mock;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !interface_exists( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' ) ) {
 			$this->markTestSkipped( '\\Illuminate\\Contracts\\Routing\\UrlGenerator is not available' );
@@ -27,7 +27,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->mock );
 	}

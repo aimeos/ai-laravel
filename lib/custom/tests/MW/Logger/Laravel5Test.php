@@ -15,7 +15,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	private $object;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( interface_exists( '\\Illuminate\\Contracts\\Logging\\Log' ) === false ) {
 			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Logging\\Log not found' );
@@ -26,7 +26,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->mock, $this->object );
 	}
@@ -63,7 +63,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	public function testBadPriority()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Logger\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Logger\\Exception' );
 		$this->object->log( 'error', -1 );
 	}
 }

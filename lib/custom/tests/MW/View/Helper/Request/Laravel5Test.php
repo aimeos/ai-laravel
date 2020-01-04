@@ -15,7 +15,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	private $mock;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( !class_exists( '\Illuminate\Http\Request' ) ) {
 			$this->markTestSkipped( '\Illuminate\Http\Request is not available' );
@@ -33,7 +33,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->object, $this->mock );
 	}

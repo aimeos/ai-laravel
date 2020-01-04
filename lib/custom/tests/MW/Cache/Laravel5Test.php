@@ -15,7 +15,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	private $mock;
 
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		if( interface_exists( '\\Illuminate\\Contracts\\Cache\\Store' ) === false ) {
 			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Cache\\Store not found' );
@@ -26,7 +26,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		unset( $this->mock, $this->object );
 	}
