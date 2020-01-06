@@ -17,14 +17,6 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( !class_exists( '\Illuminate\Http\Request' ) ) {
-			$this->markTestSkipped( '\Illuminate\Http\Request is not available' );
-		}
-
-		if( !class_exists( '\Zend\Diactoros\Response' ) ) {
-			$this->markTestSkipped( '\Zend\Diactoros\Response is not available' );
-		}
-
 		$view = new \Aimeos\MW\View\Standard();
 		$param = array( 'HTTP_HOST' => 'localhost', 'REMOTE_ADDR' => '127.0.0.1' );
 		$request = new \Illuminate\Http\Request( [], [], [], [], [], $param, 'Content' );

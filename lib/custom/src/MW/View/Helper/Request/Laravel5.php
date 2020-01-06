@@ -10,10 +10,6 @@
 
 namespace Aimeos\MW\View\Helper\Request;
 
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Stream;
-
 
 /**
  * View helper class for retrieving request data.
@@ -76,19 +72,18 @@ class Laravel5
 	 */
 	protected function createRequest( \Illuminate\Http\Request $nativeRequest ) : \Psr\Http\Message\ServerRequestInterface
 	{
-		$files = ServerRequestFactory::normalizeFiles( $this->getFiles( $nativeRequest->files->all() ) );
-		$server = ServerRequestFactory::normalizeServer( $nativeRequest->server->all() );
+		$files = $this->getFiles( $nativeRequest->files->all() );
 		$headers = $nativeRequest->headers->all();
-		$cookies = $nativeRequest->cookies->all();
-		$post = $nativeRequest->request->all();
-		$query = $nativeRequest->query->all();
+		$server = $nativeRequest->server->all();
 		$method = $nativeRequest->getMethod();
 		$uri = $nativeRequest->getUri();
 
-		$body = new Stream( 'php://temp', 'wb+' );
-		$body->write( $nativeRequest->getContent() );
-
-		$request = new ServerRequest( $server, $files, $uri, $method, $body, $headers, $cookies, $query, $post );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+		$request = new \Nyholm\Psr7\ServerRequest( $method, $uri, $headers, $nativeRequest->getContent(), '1.1', $server );
+		$request = $request->withCookieParams( $nativeRequest->cookies->all() )
+			->withParsedBody( $nativeRequest->request->all() )
+			->withQueryParams( $nativeRequest->query->all() )
+			->withUploadedFiles( $files );
 
 		foreach( $nativeRequest->attributes->all() as $key => $value ) {
 			$request = $request->withAttribute( $key, $value );
@@ -107,13 +102,14 @@ class Laravel5
 	protected function getFiles( array $files ) : array
 	{
 		$list = [];
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 
 		foreach( $files as $key => $value )
 		{
 			if( $value instanceof \Symfony\Component\HttpFoundation\File\UploadedFile )
 			{
-				$list[$key] = new \Zend\Diactoros\UploadedFile(
-					$value->getRealPath(),
+				$list[$key] = $psr17Factory->createUploadedFile(
+					$psr17Factory->createStreamFromFile( $value->getRealPath() ),
 					$value->getSize(),
 					$value->getError(),
 					$value->getClientOriginalName(),

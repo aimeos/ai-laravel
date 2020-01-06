@@ -28,6 +28,7 @@ class Laravel5
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view )
 	{
-		parent::__construct( $view, new \Zend\Diactoros\Response() );
+		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
+		parent::__construct( $view, $psr17Factory->createResponse() );
 	}
 }
