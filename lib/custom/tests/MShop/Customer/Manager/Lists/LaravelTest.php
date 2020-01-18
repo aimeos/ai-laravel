@@ -62,11 +62,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
 		}
 
@@ -76,11 +74,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-		$items = $this->object->searchItems( $search );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
 		}
 

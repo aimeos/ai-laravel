@@ -559,10 +559,10 @@ class Laravel
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Iface
+	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
 	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : array
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();

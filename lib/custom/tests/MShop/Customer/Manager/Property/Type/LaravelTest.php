@@ -68,10 +68,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$results = $this->object->searchItems( $search );
-
-		if( ( $expected = reset( $results ) ) === false )
-		{
+		if( ( $expected = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No property type item found.' );
 		}
 
@@ -85,9 +82,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.property.type.editor', $this->editor ) );
-		$results = $this->object->searchItems( $search );
 
-		if( ( $item = reset( $results ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 

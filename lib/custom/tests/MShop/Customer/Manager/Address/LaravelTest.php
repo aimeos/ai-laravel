@@ -28,14 +28,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $customer->searchItems( $search );
 
-		if( ( $customerItem = reset( $result ) ) === false ) {
+		if( ( $item = $customer->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) );
 		}
 
 		$this->fixture = array(
-			'customer.address.parentid' => $customerItem->getId(),
+			'customer.address.parentid' => $item->getId(),
 			'customer.address.company' => 'ABC GmbH',
 			'customer.address.vatid' => 'DE999999999',
 			'customer.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
@@ -102,9 +101,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		$items = $this->object->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
+		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No address item found' );
 		}
 
