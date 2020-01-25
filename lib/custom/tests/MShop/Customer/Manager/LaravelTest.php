@@ -168,10 +168,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$item = $this->object->findItem( 'test@example.com', ['text'] );
-
-		if( ( $listItem = current( $item->getListItems( 'text', 'default' ) ) ) === false ) {
-			throw new \RuntimeException( 'No list item found' );
-		}
+		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$search = $this->object->createSearch();
 
