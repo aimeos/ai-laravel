@@ -7,6 +7,8 @@
 
 
 return array(
+	'exclude' => ['users'],
+
 	'table' => array(
 		'users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
