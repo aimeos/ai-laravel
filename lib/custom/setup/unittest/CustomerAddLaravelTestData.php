@@ -72,9 +72,10 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 
 		$manager->begin();
 
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '=~', 'customer.code', 'test' ) );
-		$manager->deleteItems( $manager->searchItems( $search )->toArray() );
+		$dbm = $this->additional->getDatabaseManager();
+		$conn = $dbm->acquire( 'db-customer' );
+		$conn->create( 'DELETE FROM "users" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
+		$dbm->release( $conn, 'db-customer' );
 
 		$this->storeTypes( $testdata, ['customer/lists/type', 'customer/property/type'] );
 		$this->addGroupItems( $groupManager, $testdata );

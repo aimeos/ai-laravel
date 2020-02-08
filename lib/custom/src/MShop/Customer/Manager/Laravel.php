@@ -21,13 +21,20 @@ class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
 	private $searchConfig = array(
-		// customer.siteid is only for informational purpuse, not for filtering
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 'lvu."id"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'customer.siteid' => array(
+			'code' =>'customer.siteid',
+			'internalcode' =>'lvu."siteid"',
+			'label' =>'Customer site ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.code' => array(
@@ -51,14 +58,14 @@ class Laravel
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.company'=> array(
+		'customer.company' => array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
 			'internalcode' => 'lvu."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.vatid'=> array(
+		'customer.vatid' => array(
 			'label' => 'Customer VAT ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 'lvu."vatid"',
@@ -191,47 +198,47 @@ class Laravel
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.password'=> array(
+		'customer.password' => array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
 			'internalcode' => 'lvu."password"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.status'=> array(
+		'customer.status' => array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
 			'internalcode' => 'lvu."status"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT
 		),
-		'customer.dateverified'=> array(
+		'customer.dateverified' => array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'lvu."vdate"',
 			'type' => 'date',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.ctime'=> array(
+		'customer.ctime' => array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
 			'internalcode' => 'lvu."created_at"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.mtime'=> array(
+		'customer.mtime' => array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
 			'internalcode' => 'lvu."updated_at"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.editor'=> array(
-			'label'=>'Customer editor',
-			'code'=>'customer.editor',
+		'customer.editor' => array(
+			'label' =>'Customer editor',
+			'code' =>'customer.editor',
 			'internalcode' => 'lvu."editor"',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',

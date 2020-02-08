@@ -24,7 +24,7 @@ class Laravel
 		'customer.property.id' => array(
 			'code' => 'customer.property.id',
 			'internalcode' => 'lvupr."id"',
-			'internaldeps'=>array( 'LEFT JOIN "users_property" AS lvupr ON ( lvupr."parentid" = lvu."id" )' ),
+			'internaldeps' => ['LEFT JOIN "users_property" AS lvupr ON ( lvupr."parentid" = lvu."id" )'],
 			'label' => 'Property ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

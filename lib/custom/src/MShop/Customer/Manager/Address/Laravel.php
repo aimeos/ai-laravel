@@ -30,7 +30,14 @@ class Laravel
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// customer.siteid is only for informational purpuse, not for filtering
+		'customer.address.siteid' => array(
+			'code' =>'customer.address.siteid',
+			'internalcode' =>'lvuad."siteid"',
+			'label' =>'Customer address site ID',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'customer.address.refid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',
@@ -39,14 +46,14 @@ class Laravel
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.company'=> array(
+		'customer.address.company' => array(
 			'label' => 'Customer address company',
 			'code' => 'customer.address.company',
 			'internalcode' => 'lvuad."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.vatid'=> array(
+		'customer.address.vatid' => array(
 			'label' => 'Customer address VAT ID',
 			'code' => 'customer.address.vatid',
 			'internalcode' => 'lvuad."vatid"',
@@ -186,26 +193,26 @@ class Laravel
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.address.ctime'=> array(
-			'label'=>'Customer address create date/time',
-			'code'=>'customer.address.ctime',
-			'internalcode'=>'lvuad."ctime"',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.ctime' => array(
+			'label' =>'Customer address create date/time',
+			'code' =>'customer.address.ctime',
+			'internalcode' =>'lvuad."ctime"',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.mtime'=> array(
-			'label'=>'Customer address modification date/time',
-			'code'=>'customer.address.mtime',
-			'internalcode'=>'lvuad."mtime"',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.mtime' => array(
+			'label' =>'Customer address modification date/time',
+			'code' =>'customer.address.mtime',
+			'internalcode' =>'lvuad."mtime"',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.editor'=> array(
-			'label'=>'Customer address editor',
-			'code'=>'customer.address.editor',
-			'internalcode'=>'lvuad."editor"',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.editor' => array(
+			'label' =>'Customer address editor',
+			'code' =>'customer.address.editor',
+			'internalcode' =>'lvuad."editor"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 
