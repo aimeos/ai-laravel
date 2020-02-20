@@ -27,9 +27,9 @@ class Laravel5
 	/**
 	 * Initializes the logger object.
 	 *
-	 * @param \Illuminate\Contracts\Logging\Log $logger Laravel logger object
+	 * @param \Psr\Log\LoggerInterface $logger Laravel logger object
 	 */
-	public function __construct( \Illuminate\Contracts\Logging\Log $logger )
+	public function __construct( \Psr\Log\LoggerInterface $logger )
 	{
 		$this->logger = $logger;
 	}
@@ -52,7 +52,7 @@ class Laravel5
 		}
 
 		try {
-			$this->logger->log( $message, $this->getLogLevel( $priority ) );
+			$this->logger->log( $this->getLogLevel( $priority ), $message );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), $e->getCode(), $e );
 		}

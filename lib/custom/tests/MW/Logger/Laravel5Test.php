@@ -17,11 +17,12 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( interface_exists( '\\Illuminate\\Contracts\\Logging\\Log' ) === false ) {
-			$this->markTestSkipped( 'Class \\Illuminate\\Contracts\\Logging\\Log not found' );
+		if( interface_exists( '\Psr\Log\LoggerInterface' ) === false ) {
+echo __METHOD__ . PHP_EOL;
+			$this->markTestSkipped( 'Class \Psr\Log\LoggerInterface not found' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Logging\\Log' )->getMock();
+		$this->mock = $this->getMockBuilder( \Psr\Log\LoggerInterface::class )->getMock();
 		$this->object = new \Aimeos\MW\Logger\Laravel5( $this->mock );
 	}
 
@@ -35,7 +36,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	public function testLog()
 	{
 		$this->mock->expects( $this->once() )->method( 'log' )
-			->with( $this->equalTo( 'msg' ), $this->equalTo( 'error' ) );
+			->with( $this->equalTo( 'error' ), $this->equalTo( 'msg' ) );
 		$this->object->log( 'msg' );
 	}
 
@@ -43,7 +44,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	public function testNonScalarLog()
 	{
 		$this->mock->expects( $this->once() )->method( 'log' )
-			->with( $this->equalTo( '["error","error2",2]' ), $this->equalTo( 'error' ) );
+			->with( $this->equalTo( 'error' ), $this->equalTo( '["error","error2",2]' ) );
 		$this->object->log( array( 'error', 'error2', 2 ) );
 	}
 
