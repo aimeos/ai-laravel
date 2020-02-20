@@ -86,7 +86,7 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 	 */
 	public function pull( string $name, $default = null )
 	{
-		return $this->pull( $name, $default );
+		return $this->object->pull( $name, $default );
 	}
 
 

@@ -17,11 +17,14 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( interface_exists( '\\Illuminate\\Session\\Store' ) === false ) {
-			$this->markTestSkipped( 'Class \\Illuminate\\Session\\Store not found' );
+		if( class_exists( '\Illuminate\Session\Store' ) === false ) {
+			$this->markTestSkipped( 'Class \Illuminate\Session\Store not found' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\\Illuminate\\Session\\Store' )->getMock();
+		$this->mock = $this->getMockBuilder( \Illuminate\Session\Store::class )
+			->disableOriginalConstructor()
+			->getMock();
+
 		$this->object = new \Aimeos\MW\Session\Laravel5( $this->mock );
 	}
 
