@@ -32,18 +32,47 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetDefault()
+	public function testDel()
 	{
-		$this->mock->expects( $this->once() )->method( 'get' )->with( $this->equalTo( 'notexist' ) );
-		$this->object->get( 'notexist' );
+		$this->mock->expects( $this->once() )->method( 'forget' )
+			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->del( 'test' ) );
+	}
+
+
+	public function testGet()
+	{
+		$this->mock->expects( $this->once() )->method( 'get' )
+			->with( $this->equalTo( 'test' ) )->will( $this->returnValue( '123456789' ) );
+
+		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
+	}
+
+
+	public function testPull()
+	{
+		$this->mock->expects( $this->once() )->method( 'pull' )
+			->with( $this->equalTo( 'test' ) )->will( $this->returnValue( '123456789' ) );
+
+		$this->assertEquals( '123456789', $this->object->pull( 'test' ) );
+	}
+
+
+	public function testRemove()
+	{
+		$this->mock->expects( $this->once() )->method( 'forget' )
+			->with( $this->equalTo( ['test'] ) )->will( $this->returnSelf() );
+
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->remove( ['test'] ) );
 	}
 
 
 	public function testSet()
 	{
 		$this->mock->expects( $this->once() )->method( 'put' )
-			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
+			->with( $this->equalTo( 'test' ), $this->equalTo( '123456789' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\Session\Iface', $this->object->set( 'key', 'value' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->set( 'test', '123456789' ) );
 	}
 }

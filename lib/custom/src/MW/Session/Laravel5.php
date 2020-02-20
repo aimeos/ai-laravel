@@ -34,6 +34,32 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 
 
 	/**
+	 * Sets a list of key/value pairs.
+	 *
+	 * @param array $values Associative list of key/value pairs
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function apply( array $values ) : Iface
+	{
+		$this->object->put( $values );
+		return $this;
+	}
+
+
+	/**
+	 * Remove the given key from the session.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function del( string $name ) : Iface
+	{
+		$this->object->forget( $name );
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its string representation.
@@ -45,6 +71,35 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 	public function get( string $name, $default = null )
 	{
 		return $this->object->get( $name, $default );
+	}
+
+
+	/**
+	 * Returns the value of the requested session key and remove it from the session.
+	 *
+	 * If the returned value wasn't a string, it's decoded from its serialized
+	 * representation.
+	 *
+	 * @param string $name Key of the requested value in the session
+	 * @param mixed $default Value returned if requested key isn't found
+	 * @return mixed Value associated to the requested key
+	 */
+	public function pull( string $name, $default = null )
+	{
+		return $this->pull( $name, $default );
+	}
+
+
+	/**
+	 * Remove the list of keys from the session.
+	 *
+	 * @param array $name Keys to remove from the session
+	 * @return \Aimeos\MW\Session\Iface Session instance for method chaining
+	 */
+	public function remove( array $names ) : Iface
+	{
+		$this->object->forget( $names );
+		return $this;
 	}
 
 
