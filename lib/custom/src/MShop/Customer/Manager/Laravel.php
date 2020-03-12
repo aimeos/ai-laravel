@@ -332,13 +332,13 @@ class Laravel
 	public function clear( array $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'lists', 'property'];
+		$default = ['address', 'group', 'lists', 'property'];
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this;
+		return $this->clearBase( $siteids, 'mshop/customer/manager/laravel/delete' );
 	}
 
 
@@ -351,7 +351,7 @@ class Laravel
 	public function deleteItems( array $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/laravel/delete';
-		return $this->deleteItemsBase( $itemIds, $path, false )->deleteRefItems( $itemIds );
+		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
 	}
 
 
