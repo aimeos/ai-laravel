@@ -235,10 +235,8 @@ class Laravel
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
-			'internalcode' => '(
-				SELECT lvuli_has."id" FROM users_list AS lvuli_has
-				WHERE lvu."id" = lvuli_has."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND lvuli."id"',
+			'internaldeps' => ['LEFT JOIN "users_list" AS lvuli ON ( lvuli."parentid" = lvu."id" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -246,10 +244,8 @@ class Laravel
 		),
 		'customer:prop' => array(
 			'code' => 'customer:prop()',
-			'internalcode' => '(
-				SELECT lvupr_prop."id" FROM users_property AS lvupr_prop
-				WHERE lvu."id" = lvupr_prop."parentid" AND :site AND :key LIMIT 1
-			)',
+			'internalcode' => ':site :key AND lvupr."id"',
+			'internaldeps' => ['LEFT JOIN "users_property" AS lvupr ON ( lvupr."parentid" = lvu."id" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -286,13 +282,23 @@ class Laravel
 
 		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = isset( $params[1] ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[1] as $type ) {
+				foreach( (array) $params[2] as $id ) {
+					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+				}
 			}
 
-			$source = str_replace( ':site', $self->toExpression( 'lvuli_has."siteid"', $siteIds ), $source );
-			$str = $self->toExpression( 'lvuli_has."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'lvuli."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'lvuli."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
@@ -300,14 +306,23 @@ class Laravel
 
 		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $self, $siteIds ) {
 
-			foreach( $params as $key => $param ) {
-				$params[$key] = trim( $param, '\'' );
+			array_walk_recursive( $params, function( &$v ) {
+				$v = trim( $v, '\'' );
+			} );
+
+			$keys = [];
+			$params[1] = array_key_exists( 1, $params ) ? $params[1] : '';
+			$params[2] = isset( $params[2] ) ? $params[2] : '';
+
+			foreach( (array) $params[1] as $lang ) {
+				foreach( (array) $params[2] as $id ) {
+					$keys[] = $params[0] . '|' . ( $lang ? $lang . '|' : '' ) . ( $id !== '' ?  md5( $id ) : '' );
+				}
 			}
 
-			$params[2] = ( isset( $params[2] ) ? md5( $params[2] ) : null );
-			$source = str_replace( ':site', $self->toExpression( 'lvupr_prop."siteid"', $siteIds ), $source );
-			$str = $self->toExpression( 'lvupr_prop."key"', join( '|', $params ), isset( $params[2] ) ? '==' : '=~' );
-			$source = str_replace( ':key', $str, $source );
+			$sitestr = $siteIds ? $self->toExpression( 'lvupr."siteid"', $siteIds ) . ' AND' : '';
+			$keystr = $self->toExpression( 'lvupr."key"', $keys, $params[2] !== '' ? '==' : '=~' );
+			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 			return $params;
 		};
