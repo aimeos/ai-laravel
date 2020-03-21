@@ -65,7 +65,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 	public function testRemove()
 	{
 		$this->mock->expects( $this->once() )->method( 'forget' )
-			->with( $this->equalTo( ['test'] ) )->will( $this->returnSelf() );
+			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
 
 		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->remove( ['test'] ) );
 	}
