@@ -98,7 +98,10 @@ class Laravel5 extends Base implements \Aimeos\MW\Session\Iface
 	 */
 	public function remove( array $names ) : Iface
 	{
-		$this->object->forget( $names );
+		foreach( $names as $name ) {
+			$this->object->forget( $name );
+		}
+
 		return $this;
 	}
 
