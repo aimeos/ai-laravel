@@ -29,6 +29,7 @@ return [
 			'customer.countryid' => 'DE', 'customer.languageid' => 'de', 'customer.telephone' => '055544332211',
 			'customer.email' => 'test@example.com', 'customer.telefax' => '055544332212', 'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0', 'customer.latitude' => '50.0', 'customer.password' => 'unittest',
+			'customer.birthday' => '1999-01-01',
 			'address' => [[
 				'customer.address.company' => 'Example company', 'customer.address.vatid' => 'DE999999999',
 				'customer.address.salutation' => 'mr', 'customer.address.title' => 'Dr',
@@ -40,7 +41,7 @@ return [
 				'customer.address.telephone' => '055544332211', 'customer.address.email' => 'test@example.com',
 				'customer.address.telefax' => '055544332212', 'customer.address.website' => 'www.example.com',
 				'customer.address.longitude' => '10.0', 'customer.address.latitude' => '50.0',
-				'customer.address.position' => '0'
+				'customer.address.position' => '0', 'customer.address.birthday' => '2000-01-01'
 			]],
 			'property' => [[
 				'customer.property.type' => 'newsletter', 'customer.property.languageid' => null, 'customer.property.value' => '1'

@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
-							"pos", "mtime", "editor", "siteid", "ctime"
+							"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -38,7 +38,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					',
 				),
@@ -58,7 +58,7 @@ return array(
 							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
 							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
 							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
-							lvuad."siteid" AS "customer.address.siteid"
+							lvuad."siteid" AS "customer.address.siteid", lvuad."birthday" AS "customer.address.birthday"
 						FROM "users_address" AS lvuad
 						:joins
 						WHERE :cond
@@ -80,7 +80,7 @@ return array(
 							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
 							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
 							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
-							lvuad."siteid" AS "customer.address.siteid"
+							lvuad."siteid" AS "customer.address.siteid", lvuad."birthday" AS "customer.address.birthday"
 						FROM "users_address" AS lvuad
 						:joins
 						WHERE :cond
