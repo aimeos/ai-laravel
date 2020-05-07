@@ -13,6 +13,7 @@ return array(
 		'users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'users' );
+			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true, 'unsigned' => true ) );
 			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
