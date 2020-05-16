@@ -44,7 +44,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
 							lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
 							lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
@@ -66,7 +66,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
 							lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
 							lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
@@ -92,7 +92,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvuad."id"
+							SELECT lvuad."id"
 							FROM "users_address" AS lvuad
 							:joins
 							WHERE :cond
@@ -102,7 +102,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvuad."id"
+							SELECT lvuad."id"
 							FROM "users_address" AS lvuad
 							:joins
 							WHERE :cond
@@ -151,7 +151,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								lvulity."id" AS "customer.lists.type.id", lvulity."siteid" AS "customer.lists.type.siteid",
 								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
 								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
@@ -164,7 +164,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								lvulity."id" AS "customer.lists.type.id", lvulity."siteid" AS "customer.lists.type.siteid",
 								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
 								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
@@ -181,7 +181,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT lvulity."id"
+								SELECT lvulity."id"
 								FROM "users_list_type" AS lvulity
 								:joins
 								WHERE :cond
@@ -191,7 +191,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT lvulity."id"
+								SELECT lvulity."id"
 								FROM "users_list_type" AS lvulity
 								:joins
 								WHERE :cond
@@ -213,7 +213,7 @@ return array(
 			'laravel' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", lvuli."id" AS "id"
 							FROM "users_list" AS lvuli
@@ -225,7 +225,7 @@ return array(
 						GROUP BY "key"
 					',
 					'mysql' => '
-						SELECT "key", COUNT(DISTINCT "id") AS "count"
+						SELECT "key", COUNT("id") AS "count"
 						FROM (
 							SELECT :key AS "key", lvuli."id" AS "id"
 							FROM "users_list" AS lvuli
@@ -308,7 +308,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvuli."id"
+							SELECT lvuli."id"
 							FROM "users_list" AS lvuli
 							:joins
 							WHERE :cond
@@ -318,7 +318,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvuli."id"
+							SELECT lvuli."id"
 							FROM "users_list" AS lvuli
 							:joins
 							WHERE :cond
@@ -367,7 +367,7 @@ return array(
 					),
 					'search' => array(
 						'ansi' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								lvuprty."id" AS "customer.property.type.id", lvuprty."siteid" AS "customer.property.type.siteid",
 								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
 								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
@@ -380,7 +380,7 @@ return array(
 							OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 						',
 						'mysql' => '
-							SELECT DISTINCT :columns
+							SELECT :columns
 								lvuprty."id" AS "customer.property.type.id", lvuprty."siteid" AS "customer.property.type.siteid",
 								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
 								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
@@ -397,7 +397,7 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT lvuprty."id"
+								SELECT lvuprty."id"
 								FROM "users_property_type" lvuprty
 								:joins
 								WHERE :cond
@@ -407,7 +407,7 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT DISTINCT lvuprty."id"
+								SELECT lvuprty."id"
 								FROM "users_property_type" lvuprty
 								:joins
 								WHERE :cond
@@ -454,7 +454,7 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
 							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
 							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
@@ -467,7 +467,7 @@ return array(
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
-						SELECT DISTINCT :columns
+						SELECT :columns
 							lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
 							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
 							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
@@ -484,7 +484,7 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvupr."id"
+							SELECT lvupr."id"
 							FROM "users_property" AS lvupr
 							:joins
 							WHERE :cond
@@ -494,7 +494,7 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT DISTINCT lvupr."id"
+							SELECT lvupr."id"
 							FROM "users_property" AS lvupr
 							:joins
 							WHERE :cond
@@ -550,7 +550,7 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
 						lvu."name" AS "customer.label", lvu."email" AS "customer.code",
 						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
@@ -570,11 +570,12 @@ return array(
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
+					GROUP BY :group lvu."id"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
-					SELECT DISTINCT :columns
+					SELECT :columns
 						lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
 						lvu."name" AS "customer.label", lvu."email" AS "customer.code",
 						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
@@ -594,6 +595,7 @@ return array(
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
+					GROUP BY :group lvu."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -602,20 +604,22 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT lvu."id"
+						SELECT lvu."id"
 						FROM "users" AS lvu
 						:joins
 						WHERE :cond
+						GROUP BY lvu."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT DISTINCT lvu."id"
+						SELECT lvu."id"
 						FROM "users" AS lvu
 						:joins
 						WHERE :cond
+						GROUP BY lvu."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',
