@@ -17,7 +17,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true, 'unsigned' => true ) );
 			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => '1.'] );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'remember_token', 'string', array( 'length' => 100, 'notnull' => false ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8, 'default' => '' ) );
@@ -67,7 +67,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
+			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );

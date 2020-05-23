@@ -523,12 +523,12 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "users" ( :names
-						"siteid", "name", "email", "company", "vatid", "salutation", "title",
+						"name", "email", "company", "vatid", "salutation", "title",
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"telefax", "website", "longitude", "latitude",
 						"birthday", "status", "vdate", "password",
-						"updated_at", "editor", "created_at"
+						"updated_at", "editor", "siteid", "created_at"
 					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 					)
@@ -538,14 +538,14 @@ return array(
 				'ansi' => '
 					UPDATE "users"
 					SET :names
-						"siteid" = ?, "name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
+						"name" = ?, "email" = ?, "company" = ?, "vatid" = ?,
 						"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
 						"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "telefax" = ?, "website" = ?,
 						"longitude" = ?, "latitude" = ?, "birthday" = ?,
 						"status" = ?, "vdate" = ?, "password" = ?, "updated_at" = ?, "editor" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				',
 			),
 			'search' => array(

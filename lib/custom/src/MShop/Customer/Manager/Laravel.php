@@ -473,7 +473,6 @@ class Laravel
 				$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
 			}
 
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 			$stmt->bind( $idx++, $item->getLabel() );
 			$stmt->bind( $idx++, $item->getCode() );
 			$stmt->bind( $idx++, $billingAddress->getCompany() );
@@ -501,6 +500,7 @@ class Laravel
 			$stmt->bind( $idx++, $item->getPassword() );
 			$stmt->bind( $idx++, $date ); // Modification time
 			$stmt->bind( $idx++, $context->getEditor() );
+			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
