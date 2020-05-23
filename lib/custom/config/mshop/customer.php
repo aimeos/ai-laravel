@@ -570,7 +570,13 @@ return array(
 					FROM "users" AS lvu
 					:joins
 					WHERE :cond
-					GROUP BY :group lvu."id"
+					GROUP BY :columns :group
+						lvu."id", lvu."siteid", lvu."name", lvu."email", lvu."company", lvu."vatid",
+						lvu."salutation", lvu."title", lvu."firstname", lvu."lastname", lvu."address1",
+						lvu."address2", lvu."address3", lvu."postal", lvu."city", lvu."state", lvu."countryid",
+						lvu."langid", lvu."telephone",lvu."telefax", lvu."email", lvu."website",
+						lvu."longitude", lvu."latitude", lvu."birthday", lvu."status", lvu."vdate", lvu."password",
+						lvu."created_at", lvu."updated_at", lvu."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
