@@ -46,7 +46,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No list type item found' );
 		}
 
@@ -65,7 +65,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No type item found' );
 		}
 
@@ -133,7 +133,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

@@ -49,7 +49,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.property.editor', $this->editor ) );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No property item found' );
 		}
 
@@ -107,7 +107,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		if( ( $expected = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $expected = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( sprintf( 'No customer property item found for value "%1$s".', '1' ) );
 		}
 
@@ -147,7 +147,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 

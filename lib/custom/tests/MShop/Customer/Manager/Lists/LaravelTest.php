@@ -64,7 +64,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
 		}
 
@@ -76,7 +76,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		if( ( $item = $this->object->searchItems( $search )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
 		}
 
@@ -157,7 +157,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 2 );
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -172,7 +172,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		//search without base criteria
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->search( $search );
 		$this->assertEquals( 5, count( $result ) );
 	}
 
@@ -186,7 +186,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 5, count( $this->object->searchItems( $search ) ) );
+		$this->assertEquals( 5, count( $this->object->search( $search ) ) );
 	}
 
 

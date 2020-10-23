@@ -249,7 +249,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search );
+		$result = $this->object->search( $search );
 		$this->assertEquals( 1, count( $result ) );
 	}
 
@@ -262,7 +262,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->object->searchItems( $search, [], $total );
+		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -280,7 +280,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 2, count( $this->object->searchItems( $search, [], $total ) ) );
+		$this->assertEquals( 2, count( $this->object->search( $search, [], $total ) ) );
 	}
 
 
@@ -289,7 +289,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'test@example.com' ) );
 
-		if( ( $item = $this->object->searchItems( $search, ['customer/address', 'text'] )->first() ) === null ) {
+		if( ( $item = $this->object->search( $search, ['customer/address', 'text'] )->first() ) === null ) {
 			throw new \Exception( 'No customer item for "test@example.com" available' );
 		}
 
