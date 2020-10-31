@@ -39,7 +39,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'customer.lists.editor', 'ai-laravel:lib/custom' ),
@@ -62,7 +62,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
@@ -74,7 +74,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No item found' );
@@ -136,7 +136,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.lists.id', null );
@@ -170,7 +170,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsAll()
 	{
 		//search without base criteria
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
 		$result = $this->object->search( $search );
 		$this->assertEquals( 5, count( $result ) );
@@ -180,7 +180,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsBase()
 	{
 		//search with base criteria
-		$search = $this->object->createSearch( true );
+		$search = $this->object->filter( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.lists.editor', $this->editor ),
 			$search->getConditions()

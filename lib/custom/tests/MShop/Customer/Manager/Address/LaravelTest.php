@@ -22,7 +22,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->editor = $context->getEditor();
 		$customer = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
 
-		$search = $customer->createSearch();
+		$search = $customer->filter();
 		$conditions = array(
 			$search->compare( '==', 'customer.code', 'test@example.com' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
@@ -99,7 +99,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$search = $this->object->filter()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
 		if( ( $item = $this->object->search( $search )->first() ) === null ) {
@@ -196,13 +196,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->filter() );
 	}
 
 
 	public function testSearchItem()
 	{
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$conditions = array(
 			$search->compare( '!=', 'customer.address.id', null ),
@@ -240,7 +240,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemTotal()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
+		$search = $this->object->filter();
 
 		$conditions = array(
 			$search->compare( '~=', 'customer.address.company', 'Example company' ),
