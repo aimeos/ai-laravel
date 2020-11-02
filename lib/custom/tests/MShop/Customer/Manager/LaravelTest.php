@@ -62,7 +62,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$domains = ['text', 'customer/property' => ['newsletter']];
-		$expected = $this->object->findItem( 'test@example.com', $domains );
+		$expected = $this->object->find( 'test@example.com', $domains );
 		$actual = $this->object->get( $expected->getId(), $domains );
 
 		$this->assertEquals( $expected, $actual );
@@ -124,14 +124,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSaveAddressItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['customer/address'] );
+		$item = $this->object->find( 'test@example.com', ['customer/address'] );
 
 		$item->setId( null )->setCode( 'unittest@xyz.com' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'unittest@xyz.com', ['customer/address'] );
+		$item2 = $this->object->find( 'unittest@xyz.com', ['customer/address'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -142,13 +142,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSavePropertyItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['customer/property'] );
+		$item = $this->object->find( 'test@example.com', ['customer/property'] );
 
 		$item->setId( null )->setCode( 'unittest@xyz.com' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'unittest@xyz.com', ['customer/property'] );
+		$item2 = $this->object->find( 'unittest@xyz.com', ['customer/property'] );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -165,7 +165,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$item = $this->object->findItem( 'test@example.com', ['text'] );
+		$item = $this->object->find( 'test@example.com', ['text'] );
 		$listItem = $item->getListItems( 'text', 'default' )->first( new \RuntimeException( 'No list item found' ) );
 
 		$search = $this->object->filter();
