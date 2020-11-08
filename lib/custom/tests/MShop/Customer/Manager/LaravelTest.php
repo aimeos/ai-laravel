@@ -55,7 +55,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $this->object->create() );
 	}
 
 
@@ -74,7 +74,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = $this->object->createItem();
+		$item = $this->object->create();
 
 		$item->setCode( 'unitTest@example.com' );
 		$item->setLabel( 'unitTest' );
