@@ -227,7 +227,7 @@ class Laravel
 	/**
 	 * Removes old entries from the storage.
 	 *
-	 * @param string[] $siteids List of IDs for sites whose entries should be deleted
+	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
 	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
 	 */
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
