@@ -260,7 +260,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->filter();
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
-		$search->setSlice( 0, 2 );
+		$search->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );

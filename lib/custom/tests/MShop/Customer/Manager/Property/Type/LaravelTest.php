@@ -159,7 +159,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$search->setSlice( 0, 1 );
+		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
