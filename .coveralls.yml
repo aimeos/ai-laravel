@@ -1,3 +1,0 @@
-src_dir: ext/ai-laravel
-json_path: ext/ai-laravel/coveralls.json
-coverage_clover: ext/ai-laravel/lib/custom/tests/coverage.xml
