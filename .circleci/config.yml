@@ -5,30 +5,7 @@
 version: 2
 
 jobs:
-  "php-7.1 / mariadb-10":
-    docker:
-      - image: aimeos/ci-php:7.1
-      - image: circleci/mariadb:10
-        environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: aimeos
-          MYSQL_USER: aimeos
-          MYSQL_PASSWORD: aimeos
-    steps:
-      - checkout
-      - run: git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
-      - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
-      - restore_cache:
-          keys:
-            - php71-{{ checksum "composer.json" }}
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php71-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
-
-  "php-7.2 / mysql-5.7":
+  "php-7.2 / mysql-5.7 / laravel-6":
     docker:
       - image: aimeos/ci-php:7.2
       - image: circleci/mysql:5.7
@@ -44,6 +21,7 @@ jobs:
       - restore_cache:
           keys:
             - php72-{{ checksum "composer.json" }}
+      - run: composer req --no-update "laravel/framework:6.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php72-{{ checksum "composer.json" }}
@@ -51,7 +29,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
 
-  "php-7.3 / pgsql-13":
+  "php-7.3 / pgsql-13 / laravel-7":
     docker:
       - image: aimeos/ci-php:7.3
       - image: circleci/postgres:13
@@ -66,6 +44,7 @@ jobs:
       - restore_cache:
           keys:
             - php73-{{ checksum "composer.json" }}
+      - run: composer req --no-update "laravel/framework:7.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
@@ -73,7 +52,7 @@ jobs:
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
 
-  "php-7.4 / mysql-8.0":
+  "php-7.4 / mysql-8.0 / laravel-8":
     docker:
       - image: aimeos/ci-php:7.4
       - image: circleci/mysql:8.0
@@ -89,6 +68,7 @@ jobs:
       - restore_cache:
           keys:
             - php74-{{ checksum "composer.json" }}
+      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
@@ -101,7 +81,6 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php-7.1 / mariadb-10"
-      - "php-7.2 / mysql-5.7"
-      - "php-7.3 / pgsql-13"
-      - "php-7.4 / mysql-8.0"
+      - "php-7.2 / mysql-5.7 / laravel-6"
+      - "php-7.3 / pgsql-13 / laravel-7"
+      - "php-7.4 / mysql-8.0 / laravel-8"
