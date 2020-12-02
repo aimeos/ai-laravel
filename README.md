@@ -5,7 +5,6 @@
 # Aimeos Laravel adapter
 
 [![Build Status](https://circleci.com/gh/aimeos/ai-laravel.svg?style=shield)](https://circleci.com/gh/aimeos/ai-laravel)
-[![Build Status](https://travis-ci.org/aimeos/ai-laravel.png?branch=master)](https://travis-ci.org/aimeos/ai-laravel)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-laravel/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-laravel?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-laravel/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-laravel/?branch=master)
 [![License](https://poser.pugx.org/aimeos/ai-laravel/license.svg)](https://packagist.org/packages/aimeos/ai-laravel)
