@@ -66,7 +66,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.property.type.code', 'newsletter' ),
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 
 		if( ( $expected = $this->object->search( $search )->first() ) === null ) {
 			throw new \RuntimeException( 'No property type item found.' );
@@ -148,7 +148,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
@@ -158,7 +158,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
 			$search->compare( '==', 'customer.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->and( $conditions ) );
 		$search->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total );
 
