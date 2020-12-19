@@ -17,12 +17,14 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		if( !interface_exists( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' ) ) {
-			$this->markTestSkipped( '\\Illuminate\\Contracts\\Routing\\UrlGenerator is not available' );
+		if( !class_exists( '\\Illuminate\\Routing\\UrlGenerator' ) ) {
+			$this->markTestSkipped( '\\Illuminate\\Routing\\UrlGenerator is not available' );
 		}
 
 		$view = new \Aimeos\MW\View\Standard();
-		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Routing\\UrlGenerator' )->getMock();
+		$this->mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )
+			->disableOriginalConstructor()->getMock();
+
 		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel5( $view, $this->mock, [] );
 	}
 
