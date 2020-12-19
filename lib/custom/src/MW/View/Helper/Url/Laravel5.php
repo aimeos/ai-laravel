@@ -22,7 +22,6 @@ class Laravel5
 	implements \Aimeos\MW\View\Helper\Url\Iface
 {
 	private $builder;
-	private $fixed;
 
 
 	/**
@@ -37,7 +36,7 @@ class Laravel5
 		parent::__construct( $view );
 
 		$this->builder = $builder;
-		$this->fixed = $fixed;
+		$this->builder->defaults( $fixed );
 	}
 
 
@@ -59,7 +58,7 @@ class Laravel5
 		$values = $this->getValues( $config );
 		$fragment = ( !empty( $trailing ) ? '#' . implode( '/', $trailing ) : '' );
 
-		return $this->builder->route( $target, $params + $this->fixed, $values['absoluteUri'] ) . $fragment;
+		return $this->builder->route( $target, $params, $values['absoluteUri'] ) . $fragment;
 	}
 
 
