@@ -527,7 +527,7 @@ return array(
 						"firstname", "lastname", "address1", "address2", "address3",
 						"postal", "city", "state", "countryid", "langid", "telephone",
 						"telefax", "website", "longitude", "latitude",
-						"birthday", "status", "vdate", "password",
+						"birthday", "status", "email_verified_at", "password",
 						"updated_at", "editor", "siteid", "created_at"
 					) VALUES ( :values
 						?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
@@ -544,7 +544,7 @@ return array(
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "telefax" = ?, "website" = ?,
 						"longitude" = ?, "latitude" = ?, "birthday" = ?,
-						"status" = ?, "vdate" = ?, "password" = ?, "updated_at" = ?, "editor" = ?
+						"status" = ?, "email_verified_at" = ?, "password" = ?, "updated_at" = ?, "editor" = ?
 					WHERE ( "siteid" = ? OR "siteid" = \'\' ) AND "id" = ?
 				',
 			),
@@ -564,7 +564,7 @@ return array(
 						lvu."email" AS "customer.email", lvu."website" AS "customer.website",
 						lvu."longitude" AS "customer.longitude", lvu."latitude" AS "customer.latitude",
 						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
-						lvu."vdate" AS "customer.dateverified", lvu."password" AS "customer.password",
+						lvu."email_verified_at" AS "customer.dateverified", lvu."password" AS "customer.password",
 						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
 						lvu."editor" AS "customer.editor"
 					FROM "users" AS lvu
@@ -575,7 +575,7 @@ return array(
 						lvu."salutation", lvu."title", lvu."firstname", lvu."lastname", lvu."address1",
 						lvu."address2", lvu."address3", lvu."postal", lvu."city", lvu."state", lvu."countryid",
 						lvu."langid", lvu."telephone",lvu."telefax", lvu."email", lvu."website",
-						lvu."longitude", lvu."latitude", lvu."birthday", lvu."status", lvu."vdate", lvu."password",
+						lvu."longitude", lvu."latitude", lvu."birthday", lvu."status", lvu."email_verified_at", lvu."password",
 						lvu."created_at", lvu."updated_at", lvu."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -595,7 +595,7 @@ return array(
 						lvu."email" AS "customer.email", lvu."website" AS "customer.website",
 						lvu."longitude" AS "customer.longitude", lvu."latitude" AS "customer.latitude",
 						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
-						lvu."vdate" AS "customer.dateverified", lvu."password" AS "customer.password",
+						lvu."email_verified_at" AS "customer.dateverified", lvu."password" AS "customer.password",
 						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
 						lvu."editor" AS "customer.editor"
 					FROM "users" AS lvu
