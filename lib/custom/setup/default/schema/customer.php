@@ -42,8 +42,8 @@ return array(
 			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
 			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'vdate', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'status', 'smallint', array( 'default' => 1 ) );
+			$table->addColumn( 'email_verified_at', 'date', array( 'notnull' => false ) );
 			$table->addColumn( 'updated_at', 'datetime', [] );
 			$table->addColumn( 'created_at', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255, 'default' => '' ) );

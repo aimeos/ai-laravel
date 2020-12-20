@@ -215,7 +215,7 @@ class Laravel
 		'customer.dateverified' => array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
-			'internalcode' => 'lvu."vdate"',
+			'internalcode' => 'lvu."email_verified_at"',
 			'type' => 'date',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
