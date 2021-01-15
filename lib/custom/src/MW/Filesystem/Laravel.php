@@ -298,14 +298,16 @@ class Laravel implements Iface, DirIface, MetaIface
 	 */
 	public function writes( string $path, $stream ) : Iface
 	{
-		if( ( $content = @fread( $stream, 0x7ffffffd ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
-		}
+		try
+		{
+			if( ( $content = @fread( $stream, 0x7ffffffd ) ) === false ) {
+				throw new \Exception( error_get_last()['message'] );
+			}
 
-		try {
 			$this->fs->put( $path, $content );
-		} catch( \Exception $e ) {
+		}
+		catch( \Throwable $e )
+		{
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
 
