@@ -15,7 +15,7 @@ return array(
 			$table = $schema->createTable( 'users' );
 			$table->addOption( 'engine', 'InnoDB' );
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true, 'unsigned' => true ) );
+			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true, 'unsigned' => true ) );
 			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
@@ -67,7 +67,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
+			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -141,7 +141,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
+			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
@@ -198,7 +198,7 @@ return array(
 			$table->addOption( 'engine', 'InnoDB' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', ['unsigned' => true] );
+			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
 			$table->addColumn( 'siteid', 'string', ['length' => 255] );
 			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
