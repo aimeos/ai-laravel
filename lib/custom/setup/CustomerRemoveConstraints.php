@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2019-2021
+ * @copyright Aimeos (aimeos.org), 2021
  */
 
 
@@ -10,9 +10,9 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Removes signed constraints from users_* tables before migrating to unsigned
+ * Removes constraints from users_* tables before migrating to bigint (Laravel 8)
  */
-class CustomerRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
+class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -50,9 +50,9 @@ class CustomerRemoveSignedConstraints extends \Aimeos\MW\Setup\Task\Base
 			$type = null;
 		}
 
-		if( in_array( $type, ['int(10)', 'int(11)'] ) )
+		if( in_array( $type, ['int(10)', 'int(11)', 'int(10) unsigned'] ) )
 		{
-			$this->msg( sprintf( 'Remove signed constraints in users related tables' ), 0 );
+			$this->msg( sprintf( 'Remove constraints in users related tables' ), 0 );
 			$this->status( '' );
 
 
