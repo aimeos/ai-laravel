@@ -42,15 +42,9 @@ class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$schema = $this->getSchema( 'db-customer' );
-		$sql = 'SELECT COLUMN_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = \'users\' AND COLUMN_NAME = \'id\'';
+		$type = $schema->getColumnDetails( 'users', 'id' )->getDataType();
 
-		try {
-			$type = $this->getValue( $sql, 'COLUMN_TYPE', 'db-customer' );
-		} catch( \Aimeos\MW\Exception $e ) {
-			$type = null;
-		}
-
-		if( in_array( $type, ['int(10)', 'int(11)', 'int(10) unsigned'] ) )
+		if( $type !== 'bigint' )
 		{
 			$this->msg( sprintf( 'Remove constraints in users related tables' ), 0 );
 			$this->status( '' );
