@@ -43,7 +43,7 @@ class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
 	{
 		$schema = $this->getSchema( 'db-customer' );
 
-		if( $schema->tableExists( 'users', 'id' ) && $schema->columnExists( 'users', 'id' )
+		if( $schema->tableExists( 'users' ) && $schema->columnExists( 'users', 'id' )
 			&& $schema->getColumnDetails( 'users', 'id' )->getDataType() !== 'bigint'
 		) {
 			$this->msg( sprintf( 'Remove constraints in users related tables' ), 0 );
