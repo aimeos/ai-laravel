@@ -313,6 +313,72 @@ class Laravel
 
 
 	/**
+	 * Counts the number items that are available for the values of the given key.
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param array|string $key Search key or list of key to aggregate items for
+	 * @param string|null $value Search key for aggregating the value column
+	 * @param string|null $type Type of the aggregation, empty string for count or "sum" or "avg" (average)
+	 * @return \Aimeos\Map List of the search keys as key and the number of counted items as value
+	 */
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
+	{
+		/** mshop/customer/manager/laravel//aggregate/mysql
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * @see mshop/customer/manager/laravel//aggregate/ansi
+		 */
+
+		/** mshop/customer/manager/laravel//aggregate/ansi
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * Groups all records by the values in the key column and counts their
+		 * occurence. The matched records can be limited by the given criteria
+		 * from the customer database. The records must be from one of the sites
+		 * that are configured via the context item. If the current site is part
+		 * of a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * This statement doesn't return any records. Instead, it returns pairs
+		 * of the different values found in the key column together with the
+		 * number of records that have been found for that key values.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for aggregating customer items
+		 * @since 2021.04
+		 * @category Developer
+		 * @see mshop/customer/manager/laravel//insert/ansi
+		 * @see mshop/customer/manager/laravel//update/ansi
+		 * @see mshop/customer/manager/laravel//newid/ansi
+		 * @see mshop/customer/manager/laravel//delete/ansi
+		 * @see mshop/customer/manager/laravel//search/ansi
+		 * @see mshop/customer/manager/laravel//count/ansi
+		 */
+
+		$cfgkey = 'mshop/customer/manager/laravel/aggregate' . $type;
+		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value );
+	}
+
+
+	/**
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
