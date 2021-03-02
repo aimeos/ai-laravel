@@ -522,7 +522,8 @@ return array(
 						FROM "users" AS lvu
 						:joins
 						WHERE :cond
-						ORDER BY :order
+						GROUP BY lvu.id, :cols, :val
+						ORDER BY lvu.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -534,7 +535,8 @@ return array(
 						FROM "users" AS lvu
 						:joins
 						WHERE :cond
-						ORDER BY :order
+						GROUP BY lvu.id, :cols, :val
+						ORDER BY lvu.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
