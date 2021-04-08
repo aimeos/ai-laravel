@@ -157,8 +157,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvuli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'domain', 'type', 'refid' ), 'unq_lvuli_pid_sid_dm_ty_rid' );
-			$table->addIndex( array( 'siteid', 'key' ), 'idx_lvuli_sid_key' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_lvuli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_lvuli_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_lvuli_pid' );
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
@@ -210,7 +210,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_lvupr_id' );
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_lvupr_sid_ty_lid_value' );
-			$table->addIndex( array( 'siteid', 'key' ), 'fk_lvupr_sid_key' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_lvupr_key_sid' );
 			$table->addIndex( array( 'parentid' ), 'fk_lvupr_pid' );
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
