@@ -8,6 +8,7 @@
 
 namespace Aimeos\MW\Setup\Task;
 
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Updates site ID columns
@@ -54,6 +55,9 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 		$this->process( $this->resources );
 
 		if( $this->getSchema( 'db-customer' )->tableExists( 'users' ) !== false ) {
+			if (!Schema::table('users', function (Blueprint $table) {
+				$table->string('siteid')->after('updated_at');
+			}));
 			$this->execute( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
