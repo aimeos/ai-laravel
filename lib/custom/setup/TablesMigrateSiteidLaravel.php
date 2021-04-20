@@ -8,7 +8,6 @@
 
 namespace Aimeos\MW\Setup\Task;
 
-use Illuminate\Support\Facades\Schema;
 
 /**
  * Updates site ID columns
