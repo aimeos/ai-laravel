@@ -54,10 +54,7 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 
 		$this->process( $this->resources );
 
-		if( $this->getSchema( 'db-customer' )->tableExists( 'users' ) !== false ) {
-			if (!Schema::table('users', function (Blueprint $table) {
-				$table->string('siteid')->after('updated_at');
-			}));
+		if( $this->getSchema( 'db-customer' )->columnExists( 'users', 'siteid' ) !== false ) {
 			$this->execute( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
