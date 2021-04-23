@@ -41,52 +41,25 @@ class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$schema = $this->getSchema( 'db-customer' );
+		$this->msg( sprintf( 'Remove constraints in users related tables' ), 0, '' );
+
+		$rname = 'db-customer';
+		$schema = $this->getSchema( $rname );
 
 		if( $schema->tableExists( 'users' ) && $schema->columnExists( 'users', 'id' )
 			&& $schema->getColumnDetails( 'users', 'id' )->getDataType() !== 'bigint'
 		) {
-			$this->msg( sprintf( 'Remove constraints in users related tables' ), 0 );
-			$this->status( '' );
+			$conn = $this->acquire( $rname );
+			$dbal = $conn->getRawObject();
 
-
-			$this->msg( 'Checking constraint in "users_address"', 1 );
-
-			if( $schema->constraintExists( 'users_address', 'fk_lvuad_pid' ) )
-			{
-				$this->execute( 'ALTER TABLE "users_address" DROP FOREIGN KEY "fk_lvuad_pid"', 'db-customer' );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 			}
 
-
-			$this->msg( 'Checking constraint in "users_list"', 1 );
-
-			if( $schema->constraintExists( 'users_list', 'fk_lvuli_pid' ) )
-			{
-				$this->execute( 'ALTER TABLE "users_list" DROP FOREIGN KEY "fk_lvuli_pid"', 'db-customer' );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
-			}
-
-
-			$this->msg( 'Checking constraint in "users_property"', 1 );
-
-			if( $schema->constraintExists( 'users_property', 'fk_lvupr_pid' ) )
-			{
-				$this->execute( 'ALTER TABLE "users_property" DROP FOREIGN KEY "fk_lvupr_pid"', 'db-customer' );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
-			}
+			$dbalManager = $dbal->getSchemaManager();
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuad_pid', 'users_address' );
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvupr_pid', 'users_property' );
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuli_pid', 'users_list' );
 		}
 	}
 }
