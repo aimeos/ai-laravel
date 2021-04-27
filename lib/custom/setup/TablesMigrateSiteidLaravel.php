@@ -54,7 +54,7 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 		$this->process( $this->resources );
 
 		if( $this->getSchema( 'db-customer' )->columnExists( 'users', 'siteid' ) !== false ) {
-			$this->execute( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
+			$this->execute( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL', 'db-customer' );
 		}
 	}
 }
