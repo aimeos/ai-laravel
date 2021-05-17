@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Customer\Manager;
 
 
 /**
- * Customer class implementation for Friends of Symfony user bundle.
+ * Customer class implementation for Laravel.
  *
  * @package MShop
  * @subpackage Customer
