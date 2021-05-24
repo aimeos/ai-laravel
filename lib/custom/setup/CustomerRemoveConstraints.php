@@ -57,9 +57,9 @@ class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$dbalManager = $dbal->getSchemaManager();
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuad_pid', 'users_address' );
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvupr_pid', 'users_property' );
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuli_pid', 'users_list' );
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_mcusad_pid', 'users_address' );
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_mcuspr_pid', 'users_property' );
+			$dbalManager->tryMethod( 'dropForeignKey', 'fk_mcusli_pid', 'users_list' );
 		}
 	}
 }

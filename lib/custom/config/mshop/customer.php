@@ -45,21 +45,21 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
-							lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
-							lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
-							lvuad."firstname" AS "customer.address.firstname", lvuad."lastname" AS "customer.address.lastname",
-							lvuad."address1" AS "customer.address.address1", lvuad."address2" AS "customer.address.address2",
-							lvuad."address3" AS "customer.address.address3", lvuad."postal" AS "customer.address.postal",
-							lvuad."city" AS "customer.address.city", lvuad."state" AS "customer.address.state",
-							lvuad."countryid" AS "customer.address.countryid", lvuad."langid" AS "customer.address.languageid",
-							lvuad."telephone" AS "customer.address.telephone", lvuad."email" AS "customer.address.email",
-							lvuad."telefax" AS "customer.address.telefax", lvuad."website" AS "customer.address.website",
-							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
-							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
-							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
-							lvuad."siteid" AS "customer.address.siteid", lvuad."birthday" AS "customer.address.birthday"
-						FROM "users_address" AS lvuad
+							mcusad."id" AS "customer.address.id", mcusad."parentid" AS "customer.address.parentid",
+							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
+							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
+							mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
+							mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
+							mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
+							mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
+							mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
+							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
+							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
+							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
+							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
+							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
+							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
+						FROM "users_address" AS mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -67,21 +67,21 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							lvuad."id" AS "customer.address.id", lvuad."parentid" AS "customer.address.parentid",
-							lvuad."company" AS "customer.address.company", lvuad."vatid" AS "customer.address.vatid",
-							lvuad."salutation" AS "customer.address.salutation", lvuad."title" AS "customer.address.title",
-							lvuad."firstname" AS "customer.address.firstname", lvuad."lastname" AS "customer.address.lastname",
-							lvuad."address1" AS "customer.address.address1", lvuad."address2" AS "customer.address.address2",
-							lvuad."address3" AS "customer.address.address3", lvuad."postal" AS "customer.address.postal",
-							lvuad."city" AS "customer.address.city", lvuad."state" AS "customer.address.state",
-							lvuad."countryid" AS "customer.address.countryid", lvuad."langid" AS "customer.address.languageid",
-							lvuad."telephone" AS "customer.address.telephone", lvuad."email" AS "customer.address.email",
-							lvuad."telefax" AS "customer.address.telefax", lvuad."website" AS "customer.address.website",
-							lvuad."longitude" AS "customer.address.longitude", lvuad."latitude" AS "customer.address.latitude",
-							lvuad."pos" AS "customer.address.position", lvuad."mtime" AS "customer.address.mtime",
-							lvuad."editor" AS "customer.address.editor", lvuad."ctime" AS "customer.address.ctime",
-							lvuad."siteid" AS "customer.address.siteid", lvuad."birthday" AS "customer.address.birthday"
-						FROM "users_address" AS lvuad
+							mcusad."id" AS "customer.address.id", mcusad."parentid" AS "customer.address.parentid",
+							mcusad."company" AS "customer.address.company", mcusad."vatid" AS "customer.address.vatid",
+							mcusad."salutation" AS "customer.address.salutation", mcusad."title" AS "customer.address.title",
+							mcusad."firstname" AS "customer.address.firstname", mcusad."lastname" AS "customer.address.lastname",
+							mcusad."address1" AS "customer.address.address1", mcusad."address2" AS "customer.address.address2",
+							mcusad."address3" AS "customer.address.address3", mcusad."postal" AS "customer.address.postal",
+							mcusad."city" AS "customer.address.city", mcusad."state" AS "customer.address.state",
+							mcusad."countryid" AS "customer.address.countryid", mcusad."langid" AS "customer.address.languageid",
+							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
+							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
+							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
+							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
+							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
+							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
+						FROM "users_address" AS mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -92,8 +92,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvuad."id"
-							FROM "users_address" AS lvuad
+							SELECT mcusad."id"
+							FROM "users_address" AS mcusad
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -102,8 +102,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvuad."id"
-							FROM "users_address" AS lvuad
+							SELECT mcusad."id"
+							FROM "users_address" AS mcusad
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -152,12 +152,12 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								lvulity."id" AS "customer.lists.type.id", lvulity."siteid" AS "customer.lists.type.siteid",
-								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
-								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
-								lvulity."mtime" AS "customer.lists.type.mtime", lvulity."editor" AS "customer.lists.type.editor",
-								lvulity."ctime" AS "customer.lists.type.ctime", lvulity."pos" AS "customer.lists.type.position"
-							FROM "users_list_type" AS lvulity
+								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
+								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
+								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+							FROM "users_list_type" AS mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -165,12 +165,12 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								lvulity."id" AS "customer.lists.type.id", lvulity."siteid" AS "customer.lists.type.siteid",
-								lvulity."code" AS "customer.lists.type.code", lvulity."domain" AS "customer.lists.type.domain",
-								lvulity."label" AS "customer.lists.type.label", lvulity."status" AS "customer.lists.type.status",
-								lvulity."mtime" AS "customer.lists.type.mtime", lvulity."editor" AS "customer.lists.type.editor",
-								lvulity."ctime" AS "customer.lists.type.ctime", lvulity."pos" AS "customer.lists.type.position"
-							FROM "users_list_type" AS lvulity
+								mcuslity."id" AS "customer.lists.type.id", mcuslity."siteid" AS "customer.lists.type.siteid",
+								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
+								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
+								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+							FROM "users_list_type" AS mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -181,8 +181,8 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT lvulity."id"
-								FROM "users_list_type" AS lvulity
+								SELECT mcuslity."id"
+								FROM "users_list_type" AS mcuslity
 								:joins
 								WHERE :cond
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -191,8 +191,8 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT lvulity."id"
-								FROM "users_list_type" AS lvulity
+								SELECT mcuslity."id"
+								FROM "users_list_type" AS mcuslity
 								:joins
 								WHERE :cond
 								LIMIT 10000 OFFSET 0
@@ -215,8 +215,8 @@ return array(
 					'ansi' => '
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :acols, lvuli."id" AS "id"
-							FROM "users_list" AS lvuli
+							SELECT :acols, mcusli."id" AS "id"
+							FROM "users_list" AS mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -227,8 +227,8 @@ return array(
 					'mysql' => '
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
-							SELECT :acols, lvuli."id" AS "id"
-							FROM "users_list" AS lvuli
+							SELECT :acols, mcusli."id" AS "id"
+							FROM "users_list" AS mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -265,41 +265,41 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							lvuli."id" AS "customer.lists.id", lvuli."siteid" AS "customer.lists.siteid",
-							lvuli."parentid" AS "customer.lists.parentid", lvuli."type" AS "customer.lists.type",
-							lvuli."domain" AS "customer.lists.domain", lvuli."refid" AS "customer.lists.refid",
-							lvuli."start" AS "customer.lists.datestart", lvuli."end" AS "customer.lists.dateend",
-							lvuli."config" AS "customer.lists.config", lvuli."pos" AS "customer.lists.position",
-							lvuli."status" AS "customer.lists.status", lvuli."mtime" AS "customer.lists.mtime",
-							lvuli."editor" AS "customer.lists.editor", lvuli."ctime" AS "customer.lists.ctime"
-						FROM "users_list" AS lvuli
+							mcusli."id" AS "customer.lists.id", mcusli."siteid" AS "customer.lists.siteid",
+							mcusli."parentid" AS "customer.lists.parentid", mcusli."type" AS "customer.lists.type",
+							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
+							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
+							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
+							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+						FROM "users_list" AS mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :columns
-							lvuli."id", lvuli."parentid", lvuli."siteid", lvuli."type",
-							lvuli."domain", lvuli."refid", lvuli."start", lvuli."end",
-							lvuli."config", lvuli."pos", lvuli."status", lvuli."mtime",
-							lvuli."editor", lvuli."ctime"
+							mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
+							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
+							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
+							mcusli."editor", mcusli."ctime"
 						ORDER BY :order
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					',
 					'mysql' => '
 						SELECT :columns
-							lvuli."id" AS "customer.lists.id", lvuli."siteid" AS "customer.lists.siteid",
-							lvuli."parentid" AS "customer.lists.parentid", lvuli."type" AS "customer.lists.type",
-							lvuli."domain" AS "customer.lists.domain", lvuli."refid" AS "customer.lists.refid",
-							lvuli."start" AS "customer.lists.datestart", lvuli."end" AS "customer.lists.dateend",
-							lvuli."config" AS "customer.lists.config", lvuli."pos" AS "customer.lists.position",
-							lvuli."status" AS "customer.lists.status", lvuli."mtime" AS "customer.lists.mtime",
-							lvuli."editor" AS "customer.lists.editor", lvuli."ctime" AS "customer.lists.ctime"
-						FROM "users_list" AS lvuli
+							mcusli."id" AS "customer.lists.id", mcusli."siteid" AS "customer.lists.siteid",
+							mcusli."parentid" AS "customer.lists.parentid", mcusli."type" AS "customer.lists.type",
+							mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
+							mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
+							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
+							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
+							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
+						FROM "users_list" AS mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :columns
-							lvuli."id", lvuli."parentid", lvuli."siteid", lvuli."type",
-							lvuli."domain", lvuli."refid", lvuli."start", lvuli."end",
-							lvuli."config", lvuli."pos", lvuli."status", lvuli."mtime",
-							lvuli."editor", lvuli."ctime"
+							mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."type",
+							mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
+							mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
+							mcusli."editor", mcusli."ctime"
 						ORDER BY :order
 						LIMIT :size OFFSET :start
 					',
@@ -308,8 +308,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvuli."id"
-							FROM "users_list" AS lvuli
+							SELECT mcusli."id"
+							FROM "users_list" AS mcusli
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -318,8 +318,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvuli."id"
-							FROM "users_list" AS lvuli
+							SELECT mcusli."id"
+							FROM "users_list" AS mcusli
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -368,12 +368,12 @@ return array(
 					'search' => array(
 						'ansi' => '
 							SELECT :columns
-								lvuprty."id" AS "customer.property.type.id", lvuprty."siteid" AS "customer.property.type.siteid",
-								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
-								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
-								lvuprty."mtime" AS "customer.property.type.mtime", lvuprty."editor" AS "customer.property.type.editor",
-								lvuprty."ctime" AS "customer.property.type.ctime", lvuprty."pos" AS "customer.property.type.position"
-							FROM "users_property_type" lvuprty
+								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+							FROM "users_property_type" mcusprty
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -381,12 +381,12 @@ return array(
 						',
 						'mysql' => '
 							SELECT :columns
-								lvuprty."id" AS "customer.property.type.id", lvuprty."siteid" AS "customer.property.type.siteid",
-								lvuprty."code" AS "customer.property.type.code", lvuprty."domain" AS "customer.property.type.domain",
-								lvuprty."label" AS "customer.property.type.label", lvuprty."status" AS "customer.property.type.status",
-								lvuprty."mtime" AS "customer.property.type.mtime", lvuprty."editor" AS "customer.property.type.editor",
-								lvuprty."ctime" AS "customer.property.type.ctime", lvuprty."pos" AS "customer.property.type.position"
-							FROM "users_property_type" lvuprty
+								mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+							FROM "users_property_type" mcusprty
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -397,8 +397,8 @@ return array(
 						'ansi' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT lvuprty."id"
-								FROM "users_property_type" lvuprty
+								SELECT mcusprty."id"
+								FROM "users_property_type" mcusprty
 								:joins
 								WHERE :cond
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -407,8 +407,8 @@ return array(
 						'mysql' => '
 							SELECT COUNT(*) AS "count"
 							FROM (
-								SELECT lvuprty."id"
-								FROM "users_property_type" lvuprty
+								SELECT mcusprty."id"
+								FROM "users_property_type" mcusprty
 								:joins
 								WHERE :cond
 								LIMIT 10000 OFFSET 0
@@ -455,12 +455,12 @@ return array(
 				'search' => array(
 					'ansi' => '
 						SELECT :columns
-							lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
-							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
-							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
-							lvupr."mtime" AS "customer.property.mtime", lvupr."editor" AS "customer.property.editor",
-							lvupr."ctime" AS "customer.property.ctime"
-						FROM "users_property" AS lvupr
+							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "users_property" AS mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -468,12 +468,12 @@ return array(
 					',
 					'mysql' => '
 						SELECT :columns
-							lvupr."id" AS "customer.property.id", lvupr."parentid" AS "customer.property.parentid",
-							lvupr."siteid" AS "customer.property.siteid", lvupr."type" AS "customer.property.type",
-							lvupr."langid" AS "customer.property.languageid", lvupr."value" AS "customer.property.value",
-							lvupr."mtime" AS "customer.property.mtime", lvupr."editor" AS "customer.property.editor",
-							lvupr."ctime" AS "customer.property.ctime"
-						FROM "users_property" AS lvupr
+							mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."type" AS "customer.property.type",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "users_property" AS mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -484,8 +484,8 @@ return array(
 					'ansi' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvupr."id"
-							FROM "users_property" AS lvupr
+							SELECT mcuspr."id"
+							FROM "users_property" AS mcuspr
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -494,8 +494,8 @@ return array(
 					'mysql' => '
 						SELECT COUNT(*) AS "count"
 						FROM (
-							SELECT lvupr."id"
-							FROM "users_property" AS lvupr
+							SELECT mcuspr."id"
+							FROM "users_property" AS mcuspr
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -519,11 +519,11 @@ return array(
 					SELECT :keys, COUNT("val") AS "count"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "users" AS lvu
+						FROM "users" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY lvu.id, :cols, :val
-						ORDER BY lvu.id DESC
+						GROUP BY mcus.id, :cols, :val
+						ORDER BY mcus.id DESC
 						OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 					) AS list
 					GROUP BY :keys
@@ -532,11 +532,11 @@ return array(
 					SELECT :keys, COUNT("val") AS "count"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "users" AS lvu
+						FROM "users" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY lvu.id, :cols, :val
-						ORDER BY lvu.id DESC
+						GROUP BY mcus.id, :cols, :val
+						ORDER BY mcus.id DESC
 						LIMIT :size OFFSET :start
 					) AS list
 					GROUP BY :keys
@@ -579,57 +579,57 @@ return array(
 			'search' => array(
 				'ansi' => '
 					SELECT :columns
-						lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
-						lvu."name" AS "customer.label", lvu."email" AS "customer.code",
-						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
-						lvu."salutation" AS "customer.salutation", lvu."title" AS "customer.title",
-						lvu."firstname" AS "customer.firstname", lvu."lastname" AS "customer.lastname",
-						lvu."address1" AS "customer.address1", lvu."address2" AS "customer.address2",
-						lvu."address3" AS "customer.address3", lvu."postal" AS "customer.postal",
-						lvu."city" AS "customer.city", lvu."state" AS "customer.state",
-						lvu."countryid" AS "customer.countryid", lvu."langid" AS "customer.languageid",
-						lvu."telephone" AS "customer.telephone",lvu."telefax" AS "customer.telefax",
-						lvu."email" AS "customer.email", lvu."website" AS "customer.website",
-						lvu."longitude" AS "customer.longitude", lvu."latitude" AS "customer.latitude",
-						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
-						lvu."email_verified_at" AS "customer.dateverified", lvu."password" AS "customer.password",
-						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
-						lvu."editor" AS "customer.editor"
-					FROM "users" AS lvu
+						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+						mcus."name" AS "customer.label", mcus."email" AS "customer.code",
+						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+						mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
+						mcus."telephone" AS "customer.telephone",mcus."telefax" AS "customer.telefax",
+						mcus."email" AS "customer.email", mcus."website" AS "customer.website",
+						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
+						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
+						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
+						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
+						mcus."editor" AS "customer.editor"
+					FROM "users" AS mcus
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
-						lvu."id", lvu."siteid", lvu."name", lvu."email", lvu."company", lvu."vatid",
-						lvu."salutation", lvu."title", lvu."firstname", lvu."lastname", lvu."address1",
-						lvu."address2", lvu."address3", lvu."postal", lvu."city", lvu."state", lvu."countryid",
-						lvu."langid", lvu."telephone",lvu."telefax", lvu."email", lvu."website",
-						lvu."longitude", lvu."latitude", lvu."birthday", lvu."status", lvu."email_verified_at", lvu."password",
-						lvu."created_at", lvu."updated_at", lvu."editor"
+						mcus."id", mcus."siteid", mcus."name", mcus."email", mcus."company", mcus."vatid",
+						mcus."salutation", mcus."title", mcus."firstname", mcus."lastname", mcus."address1",
+						mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state", mcus."countryid",
+						mcus."langid", mcus."telephone",mcus."telefax", mcus."email", mcus."website",
+						mcus."longitude", mcus."latitude", mcus."birthday", mcus."status", mcus."email_verified_at", mcus."password",
+						mcus."created_at", mcus."updated_at", mcus."editor"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
 				',
 				'mysql' => '
 					SELECT :columns
-						lvu."id" AS "customer.id", lvu."siteid" AS "customer.siteid",
-						lvu."name" AS "customer.label", lvu."email" AS "customer.code",
-						lvu."company" AS "customer.company", lvu."vatid" AS "customer.vatid",
-						lvu."salutation" AS "customer.salutation", lvu."title" AS "customer.title",
-						lvu."firstname" AS "customer.firstname", lvu."lastname" AS "customer.lastname",
-						lvu."address1" AS "customer.address1", lvu."address2" AS "customer.address2",
-						lvu."address3" AS "customer.address3", lvu."postal" AS "customer.postal",
-						lvu."city" AS "customer.city", lvu."state" AS "customer.state",
-						lvu."countryid" AS "customer.countryid", lvu."langid" AS "customer.languageid",
-						lvu."telephone" AS "customer.telephone",lvu."telefax" AS "customer.telefax",
-						lvu."email" AS "customer.email", lvu."website" AS "customer.website",
-						lvu."longitude" AS "customer.longitude", lvu."latitude" AS "customer.latitude",
-						lvu."birthday" AS "customer.birthday", lvu."status" AS "customer.status",
-						lvu."email_verified_at" AS "customer.dateverified", lvu."password" AS "customer.password",
-						lvu."created_at" AS "customer.ctime", lvu."updated_at" AS "customer.mtime",
-						lvu."editor" AS "customer.editor"
-					FROM "users" AS lvu
+						mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+						mcus."name" AS "customer.label", mcus."email" AS "customer.code",
+						mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+						mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+						mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
+						mcus."telephone" AS "customer.telephone",mcus."telefax" AS "customer.telefax",
+						mcus."email" AS "customer.email", mcus."website" AS "customer.website",
+						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
+						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
+						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
+						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
+						mcus."editor" AS "customer.editor"
+					FROM "users" AS mcus
 					:joins
 					WHERE :cond
-					GROUP BY :group lvu."id"
+					GROUP BY :group mcus."id"
 					ORDER BY :order
 					LIMIT :size OFFSET :start
 				',
@@ -638,22 +638,22 @@ return array(
 				'ansi' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT lvu."id"
-						FROM "users" AS lvu
+						SELECT mcus."id"
+						FROM "users" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY lvu."id"
+						GROUP BY mcus."id"
 						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
 					) AS list
 				',
 				'mysql' => '
 					SELECT COUNT(*) AS "count"
 					FROM (
-						SELECT lvu."id"
-						FROM "users" AS lvu
+						SELECT mcus."id"
+						FROM "users" AS mcus
 						:joins
 						WHERE :cond
-						GROUP BY lvu."id"
+						GROUP BY mcus."id"
 						LIMIT 10000 OFFSET 0
 					) AS list
 				',
