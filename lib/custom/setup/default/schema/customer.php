@@ -48,15 +48,15 @@ return array(
 			$table->addColumn( 'created_at', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255, 'default' => '' ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcussr_id' );
-			$table->addUniqueIndex( array( 'email' ), 'unq_mcussr_email' );
-			$table->addIndex( array( 'langid' ), 'idx_mcussr_langid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_mcussr_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_mcussr_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_mcussr_post_city' );
-			$table->addIndex( array( 'lastname' ), 'idx_mcussr_lastname' );
-			$table->addIndex( array( 'address1' ), 'idx_mcussr_address1' );
-			$table->addIndex( array( 'city' ), 'idx_mcussr_city' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvusr_id' );
+			$table->addUniqueIndex( array( 'email' ), 'unq_lvusr_email' );
+			$table->addIndex( array( 'langid' ), 'idx_lvusr_langid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvusr_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvusr_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvusr_post_city' );
+			$table->addIndex( array( 'lastname' ), 'idx_lvusr_lastname' );
+			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
+			$table->addIndex( array( 'city' ), 'idx_lvusr_city' );
 
 			return $schema;
 		},
@@ -95,17 +95,17 @@ return array(
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcusad_id' );
-			$table->addIndex( array( 'parentid' ), 'idx_mcusad_pid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_mcusad_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_mcusad_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_mcusad_post_city' );
-			$table->addIndex( array( 'address1' ), 'idx_mcusad_address1' );
-			$table->addIndex( array( 'city' ), 'idx_mcusad_city' );
-			$table->addIndex( array( 'email' ), 'idx_mcusad_email' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvuad_id' );
+			$table->addIndex( array( 'parentid' ), 'idx_lvuad_pid' );
+			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_last_first' );
+			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_post_addr1' );
+			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_post_city' );
+			$table->addIndex( array( 'address1' ), 'idx_lvuad_address1' );
+			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
+			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcusad_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuad_pid' );
 
 			return $schema;
 		},
@@ -126,11 +126,11 @@ return array(
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcuslity_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mcuslity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mcuslity_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mcuslity_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mcuslity_sid_code' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvulity_id' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_lvulity_sid_dom_code' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_lvulity_sid_status_pos' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_lvulity_sid_label' );
+			$table->addIndex( array( 'siteid', 'code' ), 'idx_lvulity_sid_code' );
 
 			return $schema;
 		},
@@ -156,13 +156,13 @@ return array(
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcusli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_mcusli_pid_dm_sid_ty_rid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_mcusli_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_mcusli_pid' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvuli_id' );
+			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_lvuli_pid_dm_sid_ty_rid' );
+			$table->addIndex( array( 'key', 'siteid' ), 'idx_lvuli_key_sid' );
+			$table->addIndex( array( 'parentid' ), 'fk_lvuli_pid' );
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcusli_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuli_pid' );
 
 			return $schema;
 		},
@@ -183,11 +183,11 @@ return array(
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcusprty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mcusprty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mcusprty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mcusprty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_mcusprty_sid_code' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvuprty_id' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_lvuprty_sid_dom_code' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_lvuprty_sid_status_pos' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_lvuprty_sid_label' );
+			$table->addIndex( array( 'siteid', 'code' ), 'idx_lvuprty_sid_code' );
 
 			return $schema;
 		},
@@ -208,13 +208,13 @@ return array(
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_mcuspr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_mcuspr_sid_ty_lid_value' );
-			$table->addIndex( array( 'key', 'siteid' ), 'fk_mcuspr_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_mcuspr_pid' );
+			$table->setPrimaryKey( array( 'id' ), 'pk_lvupr_id' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_lvupr_sid_ty_lid_value' );
+			$table->addIndex( array( 'key', 'siteid' ), 'fk_lvupr_key_sid' );
+			$table->addIndex( array( 'parentid' ), 'fk_lvupr_pid' );
 
 			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcuspr_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvupr_pid' );
 
 			return $schema;
 		},
