@@ -16,7 +16,6 @@
 	"require": {
 		"php": "~7.1||~8.0",
 		"nyholm/psr7": "~1.2",
-		"composer/installers": "^1.0",
 		"laravel/framework": "^6.20.12||^7.30.4||^8.40.0",
 		"aimeos/aimeos-core": "dev-master"
 	},
