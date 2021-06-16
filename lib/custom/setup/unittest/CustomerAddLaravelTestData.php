@@ -21,7 +21,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 */
 	public function getPreDependencies() : array
 	{
-		return ['MShopSetLocale'];
+		return ['ProductAddTestData'];
 	}
 
 
