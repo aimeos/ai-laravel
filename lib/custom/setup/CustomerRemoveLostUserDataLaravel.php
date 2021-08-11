@@ -16,13 +16,13 @@ class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 {
 	private $sql = [
 		'users_address' => [
-			'fk_mcusad_pid' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvuad_pid' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
 		],
 		'users_list' => [
-			'fk_mcusli_pid' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvuli_pid' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
 		],
 		'users_property' => [
-			'fk_mcuspr_pid' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvupr_pid' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
 		],
 	];
 
