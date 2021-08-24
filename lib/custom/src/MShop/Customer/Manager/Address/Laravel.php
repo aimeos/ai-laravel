@@ -237,7 +237,7 @@ class Laravel
 			$this->getObject()->getSubManager( $domain )->clear( $siteids );
 		}
 
-		return $this->clearBase( $siteids, 'mshop/customer/manager/address/laravel/delete' );
+		return $this->clearBase( $siteids, 'mshop/customer/manager/address/laravel/clear' );
 	}
 
 
