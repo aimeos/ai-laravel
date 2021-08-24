@@ -10,6 +10,12 @@ return array(
 	'manager' => array(
 		'address' => array(
 			'laravel' => array(
+				'clear' => array(
+					'ansi' => '
+						DELETE FROM "users_address"
+						WHERE :cond AND "siteid" = ?
+					',
+				),
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_address"
@@ -541,6 +547,12 @@ return array(
 					) AS list
 					GROUP BY :keys
 				'
+			),
+			'clear' => array(
+				'ansi' => '
+					DELETE FROM "users"
+					WHERE :cond AND "siteid" = ?
+				',
 			),
 			'delete' => array(
 				'ansi' => '
