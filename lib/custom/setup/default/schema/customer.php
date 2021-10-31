@@ -7,216 +7,176 @@
 
 
 return array(
-	'exclude' => ['users'],
-
 	'table' => array(
-		'users' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true, 'unsigned' => true ) );
-			$table->addColumn( 'superuser', 'smallint', array( 'default' => 0 ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255, 'default' => ''] );
-			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'remember_token', 'string', array( 'length' => 100, 'notnull' => false ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8, 'default' => '' ) );
-			$table->addColumn( 'company', 'string', array( 'length' => 100, 'default' => '' ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32, 'default' => '' ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64, 'default' => '' ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64, 'default' => '' ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64, 'default' => '' ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200, 'default' => '' ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200, 'default' => '' ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200, 'default' => '' ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16, 'default' => '' ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200, 'default' => '' ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200, 'default' => '' ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32, 'default' => '' ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 32, 'default' => '' ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255, 'default' => '' ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'status', 'smallint', array( 'default' => 1 ) );
-			$table->addColumn( 'email_verified_at', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'updated_at', 'datetime', [] );
-			$table->addColumn( 'created_at', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255, 'default' => '' ) );
+			$table->bigid()->primary( 'pk_lvu_id' )->unsigned( true );
+			$table->string( 'siteid' )->default( '' );
+			$table->string( 'email' );
+			$table->string( 'name' );
+			$table->string( 'password' );
+			$table->string( 'remember_token', 100 )->null( true );
+			$table->date( 'email_verified_at' )->null( true );;
+			$table->smallint( 'superuser' )->default( 0 );
+			$table->smallint( 'status' )->default( 1 );
+			$table->string( 'company', 100 )->default( '' );
+			$table->string( 'vatid', 32 )->default( '' );
+			$table->string( 'salutation', 8 )->default( '' );
+			$table->string( 'title', 64 )->default( '' );
+			$table->string( 'firstname', 64 )->default( '' );
+			$table->string( 'lastname', 64 )->default( '' );
+			$table->string( 'address1', 200 )->default( '' );
+			$table->string( 'address2', 200 )->default( '' );
+			$table->string( 'address3', 200 )->default( '' );
+			$table->string( 'postal', 16 )->default( '' );
+			$table->string( 'city', 200 )->default( '' );
+			$table->string( 'state', 200 )->default( '' );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 )->default( '' );
+			$table->string( 'telefax', 32 )->default( '' );
+			$table->string( 'website' )->default( '' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->datetime( 'updated_at' );
+			$table->datetime( 'created_at' );
+			$table->string( 'editor' )->default( '' );
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvusr_id' );
-			$table->addUniqueIndex( array( 'email' ), 'unq_lvusr_email' );
-			$table->addIndex( array( 'langid' ), 'idx_lvusr_langid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvusr_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvusr_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_lvusr_post_city' );
-			$table->addIndex( array( 'lastname' ), 'idx_lvusr_lastname' );
-			$table->addIndex( array( 'address1' ), 'idx_lvusr_address1' );
-			$table->addIndex( array( 'city' ), 'idx_lvusr_city' );
-
-			return $schema;
+			$table->unique( ['email'], 'unq_lvu_email' );
+			$table->index( ['langid'], 'idx_lvu_langid' );
+			$table->index( ['lastname', 'firstname'], 'idx_lvu_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_lvu_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_lvu_post_city' );
+			$table->index( ['lastname'], 'idx_lvu_lastname' );
+			$table->index( ['address1'], 'idx_lvu_address1' );
+			$table->index( ['city'], 'idx_lvu_city' );
 		},
 
-		'users_address' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_address' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users_address' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
-			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
-			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'longitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'latitude', 'float', array( 'notnull' => false ) );
-			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
-			$table->addColumn( 'pos', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_lvuad_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'company', 100 );
+			$table->string( 'vatid', 32 );
+			$table->string( 'salutation', 8 );
+			$table->string( 'title', 64 );
+			$table->string( 'firstname', 64 );
+			$table->string( 'lastname', 64 );
+			$table->string( 'address1', 200 );
+			$table->string( 'address2', 200 );
+			$table->string( 'address3', 200 );
+			$table->string( 'postal', 16 );
+			$table->string( 'city', 200 );
+			$table->string( 'state', 200 );
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'countryid', 2 )->null( true );
+			$table->string( 'telephone', 32 );
+			$table->string( 'telefax', 32 );
+			$table->string( 'email' );
+			$table->string( 'website' );
+			$table->float( 'longitude' )->null( true );
+			$table->float( 'latitude' )->null( true );
+			$table->date( 'birthday' )->null( true );
+			$table->smallint( 'pos' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvuad_id' );
-			$table->addIndex( array( 'parentid' ), 'idx_lvuad_pid' );
-			$table->addIndex( array( 'lastname', 'firstname' ), 'idx_lvuad_last_first' );
-			$table->addIndex( array( 'postal', 'address1' ), 'idx_lvuad_post_addr1' );
-			$table->addIndex( array( 'postal', 'city' ), 'idx_lvuad_post_city' );
-			$table->addIndex( array( 'address1' ), 'idx_lvuad_address1' );
-			$table->addIndex( array( 'city' ), 'idx_lvuad_city' );
-			$table->addIndex( array( 'email' ), 'idx_lvuad_email' );
+			$table->index( ['parentid'], 'fk_lvuad_pid' );
+			$table->index( ['langid'], 'idx_lvuad_langid' );
+			$table->index( ['siteid', 'lastname', 'firstname'], 'idx_lvuad_sid_last_first' );
+			$table->index( ['siteid', 'postal', 'address1'], 'idx_lvuad_sid_post_addr1' );
+			$table->index( ['siteid', 'postal', 'city'], 'idx_lvuad_sid_post_ci' );
+			$table->index( ['siteid', 'city'], 'idx_lvuad_sid_city' );
+			$table->index( ['siteid', 'email'], 'idx_lvuad_sid_email' );
 
-			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuad_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'users', 'id', 'fk_lvuad_pid' );
 		},
 
-		'users_list_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_list_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users_list_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_lvulity_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvulity_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_lvulity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_lvulity_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_lvulity_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_lvulity_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_lvulity_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_lvulity_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_lvulity_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_lvulity_sid_code' );
 		},
 
-		'users_list' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users_list' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 134, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'refid', 'string', array( 'length' => 36, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', [] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_lvuli_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'key', 134 )->default( '' );
+			$table->type( 'type' );
+			$table->string( 'domain', 32 );
+			$table->refid();
+			$table->startend();
+			$table->text( 'config' );
+			$table->int( 'pos' );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvuli_id' );
-			$table->addUniqueIndex( array( 'parentid', 'domain', 'siteid', 'type', 'refid' ), 'unq_lvuli_pid_dm_sid_ty_rid' );
-			$table->addIndex( array( 'key', 'siteid' ), 'idx_lvuli_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_lvuli_pid' );
+			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_lvuli_pid_dm_sid_ty_rid' );
+			$table->index( ['key', 'siteid'], 'idx_lvuli_key_sid' );
+			$table->index( ['parentid'], 'fk_lvuli_pid' );
 
-			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvuli_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'users', 'id', 'fk_lvuli_pid' );
 		},
 
-		'users_property_type' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_property_type' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users_property_type' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', ['default' => 0] );
-			$table->addColumn( 'status', 'smallint', [] );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->id()->primary( 'pk_lvuprty_id' );
+			$table->string( 'siteid' );
+			$table->string( 'domain', 32 );
+			$table->code();
+			$table->string( 'label' );
+			$table->int( 'pos' )->default( 0 );
+			$table->smallint( 'status' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvuprty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_lvuprty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_lvuprty_sid_status_pos' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_lvuprty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_lvuprty_sid_code' );
-
-			return $schema;
+			$table->unique( ['siteid', 'domain', 'code'], 'unq_lvuprty_sid_dom_code' );
+			$table->index( ['siteid', 'status', 'pos'], 'idx_lvuprty_sid_status_pos' );
+			$table->index( ['siteid', 'label'], 'idx_lvuprty_sid_label' );
+			$table->index( ['siteid', 'code'], 'idx_lvuprty_sid_code' );
 		},
 
-		'users_property' => function( \Doctrine\DBAL\Schema\Schema $schema ) {
+		'users_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
 
-			$table = $schema->createTable( 'users_property' );
-			$table->addOption( 'engine', 'InnoDB' );
+			$table->engine = 'InnoDB';
 
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'bigint', ['unsigned' => true] );
-			$table->addColumn( 'siteid', 'string', ['length' => 255] );
-			$table->addColumn( 'key', 'string', array( 'length' => 103, 'default' => '', 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 64, 'customSchemaOptions' => ['charset' => 'binary'] ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+			$table->bigid()->primary( 'pk_lvupr_id' );
+			$table->string( 'siteid' );
+			$table->bigint( 'parentid' )->unsigned( true );
+			$table->string( 'key', 103 )->default( '' );
+			$table->type();
+			$table->string( 'langid', 5 )->null( true );
+			$table->string( 'value' );
+			$table->meta();
 
-			$table->setPrimaryKey( array( 'id' ), 'pk_lvupr_id' );
-			$table->addUniqueIndex( array( 'parentid', 'siteid', 'type', 'langid', 'value' ), 'unq_lvupr_sid_ty_lid_value' );
-			$table->addIndex( array( 'key', 'siteid' ), 'fk_lvupr_key_sid' );
-			$table->addIndex( array( 'parentid' ), 'fk_lvupr_pid' );
+			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_lvupr_sid_ty_lid_value' );
+			$table->index( ['key', 'siteid'], 'fk_lvupr_key_sid' );
+			$table->index( ['parentid'], 'fk_lvupr_pid' );
 
-			$table->addForeignKeyConstraint( 'users', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_lvupr_pid' );
-
-			return $schema;
+			$table->foreign( 'parentid', 'users', 'id', 'fk_lvupr_pid' );
 		},
 	),
 );

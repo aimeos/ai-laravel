@@ -6,60 +6,40 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Removes constraints from users_* tables before migrating to bigint (Laravel 8)
  */
-class CustomerRemoveConstraints extends \Aimeos\MW\Setup\Task\Base
+class CustomerRemoveConstraints extends Base
 {
-	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function getPreDependencies() : array
-	{
-		return ['CustomerChangeAddressRefidParentidLaravel'];
-	}
-
-
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Customer'];
 	}
 
 
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( sprintf( 'Remove constraints in users related tables' ), 0, '' );
+		$db = $this->db( 'db-customer' );
 
-		$rname = 'db-customer';
-		$schema = $this->getSchema( $rname );
-
-		if( $schema->tableExists( 'users' ) && $schema->columnExists( 'users', 'id' )
-			&& $schema->getColumnDetails( 'users', 'id' )->getDataType() !== 'bigint'
-		) {
-			$conn = $this->acquire( $rname );
-			$dbal = $conn->getRawObject();
-
-			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
-			}
-
-			$dbalManager = $dbal->getSchemaManager();
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuad_pid', 'users_address' );
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvupr_pid', 'users_property' );
-			$dbalManager->tryMethod( 'dropForeignKey', 'fk_lvuli_pid', 'users_list' );
+		if( !$db->hasColumn( 'users', 'id' ) || $db->table( 'users')->col( 'id' )->type() === 'bigint' ) {
+			return;
 		}
+
+		$this->info( sprintf( 'Remove constraints in users related tables' ), 'v' );
+
+		$db->dropForeign( 'users_address', 'fk_lvuad_pid' );
+		$db->dropForeign( 'users_property', 'fk_lvupr_pid' );
+		$db->dropForeign( 'users_list', 'fk_lvuli_pid' );
 	}
 }

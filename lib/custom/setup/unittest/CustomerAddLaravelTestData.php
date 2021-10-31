@@ -6,20 +6,20 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds Laravel customer test data.
  */
-class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestData
+class CustomerAddLaravelTestData extends CustomerAddTestData
 {
 	/**
 	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['ProductAddTestData'];
 	}
@@ -30,7 +30,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['CustomerAddTestData'];
 	}
@@ -39,21 +39,17 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	/**
 	 * Adds customer test data
 	 */
-	public function migrate()
+	public function up()
 	{
-		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
+		$this->info( 'Adding Laravel customer test data', 'v' );
 
-		$this->msg( 'Adding Laravel customer test data', 0 );
-
-		$dbm = $this->additional->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$conn = $dbm->acquire( 'db-customer' );
 		$conn->create( 'DELETE FROM "users" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
 		$dbm->release( $conn, 'db-customer' );
 
-		$this->additional->setEditor( 'ai-laravel:lib/custom' );
+		$this->context()->setEditor( 'ai-laravel:lib/custom' );
 		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
-
-		$this->status( 'done' );
 	}
 
 
@@ -66,7 +62,7 @@ class CustomerAddLaravelTestData extends \Aimeos\MW\Setup\Task\CustomerAddTestDa
 	protected function getManager( $domain )
 	{
 		if( $domain === 'customer' ) {
-			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->additional, 'Laravel' );
+			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Laravel' );
 		}
 
 		return parent::getManager( $domain );

@@ -6,13 +6,13 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Adds the new type columns
  */
-class TypesMigrateColumnsLaravel extends \Aimeos\MW\Setup\Task\TypesMigrateColumns
+class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 {
 	private $tables = [
 		'db-customer' => ['users_list', 'users_property'],
@@ -35,7 +35,7 @@ class TypesMigrateColumnsLaravel extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 	 *
 	 * @return array List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
 		return ['TablesCreateMShop'];
 	}
@@ -44,24 +44,22 @@ class TypesMigrateColumnsLaravel extends \Aimeos\MW\Setup\Task\TypesMigrateColum
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( sprintf( 'Add new type columns for Laravel' ), 0 );
-		$this->status( '' );
+		$this->info( 'Migrate typeid to type for Laravel', 'v' );
+		$this->info( 'Add new type columns for Laravel', 'vv' );
 
 		foreach( $this->tables as $rname => $list ) {
 			$this->addColumn( $rname, $list );
 		}
 
-		$this->msg( sprintf( 'Drop old unique indexes for Laravel' ), 0 );
-		$this->status( '' );
+		$this->info( 'Drop old unique indexes for Laravel', 'vv' );
 
 		foreach( $this->constraints as $rname => $list ) {
 			$this->dropIndex( $rname, $list );
 		}
 
-		$this->msg( sprintf( 'Migrate typeid to type for Laravel' ), 0 );
-		$this->status( '' );
+		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );

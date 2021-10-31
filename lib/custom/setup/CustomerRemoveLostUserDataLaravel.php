@@ -6,13 +6,13 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
  * Removes address and list records without users entry
  */
-class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
+class CustomerRemoveLostUserDataLaravel extends Base
 {
 	private $sql = [
 		'users_address' => [
@@ -32,36 +32,29 @@ class CustomerRemoveLostUserDataLaravel extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Customer'];
 	}
 
 
 	/**
 	 * Migrate database schema
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Remove left over Laravel user references', 0, '' );
+		$this->info( 'Remove left over Laravel user references', 'v' );
 
-		$schema = $this->getSchema( 'db-customer' );
+		$db = $this->db( 'db-customer' );
 
 		foreach( $this->sql as $table => $map )
 		{
 			foreach( $map as $constraint => $sql )
 			{
-				$this->msg( sprintf( 'Remove records from %1$s', $table ), 1 );
+				$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
 
-				if( $schema->tableExists( 'fe_users' ) && $schema->tableExists( $table )
-					&& $schema->constraintExists( $table, $constraint ) === false
-				) {
-					$this->execute( $sql, 'db-customer' );
-					$this->status( 'done' );
-				}
-				else
-				{
-					$this->status( 'OK' );
+				if( !$db->hasForeign( $table, $constraint ) ) {
+					$db->exec( $sql );
 				}
 			}
 		}

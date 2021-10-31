@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Setup\Task;
+namespace Aimeos\Upscheme\Task;
 
 
 /**
@@ -27,7 +27,7 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPreDependencies() : array
+	public function after() : array
 	{
 		return ['TablesMigrateSiteid'];
 	}
@@ -38,23 +38,25 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 	 *
 	 * @return string[] List of task names
 	 */
-	public function getPostDependencies() : array
+	public function before() : array
 	{
-		return ['TablesCreateMShop'];
+		return ['Customer'];
 	}
 
 
 	/**
 	 * Executes the task
 	 */
-	public function migrate()
+	public function up()
 	{
-		$this->msg( 'Update Laravel "siteid" columns', 0, '' );
+		$this->info( 'Update Laravel "siteid" columns', 'v' );
 
 		$this->process( $this->resources );
 
-		if( $this->getSchema( 'db-customer' )->columnExists( 'users', 'siteid' ) !== false ) {
-			$this->execute( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL', 'db-customer' );
+		$db = $this->db( 'db-customer' );
+
+		if( $db->hasColumn( 'users', 'siteid' ) ) {
+			$db->exec( 'UPDATE users SET siteid=\'\' WHERE siteid IS NULL' );
 		}
 	}
 }
