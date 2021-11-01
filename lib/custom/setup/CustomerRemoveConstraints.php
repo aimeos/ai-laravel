@@ -32,7 +32,7 @@ class CustomerRemoveConstraints extends Base
 	{
 		$db = $this->db( 'db-customer' );
 
-		if( !$db->hasColumn( 'users', 'id' ) || $db->table( 'users')->col( 'id' )->type() === 'bigint' ) {
+		if( !$db->hasColumn( 'users', 'id' ) || $db->table( 'users' )->col( 'id' )->type() === 'bigint' ) {
 			return;
 		}
 
