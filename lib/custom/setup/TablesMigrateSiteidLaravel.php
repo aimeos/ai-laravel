@@ -22,6 +22,12 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 	];
 
 
+	public function before() : array
+	{
+		return ['Customer'];
+	}
+
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -34,21 +40,16 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 
 
 	/**
-	 * Returns the list of task names which this task depends on.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function before() : array
-	{
-		return ['Customer'];
-	}
-
-
-	/**
 	 * Executes the task
 	 */
 	public function up()
 	{
+		$db = $this->db( 'db-locale' );
+
+		if( !$db->hasTable( 'mshop_locale_site' ) || $db->hasColumn( 'mshop_locale_site', 'siteid' ) ) {
+			return;
+		}
+
 		$this->info( 'Update Laravel "siteid" columns', 'v' );
 
 		$this->process( $this->resources );

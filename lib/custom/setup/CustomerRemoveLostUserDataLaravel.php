@@ -16,13 +16,13 @@ class CustomerRemoveLostUserDataLaravel extends Base
 {
 	private $sql = [
 		'users_address' => [
-			'fk_lvuad_pid' => 'DELETE FROM "users_address" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvuad_pid' => 'DELETE FROM users_address WHERE NOT EXISTS ( SELECT id FROM users AS u WHERE parentid=u.id )'
 		],
 		'users_list' => [
-			'fk_lvuli_pid' => 'DELETE FROM "users_list" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvuli_pid' => 'DELETE FROM users_list WHERE NOT EXISTS ( SELECT id FROM users AS u WHERE parentid=u.id )'
 		],
 		'users_property' => [
-			'fk_lvupr_pid' => 'DELETE FROM "users_property" WHERE NOT EXISTS ( SELECT "id" FROM "users" AS u WHERE "parentid"=u."id" )'
+			'fk_lvupr_pid' => 'DELETE FROM users_property WHERE NOT EXISTS ( SELECT id FROM users AS u WHERE parentid=u.id )'
 		],
 	];
 
@@ -53,7 +53,7 @@ class CustomerRemoveLostUserDataLaravel extends Base
 			{
 				$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
 
-				if( !$db->hasForeign( $table, $constraint ) ) {
+				if( $db->hasTable( $table ) && !$db->hasForeign( $table, $constraint ) ) {
 					$db->exec( $sql );
 				}
 			}

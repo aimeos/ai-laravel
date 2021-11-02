@@ -18,7 +18,7 @@ return array(
 			$table->string( 'name' );
 			$table->string( 'password' );
 			$table->string( 'remember_token', 100 )->null( true );
-			$table->date( 'email_verified_at' )->null( true );;
+			$table->date( 'email_verified_at' )->null( true );
 			$table->smallint( 'superuser' )->default( 0 );
 			$table->smallint( 'status' )->default( 1 );
 			$table->string( 'company', 100 )->default( '' );

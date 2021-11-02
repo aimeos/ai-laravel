@@ -21,18 +21,7 @@ class CustomerAddLaravelTestData extends CustomerAddTestData
 	 */
 	public function after() : array
 	{
-		return ['ProductAddTestData'];
-	}
-
-
-	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return string[] List of task names
-	 */
-	public function before() : array
-	{
-		return ['CustomerAddTestData'];
+		return ['Customer', 'Text', 'ProductAddTestData'];
 	}
 
 
@@ -43,13 +32,10 @@ class CustomerAddLaravelTestData extends CustomerAddTestData
 	{
 		$this->info( 'Adding Laravel customer test data', 'v' );
 
-		$dbm = $this->context()->getDatabaseManager();
-		$conn = $dbm->acquire( 'db-customer' );
-		$conn->create( 'DELETE FROM "users" WHERE "email" LIKE \'test%@example.com\'' )->execute()->finish();
-		$dbm->release( $conn, 'db-customer' );
+		$this->db( 'db-customer' )->exec( "DELETE FROM users WHERE email LIKE 'test%@example.com'" );
 
 		$this->context()->setEditor( 'ai-laravel:lib/custom' );
-		$this->process( __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'customer.php' );
+		$this->process();
 	}
 
 
@@ -59,7 +45,7 @@ class CustomerAddLaravelTestData extends CustomerAddTestData
 	 * @param string $domain Domain name of the manager
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
-	protected function getManager( $domain )
+	protected function getManager( string $domain ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		if( $domain === 'customer' ) {
 			return \Aimeos\MShop\Customer\Manager\Factory::create( $this->context(), 'Laravel' );
