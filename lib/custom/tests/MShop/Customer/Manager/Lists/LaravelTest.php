@@ -48,7 +48,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->aggregate( $search, 'customer.lists.domain' )->toArray();
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
 		$this->assertEquals( 4, $result['text'] );
 	}
@@ -170,23 +170,17 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsAll()
 	{
 		//search without base criteria
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.lists.editor', $this->editor ) );
+		$search = $this->object->filter()->add( ['customer.lists.editor' => $this->editor] );
 		$result = $this->object->search( $search );
-		$this->assertEquals( 5, count( $result ) );
+		$this->assertGreaterThanOrEqual( 5, count( $result ) );
 	}
 
 
 	public function testSearchItemsBase()
 	{
 		//search with base criteria
-		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'customer.lists.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$this->assertEquals( 5, count( $this->object->search( $search ) ) );
+		$search = $this->object->filter( true )->add( ['customer.lists.editor' => $this->editor] );
+		$this->assertGreaterThanOrEqual( 5, count( $this->object->search( $search ) ) );
 	}
 
 
