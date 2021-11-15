@@ -144,7 +144,7 @@ class Laravel
 	{
 		$path = 'mshop/customer/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
-			$this->getObject()->getSubManager( $domain )->clear( $siteids );
+			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
 		return $this->clearBase( $siteids, 'mshop/customer/manager/lists/laravel/delete' );
