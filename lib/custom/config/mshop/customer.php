@@ -65,7 +65,7 @@ return array(
 							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
 							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
 							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
-						FROM "users_address" AS mcusad
+						FROM "users_address" mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -87,7 +87,7 @@ return array(
 							mcusad."pos" AS "customer.address.position", mcusad."mtime" AS "customer.address.mtime",
 							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime",
 							mcusad."siteid" AS "customer.address.siteid", mcusad."birthday" AS "customer.address.birthday"
-						FROM "users_address" AS mcusad
+						FROM "users_address" mcusad
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -99,7 +99,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcusad."id"
-							FROM "users_address" AS mcusad
+							FROM "users_address" mcusad
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -109,7 +109,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcusad."id"
-							FROM "users_address" AS mcusad
+							FROM "users_address" mcusad
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -163,7 +163,7 @@ return array(
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
 								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
-							FROM "users_list_type" AS mcuslity
+							FROM "users_list_type" mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -176,7 +176,7 @@ return array(
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
 								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
-							FROM "users_list_type" AS mcuslity
+							FROM "users_list_type" mcuslity
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -188,7 +188,7 @@ return array(
 							SELECT COUNT(*) AS "count"
 							FROM (
 								SELECT mcuslity."id"
-								FROM "users_list_type" AS mcuslity
+								FROM "users_list_type" mcuslity
 								:joins
 								WHERE :cond
 								OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -198,7 +198,7 @@ return array(
 							SELECT COUNT(*) AS "count"
 							FROM (
 								SELECT mcuslity."id"
-								FROM "users_list_type" AS mcuslity
+								FROM "users_list_type" mcuslity
 								:joins
 								WHERE :cond
 								LIMIT 10000 OFFSET 0
@@ -222,7 +222,7 @@ return array(
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
 							SELECT :acols, mcusli."id" AS "id"
-							FROM "users_list" AS mcusli
+							FROM "users_list" mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -234,7 +234,7 @@ return array(
 						SELECT :keys, COUNT("id") AS "count"
 						FROM (
 							SELECT :acols, mcusli."id" AS "id"
-							FROM "users_list" AS mcusli
+							FROM "users_list" mcusli
 							:joins
 							WHERE :cond
 							ORDER BY :order
@@ -278,7 +278,7 @@ return array(
 							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
 							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
 							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
-						FROM "users_list" AS mcusli
+						FROM "users_list" mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :columns
@@ -298,7 +298,7 @@ return array(
 							mcusli."config" AS "customer.lists.config", mcusli."pos" AS "customer.lists.position",
 							mcusli."status" AS "customer.lists.status", mcusli."mtime" AS "customer.lists.mtime",
 							mcusli."editor" AS "customer.lists.editor", mcusli."ctime" AS "customer.lists.ctime"
-						FROM "users_list" AS mcusli
+						FROM "users_list" mcusli
 						:joins
 						WHERE :cond
 						GROUP BY :columns
@@ -315,7 +315,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcusli."id"
-							FROM "users_list" AS mcusli
+							FROM "users_list" mcusli
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -325,7 +325,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcusli."id"
-							FROM "users_list" AS mcusli
+							FROM "users_list" mcusli
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -466,7 +466,7 @@ return array(
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
 							mcuspr."ctime" AS "customer.property.ctime"
-						FROM "users_property" AS mcuspr
+						FROM "users_property" mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -479,7 +479,7 @@ return array(
 							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
 							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
 							mcuspr."ctime" AS "customer.property.ctime"
-						FROM "users_property" AS mcuspr
+						FROM "users_property" mcuspr
 						:joins
 						WHERE :cond
 						ORDER BY :order
@@ -491,7 +491,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcuspr."id"
-							FROM "users_property" AS mcuspr
+							FROM "users_property" mcuspr
 							:joins
 							WHERE :cond
 							OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
@@ -501,7 +501,7 @@ return array(
 						SELECT COUNT(*) AS "count"
 						FROM (
 							SELECT mcuspr."id"
-							FROM "users_property" AS mcuspr
+							FROM "users_property" mcuspr
 							:joins
 							WHERE :cond
 							LIMIT 10000 OFFSET 0
@@ -525,7 +525,7 @@ return array(
 					SELECT :keys, COUNT("val") AS "count"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "users" AS mcus
+						FROM "users" mcus
 						:joins
 						WHERE :cond
 						GROUP BY mcus.id, :cols, :val
@@ -538,7 +538,7 @@ return array(
 					SELECT :keys, COUNT("val") AS "count"
 					FROM (
 						SELECT :acols, :val AS "val"
-						FROM "users" AS mcus
+						FROM "users" mcus
 						:joins
 						WHERE :cond
 						GROUP BY mcus.id, :cols, :val
@@ -607,7 +607,7 @@ return array(
 						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
 						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
 						mcus."editor" AS "customer.editor", mcus."superuser" AS ".super"
-					FROM "users" AS mcus
+					FROM "users" mcus
 					:joins
 					WHERE :cond
 					GROUP BY :columns :group
@@ -638,7 +638,7 @@ return array(
 						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
 						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
 						mcus."editor" AS "customer.editor", mcus."superuser" AS ".super"
-					FROM "users" AS mcus
+					FROM "users" mcus
 					:joins
 					WHERE :cond
 					GROUP BY :group mcus."id"
@@ -651,7 +651,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcus."id"
-						FROM "users" AS mcus
+						FROM "users" mcus
 						:joins
 						WHERE :cond
 						GROUP BY mcus."id"
@@ -662,7 +662,7 @@ return array(
 					SELECT COUNT(*) AS "count"
 					FROM (
 						SELECT mcus."id"
-						FROM "users" AS mcus
+						FROM "users" mcus
 						:joins
 						WHERE :cond
 						GROUP BY mcus."id"
