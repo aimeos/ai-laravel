@@ -17,7 +17,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelper::context();
 		$this->editor = $context->getEditor();
 
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
@@ -65,7 +65,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelper::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

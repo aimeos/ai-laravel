@@ -15,8 +15,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::getContext()->getEditor();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::getContext(), 'Laravel' );
+		$this->editor = \TestHelper::context()->getEditor();
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::context(), 'Laravel' );
 
 		$listManager = $manager->getSubManager( 'lists', 'Laravel' );
 		$this->object = $listManager->getSubManager( 'type', 'Laravel' );

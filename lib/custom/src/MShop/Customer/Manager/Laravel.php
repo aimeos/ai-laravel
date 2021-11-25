@@ -389,7 +389,7 @@ class Laravel
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
 
-		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -443,7 +443,7 @@ class Laravel
 			return $this->saveListItems( $item, 'customer' );
 		}
 
-		$context = $this->getContext();
+		$context = $this->context();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -626,7 +626,7 @@ class Laravel
 	 */
 	public function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->getContext()->getDatabaseManager();
+		$dbm = $this->context()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$map = [];
