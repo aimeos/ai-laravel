@@ -43,17 +43,21 @@ class CustomerRemoveLostUserDataLaravel extends Base
 	 */
 	public function up()
 	{
-		$this->info( 'Remove left over Laravel user references', 'v' );
-
 		$db = $this->db( 'db-customer' );
+
+		if( !$db->hasTable( 'users' ) ) {
+			return;
+		}
+
+		$this->info( 'Remove left over Laravel user references', 'v' );
 
 		foreach( $this->sql as $table => $map )
 		{
 			foreach( $map as $constraint => $sql )
 			{
-				$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
-
-				if( $db->hasTable( $table ) && !$db->hasForeign( $table, $constraint ) ) {
+				if( $db->hasTable( $table ) && !$db->hasForeign( $table, $constraint ) )
+				{
+					$this->info( sprintf( 'Remove records from %1$s', $table ), 'vv', 1 );
 					$db->exec( $sql );
 				}
 			}

@@ -46,6 +46,12 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 	 */
 	public function up()
 	{
+		$db = $this->db( 'db-customer' );
+
+		if( !$db->hasTable( 'users' ) ) {
+			return;
+		}
+
 		$this->info( 'Migrate typeid to type for Laravel', 'v' );
 		$this->info( 'Add new type columns for Laravel', 'vv' );
 
