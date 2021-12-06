@@ -271,7 +271,7 @@ class Laravel
 		parent::__construct( $context );
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->getConfig()->get( 'mshop/customer/manager/sitemode', $level );
+		$level = $context->config()->get( 'mshop/customer/manager/sitemode', $level );
 
 
 		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
@@ -389,7 +389,7 @@ class Laravel
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'group', 'lists', 'property'];
 
-		foreach( $this->context()->getConfig()->get( $path, $default ) as $domain ) {
+		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
