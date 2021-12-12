@@ -57,7 +57,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.latitude' => '2000-01-01',
-			'customer.address.siteid' => $context->getLocale()->getSiteId(),
+			'customer.address.siteid' => $context->locale()->getSiteId(),
 		);
 
 		$this->object = $customer->getSubManager( 'address', 'Laravel' );

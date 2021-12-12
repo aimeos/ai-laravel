@@ -555,7 +555,7 @@ class Laravel
 			$stmt->bind( $idx++, $item->getPassword() );
 			$stmt->bind( $idx++, $date ); // Modification time
 			$stmt->bind( $idx++, $context->getEditor() );
-			$stmt->bind( $idx++, $context->getLocale()->getSiteId() );
+			$stmt->bind( $idx++, $context->locale()->getSiteId() );
 
 			if( $id !== null ) {
 				$stmt->bind( $idx, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
