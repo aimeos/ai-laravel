@@ -18,7 +18,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->getEditor();
+		$this->editor = $context->editor();
 
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
 		$this->object = $manager->getSubManager( 'property', 'Laravel' );
@@ -75,7 +75,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
 
-		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -86,7 +86,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 
-		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

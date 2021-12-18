@@ -19,7 +19,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->editor = $this->context->getEditor();
+		$this->editor = $this->context->editor();
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Laravel' );
 		$this->object = $manager->getSubManager( 'lists', 'Laravel' );
 	}
@@ -103,11 +103,11 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
+		$this->assertEquals( $this->editor, $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -121,7 +121,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
+		$this->assertEquals( $this->editor, $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
