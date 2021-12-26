@@ -21,7 +21,7 @@ jobs:
       - restore_cache:
           keys:
             - php72-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:6.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~6.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php72-{{ checksum "composer.json" }}
@@ -45,7 +45,7 @@ jobs:
       - restore_cache:
           keys:
             - php73-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:7.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~7.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php73-{{ checksum "composer.json" }}
@@ -70,7 +70,7 @@ jobs:
       - restore_cache:
           keys:
             - php74-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
@@ -90,12 +90,12 @@ jobs:
           MYSQL_PASSWORD: aimeos
     steps:
       - checkout
-      - run: git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+      - run: git clone --depth=50 --branch=2021.10 git://github.com/aimeos/aimeos-core.git ../aimeos-core
       - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
       - restore_cache:
           keys:
             - php80-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php80-{{ checksum "composer.json" }}
@@ -106,8 +106,8 @@ jobs:
 
   "php81-mysql80-laravel8":
     docker:
-      - image: aimeos/ci-php:7.4
-      - image: circleci/mysql:8.1
+      - image: aimeos/ci-php:8.1
+      - image: circleci/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: aimeos
@@ -115,12 +115,12 @@ jobs:
           MYSQL_PASSWORD: aimeos
     steps:
       - checkout
-      - run: git clone --depth=50 --branch=master git://github.com/aimeos/aimeos-core.git ../aimeos-core
+      - run: git clone --depth=50 --branch=2021.10 git://github.com/aimeos/aimeos-core.git ../aimeos-core
       - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
       - restore_cache:
           keys:
             - php81-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
