@@ -21,7 +21,7 @@ jobs:
       - restore_cache:
           keys:
             - php72-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:6.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~6.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php72-{{ checksum "composer.json" }}
@@ -45,7 +45,7 @@ jobs:
       - restore_cache:
           keys:
             - php73-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:7.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~7.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php73-{{ checksum "composer.json" }}
@@ -70,7 +70,7 @@ jobs:
       - restore_cache:
           keys:
             - php74-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php74-{{ checksum "composer.json" }}
@@ -95,7 +95,7 @@ jobs:
       - restore_cache:
           keys:
             - php80-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php80-{{ checksum "composer.json" }}
@@ -120,7 +120,7 @@ jobs:
       - restore_cache:
           keys:
             - php81-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~8.0" "symfony/psr-http-message-bridge:~1.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
