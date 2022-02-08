@@ -166,7 +166,7 @@ return array(
 			$table->bigid()->primary( 'pk_lvupr_id' );
 			$table->string( 'siteid' );
 			$table->bigint( 'parentid' )->unsigned( true );
-			$table->string( 'key', 103 )->default( '' );
+			$table->string( 'key', 255 )->default( '' );
 			$table->type();
 			$table->string( 'langid', 5 )->null( true );
 			$table->string( 'value' );
