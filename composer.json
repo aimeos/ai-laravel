@@ -24,6 +24,8 @@
 	},
 	"autoload": {
 		"psr-4": {
+			"Aimeos\\Base\\": "lib/custom/src/Base",
+			"Aimeos\\MShop\\": "lib/custom/src/MShop",
 			"Aimeos\\MW\\": "lib/custom/src/MW"
 		},
 		"classmap": [

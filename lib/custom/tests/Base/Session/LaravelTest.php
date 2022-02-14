@@ -6,10 +6,10 @@
  */
 
 
-namespace Aimeos\MW\Session;
+namespace Aimeos\Base\Session;
 
 
-class Laravel5Test extends \PHPUnit\Framework\TestCase
+class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +25,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Session\Laravel5( $this->mock );
+		$this->object = new \Aimeos\Base\Session\Laravel( $this->mock );
 	}
 
 
@@ -40,7 +40,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'forget' )
 			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->del( 'test' ) );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $this->object->del( 'test' ) );
 	}
 
 
@@ -67,7 +67,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'forget' )
 			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->remove( ['test'] ) );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $this->object->remove( ['test'] ) );
 	}
 
 
@@ -76,6 +76,6 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'put' )
 			->with( $this->equalTo( 'test' ), $this->equalTo( '123456789' ) );
 
-		$this->assertInstanceOf( \Aimeos\MW\Session\Iface::class, $this->object->set( 'test', '123456789' ) );
+		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $this->object->set( 'test', '123456789' ) );
 	}
 }
