@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
- * @package MW
+ * @package Base
  * @subpackage Session
  */
 
@@ -12,9 +12,9 @@ namespace Aimeos\Base\Session;
 
 
 /**
- * Implementation using Laravel 5 sessions.
+ * Implementation using Laravel sessions.
  *
- * @package MW
+ * @package Base
  * @subpackage Session
  */
 class Laravel extends Base implements \Aimeos\Base\Session\Iface
