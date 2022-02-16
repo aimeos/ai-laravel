@@ -3,18 +3,18 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
- * @package MW
+ * @package Base
  * @subpackage Filesystem
  */
 
 
-namespace Aimeos\MW\Filesystem;
+namespace Aimeos\Base\Filesystem;
 
 
 /**
  * Implementation of Laravel file system adapter
  *
- * @package MW
+ * @package Base
  * @subpackage Filesystem
  */
 class Laravel implements Iface, DirIface, MetaIface
@@ -41,7 +41,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file or directory
 	 * @return bool True if directory, false if not
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function isdir( string $path ) : bool
 	{
@@ -53,8 +53,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * Creates a new directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\DirIface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function mkdir( string $path ) : DirIface
 	{
@@ -72,8 +72,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * Deletes the directory for the given path
 	 *
 	 * @param string $path Path to the directory
-	 * @return \Aimeos\MW\Filesystem\DirIface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\DirIface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function rmdir( string $path ) : DirIface
 	{
@@ -94,7 +94,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the filesystem or directory
 	 * @return iterable Iterator over the entries or array with entries
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function scan( string $path = null ) : iterable
 	{
@@ -111,7 +111,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @return integer Size in bytes
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function size( string $path ) : int
 	{
@@ -128,7 +128,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @return integer Unix time stamp in seconds
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function time( string $path ) : int
 	{
@@ -144,8 +144,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * Deletes the file for the given path
 	 *
 	 * @param string $path Path to the file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function rm( string $path ) : Iface
 	{
@@ -178,7 +178,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @return string File content
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function read( string $path ) : string
 	{
@@ -195,7 +195,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the remote file
 	 * @return string Path of the local file
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function readf( string $path ) : string
 	{
@@ -218,7 +218,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @return resource File stream descriptor
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function reads( string $path )
 	{
@@ -251,8 +251,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function write( string $path, string $content ) : Iface
 	{
@@ -273,8 +273,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the remote file
 	 * @param string $local Path to the local file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function writef( string $path, string $local ) : Iface
 	{
@@ -293,8 +293,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function writes( string $path, $stream ) : Iface
 	{
@@ -320,8 +320,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function move( string $from, string $to ) : Iface
 	{
@@ -340,8 +340,8 @@ class Laravel implements Iface, DirIface, MetaIface
 	 *
 	 * @param string $from Path to the original file
 	 * @param string $to Path to the new file
-	 * @return \Aimeos\MW\Filesystem\Iface Filesystem object for fluent interface
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 * @return \Aimeos\Base\Filesystem\Iface Filesystem object for fluent interface
+	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
 	public function copy( string $from, string $to ) : Iface
 	{

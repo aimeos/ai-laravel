@@ -6,13 +6,11 @@
  */
 
 
-namespace Aimeos\MW\Filesystem\Manager;
+namespace Aimeos\Base\Filesystem\Manager;
 
 
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
-	private $config;
-	private $object;
 	private $storage;
 
 
@@ -26,15 +24,12 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
-
-		$this->config = new \Aimeos\MW\Config\Decorator\Memory( new \Aimeos\MW\Config\PHPArray( [], [] ) );
-		$this->object = new \Aimeos\MW\Filesystem\Manager\Laravel( $this->storage, $this->config, sys_get_temp_dir() );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->config, $this->object, $this->storage );
+		unset( $this->storage );
 	}
 
 
@@ -47,21 +42,26 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->storage->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
-		$this->config->set( 'resource/fs-media', 'local' );
-		$this->assertInstanceof( 'Aimeos\MW\Filesystem\Iface', $this->object->get( 'fs-media' ) );
+		$object = new \Aimeos\Base\Filesystem\Manager\Laravel( $this->storage, ['fs-media' => 'local'], sys_get_temp_dir() );
+
+		$this->assertInstanceof( 'Aimeos\Base\Filesystem\Iface', $object->get( 'fs-media' ) );
 	}
 
 
 	public function testGetFallback()
 	{
-		$this->config->set( 'resource/fs', array( 'adapter' => 'Standard', 'basedir' => __DIR__ ) );
-		$this->assertInstanceof( 'Aimeos\MW\Filesystem\Iface', $this->object->get( 'fs-media' ) );
+		$config = ['fs' => ['adapter' => 'Standard', 'basedir' => __DIR__]];
+		$object = new \Aimeos\Base\Filesystem\Manager\Laravel( $this->storage, $config, sys_get_temp_dir() );
+
+		$this->assertInstanceof( 'Aimeos\Base\Filesystem\Iface', $object->get( 'fs-media' ) );
 	}
 
 
 	public function testGetException()
 	{
-		$this->expectException( 'Aimeos\MW\Filesystem\Exception' );
-		$this->object->get( 'fs-media' );
+		$object = new \Aimeos\Base\Filesystem\Manager\Laravel( $this->storage, [], sys_get_temp_dir() );
+
+		$this->expectException( 'Aimeos\Base\Filesystem\Exception' );
+		$object->get( 'fs-media' );
 	}
 }
