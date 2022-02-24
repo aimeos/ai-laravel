@@ -71,7 +71,7 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
-		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$i18n = new \Aimeos\Base\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
