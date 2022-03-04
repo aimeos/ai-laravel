@@ -2,11 +2,14 @@
 
 <phpunit bootstrap="bootstrap.php">
 	<testsuites>
+		<testsuite name="Base suite">
+			<directory>Base/</directory>
+		</testsuite>
 		<testsuite name="MW suite">
 			<directory>MW/</directory>
 		</testsuite>
+		<testsuite name="MShop suite">
+			<directory>MShop/</directory>
+		</testsuite>
 	</testsuites>
-	<logging>
-		<log type="junit" target="ai-laravel_lib-custom_test.junit.xml" />
-	</logging>
 </phpunit>

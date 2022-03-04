@@ -1,6 +1,6 @@
 {
 	"name": "aimeos/ai-laravel",
-	"description": "Laravel adapter for Aimeos web shops and e-commerce solutions",
+	"description": "Laravel adapter for Aimeos e-commerce integration",
 	"keywords": ["aimeos", "adapter", "laravel", "shop", "e-commerce"],
 	"homepage": "https://aimeos.org/Laravel",
 	"type": "aimeos-extension",
@@ -24,12 +24,18 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Aimeos\\Base\\": "lib/custom/src/Base",
-			"Aimeos\\MShop\\": "lib/custom/src/MShop",
-			"Aimeos\\MW\\": "lib/custom/src/MW"
+			"Aimeos\\": "src"
 		},
 		"classmap": [
-			"lib/custom/src"
+			"src"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Aimeos\\": "src"
+		},
+		"classmap": [
+			"src"
 		]
 	}
 }
