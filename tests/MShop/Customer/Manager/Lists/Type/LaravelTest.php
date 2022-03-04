@@ -1,21 +1,21 @@
 <?php
 
-namespace Aimeos\MShop\Customer\Manager\Lists\Type;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
  */
+
+
+namespace Aimeos\MShop\Customer\Manager\Lists\Type;
+
+
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = 'ai-laravel:lib/custom';
 
 
 	protected function setUp() : void
 	{
-		$this->editor = \TestHelper::context()->editor();
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( \TestHelper::context(), 'Laravel' );
 
 		$listManager = $manager->getSubManager( 'lists', 'Laravel' );
@@ -45,10 +45,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No list type item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
@@ -64,10 +61,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No list type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestInit' );
@@ -81,6 +75,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
+		$context = \TestHelper::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -90,7 +85,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -101,7 +96,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -128,7 +123,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.type.editor', '' );
 
 		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 1 );

@@ -13,14 +13,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
-	private $editor = 'ai-laravel:lib/custom';
 
 
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$this->editor = $this->context->editor();
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Laravel' );
+
 		$this->object = $manager->getSubManager( 'lists', 'Laravel' );
 	}
 
@@ -40,11 +39,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testAggregate()
 	{
 		$search = $this->object->filter( true );
-		$expr = array(
-			$search->getConditions(),
-			$search->compare( '==', 'customer.lists.editor', 'ai-laravel:lib/custom' ),
-		);
-		$search->setConditions( $search->and( $expr ) );
 
 		$result = $this->object->aggregate( $search, 'customer.lists.domain' )->toArray();
 
@@ -63,10 +57,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No item found' ) );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
@@ -75,10 +66,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->filter()->slice( 0, 1 );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No item found' ) );
 
 		$item->setId( null );
 		$item->setDomain( 'unittest' );
@@ -92,6 +80,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
+		$context = \TestHelper::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -103,11 +92,11 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
 		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -121,7 +110,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -153,11 +142,12 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.lists.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.lists.editor', '' );
 
 		$search->setConditions( $search->and( $expr ) );
 		$search->slice( 0, 2 );
 		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -169,18 +159,15 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsAll()
 	{
-		//search without base criteria
-		$search = $this->object->filter()->add( ['customer.lists.editor' => $this->editor] );
-		$result = $this->object->search( $search );
+		$result = $this->object->search( $this->object->filter() );
 		$this->assertGreaterThanOrEqual( 5, count( $result ) );
 	}
 
 
 	public function testSearchItemsBase()
 	{
-		//search with base criteria
-		$search = $this->object->filter( true )->add( ['customer.lists.editor' => $this->editor] );
-		$this->assertGreaterThanOrEqual( 5, count( $this->object->search( $search ) ) );
+		$result = $this->object->search( $this->object->filter( true ) );
+		$this->assertGreaterThanOrEqual( 5, count( $result ) );
 	}
 
 

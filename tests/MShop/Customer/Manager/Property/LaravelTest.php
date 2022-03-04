@@ -12,15 +12,13 @@ namespace Aimeos\MShop\Customer\Manager\Property;
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->editor();
-
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
+
 		$this->object = $manager->getSubManager( 'property', 'Laravel' );
 	}
 
@@ -46,12 +44,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.property.editor', $this->editor ) );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No property item found' );
-		}
+		$item = $this->object->search( $this->object->filter() )
+			->first( new \RuntimeException( 'No property item found' ) );
 
 		$item->setId( null );
 		$item->setLanguageId( 'en' );
@@ -100,16 +94,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '~=', 'customer.property.value', '1' ),
-			$search->compare( '==', 'customer.property.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->add( ['customer.property.value' => '1'] );
 
-		if( ( $expected = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( sprintf( 'No customer property item found for value "%1$s".', '1' ) );
-		}
+		$expected = $this->object->search( $search )
+			->first( new \RuntimeException( sprintf( 'No customer property item found for value "%1$s".', '1' ) ) );
 
 		$actual = $this->object->get( $expected->getId() );
 		$this->assertEquals( $expected, $actual );
@@ -144,7 +132,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.type', 'newsletter' );
 		$expr[] = $search->compare( '==', 'customer.property.languageid', null );
 		$expr[] = $search->compare( '==', 'customer.property.value', '1' );
-		$expr[] = $search->compare( '==', 'customer.property.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.property.editor', '' );
 
 		$search->setConditions( $search->and( $expr ) );
 		$results = $this->object->search( $search, [], $total );

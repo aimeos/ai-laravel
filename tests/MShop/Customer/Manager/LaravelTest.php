@@ -14,13 +14,11 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	private $object;
 	private $fixture;
 	private $address;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->editor();
 		$this->object = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
 
 		$this->fixture = array(
@@ -110,6 +108,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $item->getId() );
 
+		$context = \TestHelper::context();
 
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
 		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $itemExp );
@@ -122,7 +121,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -133,7 +132,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -199,7 +198,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.editor', '' );
 
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
 		$expr[] = $search->compare( '==', 'customer.company', 'Example company' );
@@ -267,7 +266,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.birthday', '2000-01-01' );
 		$expr[] = $search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.address.editor', '' );
 
 		$search->setConditions( $search->and( $expr ) );
 		$result = $this->object->search( $search );
@@ -278,12 +277,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsTotal()
 	{
 		$total = 0;
-
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
-		$search->slice( 0, 2 );
+		$search = $this->object->filter()->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
+
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
@@ -295,13 +292,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCriteria()
 	{
-		$search = $this->object->filter( true );
-		$conditions = array(
-			$search->compare( '==', 'customer.address.editor', $this->editor ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$this->assertEquals( 2, count( $this->object->search( $search, [], $total ) ) );
+		$this->assertEquals( 2, count( $this->object->search( $this->object->filter( true ) ) ) );
 	}
 
 

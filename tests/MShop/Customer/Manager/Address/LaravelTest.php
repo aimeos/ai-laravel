@@ -11,30 +11,17 @@ namespace Aimeos\MShop\Customer\Manager\Address;
 
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
-	private $fixture = null;
-	private $object = null;
-	private $editor = '';
+	private $fixture;
+	private $object;
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->editor();
-		$customer = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
-
-		$search = $customer->filter();
-		$conditions = array(
-			$search->compare( '==', 'customer.code', 'test@example.com' ),
-			$search->compare( '==', 'customer.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-
-		if( ( $item = $customer->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( sprintf( 'No customer item found for code "%1$s"', 'test@example.com' ) );
-		}
+		$manager = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
 
 		$this->fixture = array(
-			'customer.address.parentid' => $item->getId(),
+			'customer.address.parentid' => $manager->find( 'test@example.com' )->getId(),
 			'customer.address.company' => 'ABC GmbH',
 			'customer.address.vatid' => 'DE999999999',
 			'customer.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
@@ -60,7 +47,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			'customer.address.siteid' => $context->locale()->getSiteId(),
 		);
 
-		$this->object = $customer->getSubManager( 'address', 'Laravel' );
+		$this->object = $manager->getSubManager( 'address', 'Laravel' );
 	}
 
 
@@ -102,9 +89,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->filter()->slice( 0, 1 );
 		$search->setConditions( $search->compare( '~=', 'customer.address.company', 'Example company' ) );
 
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No address item found' );
-		}
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No address item found' ) );
 
 		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
@@ -126,6 +111,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
+		$context = \TestHelper::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -153,7 +139,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -182,7 +168,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -200,7 +186,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItem()
+	public function testSearch()
 	{
 		$search = $this->object->filter();
 
@@ -230,25 +216,18 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'customer.address.birthday', '2000-01-01' ),
 			$search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' ),
 			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
-			$search->compare( '==', 'customer.address.editor', $this->editor ),
+			$search->compare( '!=', 'customer.address.editor', '' ),
 		);
 		$search->setConditions( $search->and( $conditions ) );
 		$this->assertEquals( 1, count( $this->object->search( $search ) ) );
 	}
 
 
-	public function testSearchItemTotal()
+	public function testSearchTotal()
 	{
 		$total = 0;
 		$search = $this->object->filter();
-
-		$conditions = array(
-			$search->compare( '~=', 'customer.address.company', 'Example company' ),
-			$search->compare( '==', 'customer.address.editor', $this->editor )
-		);
-
-		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 2 );
+		$search->add( $search->compare( '~=', 'customer.address.company', 'Example company' ) )->slice( 0, 2 );
 
 		$results = $this->object->search( $search, [], $total );
 

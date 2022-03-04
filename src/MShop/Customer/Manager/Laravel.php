@@ -284,7 +284,7 @@ class Laravel
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mcusli."siteid"', $level );
+			$sitestr = $this->siteString( 'mcusli."siteid"', $level );
 			$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
@@ -303,7 +303,7 @@ class Laravel
 				}
 			}
 
-			$sitestr = $this->getSiteString( 'mcuspr."siteid"', $level );
+			$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
 			$keystr = $this->toExpression( 'mcuspr."key"', $keys, '=~' );
 			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 

@@ -12,15 +12,13 @@ namespace Aimeos\MShop\Customer\Manager\Property\Type;
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	private $editor = '';
 
 
 	protected function setUp() : void
 	{
 		$context = \TestHelper::context();
-		$this->editor = $context->editor();
-
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
+
 		$this->object = $manager->getSubManager( 'property', 'Laravel' )->getSubManager( 'type', 'Laravel' );
 	}
 
@@ -61,17 +59,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '==', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
+		$search = $this->object->filter()->add( ['customer.property.type.code' => 'newsletter'] );
 
-		if( ( $expected = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No property type item found.' );
-		}
-
+		$expected = $this->object->search( $search )->first( new \RuntimeException( 'No property type item found.' ) );
 		$actual = $this->object->get( $expected->getId() );
 
 		$this->assertEquals( $expected, $actual );
@@ -80,12 +70,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$search = $this->object->filter();
-		$search->setConditions( $search->compare( '==', 'customer.property.type.editor', $this->editor ) );
-
-		if( ( $item = $this->object->search( $search )->first() ) === null ) {
-			throw new \RuntimeException( 'No type item found' );
-		}
+		$search = $this->object->filter()->slice( 0, 1 );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found' ) );
 
 		$item->setId( null );
 		$item->setCode( 'unitTestSave' );
@@ -99,6 +85,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
+		$context = \TestHelper::context();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -108,7 +95,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemSaved->editor() );
+		$this->assertEquals( $context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -119,7 +106,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $this->editor, $itemUpd->editor() );
+		$this->assertEquals( $context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
@@ -131,9 +118,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearch()
 	{
-		$total = 0;
 		$search = $this->object->filter();
 
 		$expr = [];
@@ -146,20 +132,18 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.property.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'customer.property.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'customer.property.type.editor', '' );
 
 		$search->setConditions( $search->and( $expr ) );
-		$results = $this->object->search( $search, [], $total );
+		$results = $this->object->search( $search );
 		$this->assertEquals( 1, count( $results ) );
+	}
 
 
-		$search = $this->object->filter();
-		$conditions = array(
-			$search->compare( '=~', 'customer.property.type.code', 'newsletter' ),
-			$search->compare( '==', 'customer.property.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->and( $conditions ) );
-		$search->slice( 0, 1 );
+	public function testSearchSlice()
+	{
+		$total = 0;
+		$search = $this->object->filter()->add( ['customer.property.type.code' => 'newsletter'] )->slice( 0, 1 );
 		$items = $this->object->search( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
