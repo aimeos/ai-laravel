@@ -194,20 +194,21 @@ class Laravel implements Iface, DirIface, MetaIface
 	 * Reads the content of the remote file and writes it to a local one
 	 *
 	 * @param string $path Path to the remote file
+	 * @param string|null $local Path to the local file (optional)
 	 * @return string Path of the local file
 	 * @throws \Aimeos\Base\Filesystem\Exception If an error occurs
 	 */
-	public function readf( string $path ) : string
+	public function readf( string $path, string $local = null ) : string
 	{
-		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
+		if( $local === null && ( $local = @tempnam( $this->tempdir, 'ai-' ) ) === false ) {
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
 		}
 
-		if( @file_put_contents( $filename, $this->fs->get( $path ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $filename ) );
+		if( @file_put_contents( $local, $this->fs->get( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $local ) );
 		}
 
-		return $filename;
+		return $local;
 	}
 
 
