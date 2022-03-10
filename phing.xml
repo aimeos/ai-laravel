@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Aimeos Laravel extension" default="test">
+<project name="ai-laravel extension" default="test">
 
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
