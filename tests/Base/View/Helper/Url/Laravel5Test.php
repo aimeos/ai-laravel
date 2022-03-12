@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Url;
+namespace Aimeos\Base\View\Helper\Url;
 
 
 class Laravel5Test extends \PHPUnit\Framework\TestCase
@@ -21,11 +21,11 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( '\\Illuminate\\Routing\\UrlGenerator is not available' );
 		}
 
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\Base\View\Standard();
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->object = new \Aimeos\MW\View\Helper\Url\Laravel5( $view, $this->mock, [] );
+		$this->object = new \Aimeos\Base\View\Helper\Url\Laravel5( $view, $this->mock, [] );
 	}
 
 

@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Request;
+namespace Aimeos\Base\View\Helper\Request;
 
 
 /**
@@ -18,8 +18,8 @@ namespace Aimeos\MW\View\Helper\Request;
  * @subpackage View
  */
 class Laravel5
-	extends \Aimeos\MW\View\Helper\Request\Standard
-	implements \Aimeos\MW\View\Helper\Request\Iface
+	extends \Aimeos\Base\View\Helper\Request\Standard
+	implements \Aimeos\Base\View\Helper\Request\Iface
 {
 	private $request;
 
@@ -27,10 +27,10 @@ class Laravel5
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param \\Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \\Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Http\Request $request Laravel request object
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Http\Request $request )
+	public function __construct( \Aimeos\Base\View\Iface $view, \Illuminate\Http\Request $request )
 	{
 		$this->request = $request;
 

@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2017-2022
  */
 
-namespace Aimeos\MW\View\Engine;
+namespace Aimeos\Base\View\Engine;
 
 
 class BladeTest extends \PHPUnit\Framework\TestCase
@@ -25,7 +25,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\View\Engine\Blade( $this->mock );
+		$this->object = new \Aimeos\Base\View\Engine\Blade( $this->mock );
 	}
 
 
@@ -37,7 +37,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 
 	public function testRender()
 	{
-		$v = new \Aimeos\MW\View\Standard( [] );
+		$v = new \Aimeos\Base\View\Standard( [] );
 
 		$view = $this->getMockBuilder( \Illuminate\View\View::class )
 			->setMethods( array( 'render' ) )

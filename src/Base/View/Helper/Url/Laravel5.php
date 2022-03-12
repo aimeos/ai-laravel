@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Url;
+namespace Aimeos\Base\View\Helper\Url;
 
 
 /**
@@ -18,8 +18,8 @@ namespace Aimeos\MW\View\Helper\Url;
  * @subpackage View
  */
 class Laravel5
-	extends \Aimeos\MW\View\Helper\Url\Base
-	implements \Aimeos\MW\View\Helper\Url\Iface
+	extends \Aimeos\Base\View\Helper\Url\Base
+	implements \Aimeos\Base\View\Helper\Url\Iface
 {
 	private $builder;
 	private $fixed;
@@ -28,11 +28,11 @@ class Laravel5
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param \\Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \\Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Contracts\Routing\UrlGenerator $builder Laravel URL builder object
 	 * @param array Associative list of fixed parameters that should be available for all routes
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
+	public function __construct( \Aimeos\Base\View\Iface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
 	{
 		parent::__construct( $view );
 

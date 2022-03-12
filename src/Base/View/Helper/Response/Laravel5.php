@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Response;
+namespace Aimeos\Base\View\Helper\Response;
 
 
 /**
@@ -18,15 +18,15 @@ namespace Aimeos\MW\View\Helper\Response;
  * @subpackage View
  */
 class Laravel5
-	extends \Aimeos\MW\View\Helper\Response\Standard
-	implements \Aimeos\MW\View\Helper\Response\Iface
+	extends \Aimeos\Base\View\Helper\Response\Standard
+	implements \Aimeos\Base\View\Helper\Response\Iface
 {
 	/**
 	 * Initializes the response view helper.
 	 *
-	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view )
+	public function __construct( \Aimeos\Base\View\Iface $view )
 	{
 		$psr17Factory = new \Nyholm\Psr7\Factory\Psr17Factory();
 		parent::__construct( $view, $psr17Factory->createResponse() );

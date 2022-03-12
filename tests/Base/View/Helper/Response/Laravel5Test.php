@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Response;
+namespace Aimeos\Base\View\Helper\Response;
 
 
 class Laravel5Test extends \PHPUnit\Framework\TestCase
@@ -17,8 +17,8 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	protected function setUp() : void
 	{
-		$view = new \Aimeos\MW\View\Standard();
-		$this->object = new \Aimeos\MW\View\Helper\Response\Laravel5( $view );
+		$view = new \Aimeos\Base\View\Standard();
+		$this->object = new \Aimeos\Base\View\Helper\Response\Laravel5( $view );
 	}
 
 
@@ -30,6 +30,6 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\View\Helper\Response\Laravel5', $this->object->transform() );
+		$this->assertInstanceOf( '\Aimeos\Base\View\Helper\Response\Laravel5', $this->object->transform() );
 	}
 }
