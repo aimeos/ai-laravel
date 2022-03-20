@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\Cache;
+namespace Aimeos\Base\Cache;
 
 
 /**
@@ -18,8 +18,8 @@ namespace Aimeos\MW\Cache;
  * @subpackage Cache
  */
 class Laravel5
-	extends \Aimeos\MW\Cache\Base
-	implements \Aimeos\MW\Cache\Iface
+	extends \Aimeos\Base\Cache\Base
+	implements \Aimeos\Base\Cache\Iface
 {
 	private $object;
 

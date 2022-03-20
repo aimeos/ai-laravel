@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MW\Cache;
+namespace Aimeos\Base\Cache;
 
 
 class Laravel5Test extends \PHPUnit\Framework\TestCase
@@ -22,7 +22,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Contracts\\Cache\\Store' )->getMock();
-		$this->object = new \Aimeos\MW\Cache\Laravel5( $this->mock );
+		$this->object = new \Aimeos\Base\Cache\Laravel5( $this->mock );
 	}
 
 
