@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2017-2022
- * @package MW
+ * @package Base
  * @subpackage View
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Base\View\Engine;
 /**
  * Blade view engine implementation
  *
- * @package MW
+ * @package Base
  * @subpackage View
  */
 class Blade implements Iface

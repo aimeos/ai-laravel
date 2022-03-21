@@ -9,7 +9,7 @@
 namespace Aimeos\Base\View\Helper\Request;
 
 
-class Laravel5Test extends \PHPUnit\Framework\TestCase
+class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;
@@ -21,7 +21,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		$param = array( 'HTTP_HOST' => 'localhost', 'REMOTE_ADDR' => '127.0.0.1' );
 		$request = new \Illuminate\Http\Request( [], [], [], [], [], $param, 'Content' );
 
-		$this->object = new \Aimeos\Base\View\Helper\Request\Laravel5( $view, $request );
+		$this->object = new \Aimeos\Base\View\Helper\Request\Laravel( $view, $request );
 	}
 
 
@@ -33,7 +33,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( '\Aimeos\Base\View\Helper\Request\Laravel5', $this->object->transform() );
+		$this->assertInstanceOf( '\Aimeos\Base\View\Helper\Request\Laravel', $this->object->transform() );
 	}
 
 

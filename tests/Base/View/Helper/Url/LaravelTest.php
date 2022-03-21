@@ -9,7 +9,7 @@
 namespace Aimeos\Base\View\Helper\Url;
 
 
-class Laravel5Test extends \PHPUnit\Framework\TestCase
+class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $mock;
@@ -25,7 +25,7 @@ class Laravel5Test extends \PHPUnit\Framework\TestCase
 		$this->mock = $this->getMockBuilder( '\\Illuminate\\Routing\\UrlGenerator' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->object = new \Aimeos\Base\View\Helper\Url\Laravel5( $view, $this->mock, [] );
+		$this->object = new \Aimeos\Base\View\Helper\Url\Laravel( $view, $this->mock, [] );
 	}
 
 

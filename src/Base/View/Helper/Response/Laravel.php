@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
- * @package MW
+ * @package Base
  * @subpackage View
  */
 
@@ -14,10 +14,10 @@ namespace Aimeos\Base\View\Helper\Response;
 /**
  * View helper class for retrieving response data.
  *
- * @package MW
+ * @package Base
  * @subpackage View
  */
-class Laravel5
+class Laravel
 	extends \Aimeos\Base\View\Helper\Response\Standard
 	implements \Aimeos\Base\View\Helper\Response\Iface
 {

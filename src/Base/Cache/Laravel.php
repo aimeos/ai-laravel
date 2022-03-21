@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2022
- * @package MW
+ * @package Base
  * @subpackage Cache
  */
 
@@ -12,12 +12,12 @@ namespace Aimeos\Base\Cache;
 
 
 /**
- * Laravel 5 caching implementation.
+ * Laravel caching implementation.
  *
- * @package MW
+ * @package Base
  * @subpackage Cache
  */
-class Laravel5
+class Laravel
 	extends \Aimeos\Base\Cache\Base
 	implements \Aimeos\Base\Cache\Iface
 {
