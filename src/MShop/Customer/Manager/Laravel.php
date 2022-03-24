@@ -444,12 +444,8 @@ class Laravel
 		}
 
 		$context = $this->context();
-		$dbm = $context->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $context->db( $this->getResourceName() );
 
-		try
-		{
 			$id = $item->getId();
 			$date = date( 'Y-m-d H:i:s' );
 			$billingAddress = $item->getPaymentAddress();
@@ -602,14 +598,6 @@ class Laravel
 				$item->setId( $this->newId( $conn, $path ) );
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
 		$item = $this->savePropertyItems( $item, 'customer' );
 		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveListItems( $item, 'customer' );
@@ -626,33 +614,21 @@ class Laravel
 	 */
 	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
 	{
-		$dbm = $this->context()->db();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
+		$conn = $this->context()->db( $this->getResourceName() );
 		$map = [];
 
-		try
-		{
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
 
-			$cfgPathSearch = 'mshop/customer/manager/laravel/search';
-			$cfgPathCount = 'mshop/customer/manager/laravel/count';
-			$ref[] = 'customer/group';
-			$required = ['customer'];
+		$cfgPathSearch = 'mshop/customer/manager/laravel/search';
+		$cfgPathCount = 'mshop/customer/manager/laravel/count';
+		$ref[] = 'customer/group';
+		$required = ['customer'];
 
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
+		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== null ) {
-				$map[(string) $row['customer.id']] = $row;
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
+		while( ( $row = $results->fetch() ) !== null ) {
+			$map[(string) $row['customer.id']] = $row;
 		}
 
 		$addrItems = [];
