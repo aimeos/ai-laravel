@@ -16,6 +16,7 @@
 	"require": {
 		"php": "~8.0",
 		"nyholm/psr7": "~1.2",
+		"symfony/mailer": "^6.0",
 		"laravel/framework": "^9.0",
 		"aimeos/aimeos-core": "dev-master"
 	},

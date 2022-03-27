@@ -98,8 +98,11 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	 */
 	public function bcc( $email ) : Iface
 	{
-		if( !empty( $email ) ) {
-				$this->message->bcc( $email );
+		if( !empty( $email ) )
+		{
+			foreach( (array) $email as $addr ) {
+				$this->message->bcc( $addr );
+			}
 		}
 
 		return $this;
@@ -164,7 +167,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function sender( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->sender( $email, $name );
+			$this->message->sender( $email );
 		}
 
 		return $this;
