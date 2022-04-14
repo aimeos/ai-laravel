@@ -36,7 +36,7 @@ class CustomerRemoveConstraints extends Base
 			return;
 		}
 
-		$this->info( sprintf( 'Remove constraints in users related tables' ), 'v' );
+		$this->info( sprintf( 'Remove constraints in users related tables' ), 'vv' );
 
 		$db->dropForeign( 'users_address', 'fk_lvuad_pid' );
 		$db->dropForeign( 'users_property', 'fk_lvupr_pid' );

@@ -52,7 +52,7 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 			return;
 		}
 
-		$this->info( 'Migrate typeid to type for Laravel', 'v' );
+		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
 		$this->info( 'Add new type columns for Laravel', 'vv' );
 
 		foreach( $this->tables as $rname => $list ) {

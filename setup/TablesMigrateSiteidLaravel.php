@@ -50,7 +50,7 @@ class TablesMigrateSiteidLaravel extends TablesMigrateSiteid
 			return;
 		}
 
-		$this->info( 'Update Laravel "siteid" columns', 'v' );
+		$this->info( 'Update Laravel "siteid" columns', 'vv' );
 
 		$this->process( $this->resources );
 

@@ -30,7 +30,7 @@ class CustomerMigrateListsKeyLaravel extends TablesMigrateListsKey
 	 */
 	public function up()
 	{
-		$this->info( 'Update Laravel lists "key" columns', 'v' );
+		$this->info( 'Update Laravel lists "key" columns', 'vv' );
 
 		$this->process( ['db-customer' => 'users_list'] );
 	}

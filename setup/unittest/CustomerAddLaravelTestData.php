@@ -30,7 +30,7 @@ class CustomerAddLaravelTestData extends CustomerAddTestData
 	 */
 	public function up()
 	{
-		$this->info( 'Adding Laravel customer test data', 'v' );
+		$this->info( 'Adding Laravel customer test data', 'vv' );
 
 		$this->db( 'db-customer' )->exec( "DELETE FROM users WHERE email LIKE 'test%@example.com'" );
 

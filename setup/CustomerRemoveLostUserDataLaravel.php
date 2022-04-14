@@ -49,7 +49,7 @@ class CustomerRemoveLostUserDataLaravel extends Base
 			return;
 		}
 
-		$this->info( 'Remove left over Laravel user references', 'v' );
+		$this->info( 'Remove left over Laravel user references', 'vv' );
 
 		foreach( $this->sql as $table => $map )
 		{
