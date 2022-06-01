@@ -11,21 +11,20 @@ namespace Aimeos\MShop\Customer\Manager\Property\Type;
 
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
-
-		$this->object = $manager->getSubManager( 'property', 'Laravel' )->getSubManager( 'type', 'Laravel' );
+		$this->context = \TestHelper::context();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Property\Type\Laravel( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -85,8 +84,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelper::context();
-
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
@@ -95,7 +92,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
-		$this->assertEquals( $context->editor(), $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -106,7 +103,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
-		$this->assertEquals( $context->editor(), $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

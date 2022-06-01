@@ -11,21 +11,20 @@ namespace Aimeos\MShop\Customer\Manager\Property;
 
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $context, 'Laravel' );
-
-		$this->object = $manager->getSubManager( 'property', 'Laravel' );
+		$this->context = \TestHelper::context();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Property\Laravel( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object );
+		unset( $this->object, $this->context );
 	}
 
 
@@ -59,8 +58,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelper::context();
-
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
@@ -69,7 +66,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
 		$this->assertEquals( $item->getValue(), $itemSaved->getValue() );
 
-		$this->assertEquals( $context->editor(), $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -80,7 +77,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 
-		$this->assertEquals( $context->editor(), $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

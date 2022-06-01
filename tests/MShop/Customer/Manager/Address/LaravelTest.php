@@ -11,14 +11,15 @@ namespace Aimeos\MShop\Customer\Manager\Address;
 
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $fixture;
 	private $object;
 
 
 	protected function setUp() : void
 	{
-		$context = \TestHelper::context();
-		$manager = new \Aimeos\MShop\Customer\Manager\Laravel( $context );
+		$this->context = \TestHelper::context();
+		$manager = new \Aimeos\MShop\Customer\Manager\Laravel( $this->context );
 
 		$this->fixture = array(
 			'customer.address.parentid' => $manager->find( 'test@example.com' )->getId(),
@@ -44,16 +45,16 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.latitude' => '2000-01-01',
-			'customer.address.siteid' => $context->locale()->getSiteId(),
+			'customer.address.siteid' => $this->context->locale()->getSiteId(),
 		);
 
-		$this->object = $manager->getSubManager( 'address', 'Laravel' );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Address\Laravel( $this->context );
 	}
 
 
 	protected function tearDown() : void
 	{
-		unset( $this->object, $this->fixture );
+		unset( $this->object, $this->fixture, $this->context );
 	}
 
 
@@ -111,8 +112,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelper::context();
-
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
@@ -139,7 +138,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 
-		$this->assertEquals( $context->editor(), $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -168,7 +167,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 
-		$this->assertEquals( $context->editor(), $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 

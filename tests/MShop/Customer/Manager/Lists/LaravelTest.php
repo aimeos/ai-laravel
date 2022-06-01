@@ -18,9 +18,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	protected function setUp() : void
 	{
 		$this->context = \TestHelper::context();
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::create( $this->context, 'Laravel' );
-
-		$this->object = $manager->getSubManager( 'lists', 'Laravel' );
+		$this->object = new \Aimeos\MShop\Customer\Manager\Lists\Laravel( $this->context );
 	}
 
 
@@ -80,8 +78,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->delete( $itemSaved->getId() );
 
-		$context = \TestHelper::context();
-
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
@@ -92,11 +88,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
-		$this->assertEquals( $context->editor(), $itemSaved->editor() );
-		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeCreated() );
-		$this->assertStringStartsWith( date( 'Y-m-d', time() ), $itemSaved->getTimeModified() );
 
-		$this->assertEquals( $context->editor(), $itemSaved->editor() );
+		$this->assertEquals( $this->context->editor(), $itemSaved->editor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
 
@@ -110,7 +103,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 
-		$this->assertEquals( $context->editor(), $itemUpd->editor() );
+		$this->assertEquals( $this->context->editor(), $itemUpd->editor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
