@@ -34,7 +34,7 @@ class CustomerAddLaravelTestData extends CustomerAddTestData
 
 		$this->db( 'db-customer' )->exec( "DELETE FROM users WHERE email LIKE 'test%@example.com'" );
 
-		$this->context()->setEditor( 'ai-laravel:lib/custom' );
+		$this->context()->setEditor( 'ai-laravel' );
 		$this->process();
 	}
 
