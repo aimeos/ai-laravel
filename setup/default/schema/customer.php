@@ -46,12 +46,10 @@ return array(
 			$table->string( 'editor' )->default( '' );
 
 			$table->unique( ['email'], 'unq_lvu_email' );
-			$table->index( ['langid'], 'idx_lvu_langid' );
+			$table->index( ['langid', 'siteid'], 'idx_lvu_langid_sid' );
 			$table->index( ['lastname', 'firstname'], 'idx_lvu_last_first' );
 			$table->index( ['postal', 'address1'], 'idx_lvu_post_addr1' );
 			$table->index( ['postal', 'city'], 'idx_lvu_post_city' );
-			$table->index( ['lastname'], 'idx_lvu_lastname' );
-			$table->index( ['address1'], 'idx_lvu_address1' );
 			$table->index( ['city'], 'idx_lvu_city' );
 		},
 
@@ -86,13 +84,12 @@ return array(
 			$table->smallint( 'pos' );
 			$table->meta();
 
-			$table->index( ['parentid'], 'fk_lvuad_pid' );
-			$table->index( ['langid'], 'idx_lvuad_langid' );
-			$table->index( ['siteid', 'lastname', 'firstname'], 'idx_lvuad_sid_last_first' );
-			$table->index( ['siteid', 'postal', 'address1'], 'idx_lvuad_sid_post_addr1' );
-			$table->index( ['siteid', 'postal', 'city'], 'idx_lvuad_sid_post_ci' );
-			$table->index( ['siteid', 'city'], 'idx_lvuad_sid_city' );
-			$table->index( ['siteid', 'email'], 'idx_lvuad_sid_email' );
+			$table->index( ['langid', 'siteid'], 'idx_lvuad_langid_sid' );
+			$table->index( ['lastname', 'firstname'], 'idx_lvuad_last_first' );
+			$table->index( ['postal', 'address1'], 'idx_lvuad_post_addr1' );
+			$table->index( ['postal', 'city'], 'idx_lvuad_post_ci' );
+			$table->index( ['city'], 'idx_lvuad_city' );
+			$table->index( ['email'], 'idx_lvuad_email' );
 
 			$table->foreign( 'parentid', 'users', 'id', 'fk_lvuad_pid' );
 		},
@@ -110,10 +107,10 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_lvulity_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_lvulity_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_lvulity_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_lvulity_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_lvulity_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_lvulity_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_lvulity_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_lvulity_code_sid' );
 		},
 
 		'users_list' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -133,9 +130,8 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'domain', 'siteid', 'type', 'refid'], 'unq_lvuli_pid_dm_sid_ty_rid' );
+			$table->unique( ['parentid', 'domain', 'type', 'refid', 'siteid'], 'unq_lvuli_pid_dm_ty_rid_sid' );
 			$table->index( ['key', 'siteid'], 'idx_lvuli_key_sid' );
-			$table->index( ['parentid'], 'fk_lvuli_pid' );
 
 			$table->foreign( 'parentid', 'users', 'id', 'fk_lvuli_pid' );
 		},
@@ -153,10 +149,10 @@ return array(
 			$table->smallint( 'status' );
 			$table->meta();
 
-			$table->unique( ['siteid', 'domain', 'code'], 'unq_lvuprty_sid_dom_code' );
-			$table->index( ['siteid', 'status', 'pos'], 'idx_lvuprty_sid_status_pos' );
-			$table->index( ['siteid', 'label'], 'idx_lvuprty_sid_label' );
-			$table->index( ['siteid', 'code'], 'idx_lvuprty_sid_code' );
+			$table->unique( ['domain', 'code', 'siteid'], 'unq_lvuprty_dom_code_sid' );
+			$table->index( ['status', 'siteid', 'pos'], 'idx_lvuprty_status_sid_pos' );
+			$table->index( ['label', 'siteid'], 'idx_lvuprty_label_sid' );
+			$table->index( ['code', 'siteid'], 'idx_lvuprty_code_sid' );
 		},
 
 		'users_property' => function( \Aimeos\Upscheme\Schema\Table $table ) {
@@ -172,9 +168,8 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'siteid', 'type', 'langid', 'value'], 'unq_lvupr_sid_ty_lid_value' );
-			$table->index( ['key', 'siteid'], 'fk_lvupr_key_sid' );
-			$table->index( ['parentid'], 'fk_lvupr_pid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_lvupr_ty_lid_val_sid' );
+			$table->index( ['key', 'siteid'], 'idx_lvupr_key_sid' );
 
 			$table->foreign( 'parentid', 'users', 'id', 'fk_lvupr_pid' );
 		},
