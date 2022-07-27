@@ -168,7 +168,7 @@ return array(
 			$table->string( 'value' );
 			$table->meta();
 
-			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_lvupr_ty_lid_val_sid' );
+			$table->unique( ['parentid', 'type', 'langid', 'value', 'siteid'], 'unq_lvupr_pid_ty_lid_val_sid' );
 			$table->index( ['key', 'siteid'], 'idx_lvupr_key_sid' );
 
 			$table->foreign( 'parentid', 'users', 'id', 'fk_lvupr_pid' );
