@@ -13,13 +13,13 @@ return array(
 				'clear' => array(
 					'ansi' => '
 						DELETE FROM "users_address"
-						WHERE :cond AND "siteid" = ?
+						WHERE :cond AND "siteid" LIKE ?
 					',
 				),
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_address"
-						WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
+						WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = \'\' )
 					',
 				),
 				'insert' => array(
@@ -152,7 +152,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "users_list_type"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						',
 					),
 					'search' => array(
@@ -246,7 +246,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_list"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					',
 				),
 				'insert' => array(
@@ -349,7 +349,7 @@ return array(
 					'delete' => array(
 						'ansi' => '
 							DELETE FROM "users_property_type"
-							WHERE :cond AND siteid = ?
+							WHERE :cond AND "siteid" LIKE ?
 						'
 					),
 					'insert' => array(
@@ -436,7 +436,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_property"
-						WHERE :cond AND siteid = ?
+						WHERE :cond AND "siteid" LIKE ?
 					'
 				),
 				'insert' => array(
@@ -551,13 +551,13 @@ return array(
 			'clear' => array(
 				'ansi' => '
 					DELETE FROM "users"
-					WHERE :cond AND "siteid" = ?
+					WHERE :cond AND "siteid" LIKE ?
 				',
 			),
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "users"
-					WHERE :cond AND ( "siteid" = ? OR "siteid" = \'\' )
+					WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = \'\' )
 				',
 			),
 			'insert' => array(
