@@ -19,7 +19,7 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 	];
 
 	private $constraints = [
-		'db-customer' => ['users_list' => 'unq_mcusli_sid_dm_rid_tid_pid', 'users_property' => 'unq_mcuspr_sid_tid_lid_value'],
+		'db-customer' => ['users_list' => 'unq_lvuli_sid_dm_rid_tid_pid', 'users_property' => 'unq_lvupr_sid_tid_lid_value'],
 	];
 
 	private $migrations = [
