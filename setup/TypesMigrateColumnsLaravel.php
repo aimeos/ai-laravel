@@ -31,17 +31,6 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 
 
 	/**
-	 * Returns the list of task names which depends on this task.
-	 *
-	 * @return array List of task names
-	 */
-	public function before() : array
-	{
-		return ['TablesCreateMShop'];
-	}
-
-
-	/**
 	 * Executes the task
 	 */
 	public function up()
