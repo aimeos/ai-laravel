@@ -24,8 +24,8 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 
 	private $migrations = [
 		'db-customer' => [
-			'users_list' => 'UPDATE "users_list" SET "type" = ( SELECT "code" FROM "users_list_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
-			'users_property' => 'UPDATE "users_property" SET "type" = ( SELECT "code" FROM "users_property_type" AS t WHERE t."id" = "typeid" AND t."domain" = "domain" ) WHERE "type" = \'\'',
+			'users_list' => 'UPDATE users_list SET type = ( SELECT code FROM users_list_type AS t WHERE t.id = typeid AND t.domain = domain ) WHERE type = \'\'',
+			'users_property' => 'UPDATE users_property SET type = ( SELECT code FROM users_property_type AS t WHERE t.id = typeid AND t.domain = domain ) WHERE type = \'\'',
 		],
 	];
 
