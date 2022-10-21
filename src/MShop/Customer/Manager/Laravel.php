@@ -554,7 +554,7 @@ class Laravel
 				$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( $idx++, $context->locale()->getSiteId() );
+				$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
 				$stmt->bind( $idx, $date ); // Creation time
 			}
 
