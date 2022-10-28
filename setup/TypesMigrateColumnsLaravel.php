@@ -29,6 +29,10 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 		],
 	];
 
+	private $drops = [
+		'db-customer' => ['users_list' => 'fk_lvuli_typeid', 'users_property' => 'fk_lvupr_typeid'],
+	];
+
 
 	/**
 	 * Executes the task
@@ -42,22 +46,29 @@ class TypesMigrateColumnsLaravel extends TypesMigrateColumns
 		}
 
 		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
-		$this->info( 'Add new type columns for Laravel', 'vv' );
+
+		$this->info( 'Add new type columns for Laravel', 'vv', 1 );
 
 		foreach( $this->tables as $rname => $list ) {
 			$this->addColumn( $rname, $list );
 		}
 
-		$this->info( 'Drop old unique indexes for Laravel', 'vv' );
+		$this->info( 'Drop old unique indexes for Laravel', 'vv', 1 );
 
 		foreach( $this->constraints as $rname => $list ) {
 			$this->dropIndex( $rname, $list );
 		}
 
-		$this->info( 'Migrate typeid to type for Laravel', 'vv' );
+		$this->info( 'Migrate typeid to type for Laravel', 'vv', 1 );
 
 		foreach( $this->migrations as $rname => $list ) {
 			$this->migrateData( $rname, $list );
+		}
+
+		$this->info( 'Drop typeid columns for Laravel', 'vv', 1 );
+
+		foreach( $this->drops as $rname => $list ) {
+			$this->dropColumn( $rname, $list );
 		}
 	}
 }
