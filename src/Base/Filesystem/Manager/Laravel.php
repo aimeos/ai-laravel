@@ -57,7 +57,6 @@ class Laravel extends Standard implements Iface
 	public function __sleep()
 	{
 		$this->__destruct();
-
 		$this->objects = [];
 
 		return get_object_vars( $this );
@@ -73,7 +72,7 @@ class Laravel extends Standard implements Iface
 	 */
 	public function get( string $name ) : \Aimeos\Base\Filesystem\Iface
 	{
-		$key = $this->getConfig( $name );
+		$key = $this->config( $name );
 
 		if( is_string( $key ) )
 		{
