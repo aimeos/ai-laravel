@@ -436,8 +436,11 @@ class Laravel
 
 		$item = $this->addGroups( $item );
 
-		if( !$item->isModified() ) {
-			return $item;
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'customer' );
+			$item = $this->saveAddressItems( $item, 'customer' );
+			return $this->saveListItems( $item, 'customer' );
 		}
 
 		$context = $this->context();
