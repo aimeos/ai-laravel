@@ -125,7 +125,7 @@ return array(
 			$table->string( 'domain', 32 );
 			$table->refid();
 			$table->startend();
-			$table->text( 'config' );
+			$table->config();
 			$table->int( 'pos' );
 			$table->smallint( 'status' );
 			$table->meta();
