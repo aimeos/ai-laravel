@@ -19,11 +19,11 @@ jobs:
       - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
       - restore_cache:
           keys:
-            - php73-{{ checksum "composer.json" }}
+            - php80-{{ checksum "composer.json" }}
       - run: composer req --no-update "laravel/framework:~9.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
-          key: php73-{{ checksum "composer.json" }}
+          key: php80-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
@@ -44,11 +44,36 @@ jobs:
       - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
       - restore_cache:
           keys:
-            - php80-{{ checksum "composer.json" }}
+            - php81-{{ checksum "composer.json" }}
       - run: composer req --no-update "laravel/framework:~9.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
-          key: php80-{{ checksum "composer.json" }}
+          key: php81-{{ checksum "composer.json" }}
+          paths: [./vendor]
+      - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
+      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
+      - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
+
+  "php82-mysql80-laravel9":
+    docker:
+      - image: aimeos/ci-php:8.2
+      - image: cimg/mysql:8.0
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: aimeos
+          MYSQL_USER: aimeos
+          MYSQL_PASSWORD: aimeos
+    steps:
+      - checkout
+      - run: git clone --depth=50 --branch=master https://github.com/aimeos/aimeos-core ../aimeos-core
+      - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
+      - restore_cache:
+          keys:
+            - php82-{{ checksum "composer.json" }}
+      - run: composer req --no-update "laravel/framework:~9.0" "nyholm/psr7:~1.2"
+      - run: composer update -n --prefer-dist
+      - save_cache:
+          key: php82-{{ checksum "composer.json" }}
           paths: [./vendor]
       - run: echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'port' => 3306, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 3306 && echo OK && exit 0; echo -n .; sleep 1; done
@@ -60,3 +85,4 @@ workflows:
     jobs:
       - "php80-pgsql14-laravel9"
       - "php81-mysql80-laravel9"
+      - "php82-mysql80-laravel9"
