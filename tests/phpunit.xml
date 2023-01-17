@@ -5,9 +5,6 @@
 		<testsuite name="Base suite">
 			<directory>Base/</directory>
 		</testsuite>
-		<testsuite name="MW suite">
-			<directory>MW/</directory>
-		</testsuite>
 		<testsuite name="MShop suite">
 			<directory>MShop/</directory>
 		</testsuite>
