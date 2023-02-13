@@ -432,8 +432,6 @@ class Laravel
 	 */
 	protected function saveItem( \Aimeos\MShop\Customer\Item\Iface $item, bool $fetch = true ) : \Aimeos\MShop\Customer\Item\Iface
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\Iface', $item );
-
 		$item = $this->addGroups( $item );
 
 		if( !$item->isModified() )
