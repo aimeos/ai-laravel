@@ -21,7 +21,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->mock = $this->getMockBuilder( \Illuminate\View\Factory::class )
-			->setMethods( array( 'file' ) )
+			->onlyMethods( array( 'file' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
@@ -40,7 +40,7 @@ class BladeTest extends \PHPUnit\Framework\TestCase
 		$v = new \Aimeos\Base\View\Standard( [] );
 
 		$view = $this->getMockBuilder( \Illuminate\View\View::class )
-			->setMethods( array( 'render' ) )
+			->onlyMethods( array( 'render' ) )
 			->disableOriginalConstructor()
 			->getMock();
 

@@ -21,7 +21,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->storage = $this->getMockBuilder( \Illuminate\Filesystem\FilesystemManager::class )
-			->setMethods( array( 'get' ) )
+			->onlyMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 	}
