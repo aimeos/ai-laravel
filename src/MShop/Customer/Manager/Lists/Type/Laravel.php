@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists\Type;
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Lists\Type\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.lists.type.id' => array(
 			'code' =>'customer.lists.type.id',
 			'internalcode' =>'mcuslity."id"',

@@ -19,7 +19,7 @@ namespace Aimeos\Base\View\Engine;
  */
 class Blade implements Iface
 {
-	private $factory;
+	private \Illuminate\View\Factory $factory;
 
 
 	/**

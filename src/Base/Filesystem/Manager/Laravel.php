@@ -19,9 +19,9 @@ namespace Aimeos\Base\Filesystem\Manager;
  */
 class Laravel extends Standard implements Iface
 {
-	private $fsm;
-	private $objects = [];
-	private $tempdir;
+	private \Illuminate\Filesystem\FilesystemManager $fsm;
+	private array $objects = [];
+	private string $tempdir;
 
 
 	/**
@@ -31,7 +31,7 @@ class Laravel extends Standard implements Iface
 	 * @param array $config Filesystem resource configuration
 	 * @param string $tempdir Directory for storing temporary files
 	 */
-	public function __construct( \Illuminate\Filesystem\FilesystemManager $fsm, array $config, $tempdir )
+	public function __construct( \Illuminate\Filesystem\FilesystemManager $fsm, array $config, string $tempdir )
 	{
 		parent::__construct( $config );
 

@@ -19,7 +19,7 @@ namespace Aimeos\Base\Mail;
  */
 class Laravel implements \Aimeos\Base\Mail\Iface
 {
-	private $mailer;
+	private \Closure $mailer;
 
 	/**
 	 * Initializes the instance of the class.

@@ -19,7 +19,7 @@ namespace Aimeos\Base\Session;
  */
 class Laravel extends Base implements \Aimeos\Base\Session\Iface
 {
-	private $object;
+	private \Illuminate\Session\Store $object;
 
 
 	/**

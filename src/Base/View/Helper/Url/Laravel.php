@@ -21,8 +21,8 @@ class Laravel
 	extends \Aimeos\Base\View\Helper\Url\Base
 	implements \Aimeos\Base\View\Helper\Url\Iface
 {
-	private $builder;
-	private $fixed;
+	private \Illuminate\Contracts\Routing\UrlGenerator $builder;
+	private array $fixed;
 
 
 	/**

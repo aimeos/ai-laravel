@@ -21,7 +21,7 @@ class Laravel
 	extends \Aimeos\Base\View\Helper\Request\Standard
 	implements \Aimeos\Base\View\Helper\Request\Iface
 {
-	private $request;
+	private \Illuminate\Http\Request $request;
 
 
 	/**

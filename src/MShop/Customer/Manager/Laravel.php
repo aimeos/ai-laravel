@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Manager;
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',

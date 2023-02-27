@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Customer\Manager\Property\Type;
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Property\Type\Standard
 {
-	private $searchConfig = array(
+	private array $searchConfig = array(
 		'customer.property.type.id' => array(
 			'code' => 'customer.property.type.id',
 			'internalcode' => 'mcusprty."id"',

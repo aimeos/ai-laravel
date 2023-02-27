@@ -19,9 +19,9 @@ namespace Aimeos\Base\Mail\Message;
  */
 class Laravel implements \Aimeos\Base\Mail\Message\Iface
 {
-	private $charset;
-	private $message;
-	private $mailer;
+	private \Symfony\Component\Mime\Email $message;
+	private \Illuminate\Mail\Mailer $mailer;
+	private string $charset;
 
 
 	/**
