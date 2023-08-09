@@ -156,17 +156,24 @@ class Laravel
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.email' => array(
-			'label' => 'Customer email',
-			'code' => 'customer.email',
-			'internalcode' => 'mcus."email"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 'mcus."telefax"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.mobile' => array(
+			'label' => 'Customer mobile number',
+			'code' => 'customer.mobile',
+			'internalcode' => 'mcus."mobile"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.email' => array(
+			'label' => 'Customer email',
+			'code' => 'customer.email',
+			'internalcode' => 'mcus."email"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
@@ -540,6 +547,7 @@ class Laravel
 		$stmt->bind( $idx++, $billingAddress->getLanguageId() );
 		$stmt->bind( $idx++, $billingAddress->getTelephone() );
 		$stmt->bind( $idx++, $billingAddress->getTelefax() );
+		$stmt->bind( $idx++, $billingAddress->getMobile() );
 		$stmt->bind( $idx++, $billingAddress->getWebsite() );
 		$stmt->bind( $idx++, $billingAddress->getLongitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );
 		$stmt->bind( $idx++, $billingAddress->getLatitude(), \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT );

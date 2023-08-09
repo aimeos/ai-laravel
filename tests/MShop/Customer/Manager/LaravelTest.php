@@ -205,8 +205,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'customer.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'customer.mobile', '055544332213' );
+		$expr[] = $search->compare( '==', 'customer.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.latitude', '50.0' );
@@ -247,8 +248,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332211' );
-		$expr[] = $search->compare( '==', 'customer.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544332212' );
+		$expr[] = $search->compare( '==', 'customer.address.mobile', '055544332213' );
+		$expr[] = $search->compare( '==', 'customer.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.longitude', '10.0' );
 		$expr[] = $search->compare( '==', 'customer.address.latitude', '50.0' );
