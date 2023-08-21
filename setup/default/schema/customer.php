@@ -77,7 +77,7 @@ return array(
 			$table->string( 'countryid', 2 )->null( true );
 			$table->string( 'telephone', 32 );
 			$table->string( 'telefax', 32 );
-			$table->string( 'mobile', 32 );
+			$table->string( 'mobile', 32 )->default( '' );
 			$table->string( 'email' );
 			$table->string( 'website' );
 			$table->float( 'longitude' )->null( true );
