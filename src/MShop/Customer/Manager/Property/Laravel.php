@@ -26,16 +26,14 @@ class Laravel
 			'internalcode' => 'mcuspr."id"',
 			'internaldeps' => ['LEFT JOIN "users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 			'label' => 'Property ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'customer.property.parentid' => array(
 			'code' => 'customer.property.parentid',
 			'internalcode' => 'mcuspr."parentid"',
 			'label' => 'Property parent ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'customer.property.siteid' => array(
@@ -43,7 +41,6 @@ class Laravel
 			'internalcode' => 'mcuspr."siteid"',
 			'label' => 'Property site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.type' => array(
@@ -51,28 +48,24 @@ class Laravel
 			'internalcode' => 'mcuspr."type"',
 			'label' => 'Property type',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.value' => array(
 			'code' => 'customer.property.value',
 			'internalcode' => 'mcuspr."value"',
 			'label' => 'Property value',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.languageid' => array(
 			'code' => 'customer.property.languageid',
 			'internalcode' => 'mcuspr."langid"',
 			'label' => 'Property language ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.property.ctime' => array(
 			'code' => 'customer.property.ctime',
 			'internalcode' => 'mcuspr."ctime"',
 			'label' => 'Property create date/time',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.mtime' => array(
@@ -80,7 +73,6 @@ class Laravel
 			'internalcode' => 'mcuspr."mtime"',
 			'label' => 'Property modify date',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.property.editor' => array(
@@ -88,7 +80,6 @@ class Laravel
 			'internalcode' => 'mcuspr."editor"',
 			'label' => 'Property editor',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

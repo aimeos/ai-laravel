@@ -25,8 +25,7 @@ class Laravel
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 'mcus."id"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT,
+			'type' => 'int',
 			'public' => false,
 		),
 		'customer.siteid' => array(
@@ -34,7 +33,6 @@ class Laravel
 			'internalcode' =>'mcus."siteid"',
 			'label' =>'Customer site ID',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'customer.code' => array(
@@ -42,210 +40,180 @@ class Laravel
 			'code' => 'customer.code',
 			'internalcode' => 'mcus."email"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR
 		),
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
 			'internalcode' => 'mcus."name"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR
 		),
 		'customer.salutation' => array(
 			'label' => 'Customer salutation',
 			'code' => 'customer.salutation',
 			'internalcode' => 'mcus."salutation"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.company' => array(
 			'label' => 'Customer company',
 			'code' => 'customer.company',
 			'internalcode' => 'mcus."company"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.vatid' => array(
 			'label' => 'Customer VAT ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 'mcus."vatid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.title' => array(
 			'label' => 'Customer title',
 			'code' => 'customer.title',
 			'internalcode' => 'mcus."title"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.firstname' => array(
 			'label' => 'Customer firstname',
 			'code' => 'customer.firstname',
 			'internalcode' => 'mcus."firstname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.lastname' => array(
 			'label' => 'Customer lastname',
 			'code' => 'customer.lastname',
 			'internalcode' => 'mcus."lastname"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address1' => array(
 			'label' => 'Customer address part one',
 			'code' => 'customer.address1',
 			'internalcode' => 'mcus."address1"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address2' => array(
 			'label' => 'Customer address part two',
 			'code' => 'customer.address2',
 			'internalcode' => 'mcus."address2"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.address3' => array(
 			'label' => 'Customer address part three',
 			'code' => 'customer.address3',
 			'internalcode' => 'mcus."address3"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.postal' => array(
 			'label' => 'Customer postal',
 			'code' => 'customer.postal',
 			'internalcode' => 'mcus."postal"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.city' => array(
 			'label' => 'Customer city',
 			'code' => 'customer.city',
 			'internalcode' => 'mcus."city"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.state' => array(
 			'label' => 'Customer state',
 			'code' => 'customer.state',
 			'internalcode' => 'mcus."state"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.languageid' => array(
 			'label' => 'Customer language',
 			'code' => 'customer.languageid',
 			'internalcode' => 'mcus."langid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.countryid' => array(
 			'label' => 'Customer country',
 			'code' => 'customer.countryid',
 			'internalcode' => 'mcus."countryid"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telephone' => array(
 			'label' => 'Customer telephone',
 			'code' => 'customer.telephone',
 			'internalcode' => 'mcus."telephone"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.telefax' => array(
 			'label' => 'Customer telefax',
 			'code' => 'customer.telefax',
 			'internalcode' => 'mcus."telefax"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.mobile' => array(
 			'label' => 'Customer mobile number',
 			'code' => 'customer.mobile',
 			'internalcode' => 'mcus."mobile"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.email' => array(
 			'label' => 'Customer email',
 			'code' => 'customer.email',
 			'internalcode' => 'mcus."email"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.website' => array(
 			'label' => 'Customer website',
 			'code' => 'customer.website',
 			'internalcode' => 'mcus."website"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.longitude' => array(
 			'label' => 'Customer longitude',
 			'code' => 'customer.longitude',
 			'internalcode' => 'mcus."longitude"',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.latitude' => array(
 			'label' => 'Customer latitude',
 			'code' => 'customer.latitude',
 			'internalcode' => 'mcus."latitude"',
 			'type' => 'float',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_FLOAT,
 		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
 			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.password' => array(
 			'label' => 'Customer password',
 			'code' => 'customer.password',
 			'internalcode' => 'mcus."password"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.status' => array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
 			'internalcode' => 'mcus."status"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_INT
+			'type' => 'int',
 		),
 		'customer.dateverified' => array(
 			'label' => 'Customer verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'mcus."email_verified_at"',
 			'type' => 'date',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.ctime' => array(
 			'label' => 'Customer creation time',
 			'code' => 'customer.ctime',
 			'internalcode' => 'mcus."created_at"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.mtime' => array(
 			'label' => 'Customer modification time',
 			'code' => 'customer.mtime',
 			'internalcode' => 'mcus."updated_at"',
 			'type' => 'datetime',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer.editor' => array(
 			'label' =>'Customer editor',
 			'code' =>'customer.editor',
 			'internalcode' => 'mcus."editor"',
 			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
 		'customer:has' => array(
 			'code' => 'customer:has()',
@@ -253,7 +221,6 @@ class Laravel
 			'internaldeps' => ['LEFT JOIN "users_list" AS mcusli ON ( mcusli."parentid" = mcus."id" )'],
 			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 		'customer:prop' => array(
@@ -262,7 +229,6 @@ class Laravel
 			'internaldeps' => ['LEFT JOIN "users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 			'type' => 'null',
-			'internaltype' => 'null',
 			'public' => false,
 		),
 	);
@@ -526,7 +492,7 @@ class Laravel
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
-			$stmt->bind( $idx++, $item->get( $name ), $entry->getInternalType() );
+			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
 		$stmt->bind( $idx++, $item->getLabel() );
