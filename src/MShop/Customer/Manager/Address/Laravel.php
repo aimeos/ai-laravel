@@ -59,7 +59,7 @@ class Laravel
 			'label' => 'Customer address salutation',
 			'code' => 'customer.address.salutation',
 			'internalcode' => 'mcusad."salutation"',
-			'type' => 'int',
+			'type' => 'string',
 		),
 		'customer.address.title' => array(
 			'label' => 'Customer address title',
