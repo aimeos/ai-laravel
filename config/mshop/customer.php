@@ -164,7 +164,8 @@ return array(
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position",
+								mcuslity."i18n" AS "customer.lists.type.i18n"
 							FROM "users_list_type" mcuslity
 							:joins
 							WHERE :cond
@@ -177,7 +178,8 @@ return array(
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position",
+								mcuslity."i18n" AS "customer.lists.type.i18n"
 							FROM "users_list_type" mcuslity
 							:joins
 							WHERE :cond
@@ -380,7 +382,8 @@ return array(
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
 								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position",
+								mcusprty."i18n" AS "customer.property.type.i18n"
 							FROM "users_property_type" mcusprty
 							:joins
 							WHERE :cond
@@ -393,7 +396,8 @@ return array(
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
 								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position",
+								mcusprty."i18n" AS "customer.property.type.i18n"
 							FROM "users_property_type" mcusprty
 							:joins
 							WHERE :cond
