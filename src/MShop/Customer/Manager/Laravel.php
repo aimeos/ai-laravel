@@ -360,7 +360,7 @@ class Laravel
 	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		$default = ['address', 'group', 'lists', 'property'];
+		$default = ['address', 'lists', 'property'];
 
 		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
 			$this->object()->getSubManager( $domain )->clear( $siteids );
