@@ -233,6 +233,8 @@ class Laravel
 		),
 	);
 
+	private ?\Aimeos\MShop\Customer\Item\Iface $user = null;
+
 
 	/**
 	 * Initializes the object.
@@ -378,8 +380,29 @@ class Laravel
 	 */
 	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$path = 'mshop/customer/manager/laravel/delete';
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
+		if( map( $itemIds )->isEmpty() ) {
+			return $this;
+		}
+
+		$search = $this->object()->filter();
+		$search->setConditions( $search->compare( '==', 'id', $itemIds ) );
+
+		$types = array( 'id' => \Aimeos\Base\DB\Statement\Base::PARAM_STR );
+		$translations = array( 'id' => '"id"' );
+
+		$cond = $search->getConditionSource( $types, $translations );
+		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( 'mshop/customer/manager/laravel/delete' ) );
+
+		$context = $this->context();
+		$conn = $context->db( $this->getResourceName() );
+
+		$stmt = $conn->create( $sql );
+		$stmt->bind( 1, $context->locale()->getSiteId() . '%' );
+		$stmt->bind( 2, $this->getUser()?->getSiteId() );
+
+		$stmt->execute()->finish();
+
+		return $this->deleteRefItems( $itemIds );
 	}
 
 
@@ -526,11 +549,12 @@ class Laravel
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( $idx++, $this->getUser()?->getSiteId() );
+			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$item->setId( $id );
 		} else {
 			$stmt->bind( $idx++, $this->siteId( $item->getSiteId(), \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) );
-			$stmt->bind( $idx, $date ); // Creation time
+			$stmt->bind( $idx++, $date ); // Creation time
 		}
 
 		$stmt->execute()->finish();
@@ -630,5 +654,20 @@ class Laravel
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name ?: 'Laravel' );
+	}
+
+
+	/**
+	 * Returns the currently authenticated user
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface|null Customer item or NULL if not available
+	 */
+	protected function getUser() : ?\Aimeos\MShop\Customer\Item\Iface
+	{
+		if( !isset( $this->user ) && ( $userid = $this->context()->user() ) !== null ) {
+			$this->user = $this->search( $this->filter( true )->add( 'customer.id', '==', $userid ) )->first();
+		}
+
+		return $this->user;
 	}
 }
