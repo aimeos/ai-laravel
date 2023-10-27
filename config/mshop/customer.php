@@ -19,7 +19,7 @@ return array(
 				'delete' => array(
 					'ansi' => '
 						DELETE FROM "users_address"
-						WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = \'\' )
+						WHERE :cond AND ( "siteid" LIKE ? OR "siteid" = ? )
 					',
 				),
 				'insert' => array(
@@ -45,7 +45,7 @@ return array(
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?, "mobile" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
 							"pos" = ?, "birthday" = ?, "mtime" = ?, "editor" = ?
-						WHERE ( "siteid" LIKE ? OR "siteid" = \'\' ) AND "id" = ?
+						WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 					',
 				),
 				'search' => array(
