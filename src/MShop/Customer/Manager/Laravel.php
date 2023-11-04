@@ -596,8 +596,8 @@ class Laravel
 
 		$cfgPathSearch = 'mshop/customer/manager/laravel/search';
 		$cfgPathCount = 'mshop/customer/manager/laravel/count';
-		$ref[] = 'customer/group';
 		$required = ['customer'];
+		$ref[] = 'group';
 
 		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
