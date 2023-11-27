@@ -51,7 +51,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function from( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->from( new Address( $email, $name ) );
+			$this->message->from( new Address( $email, (string) $name ) );
 		}
 
 		return $this;
@@ -68,7 +68,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function to( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->to( new Address( $email, $name ) );
+			$this->message->to( new Address( $email, (string) $name ) );
 		}
 
 		return $this;
@@ -85,7 +85,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function cc( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->cc( new Address( $email, $name ) );
+			$this->message->cc( new Address( $email, (string) $name ) );
 		}
 
 		return $this;
@@ -121,7 +121,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function replyTo( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->replyTo( new Address( $email, $name ) );
+			$this->message->replyTo( new Address( $email, (string) $name ) );
 		}
 
 		return $this;
@@ -169,7 +169,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	public function sender( string $email, string $name = null ) : Iface
 	{
 		if( $email ) {
-			$this->message->sender( new Address( $email, $name ) );
+			$this->message->sender( new Address( $email, (string) $name ) );
 		}
 
 		return $this;
