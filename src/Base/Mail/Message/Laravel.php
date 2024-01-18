@@ -103,7 +103,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 		if( !empty( $email ) )
 		{
 			foreach( (array) $email as $addr ) {
-				$this->message->bcc( $addr );
+				$this->message->addBcc( $addr );
 			}
 		}
 

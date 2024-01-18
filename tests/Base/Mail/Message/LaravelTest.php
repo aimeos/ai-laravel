@@ -68,7 +68,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testBcc()
 	{
-		$this->stub->expects( $this->once() )->method( 'bcc' );
+		$this->stub->expects( $this->once() )->method( 'addBcc' );
 
 		$result = $this->object->bcc( 'a@b', 'test' );
 		$this->assertSame( $this->object, $result );
