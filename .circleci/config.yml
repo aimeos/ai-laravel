@@ -5,31 +5,7 @@
 version: 2.1
 
 jobs:
-  "php80-pgsql-laravel9":
-    docker:
-      - image: aimeos/ci-php:8.0
-      - image: postgres:latest
-        environment:
-          POSTGRES_PASSWORD: aimeos
-          POSTGRES_USER: aimeos
-          POSTGRES_DB: aimeos
-    steps:
-      - checkout
-      - run: git clone --depth=50 --branch=master https://github.com/aimeos/aimeos-core ../aimeos-core
-      - run: cd .. && mv project aimeos-core/ext/ai-laravel && mv aimeos-core project && cd project
-      - restore_cache:
-          keys:
-            - php80-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:~9.0" "nyholm/psr7:~1.2"
-      - run: composer update -n --prefer-dist
-      - save_cache:
-          key: php80-{{ checksum "composer.json" }}
-          paths: [./vendor]
-      - run: echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5432, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php
-      - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
-      - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
-
-  "php81-mysql-laravel9":
+  "php81-mysql-laravel10":
     docker:
       - image: aimeos/ci-php:8.1
       - image: mysql:latest
@@ -45,7 +21,7 @@ jobs:
       - restore_cache:
           keys:
             - php81-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:~9.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~10.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php81-{{ checksum "composer.json" }}
@@ -107,7 +83,6 @@ workflows:
   version: 2
   unittest:
     jobs:
-      - "php80-pgsql-laravel9"
-      - "php81-mysql-laravel9"
+      - "php81-mysql-laravel10"
       - "php82-pgsql-laravel10"
       - "php83-mysql-laravel10"
