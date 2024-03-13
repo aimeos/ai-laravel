@@ -54,7 +54,7 @@ jobs:
       - run: for i in `seq 1 10`; do nc -z 127.0.0.1 5432 && echo OK && exit 0; echo -n .; sleep 1; done
       - run: ./vendor/bin/phing -Ddir=ext/ai-laravel setup testext
 
-  "php83-mysql-laravel10":
+  "php83-mysql-laravel11":
     docker:
       - image: aimeos/ci-php:8.3
       - image: mysql:latest
@@ -70,7 +70,7 @@ jobs:
       - restore_cache:
           keys:
             - php83-{{ checksum "composer.json" }}
-      - run: composer req --no-update "laravel/framework:~10.0" "nyholm/psr7:~1.2"
+      - run: composer req --no-update "laravel/framework:~11.0" "nyholm/psr7:~1.2"
       - run: composer update -n --prefer-dist
       - save_cache:
           key: php83-{{ checksum "composer.json" }}
@@ -85,4 +85,4 @@ workflows:
     jobs:
       - "php81-mysql-laravel10"
       - "php82-pgsql-laravel10"
-      - "php83-mysql-laravel10"
+      - "php83-mysql-laravel11"
