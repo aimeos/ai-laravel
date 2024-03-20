@@ -40,7 +40,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			->getMock();
 
 		$this->storage->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $fs ) );
+			->willReturn( $fs );
 
 		$object = new \Aimeos\Base\Filesystem\Manager\Laravel( $this->storage, ['fs-media' => 'local'], sys_get_temp_dir() );
 

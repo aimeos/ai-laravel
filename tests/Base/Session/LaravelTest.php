@@ -38,7 +38,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testDel()
 	{
 		$this->mock->expects( $this->once() )->method( 'forget' )
-			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
+			->with( $this->equalTo( 'test' ) )->willReturnSelf();
 
 		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $this->object->del( 'test' ) );
 	}
@@ -47,7 +47,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->with( $this->equalTo( 'test' ) )->will( $this->returnValue( '123456789' ) );
+			->with( $this->equalTo( 'test' ) )->willReturn( '123456789' );
 
 		$this->assertEquals( '123456789', $this->object->get( 'test' ) );
 	}
@@ -56,7 +56,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testPull()
 	{
 		$this->mock->expects( $this->once() )->method( 'pull' )
-			->with( $this->equalTo( 'test' ) )->will( $this->returnValue( '123456789' ) );
+			->with( $this->equalTo( 'test' ) )->willReturn( '123456789' );
 
 		$this->assertEquals( '123456789', $this->object->pull( 'test' ) );
 	}
@@ -65,7 +65,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testRemove()
 	{
 		$this->mock->expects( $this->once() )->method( 'forget' )
-			->with( $this->equalTo( 'test' ) )->will( $this->returnSelf() );
+			->with( $this->equalTo( 'test' ) )->willReturnSelf();
 
 		$this->assertInstanceOf( \Aimeos\Base\Session\Iface::class, $this->object->remove( ['test'] ) );
 	}

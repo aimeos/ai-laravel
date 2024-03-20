@@ -93,7 +93,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$transport->expects( $this->once() )->method( 'send' );
 
 		$this->mock->expects( $this->once() )->method( 'getSymfonyTransport' )
-			->will( $this->returnValue( $transport ) );
+			->willReturn( $transport );
 
 		$this->assertSame( $this->object, $this->object->send() );
 	}

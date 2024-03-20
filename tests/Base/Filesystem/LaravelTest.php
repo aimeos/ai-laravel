@@ -38,7 +38,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testIsdir()
 	{
 		$this->mock->expects( $this->once() )->method( 'directories' )
-			->will( $this->returnValue( array( 't', 'test', 'es' ) ) );
+			->willReturn( array( 't', 'test', 'es' ) );
 
 		$this->assertTrue( $this->object->isdir( 'test' ) );
 	}
@@ -47,7 +47,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testIsdirFalse()
 	{
 		$this->mock->expects( $this->once() )->method( 'directories' )
-			->will( $this->returnValue( array( 't', 'es' ) ) );
+			->willReturn( array( 't', 'es' ) );
 
 		$this->assertFalse( $this->object->isdir( 'test' ) );
 	}
@@ -94,10 +94,10 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$list = array( 't', 'es', 'st' );
 
 		$this->mock->expects( $this->once() )->method( 'directories' )
-			->will( $this->returnValue( array( 't', 'es' ) ) );
+			->willReturn( array( 't', 'es' ) );
 
 		$this->mock->expects( $this->once() )->method( 'files' )
-			->will( $this->returnValue( array( 'st' ) ) );
+			->willReturn( array( 'st' ) );
 
 		$result = $this->object->scan();
 
@@ -122,7 +122,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testSize()
 	{
 		$this->mock->expects( $this->once() )->method( 'size' )
-			->will( $this->returnValue( 4 ) );
+			->willReturn( 4 );
 
 		$result = $this->object->size( 'test' );
 
@@ -143,7 +143,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testTime()
 	{
 		$this->mock->expects( $this->once() )->method( 'lastModified' )
-			->will( $this->returnValue( 1 ) );
+			->willReturn( 1 );
 
 		$result = $this->object->time( 'test' );
 
@@ -182,7 +182,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testHas()
 	{
 		$this->mock->expects( $this->once() )->method( 'exists' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$result = $this->object->has( 'test' );
 
@@ -193,7 +193,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testHasFalse()
 	{
 		$this->mock->expects( $this->once() )->method( 'exists' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$result = $this->object->has( 'test' );
 
@@ -204,7 +204,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testRead()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( 'test' ) );
+			->willReturn( 'test' );
 
 		$result = $this->object->read( 'file' );
 
@@ -225,7 +225,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testReadf()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( 'test' ) );
+			->willReturn( 'test' );
 
 		$result = $this->object->readf( 'file' );
 
@@ -237,7 +237,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testReads()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( 'test' ) );
+			->willReturn( 'test' );
 
 		$handle = $this->object->reads( 'file' );
 

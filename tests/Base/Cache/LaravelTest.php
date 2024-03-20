@@ -35,7 +35,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testDelete()
 	{
 		$this->mock->expects( $this->once() )->method( 'forget' )->with( $this->equalTo( 'key' ) )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->delete( 'key' ) );
 	}
@@ -44,7 +44,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testDeleteMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'forget' )->with( $this->equalTo( 'key' ) )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$this->assertTrue( $this->object->deleteMultiple( array( 'key', 'key' ) ) );
 	}
@@ -52,14 +52,14 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteByTags()
 	{
-		$this->mock->expects( $this->once() )->method( 'flush' )->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'flush' )->willReturn( true );
 		$this->assertTrue( $this->object->deleteByTags( array( 'tag', 'tag' ) ) );
 	}
 
 
 	public function testClear()
 	{
-		$this->mock->expects( $this->once() )->method( 'flush' )->will( $this->returnValue( true ) );
+		$this->mock->expects( $this->once() )->method( 'flush' )->willReturn( true );
 		$this->assertTrue( $this->object->clear() );
 	}
 
@@ -67,7 +67,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGet()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( 'value' ) );
+			->with( $this->equalTo( 'key' ) )->willReturn( 'value' );
 
 		$this->assertEquals( 'value', $this->object->get( 'key', 'default' ) );
 	}
@@ -76,7 +76,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetDefault()
 	{
 		$this->mock->expects( $this->once() )->method( 'get' )
-			->with( $this->equalTo( 'key' ) )->will( $this->returnValue( null ) );
+			->with( $this->equalTo( 'key' ) )->willReturn( null );
 
 		$this->assertEquals( 'default', $this->object->get( 'key', 'default' ) );
 	}
@@ -85,7 +85,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetMultiple()
 	{
 		$this->mock->expects( $this->exactly( 2 ) )->method( 'get' )
-			->will( $this->returnValue( 'value' ) );
+			->willReturn( 'value' );
 
 		$expected = array( 'key1' => 'value', 'key2' => 'value' );
 		$this->assertEquals( $expected, $this->object->getMultiple( array( 'key1', 'key2' ) ) );
@@ -94,7 +94,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSet()
 	{
-		$this->mock->expects( $this->once() )->method( 'put' )->will( $this->returnValue( true ) )
+		$this->mock->expects( $this->once() )->method( 'put' )->willReturn( true )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
 		$this->assertTrue( $this->object->set( 'key', 'value', '2100-01-01 00:00:00', ['tag'] ) );
@@ -103,7 +103,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetForever()
 	{
-		$this->mock->expects( $this->once() )->method( 'forever' )->will( $this->returnValue( true ) )
+		$this->mock->expects( $this->once() )->method( 'forever' )->willReturn( true )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ) );
 
 		$this->assertTrue( $this->object->set( 'key', 'value', null, ['tag'] ) );
@@ -112,7 +112,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMultiple()
 	{
-		$this->mock->expects( $this->once() )->method( 'put' )->will( $this->returnValue( true ) )
+		$this->mock->expects( $this->once() )->method( 'put' )->willReturn( true )
 			->with( $this->equalTo( 'key' ), $this->equalTo( 'value' ), $this->greaterThan( 0 ) );
 
 		$this->assertTrue( $this->object->setMultiple( array( 'key' => 'value' ), '2100-01-01 00:00:00', ['tag'] ) );
