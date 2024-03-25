@@ -526,7 +526,7 @@ class Laravel
 
 		if( $id !== null ) {
 			$stmt->bind( $idx++, $context->locale()->getSiteId() . '%' );
-			$stmt->bind( $idx++, $this->getUser()?->getSiteId() );
+			$stmt->bind( $idx++, (string) $this->getUser()?->getSiteId() );
 			$stmt->bind( $idx++, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT );
 			$item->setId( $id );
 		} else {
