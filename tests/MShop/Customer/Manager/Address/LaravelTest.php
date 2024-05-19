@@ -23,6 +23,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->fixture = array(
 			'customer.address.parentid' => $manager->find( 'test@example.com' )->getId(),
+			'customer.address.type' => 'delivery',
 			'customer.address.company' => 'ABC GmbH',
 			'customer.address.vatid' => 'DE999999999',
 			'customer.address.salutation' => 'mr',
@@ -82,7 +83,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Address\\Iface', $this->object->create() );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $this->object->create() );
 	}
 
 
@@ -99,7 +100,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$item = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.', $this->fixture );
+		$item = new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', $this->fixture );
 		$item->setId( null );
 		$resultSaved = $this->object->save( $item );
 		$itemSaved = $this->object->get( $item->getId() );
@@ -117,6 +118,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
+		$this->assertEquals( $item->getType(), $itemSaved->getType() );
 		$this->assertEquals( $item->getCompany(), $itemSaved->getCompany() );
 		$this->assertEquals( $item->getVatID(), $itemSaved->getVatID() );
 		$this->assertEquals( $item->getSalutation(), $itemSaved->getSalutation() );
@@ -146,6 +148,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
+		$this->assertEquals( $itemExp->getType(), $itemUpd->getType() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getCompany(), $itemUpd->getCompany() );
 		$this->assertEquals( $itemExp->getVatID(), $itemUpd->getVatID() );
@@ -195,6 +198,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$conditions = array(
 			$search->compare( '!=', 'customer.address.id', null ),
 			$search->compare( '!=', 'customer.address.parentid', null ),
+			$search->compare( '==', 'customer.address.type', 'delivery' ),
 			$search->compare( '==', 'customer.address.company', 'Example company' ),
 			$search->compare( '==', 'customer.address.vatid', 'DE999999999' ),
 			$search->compare( '==', 'customer.address.salutation', 'mr' ),

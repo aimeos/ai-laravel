@@ -25,13 +25,13 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "users_address" ( :names
-							"parentid", "company", "vatid", "salutation", "title",
+							"parentid", "type", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"mobile", "email", "telefax", "website", "longitude", "latitude",
 							"pos", "birthday", "mtime", "editor", "siteid", "ctime"
 						) VALUES ( :values
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 				),
@@ -39,7 +39,7 @@ return array(
 					'ansi' => '
 						UPDATE "users_address"
 						SET :names
-							"parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+							"parentid" = ?, "type" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?, "mobile" = ?,

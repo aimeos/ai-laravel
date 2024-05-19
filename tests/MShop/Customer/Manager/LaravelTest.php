@@ -138,7 +138,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null )->setCode( 'unittest@xyz.com' );
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
-		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
+		$item->addAddressItem( new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.' ) );
 		$this->object->save( $item );
 
 		$item2 = $this->object->find( 'unittest@xyz.com', ['customer/address'] );
@@ -191,6 +191,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.editor', '' );
 
 		$expr[] = $search->compare( '==', 'customer.salutation', 'mr' );
+		$expr[] = $search->compare( '==', 'customer.address.type', 'delivery' );
 		$expr[] = $search->compare( '==', 'customer.company', 'Example company' );
 		$expr[] = $search->compare( '==', 'customer.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'customer.title', 'Dr' );

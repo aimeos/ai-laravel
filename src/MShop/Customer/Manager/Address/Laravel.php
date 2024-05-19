@@ -36,12 +36,17 @@ class Laravel
 			'type' => 'string',
 			'public' => false,
 		),
-		'customer.address.refid' => array(
+		'customer.address.parentid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',
 			'internalcode' => 'mcusad."parentid"',
 			'type' => 'int',
 			'public' => false,
+		),
+		'customer.address.type' => array(
+			'label' => 'Address type',
+			'code' => 'customer.address.type',
+			'internalcode' => 'mcusad."type"',
 		),
 		'customer.address.company' => array(
 			'label' => 'Customer address company',
