@@ -21,6 +21,7 @@ class Laravel implements \Aimeos\Base\Mail\Iface
 {
 	private \Closure $mailer;
 
+
 	/**
 	 * Initializes the instance of the class.
 	 *
