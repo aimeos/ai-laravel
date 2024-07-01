@@ -19,7 +19,7 @@ namespace Aimeos\Base\Mail;
  */
 class Laravel implements \Aimeos\Base\Mail\Iface
 {
-	private \Closure $mailer;
+	private \Illuminate\Mail\Mailer $mailer;
 
 
 	/**
@@ -27,7 +27,7 @@ class Laravel implements \Aimeos\Base\Mail\Iface
 	 *
 	 * @param \Illuminate\Mail\Mailer $closure Laravel mailer object
 	 */
-	public function __construct( \Closure $mailer )
+	public function __construct( \Illuminate\Mail\Mailer $mailer )
 	{
 		$this->mailer = $mailer;
 	}
@@ -41,10 +41,8 @@ class Laravel implements \Aimeos\Base\Mail\Iface
 	 */
 	public function create( string $charset = 'UTF-8' ) : \Aimeos\Base\Mail\Message\Iface
 	{
-		$mailer = $this->mailer;
 		$message = new \Symfony\Component\Mime\Email();
-
-		return new \Aimeos\Base\Mail\Message\Laravel( $mailer(), $message, $charset );
+		return new \Aimeos\Base\Mail\Message\Laravel( $this->mailer, $message, $charset );
 	}
 
 

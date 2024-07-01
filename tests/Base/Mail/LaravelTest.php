@@ -25,7 +25,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\Base\Mail\Laravel( function() { return $this->mock; } );
+		$this->object = new \Aimeos\Base\Mail\Laravel( $this->mock );
 	}
 
 
