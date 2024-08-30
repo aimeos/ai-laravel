@@ -29,7 +29,7 @@ class Laravel
 	 */
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		return $this->getSubManagerBase( 'customer', 'lists/' . $manager, ( $name === null ? 'Laravel' : $name ) );
+		return parent::getSubManager( $manager, $name ?: 'Laravel' );
 	}
 
 
