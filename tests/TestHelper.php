@@ -70,6 +70,10 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$passwd = new \Aimeos\Base\Password\Standard();
+		$ctx->setPassword( $passwd );
+
+
 		$i18n = new \Aimeos\Base\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 

@@ -20,271 +20,6 @@ namespace Aimeos\MShop\Customer\Manager;
 class Laravel
 	extends \Aimeos\MShop\Customer\Manager\Standard
 {
-	private array $searchConfig = array(
-		'customer.id' => array(
-			'label' => 'Customer ID',
-			'code' => 'customer.id',
-			'internalcode' => 'mcus."id"',
-			'type' => 'int',
-			'public' => false,
-		),
-		'customer.siteid' => array(
-			'code' =>'customer.siteid',
-			'internalcode' =>'mcus."siteid"',
-			'label' =>'Customer site ID',
-			'type' => 'string',
-			'public' => false,
-		),
-		'customer.code' => array(
-			'label' => 'Customer username',
-			'code' => 'customer.code',
-			'internalcode' => 'mcus."email"',
-			'type' => 'string',
-		),
-		'customer.label' => array(
-			'label' => 'Customer label',
-			'code' => 'customer.label',
-			'internalcode' => 'mcus."name"',
-			'type' => 'string',
-		),
-		'customer.salutation' => array(
-			'label' => 'Customer salutation',
-			'code' => 'customer.salutation',
-			'internalcode' => 'mcus."salutation"',
-			'type' => 'string',
-		),
-		'customer.company' => array(
-			'label' => 'Customer company',
-			'code' => 'customer.company',
-			'internalcode' => 'mcus."company"',
-			'type' => 'string',
-		),
-		'customer.vatid' => array(
-			'label' => 'Customer VAT ID',
-			'code' => 'customer.vatid',
-			'internalcode' => 'mcus."vatid"',
-			'type' => 'string',
-		),
-		'customer.title' => array(
-			'label' => 'Customer title',
-			'code' => 'customer.title',
-			'internalcode' => 'mcus."title"',
-			'type' => 'string',
-		),
-		'customer.firstname' => array(
-			'label' => 'Customer firstname',
-			'code' => 'customer.firstname',
-			'internalcode' => 'mcus."firstname"',
-			'type' => 'string',
-		),
-		'customer.lastname' => array(
-			'label' => 'Customer lastname',
-			'code' => 'customer.lastname',
-			'internalcode' => 'mcus."lastname"',
-			'type' => 'string',
-		),
-		'customer.address1' => array(
-			'label' => 'Customer address part one',
-			'code' => 'customer.address1',
-			'internalcode' => 'mcus."address1"',
-			'type' => 'string',
-		),
-		'customer.address2' => array(
-			'label' => 'Customer address part two',
-			'code' => 'customer.address2',
-			'internalcode' => 'mcus."address2"',
-			'type' => 'string',
-		),
-		'customer.address3' => array(
-			'label' => 'Customer address part three',
-			'code' => 'customer.address3',
-			'internalcode' => 'mcus."address3"',
-			'type' => 'string',
-		),
-		'customer.postal' => array(
-			'label' => 'Customer postal',
-			'code' => 'customer.postal',
-			'internalcode' => 'mcus."postal"',
-			'type' => 'string',
-		),
-		'customer.city' => array(
-			'label' => 'Customer city',
-			'code' => 'customer.city',
-			'internalcode' => 'mcus."city"',
-			'type' => 'string',
-		),
-		'customer.state' => array(
-			'label' => 'Customer state',
-			'code' => 'customer.state',
-			'internalcode' => 'mcus."state"',
-			'type' => 'string',
-		),
-		'customer.languageid' => array(
-			'label' => 'Customer language',
-			'code' => 'customer.languageid',
-			'internalcode' => 'mcus."langid"',
-			'type' => 'string',
-		),
-		'customer.countryid' => array(
-			'label' => 'Customer country',
-			'code' => 'customer.countryid',
-			'internalcode' => 'mcus."countryid"',
-			'type' => 'string',
-		),
-		'customer.telephone' => array(
-			'label' => 'Customer telephone',
-			'code' => 'customer.telephone',
-			'internalcode' => 'mcus."telephone"',
-			'type' => 'string',
-		),
-		'customer.telefax' => array(
-			'label' => 'Customer telefax',
-			'code' => 'customer.telefax',
-			'internalcode' => 'mcus."telefax"',
-			'type' => 'string',
-		),
-		'customer.mobile' => array(
-			'label' => 'Customer mobile number',
-			'code' => 'customer.mobile',
-			'internalcode' => 'mcus."mobile"',
-			'type' => 'string',
-		),
-		'customer.email' => array(
-			'label' => 'Customer email',
-			'code' => 'customer.email',
-			'internalcode' => 'mcus."email"',
-			'type' => 'string',
-		),
-		'customer.website' => array(
-			'label' => 'Customer website',
-			'code' => 'customer.website',
-			'internalcode' => 'mcus."website"',
-			'type' => 'string',
-		),
-		'customer.longitude' => array(
-			'label' => 'Customer longitude',
-			'code' => 'customer.longitude',
-			'internalcode' => 'mcus."longitude"',
-			'type' => 'float',
-		),
-		'customer.latitude' => array(
-			'label' => 'Customer latitude',
-			'code' => 'customer.latitude',
-			'internalcode' => 'mcus."latitude"',
-			'type' => 'float',
-		),
-		'customer.birthday' => array(
-			'label' => 'Customer birthday',
-			'code' => 'customer.birthday',
-			'internalcode' => 'mcus."birthday"',
-			'type' => 'string',
-		),
-		'customer.password' => array(
-			'label' => 'Customer password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-		),
-		'customer.status' => array(
-			'label' => 'Customer status',
-			'code' => 'customer.status',
-			'internalcode' => 'mcus."status"',
-			'type' => 'int',
-		),
-		'customer.dateverified' => array(
-			'label' => 'Customer verification date',
-			'code' => 'customer.dateverified',
-			'internalcode' => 'mcus."email_verified_at"',
-			'type' => 'date',
-		),
-		'customer.ctime' => array(
-			'label' => 'Customer creation time',
-			'code' => 'customer.ctime',
-			'internalcode' => 'mcus."created_at"',
-			'type' => 'datetime',
-		),
-		'customer.mtime' => array(
-			'label' => 'Customer modification time',
-			'code' => 'customer.mtime',
-			'internalcode' => 'mcus."updated_at"',
-			'type' => 'datetime',
-		),
-		'customer.editor' => array(
-			'label' =>'Customer editor',
-			'code' =>'customer.editor',
-			'internalcode' => 'mcus."editor"',
-			'type' => 'string',
-		),
-		'customer:has' => array(
-			'code' => 'customer:has()',
-			'internalcode' => ':site AND :key AND mcusli."id"',
-			'internaldeps' => ['LEFT JOIN "users_list" AS mcusli ON ( mcusli."parentid" = mcus."id" )'],
-			'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
-			'type' => 'null',
-			'public' => false,
-		),
-		'customer:prop' => array(
-			'code' => 'customer:prop()',
-			'internalcode' => ':site AND :key AND mcuspr."id"',
-			'internaldeps' => ['LEFT JOIN "users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
-			'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
-			'type' => 'null',
-			'public' => false,
-		),
-	);
-
-
-	/**
-	 * Initializes the object.
-	 *
-	 * @param \Aimeos\MShop\ContextIface $context Context object
-	 */
-	public function __construct( \Aimeos\MShop\ContextIface $context )
-	{
-		parent::__construct( $context );
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $context->config()->get( 'mshop/customer/manager/sitemode', $level );
-
-
-		$this->searchConfig['customer:has']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-
-			foreach( (array) ( $params[1] ?? '' ) as $type ) {
-				foreach( (array) ( $params[2] ?? '' ) as $id ) {
-					$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-				}
-			}
-
-			$sitestr = $this->siteString( 'mcusli."siteid"', $level );
-			$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-
-
-		$this->searchConfig['customer:prop']['function'] = function( &$source, array $params ) use ( $level ) {
-
-			$keys = [];
-			$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-			foreach( (array) $langs as $lang ) {
-				foreach( (array) ( $params[2] ?? '' ) as $val ) {
-					$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-				}
-			}
-
-			$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
-			$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-			$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-			return $params;
-		};
-	}
-
-
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
@@ -296,13 +31,13 @@ class Laravel
 	 */
 	public function aggregate( \Aimeos\Base\Criteria\Iface $search, $key, string $value = null, string $type = null ) : \Aimeos\Map
 	{
-		/** mshop/customer/manager/laravel//aggregate/mysql
+		/** mshop/customer/manager/laravel/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
-		 * @see mshop/customer/manager/laravel//aggregate/ansi
+		 * @see mshop/customer/manager/laravel/aggregate/ansi
 		 */
 
-		/** mshop/customer/manager/laravel//aggregate/ansi
+		/** mshop/customer/manager/laravel/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -338,12 +73,12 @@ class Laravel
 		 * @param string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @category Developer
-		 * @see mshop/customer/manager/laravel//insert/ansi
-		 * @see mshop/customer/manager/laravel//update/ansi
-		 * @see mshop/customer/manager/laravel//newid/ansi
-		 * @see mshop/customer/manager/laravel//delete/ansi
-		 * @see mshop/customer/manager/laravel//search/ansi
-		 * @see mshop/customer/manager/laravel//count/ansi
+		 * @see mshop/customer/manager/laravel/insert/ansi
+		 * @see mshop/customer/manager/laravel/update/ansi
+		 * @see mshop/customer/manager/laravel/newid/ansi
+		 * @see mshop/customer/manager/laravel/delete/ansi
+		 * @see mshop/customer/manager/laravel/search/ansi
+		 * @see mshop/customer/manager/laravel/count/ansi
 		 */
 
 		$cfgkey = 'mshop/customer/manager/laravel/aggregate' . $type;
@@ -391,8 +126,81 @@ class Laravel
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$path = 'mshop/customer/manager/submanagers';
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['address'], $withsub );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
+
+		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
+			'customer.code' => [
+				'label' => 'Username',
+				'internalcode' => 'email',
+			],
+			'customer.label' => [
+				'label' => 'Label',
+				'internalcode' => 'name',
+			],
+			'customer.dateverified' => [
+				'label' => 'Customer verification date',
+				'internalcode' => 'mcus."email_verified_at"',
+				'type' => 'date',
+			],
+			'customer.ctime' => [
+				'label' => 'Customer creation time',
+				'internalcode' => 'mcus."created_at"',
+				'type' => 'datetime',
+			],
+			'customer.mtime' => [
+				'label' => 'Customer modification time',
+				'internalcode' => 'mcus."updated_at"',
+				'type' => 'datetime',
+			],
+			'customer:has' => [
+				'code' => 'customer:has()',
+				'internalcode' => ':site AND :key AND mcusli."id"',
+				'internaldeps' => ['LEFT JOIN "users_list" AS mcusli ON ( mcusli."parentid" = mcus."id" )'],
+				'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+
+					foreach( (array) ( $params[1] ?? '' ) as $type ) {
+						foreach( (array) ( $params[2] ?? '' ) as $id ) {
+							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
+						}
+					}
+
+					$sitestr = $this->siteString( 'mcusli."siteid"', $level );
+					$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			],
+			'customer:prop' => [
+				'code' => 'customer:prop()',
+				'internalcode' => ':site AND :key AND mcuspr."id"',
+				'internaldeps' => ['LEFT JOIN "users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
+				'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
+				'type' => 'null',
+				'public' => false,
+				'function' => function( &$source, array $params ) use ( $level ) {
+					$keys = [];
+					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
+
+					foreach( (array) $langs as $lang ) {
+						foreach( (array) ( $params[2] ?? '' ) as $val ) {
+							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
+						}
+					}
+
+					$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
+					$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
+
+					return $params;
+				}
+			],
+		] ) );
 	}
 
 
@@ -407,11 +215,8 @@ class Laravel
 	{
 		$item = $this->addGroups( $item );
 
-		if( !$item->isModified() )
-		{
-			$item = $this->savePropertyItems( $item, 'customer' );
-			$item = $this->saveAddressItems( $item, 'customer' );
-			return $this->saveListItems( $item, 'customer' );
+		if( !$item->isModified() ) {
+			return $this->saveDeps( $item, $fetch );
 		}
 
 		$context = $this->context();
@@ -568,55 +373,26 @@ class Laravel
 			 * @see mshop/customer/manager/laravel/count
 			 */
 			$path = 'mshop/customer/manager/laravel/newid';
-			$item->setId( $this->newId( $conn, $path ) );
+			$id = $this->newId( $conn, $path );
 		}
 
-		$item = $this->savePropertyItems( $item, 'customer' );
-		$item = $this->saveAddressItems( $item, 'customer' );
-		return $this->saveListItems( $item, 'customer' );
+		return $this->saveDeps( $item->setId( $id ), $fetch );
 	}
 
 
 	/**
-	 * Returns the item objects matched by the given search criteria.
+	 * Returns the full configuration key for the passed last part
 	 *
-	 * @param \Aimeos\Base\Criteria\Iface $search Search criteria object
-	 * @param integer &$total Number of items that are available in total
-	 * @return \Aimeos\Map List of items implementing \Aimeos\MShop\Customer\Item\Iface
-	 * @throws \Aimeos\MShop\Customer\Exception If creating items failed
+	 * @param string $name Configuration last part
+	 * @return string Full configuration key
 	 */
-	public function search( \Aimeos\Base\Criteria\Iface $search, array $ref = [], int &$total = null ) : \Aimeos\Map
+	protected function getConfigKey( string $name, string $default = '' ) : string
 	{
-		$conn = $this->context()->db( $this->getResourceName() );
-		$map = [];
-
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
-
-		$cfgPathSearch = 'mshop/customer/manager/laravel/search';
-		$cfgPathCount = 'mshop/customer/manager/laravel/count';
-		$required = ['customer'];
-		$ref[] = 'group';
-
-		$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-
-		while( ( $row = $results->fetch() ) !== null ) {
-			$map[(string) $row['customer.id']] = $row;
+		if( $this->context()->config()->get( 'mshop/customer/manager/laravel/' . $name ) ) {
+			return 'mshop/customer/manager/laravel/' . $name;
 		}
 
-		$addrItems = [];
-		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
-		}
-
-		$propItems = []; $name = 'customer/property';
-		if( isset( $ref[$name] ) || in_array( $name, $ref, true ) )
-		{
-			$propTypes = isset( $ref[$name] ) && is_array( $ref[$name] ) ? $ref[$name] : null;
-			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer', $propTypes );
-		}
-
-		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
+		return parent::getConfigKey( $name, $default );
 	}
 
 
@@ -630,5 +406,16 @@ class Laravel
 	public function getSubManager( string $manager, string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name ?: 'Laravel' );
+	}
+
+
+	/**
+	 * Returns the name of the used table
+	 *
+	 * @return string Table name
+	 */
+	protected function getTable() : string
+	{
+		return 'users';
 	}
 }

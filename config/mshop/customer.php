@@ -97,30 +97,6 @@ return array(
 					LIMIT :size OFFSET :start
 				',
 			),
-			'count' => array(
-				'ansi' => '
-					SELECT COUNT(*) AS "count"
-					FROM (
-						SELECT mcus."id"
-						FROM "users" mcus
-						:joins
-						WHERE :cond
-						GROUP BY mcus."id"
-						OFFSET 0 ROWS FETCH NEXT 10000 ROWS ONLY
-					) AS list
-				',
-				'mysql' => '
-					SELECT COUNT(*) AS "count"
-					FROM (
-						SELECT mcus."id"
-						FROM "users" mcus
-						:joins
-						WHERE :cond
-						GROUP BY mcus."id"
-						LIMIT 10000 OFFSET 0
-					) AS list
-				',
-			),
 			'newid' => array(
 				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 				'mysql' => 'SELECT LAST_INSERT_ID()',
