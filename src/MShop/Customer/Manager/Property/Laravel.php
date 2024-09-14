@@ -39,7 +39,7 @@ class Laravel
 	 *
 	 * @return string Table name
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'users_property';
 	}

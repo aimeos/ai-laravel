@@ -38,7 +38,7 @@ class Laravel
 	 *
 	 * @return string Table name e.g. "mshop_product_list_type"
 	 */
-	protected function getTable() : string
+	protected function table() : string
 	{
 		return 'users_list_type';
 	}
