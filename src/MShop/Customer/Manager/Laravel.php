@@ -216,7 +216,7 @@ class Laravel
 		$item = $this->addGroups( $item );
 
 		if( !$item->isModified() ) {
-			return $this->saveDeps( $item, $fetch );
+			return $this->object()->saveRefs( $item, $fetch );
 		}
 
 		$context = $this->context();
@@ -376,7 +376,7 @@ class Laravel
 			$id = $this->newId( $conn, $path );
 		}
 
-		return $this->saveDeps( $item->setId( $id ), $fetch );
+		return $this->object()->saveRefs( $item->setId( $id ), $fetch );
 	}
 
 
