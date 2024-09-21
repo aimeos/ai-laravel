@@ -108,13 +108,12 @@ class Laravel
 	/**
 	 * Removes multiple items.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $itemIds List of item objects or IDs of the items
+	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
-	public function delete( $itemIds ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
 	{
-		$path = 'mshop/customer/manager/laravel/delete';
-		return $this->deleteItemsBase( $itemIds, $path )->deleteRefItems( $itemIds );
+		return $this->deleteItemsBase( $items, 'mshop/customer/manager/laravel/delete' );
 	}
 
 
