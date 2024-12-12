@@ -53,13 +53,15 @@ class Laravel extends Standard implements Iface
 
 	/**
 	 * Clean up the objects inside
+	 *
+	 * @return array List of property names
 	 */
-	public function __sleep()
+	public function __sleep() : array
 	{
 		$this->__destruct();
 		$this->objects = [];
 
-		return get_object_vars( $this );
+		return array_keys( get_object_vars( $this ) );
 	}
 
 
