@@ -31,15 +31,4 @@ class Laravel
 	{
 		return parent::getSubManager( $manager, $name ?: 'Laravel' );
 	}
-
-
-	/**
-	 * Returns the name of the used table
-	 *
-	 * @return string Table name e.g. "mshop_product_list_type"
-	 */
-	protected function table() : string
-	{
-		return 'users_property_type';
-	}
 }

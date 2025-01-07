@@ -51,11 +51,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->filter()->add( ['customer.property.type.code' => 'newsletter'] );
+		$item = $this->object->search( $search )->first( new \RuntimeException( 'No type item found.' ) );
 
-		$expected = $this->object->search( $search )->first( new \RuntimeException( 'No property type item found.' ) );
-		$actual = $this->object->get( $expected->getId() );
-
-		$this->assertEquals( $expected, $actual );
+		$this->assertEquals( $item, $this->object->get( $item->getId() ) );
 	}
 
 
@@ -121,9 +119,9 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'customer.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.property.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.property.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.property.type.editor', '' );
+		$expr[] = $search->compare( '==', 'customer.property.type.editor', 'core' );
 
-		$search->setConditions( $search->and( $expr ) );
+		$search->add( $search->and( $expr ) );
 		$results = $this->object->search( $search );
 		$this->assertEquals( 1, count( $results ) );
 	}
