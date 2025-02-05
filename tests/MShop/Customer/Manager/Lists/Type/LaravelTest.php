@@ -114,7 +114,7 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.lists.type.id', 0 );
 		$expr[] = $search->compare( '!=', 'customer.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.lists.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '==', 'customer.lists.type.domain', 'customer/lists' );
 		$expr[] = $search->compare( '==', 'customer.lists.type.label', 'Standard' );
 		$expr[] = $search->compare( '>=', 'customer.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'customer.lists.type.status', 1 );
