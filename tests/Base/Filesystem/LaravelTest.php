@@ -9,6 +9,7 @@
 namespace Aimeos\Base\Filesystem;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;

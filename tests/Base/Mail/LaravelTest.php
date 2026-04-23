@@ -9,6 +9,7 @@
 namespace Aimeos\Base\Mail;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;

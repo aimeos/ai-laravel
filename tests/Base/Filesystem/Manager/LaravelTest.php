@@ -9,6 +9,7 @@
 namespace Aimeos\Base\Filesystem\Manager;
 
 
+#[\PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations]
 class LaravelTest extends \PHPUnit\Framework\TestCase
 {
 	private $storage;
