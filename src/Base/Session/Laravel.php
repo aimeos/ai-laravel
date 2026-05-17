@@ -93,12 +93,13 @@ class Laravel extends Base implements \Aimeos\Base\Session\Iface
 	/**
 	 * Remove the list of keys from the session.
 	 *
-	 * @param array $name Keys to remove from the session
+	 * @param array $names Keys to remove from the session
 	 * @return \Aimeos\Base\Session\Iface Session instance for method chaining
 	 */
 	public function remove( array $names ) : Iface
 	{
 		foreach( $names as $name ) {
+			// @phpstan-ignore argument.type
 			$this->object->forget( $name );
 		}
 

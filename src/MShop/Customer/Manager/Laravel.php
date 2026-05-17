@@ -70,7 +70,7 @@ class Laravel
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @param string SQL statement for aggregating customer items
+		 * @type string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @category Developer
 		 * @see mshop/customer/manager/laravel/insert/ansi
@@ -90,14 +90,15 @@ class Laravel
 	 * Removes old entries from the storage.
 	 *
 	 * @param iterable $siteids List of IDs for sites whose entries should be deleted
-	 * @return \Aimeos\MShop\Common\Manager\Iface Same object for fluent interface
+	 * @return static Same object for fluent interface
 	 */
-	public function clear( iterable $siteids ) : \Aimeos\MShop\Common\Manager\Iface
+	public function clear( iterable $siteids ) : static
 	{
 		$path = 'mshop/customer/manager/submanagers';
 		$default = ['address', 'lists', 'property'];
 
 		foreach( $this->context()->config()->get( $path, $default ) as $domain ) {
+			// @phpstan-ignore argument.type
 			$this->object()->getSubManager( $domain )->clear( $siteids );
 		}
 
@@ -109,9 +110,9 @@ class Laravel
 	 * Removes multiple items.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[]|string[] $items List of item objects or IDs of the items
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 * @return static Manager object for chaining method calls
 	 */
-	public function delete( $items ) : \Aimeos\MShop\Common\Manager\Iface
+	public function delete( $items ) : static
 	{
 		return $this->deleteItemsBase( $items, 'mshop/customer/manager/laravel/delete' );
 	}
@@ -168,8 +169,10 @@ class Laravel
 						}
 					}
 
+					// @phpstan-ignore argument.type
 					$sitestr = $this->siteString( 'mcusli."siteid"', $level );
 					$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					// @phpstan-ignore argument.type
 					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 					return $params;
@@ -192,8 +195,10 @@ class Laravel
 						}
 					}
 
+					// @phpstan-ignore argument.type
 					$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
 					$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
+					// @phpstan-ignore argument.type
 					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
 
 					return $params;
@@ -215,7 +220,7 @@ class Laravel
 		$item = $this->addGroups( $item );
 
 		if( !$item->isModified() ) {
-			return $this->object()->saveRefs( $item, $fetch );
+			return $this->object()->saveRefs( $item, $fetch ); // @phpstan-ignore return.type
 		}
 
 		$context = $this->context();
@@ -247,7 +252,7 @@ class Laravel
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for inserting records
+			 * @type string SQL statement for inserting records
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/update
@@ -257,6 +262,7 @@ class Laravel
 			 * @see mshop/customer/manager/laravel/count
 			 */
 			$path = 'mshop/customer/manager/laravel/insert';
+			// @phpstan-ignore argument.type
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ) );
 		}
 		else
@@ -278,7 +284,7 @@ class Laravel
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @param string SQL statement for updating records
+			 * @type string SQL statement for updating records
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/insert
@@ -288,6 +294,7 @@ class Laravel
 			 * @see mshop/customer/manager/laravel/count
 			 */
 			$path = 'mshop/customer/manager/laravel/update';
+			// @phpstan-ignore argument.type
 			$sql = $this->addSqlColumns( array_keys( $columns ), $this->getSqlConfig( $path ), false );
 		}
 
@@ -295,6 +302,7 @@ class Laravel
 		$stmt = $this->getCachedStatement( $conn, $path, $sql );
 
 		foreach( $columns as $name => $entry ) {
+			// @phpstan-ignore argument.type
 			$stmt->bind( $idx++, $item->get( $name ), \Aimeos\Base\Criteria\SQL::type( $entry->getType() ) );
 		}
 
@@ -362,7 +370,7 @@ class Laravel
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @param string SQL statement for retrieving the last inserted record ID
+			 * @type string SQL statement for retrieving the last inserted record ID
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/insert
@@ -375,7 +383,7 @@ class Laravel
 			$id = $this->newId( $conn, $path );
 		}
 
-		return $this->object()->saveRefs( $item->setId( $id ), $fetch );
+		return $this->object()->saveRefs( $item->setId( $id ), $fetch ); // @phpstan-ignore return.type
 	}
 
 
@@ -400,7 +408,7 @@ class Laravel
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{

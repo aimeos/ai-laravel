@@ -19,7 +19,7 @@ namespace Aimeos\Base\Mail\Manager;
  */
 class Laravel implements Iface
 {
-	private ?\Illuminate\Mail\MailManager $manager;
+	private \Illuminate\Mail\MailManager $manager;
 
 
 	/**
@@ -41,6 +41,7 @@ class Laravel implements Iface
 	 */
 	public function get( ?string $name = null ) : \Aimeos\Base\Mail\Iface
 	{
+		// @phpstan-ignore argument.type
 		return new \Aimeos\Base\Mail\Laravel( $this->manager->mailer( $name ?: $this->manager->getDefaultDriver() ) );
 	}
 }

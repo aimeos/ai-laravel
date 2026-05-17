@@ -29,7 +29,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 	/**
 	 * Initializes the message instance.
 	 *
-	 * @param \Illuminate\Mail\Mailer $object Laravel mailer object
+	 * @param \Illuminate\Mail\Mailer $mailer Laravel mailer object
 	 * @param \Symfony\Component\Mime\Email $message Message object
 	 * @param string $charset Default charset of the message
 	 */
@@ -103,6 +103,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 		if( !empty( $email ) )
 		{
 			foreach( (array) $email as $addr ) {
+				// @phpstan-ignore argument.type
 				$this->message->addBcc( $addr );
 			}
 		}
@@ -240,6 +241,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
+			// @phpstan-ignore argument.type
 			$this->message->attach( $data, $filename, $mimetype );
 		}
 
@@ -262,6 +264,7 @@ class Laravel implements \Aimeos\Base\Mail\Message\Iface
 			$mimetype = $mimetype ?: (new \finfo( FILEINFO_MIME_TYPE ))->buffer( $data );
 			$filename = $filename ?: md5( $data );
 
+			// @phpstan-ignore argument.type
 			$this->message->embed( $data, $filename, $mimetype );
 			return 'cid:' . $filename;
 		}

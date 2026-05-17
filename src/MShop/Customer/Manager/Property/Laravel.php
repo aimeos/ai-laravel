@@ -26,7 +26,7 @@ class Laravel
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
-	 * @return mixed Manager for different extensions, e.g stock, tags, locations, etc.
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g stock, tags, locations, etc.
 	 */
 	public function getSubManager( string $manager, ?string $name = null ) : \Aimeos\MShop\Common\Manager\Iface
 	{

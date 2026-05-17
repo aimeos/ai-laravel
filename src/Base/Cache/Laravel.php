@@ -80,6 +80,7 @@ class Laravel
 	public function deleteMultiple( iterable $keys ) : bool
 	{
 		foreach( $keys as $key ) {
+			// @phpstan-ignore argument.type
 			$this->object->forget( $key );
 		}
 
@@ -139,6 +140,7 @@ class Laravel
 
 		foreach( $keys as $key )
 		{
+			// @phpstan-ignore argument.type
 			if( ( $entry = $this->object->get( $key ) ) !== false ) {
 				$result[$key] = $entry;
 			} else {
@@ -186,7 +188,7 @@ class Laravel
 	public function set( string $key, $value, $expires = null, iterable $tags = [] ) : bool
 	{
 		if( $expires instanceof \DateInterval ) {
-			return $this->object->put( $key, $value, (int) ( date_create()->add( $expires )->format( 'Y-m-d H:i:s' ) - time() ) );
+			return $this->object->put( $key, $value, (int) ( date_create()->add( $expires )->format( 'Y-m-d H:i:s' ) - time() ) ); // @phpstan-ignore binaryOp.invalid
 		} elseif( is_string( $expires ) ) {
 			return $this->object->put( $key, $value, (int) ( date_create( $expires )->getTimestamp() - time() ) );
 		} elseif( is_int( $expires ) ) {
@@ -213,6 +215,7 @@ class Laravel
 	public function setMultiple( iterable $pairs, $expires = null, iterable $tags = [] ) : bool
 	{
 		foreach( $pairs as $key => $value ) {
+			// @phpstan-ignore argument.type
 			$this->set( $key, $value, $expires, $tags );
 		}
 

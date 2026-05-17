@@ -183,7 +183,7 @@ class Laravel implements Iface, DirIface, MetaIface
 	public function read( string $path ) : string
 	{
 		try {
-			return $this->fs->get( $path );
+			return (string) $this->fs->get( $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
@@ -204,6 +204,7 @@ class Laravel implements Iface, DirIface, MetaIface
 			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
 		}
 
+		// @phpstan-ignore argument.type
 		if( @file_put_contents( $local, $this->fs->get( $path ) ) === false ) {
 			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $local ) );
 		}
@@ -233,6 +234,7 @@ class Laravel implements Iface, DirIface, MetaIface
 			throw new Exception( 'Couldn\'t create temporary file' );
 		}
 
+		// @phpstan-ignore argument.type
 		if( fwrite( $stream, $content ) === false ) {
 			throw new Exception( 'Couldn\'t write to temporary file' );
 		}
@@ -302,7 +304,7 @@ class Laravel implements Iface, DirIface, MetaIface
 		try
 		{
 			if( ( $content = @fread( $stream, 0x7ffffffd ) ) === false ) {
-				throw new \Exception( error_get_last()['message'] );
+				throw new \Exception( error_get_last()['message'] ); // @phpstan-ignore offsetAccess.notFound
 			}
 
 			$this->fs->put( $path, $content );

@@ -25,7 +25,7 @@ class Laravel implements \Aimeos\Base\Mail\Iface
 	/**
 	 * Initializes the instance of the class.
 	 *
-	 * @param \Illuminate\Mail\Mailer $closure Laravel mailer object
+	 * @param \Illuminate\Mail\Mailer $mailer Laravel mailer object
 	 */
 	public function __construct( \Illuminate\Mail\Mailer $mailer )
 	{

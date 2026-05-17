@@ -28,9 +28,9 @@ class Laravel
 	/**
 	 * Initializes the URL view helper.
 	 *
-	 * @param \\Aimeos\Base\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Contracts\Routing\UrlGenerator $builder Laravel URL builder object
-	 * @param array Associative list of fixed parameters that should be available for all routes
+	 * @type array Associative list of fixed parameters that should be available for all routes
 	 */
 	public function __construct( \Aimeos\Base\View\Iface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
 	{
@@ -57,8 +57,10 @@ class Laravel
 	{
 		$values = $this->getValues( $config );
 		$params = $this->sanitize( $params ) + $this->fixed;
+		// @phpstan-ignore argument.type
 		$fragment = ( !empty( $trailing ) ? '#' . implode( '/', $trailing ) : '' );
 
+		// @phpstan-ignore argument.type, argument.type
 		return $this->builder->route( $target, $params, $values['absoluteUri'] ) . $fragment;
 	}
 

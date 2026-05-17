@@ -27,7 +27,7 @@ class Laravel
 	/**
 	 * Initializes the request view helper.
 	 *
-	 * @param \\Aimeos\Base\View\Iface $view View instance with registered view helpers
+	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Http\Request $request Laravel request object
 	 */
 	public function __construct( \Aimeos\Base\View\Iface $view, \Illuminate\Http\Request $request )
@@ -45,7 +45,7 @@ class Laravel
 	 */
 	public function getClientAddress() : string
 	{
-		return $this->request->ip();
+		return $this->request->ip() ?? '';
 	}
 
 

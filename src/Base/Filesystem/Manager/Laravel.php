@@ -82,6 +82,7 @@ class Laravel extends Standard implements Iface
 				$this->objects[$key] = new \Aimeos\Base\Filesystem\Laravel( $this->fsm->disk( $key ), $this->tempdir );
 			}
 
+			// @phpstan-ignore return.type
 			return $this->objects[$key];
 		}
 

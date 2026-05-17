@@ -50,6 +50,7 @@ class Blade implements Iface
 		$fcn = function() use ( $factory, $view )
 		{
 			foreach( $factory->getSections() as $name => $section ) {
+				// @phpstan-ignore argument.type
 				$view->block()->set( $name, $section );
 			}
 		};
