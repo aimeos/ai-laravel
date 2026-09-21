@@ -584,7 +584,7 @@ return array(
 						"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 						"telephone" = ?, "telefax" = ?, "website" = ?,
 						"longitude" = ?, "latitude" = ?, "birthday" = ?,
-						"status" = ?, "email_verified_at" = ?, "password" = ?, "updated_at" = ?, "editor" = ?
+						"status" = ?, "email_verified_at" = ?, "password" = COALESCE( ?, "password" ), "updated_at" = ?, "editor" = ?
 					WHERE ( "siteid" LIKE ? OR "siteid" = ? ) AND "id" = ?
 				',
 			),
