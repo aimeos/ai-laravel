@@ -83,6 +83,25 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSavePasswordWriteOnly()
+	{
+		$item = $this->object->save( $this->object->create()->setCode( 'unitTest@example.com' )->setPassword( 'secret' ) );
+
+		$loaded = $this->object->get( $item->getId() );
+		$this->object->save( $loaded->setLabel( 'unitTest2' )->setPassword( '' ) );
+		$kept = $this->password( $item->getId() );
+
+		$this->object->save( $this->object->get( $item->getId() )->setPassword( 'changed' ) );
+		$changed = $this->password( $item->getId() );
+
+		$this->object->delete( $item->getId() );
+
+		$this->assertEquals( '', $loaded->getPassword() );
+		$this->assertTrue( $this->context->password()->verify( 'secret', $kept ) );
+		$this->assertTrue( $this->context->password()->verify( 'changed', $changed ) );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
@@ -184,7 +203,6 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer001' );
 		$expr[] = $search->compare( '==', 'customer.code', 'test@example.com' );
-		$expr[] = $search->compare( '>=', 'customer.password', '' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
 		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
@@ -316,5 +334,13 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->expectException( \LogicException::class );
 		$this->object->getSubManager( 'address', 'unknown' );
+	}
+
+
+	protected function password( string $id ) : string
+	{
+		$stmt = $this->context->db( 'db-customer' )->create( 'SELECT "password" FROM "users" WHERE "id" = ?' );
+		$row = $stmt->bind( 1, $id, \Aimeos\Base\DB\Statement\Base::PARAM_INT )->execute()->fetch();
+		return (string) ( $row['password'] ?? '' );
 	}
 }
