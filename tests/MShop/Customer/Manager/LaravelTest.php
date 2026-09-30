@@ -97,8 +97,8 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 		$this->object->delete( $item->getId() );
 
 		$this->assertEquals( '', $loaded->getPassword() );
-		$this->assertTrue( $this->context->password()->verify( 'secret', $kept ) );
-		$this->assertTrue( $this->context->password()->verify( 'changed', $changed ) );
+		$this->assertTrue( password_verify( 'secret', $kept ) );
+		$this->assertTrue( password_verify( 'changed', $changed ) );
 	}
 
 
