@@ -604,7 +604,7 @@ return array(
 						mcus."email" AS "customer.email", mcus."website" AS "customer.website",
 						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
 						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
+						mcus."email_verified_at" AS "customer.dateverified",
 						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
 						mcus."editor" AS "customer.editor", mcus."superuser" AS ".super"
 					FROM "users" mcus
@@ -615,7 +615,7 @@ return array(
 						mcus."salutation", mcus."title", mcus."firstname", mcus."lastname", mcus."address1",
 						mcus."address2", mcus."address3", mcus."postal", mcus."city", mcus."state", mcus."countryid",
 						mcus."langid", mcus."telephone",mcus."telefax", mcus."email", mcus."website",
-						mcus."longitude", mcus."latitude", mcus."birthday", mcus."status", mcus."email_verified_at", mcus."password",
+						mcus."longitude", mcus."latitude", mcus."birthday", mcus."status", mcus."email_verified_at",
 						mcus."created_at", mcus."updated_at", mcus."editor", mcus."superuser"
 					ORDER BY :order
 					OFFSET :start ROWS FETCH NEXT :size ROWS ONLY
@@ -635,7 +635,7 @@ return array(
 						mcus."email" AS "customer.email", mcus."website" AS "customer.website",
 						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
 						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
-						mcus."email_verified_at" AS "customer.dateverified", mcus."password" AS "customer.password",
+						mcus."email_verified_at" AS "customer.dateverified",
 						mcus."created_at" AS "customer.ctime", mcus."updated_at" AS "customer.mtime",
 						mcus."editor" AS "customer.editor", mcus."superuser" AS ".super"
 					FROM "users" mcus

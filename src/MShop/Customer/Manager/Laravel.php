@@ -198,13 +198,6 @@ class Laravel
 			'type' => 'string',
 			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.password' => array(
-			'label' => 'Customer password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\Base\DB\Statement\Base::PARAM_STR,
-		),
 		'customer.status' => array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
