@@ -179,12 +179,6 @@ class Laravel
 			'internalcode' => 'mcus."birthday"',
 			'type' => 'string',
 		),
-		'customer.password' => array(
-			'label' => 'Customer password',
-			'code' => 'customer.password',
-			'internalcode' => 'mcus."password"',
-			'type' => 'string',
-		),
 		'customer.status' => array(
 			'label' => 'Customer status',
 			'code' => 'customer.status',
