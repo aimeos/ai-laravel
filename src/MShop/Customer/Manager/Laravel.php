@@ -66,6 +66,11 @@ class Laravel
 		 * of the different values found in the key column together with the
 		 * number of records that have been found for that key values.
 		 *
+		 * The outer SELECT should also return the number of aggregated records
+		 * in a column named "_total" ('COUNT(*) AS "_total"'). It's used to
+		 * detect if the result is incomplete because the limit of aggregated
+		 * records has been reached.
+		 *
 		 * The SQL statement should conform to the ANSI standard to be
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
@@ -81,8 +86,8 @@ class Laravel
 		 * @see mshop/customer/manager/laravel/count/ansi
 		 */
 
-		$cfgkey = 'mshop/customer/manager/laravel/aggregate' . $type;
-		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value );
+		$cfgkey = 'mshop/customer/manager/laravel/aggregate';
+		return $this->aggregateBase( $search, $key, $cfgkey, ['customer'], $value, $type );
 	}
 
 
