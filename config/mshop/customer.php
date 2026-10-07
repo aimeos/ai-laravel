@@ -97,6 +97,11 @@ return array(
 					LIMIT :size OFFSET :start
 				',
 			),
+			'password' => array(
+				'ansi' => '
+					SELECT "password" FROM "users" WHERE "id" = ?
+				',
+			),
 			'newid' => array(
 				'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 				'mysql' => 'SELECT LAST_INSERT_ID()',

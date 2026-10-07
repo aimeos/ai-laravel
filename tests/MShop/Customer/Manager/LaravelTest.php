@@ -107,6 +107,21 @@ class LaravelTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testVerify()
+	{
+		$item = $this->object->save( $this->object->create()->setCode( 'unitTest@example.com' )->setPassword( 'secret' ) );
+		$loaded = $this->object->get( $item->getId() );
+
+		$valid = $this->object->verify( $loaded, 'secret' );
+		$invalid = $this->object->verify( $loaded, 'wrong' );
+
+		$this->object->delete( $item->getId() );
+
+		$this->assertTrue( $valid );
+		$this->assertFalse( $invalid );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->create();
