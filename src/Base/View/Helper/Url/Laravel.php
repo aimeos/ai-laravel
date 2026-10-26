@@ -30,7 +30,7 @@ class Laravel
 	 *
 	 * @param \Aimeos\Base\View\Iface $view View instance with registered view helpers
 	 * @param \Illuminate\Contracts\Routing\UrlGenerator $builder Laravel URL builder object
-	 * @type array Associative list of fixed parameters that should be available for all routes
+	 * @param array $fixed Associative list of fixed parameters that should be available for all routes
 	 */
 	public function __construct( \Aimeos\Base\View\Iface $view, \Illuminate\Contracts\Routing\UrlGenerator $builder, array $fixed )
 	{

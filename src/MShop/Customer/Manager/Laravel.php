@@ -75,7 +75,7 @@ class Laravel
 		 * compatible with most relational database systems. This also
 		 * includes using double quotes for table and column names.
 		 *
-		 * @type string SQL statement for aggregating customer items
+		 * @param string SQL statement for aggregating customer items
 		 * @since 2021.04
 		 * @category Developer
 		 * @see mshop/customer/manager/laravel/insert/ansi
@@ -257,7 +257,7 @@ class Laravel
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for inserting records
+			 * @param string SQL statement for inserting records
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/update
@@ -289,7 +289,7 @@ class Laravel
 			 * compatible with most relational database systems. This also
 			 * includes using double quotes for table and column names.
 			 *
-			 * @type string SQL statement for updating records
+			 * @param string SQL statement for updating records
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/insert
@@ -376,7 +376,7 @@ class Laravel
 			 * fits for most database servers as they implement their own
 			 * specific way.
 			 *
-			 * @type string SQL statement for retrieving the last inserted record ID
+			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2015.01
 			 * @category Developer
 			 * @see mshop/customer/manager/laravel/insert
