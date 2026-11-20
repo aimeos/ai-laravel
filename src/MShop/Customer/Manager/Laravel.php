@@ -131,9 +131,6 @@ class Laravel
 	 */
 	public function getSearchAttributes( bool $withsub = true ) : array
 	{
-		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-		$level = $this->context()->config()->get( 'mshop/customer/manager/sitemode', $level );
-
 		return array_replace( parent::getSearchAttributes( $withsub ), $this->createAttributes( [
 			'customer.code' => [
 				'label' => 'Username',
@@ -160,54 +157,19 @@ class Laravel
 			],
 			'customer:has' => [
 				'code' => 'customer:has()',
-				'internalcode' => ':site AND :key AND mcusli."id"',
 				'internaldeps' => ['LEFT JOIN "users_list" AS mcusli ON ( mcusli."parentid" = mcus."id" )'],
 				'label' => 'Customer has list item, parameter(<domain>[,<list type>[,<reference ID>)]]',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-
-					foreach( (array) ( $params[1] ?? '' ) as $type ) {
-						foreach( (array) ( $params[2] ?? '' ) as $id ) {
-							$keys[] = $params[0] . '|' . ( $type ? $type . '|' : '' ) . $id;
-						}
-					}
-
-					// @phpstan-ignore argument.type
-					$sitestr = $this->siteString( 'mcusli."siteid"', $level );
-					$keystr = $this->toExpression( 'mcusli."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					// @phpstan-ignore argument.type
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
+				'function' => $this->hasFunction( 'mcusli' )
 			],
 			'customer:prop' => [
 				'code' => 'customer:prop()',
-				'internalcode' => ':site AND :key AND mcuspr."id"',
 				'internaldeps' => ['LEFT JOIN "users_property" AS mcuspr ON ( mcuspr."parentid" = mcus."id" )'],
 				'label' => 'Customer has property item, parameter(<property type>[,<language code>[,<property value>]])',
 				'type' => 'null',
 				'public' => false,
-				'function' => function( &$source, array $params ) use ( $level ) {
-					$keys = [];
-					$langs = array_key_exists( 1, $params ) ? ( $params[1] ?? 'null' ) : '';
-
-					foreach( (array) $langs as $lang ) {
-						foreach( (array) ( $params[2] ?? '' ) as $val ) {
-							$keys[] = substr( $params[0] . '|' . ( $lang === null ? 'null|' : ( $lang ? $lang . '|' : '' ) ) . $val, 0, 255 );
-						}
-					}
-
-					// @phpstan-ignore argument.type
-					$sitestr = $this->siteString( 'mcuspr."siteid"', $level );
-					$keystr = $this->toExpression( 'mcuspr."key"', $keys, ( $params[2] ?? null ) ? '==' : '=~' );
-					// @phpstan-ignore argument.type
-					$source = str_replace( [':site', ':key'], [$sitestr, $keystr], $source );
-
-					return $params;
-				}
+				'function' => $this->propFunction( 'mcuspr' )
 			],
 		] ) );
 	}
